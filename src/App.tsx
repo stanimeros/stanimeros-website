@@ -17,6 +17,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/data-deletion" element={<DataDeletion />} />
+          <Route path="*" element={<HomePage />} />
         </Routes>
       </div>
     </Router>
