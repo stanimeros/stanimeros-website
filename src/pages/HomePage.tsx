@@ -131,6 +131,13 @@ const HomePage = () => {
               textColor: "text-blue-200"
             },
             {
+              title: "Near",
+              description: "Privacy-focused social networking platform enabling users to share their current location with friends and family while maintaining complete control over data visibility and implementing advanced privacy preservation mechanisms",
+              technologies: ["Java", "Python", "Android", "iOS", "Google Maps", "Machine Learning"],
+              bgColor: "bg-orange-900/30",
+              textColor: "text-orange-200"
+            },
+            {
               title: "Reserwave",
               description: "Sophisticated booking and discovery platform enabling users to search, compare, and reserve services while providing businesses with comprehensive reservation management tools",
               technologies: ["PHP", "MySQL", "React", "JavaScript", "Search System"],

@@ -77,6 +77,7 @@ const DataDeletion = () => {
             { name: "MP-Transfer", id: "mp-transfer" },
             { name: "TapFast", id: "tapfast" },
             { name: "Meal AI", id: "meal-ai" },
+            { name: "Near", id: "near" },
             { name: "Reserwave", id: "reserwave" },
             { name: "Hedeos", id: "hedeos" },
             { name: "e-karotsi", id: "e-karotsi" }
