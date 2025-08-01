@@ -17,7 +17,6 @@ const DataDeletion = () => {
     name: "",
     email: "",
     reason: "",
-    additionalInfo: ""
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -49,7 +48,7 @@ const DataDeletion = () => {
     
     try {
       const selectedAppsText = selectedApps.length > 0 ? selectedApps.join(', ') : 'All applications'
-      const message = `Data Deletion Request\n\nReason: ${formData.reason}\n\nAdditional Information: ${formData.additionalInfo}\n\nSelected Applications: ${selectedAppsText}`
+      const message = `Data Deletion Request\n\nReason: ${formData.reason}\n\nSelected Applications: ${selectedAppsText}`
       
       await sendEmail({
         name: formData.name,
@@ -286,18 +285,6 @@ const DataDeletion = () => {
                     placeholder="Please explain why you want to delete your data..."
                     rows={3}
                     required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="additionalInfo">Additional Information</Label>
-                  <Textarea
-                    id="additionalInfo"
-                    name="additionalInfo"
-                    value={formData.additionalInfo}
-                    onChange={handleInputChange}
-                    placeholder="Any additional details that might help us process your request..."
-                    rows={3}
                   />
                 </div>
 
