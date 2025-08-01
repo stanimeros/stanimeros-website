@@ -52,7 +52,7 @@ const DataDeletion = () => {
     
     try {
       const selectedAppsText = selectedApps.length > 0 ? selectedApps.join(', ') : 'All applications'
-      const message = `Data Deletion Request\n\nReason: ${formData.reason}\n\nSelected Applications: ${selectedAppsText}`
+      const message = `Reason: ${formData.reason}\n\nSelected Applications: ${selectedAppsText}`
       
       await sendEmail({
         name: formData.name,
@@ -72,16 +72,15 @@ const DataDeletion = () => {
     }
   }
 
-  const apps = [
-    { name: "RideFast", id: "ridefast" },
-    { name: "TapFast", id: "tapfast" },
-    { name: "Meal AI", id: "meal-ai" },
-    { name: "Reserwave", id: "reserwave" },
-    { name: "Near", id: "near" },
-    { name: "Hedeos", id: "hedeos" },
-    { name: "e-karotsi", id: "e-karotsi" },
-    { name: "MP-Transfer", id: "mp-transfer" }
-  ]
+            const apps = [
+            { name: "RideFast", id: "ridefast" },
+            { name: "MP-Transfer", id: "mp-transfer" },
+            { name: "TapFast", id: "tapfast" },
+            { name: "Meal AI", id: "meal-ai" },
+            { name: "Reserwave", id: "reserwave" },
+            { name: "Hedeos", id: "hedeos" },
+            { name: "e-karotsi", id: "e-karotsi" }
+          ]
 
   if (isSubmitted) {
     return (

@@ -101,64 +101,57 @@ const HomePage = () => {
     }
   ]
 
-  const portfolioItems = [
-    {
-      title: "RideFast",
-      description: "Comprehensive reservation management system for transfer companies and taxi services, featuring real-time booking, scheduling, and payment processing with integrated mapping and notification systems",
-      technologies: ["React", "TypeScript", "Google Maps", "Firestore", "Resend", "Stripe API"],
-      bgColor: "bg-gray-900/30",
-      textColor: "text-gray-200"
-    },
-    {
-      title: "TapFast",
-      description: "Advanced QR code generation and management platform for digital assets including wallet badges, shopping carts, promotional coupons, and loyalty programs with comprehensive admin controls",
-      technologies: ["React", "TypeScript", "QR Codes", "Admin Panel"],
-      bgColor: "bg-orange-900/30",
-      textColor: "text-orange-200"
-    },
-    {
-      title: "Meal AI",
-      description: "Intelligent mobile application leveraging computer vision and AI to automatically scan, identify, and count food items for precise nutrition tracking and dietary management",
-      technologies: ["Android", "iOS", "AI", "Computer Vision", "Mobile App"],
-      bgColor: "bg-blue-900/30",
-      textColor: "text-blue-200"
-    },
-    {
-      title: "Reserwave",
-      description: "Sophisticated booking and discovery platform enabling users to search, compare, and reserve services while providing businesses with comprehensive reservation management tools",
-      technologies: ["PHP", "MySQL", "React", "JavaScript", "Search System"],
-      bgColor: "bg-cyan-900/30",
-      textColor: "text-cyan-200"
-    },
-    {
-      title: "Near",
-      description: "Innovative location-based social networking platform that connects users with nearby people, places, and events using advanced geolocation and machine learning algorithms",
-      technologies: ["Java", "Python", "Android", "iOS", "Google Maps", "Machine Learning"],
-      bgColor: "bg-orange-900/30",
-      textColor: "text-orange-200"
-    },
-    {
-      title: "Hedeos",
-      description: "Interactive educational mobile application designed to teach Greek language through gamified learning experiences, featuring vocabulary building, interactive quizzes, and progress tracking",
-      technologies: ["iOS", "Android", "Education", "Quizzes", "Mobile App"],
-      bgColor: "bg-yellow-900/30",
-      textColor: "text-yellow-200"
-    },
-    {
-      title: "e-karotsi",
-      description: "Full-featured e-commerce platform for Thessaloniki-based Greek supermarket, offering seamless online shopping experience with real-time inventory management and efficient delivery services",
-      technologies: ["Web", "E-commerce", "Supermarket", "Online Ordering"],
-      bgColor: "bg-green-900/30",
-      textColor: "text-green-200"
-    },
-    {
-      title: "MP-Transfer",
-      description: "Enterprise-grade appointment management system for transportation companies and hotels, facilitating seamless transfer scheduling, real-time updates, and comprehensive booking administration",
-      technologies: ["iOS", "Android", "Web", "Flutter", "Push Notifications", "Firestore"],
-      bgColor: "bg-sky-900/30",
-      textColor: "text-sky-200"
-    }
-  ]
+            const portfolioItems = [
+            {
+              title: "RideFast",
+              description: "Comprehensive reservation management system for transfer companies and taxi services, featuring real-time booking, scheduling, and payment processing with integrated mapping and notification systems",
+              technologies: ["React", "TypeScript", "Google Maps", "Firestore", "Resend", "Stripe API"],
+              bgColor: "bg-gray-900/30",
+              textColor: "text-gray-200"
+            },
+            {
+              title: "MP-Transfer",
+              description: "Enterprise-grade appointment management system for transportation companies and hotels, facilitating seamless transfer scheduling, real-time updates, and comprehensive booking administration",
+              technologies: ["iOS", "Android", "Web", "Flutter", "Push Notifications", "Firestore"],
+              bgColor: "bg-sky-900/30",
+              textColor: "text-sky-200"
+            },
+            {
+              title: "TapFast",
+              description: "Advanced QR code generation and management platform for digital assets including wallet badges, shopping carts, promotional coupons, and loyalty programs with comprehensive admin controls",
+              technologies: ["React", "TypeScript", "QR Codes", "Admin Panel"],
+              bgColor: "bg-orange-900/30",
+              textColor: "text-orange-200"
+            },
+            {
+              title: "Meal AI",
+              description: "Intelligent mobile application leveraging computer vision and AI to automatically scan, identify, and count food items for precise nutrition tracking and dietary management",
+              technologies: ["Android", "iOS", "AI", "Computer Vision", "Mobile App"],
+              bgColor: "bg-blue-900/30",
+              textColor: "text-blue-200"
+            },
+            {
+              title: "Reserwave",
+              description: "Sophisticated booking and discovery platform enabling users to search, compare, and reserve services while providing businesses with comprehensive reservation management tools",
+              technologies: ["PHP", "MySQL", "React", "JavaScript", "Search System"],
+              bgColor: "bg-cyan-900/30",
+              textColor: "text-cyan-200"
+            },
+            {
+              title: "Hedeos",
+              description: "Interactive educational mobile application designed to teach Greek language through gamified learning experiences, featuring vocabulary building, interactive quizzes, and progress tracking",
+              technologies: ["iOS", "Android", "Education", "Quizzes", "Mobile App"],
+              bgColor: "bg-yellow-900/30",
+              textColor: "text-yellow-200"
+            },
+            {
+              title: "e-karotsi",
+              description: "Full-featured e-commerce platform for Thessaloniki-based Greek supermarket, offering seamless online shopping experience with real-time inventory management and efficient delivery services",
+              technologies: ["Web", "E-commerce", "Supermarket", "Online Ordering"],
+              bgColor: "bg-green-900/30",
+              textColor: "text-green-200"
+            }
+          ]
 
   return (
     <div className="min-h-screen bg-background">
@@ -196,15 +189,16 @@ const HomePage = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <h3 className="text-2xl font-semibold mb-4">Pantelis Stanimeros</h3>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                I'm a dedicated full-stack developer with a passion for creating innovative digital solutions. 
-                With years of experience in web and mobile development, I specialize in building scalable, 
-                user-friendly applications that solve real-world problems.
-              </p>
-              <p className="text-muted-foreground mb-6 leading-relaxed">
-                My expertise spans across modern web technologies, mobile development, and cloud solutions. 
-                I believe in writing clean, maintainable code and creating exceptional user experiences.
-              </p>
+                                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                        I'm a dedicated full-stack developer with a passion for creating innovative digital solutions.
+                        With years of experience in web and mobile development, I specialize in building scalable,
+                        user-friendly applications that solve real-world problems.
+                      </p>
+                      <p className="text-muted-foreground mb-6 leading-relaxed">
+                        I hold a Bachelor's degree in Computer Science and am currently pursuing a Master's degree in AI and Data Analytics.
+                        My expertise spans across modern web technologies, mobile development, and cloud solutions.
+                        I believe in writing clean, maintainable code and creating exceptional user experiences.
+                      </p>
               <div className="flex flex-wrap gap-2">
                 <Badge variant="secondary">React</Badge>
                 <Badge variant="secondary">TypeScript</Badge>
