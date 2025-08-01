@@ -221,7 +221,7 @@ const HomePage = () => {
             <div className="relative">
               <div className="w-full h-96 rounded-lg overflow-hidden">
                 <img 
-                  src="/images/pantelis.jpg" 
+                  src="/images/pantelis.png" 
                   alt="Pantelis Stanimeros"
                   className="w-full h-full object-cover"
                 />
