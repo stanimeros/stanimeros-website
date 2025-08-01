@@ -270,7 +270,7 @@ const DataDeletion = () => {
                       type="email"
                       value={formData.email}
                       onChange={handleInputChange}
-                      placeholder="your.email@example.com"
+                      placeholder="email@example.com"
                       required
                     />
                   </div>
