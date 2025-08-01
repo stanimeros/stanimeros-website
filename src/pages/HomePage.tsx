@@ -176,8 +176,8 @@ const HomePage = () => {
             Full-stack developer passionate about creating innovative digital solutions
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" onClick={() => scrollToSection('portfolio')}>
-              View My Work
+            <Button size="lg" onClick={() => scrollToSection('services')}>
+              View Services
             </Button>
             <Button size="lg" variant="outline" onClick={() => scrollToSection('contact')}>
               Get In Touch
