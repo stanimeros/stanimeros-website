@@ -1,10 +1,25 @@
-import { Button } from "@/components/ui/button"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import { useEffect } from "react"
+import HomePage from "@/pages/HomePage"
+import PrivacyPolicy from "@/pages/PrivacyPolicy"
+import DataDeletion from "@/pages/DataDeletion"
 
 function App() {
+  useEffect(() => {
+    // Force dark mode
+    document.documentElement.classList.add('dark')
+  }, [])
+
   return (
-    <div className="flex min-h-svh flex-col items-center justify-center">
-      <Button>Click me</Button>
-    </div>
+    <Router>
+      <div className="min-h-screen bg-background text-foreground">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/data-deletion" element={<DataDeletion />} />
+        </Routes>
+      </div>
+    </Router>
   )
 }
 
