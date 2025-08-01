@@ -9,6 +9,7 @@ import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ArrowLeft, Trash2, AlertTriangle, CheckCircle, Mail, Shield, Clock } from "lucide-react"
+import Footer from "@/components/Footer"
 
 const DataDeletion = () => {
   const [formData, setFormData] = useState({
@@ -144,6 +145,7 @@ const DataDeletion = () => {
             </div>
           </div>
         </main>
+        <Footer />
       </div>
     )
   }
@@ -376,23 +378,7 @@ const DataDeletion = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-card py-8 border-t mt-12">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-muted-foreground">
-              © 2024 Stanimeros. All rights reserved.
-            </div>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">
-                Home
-              </Link>
-              <Link to="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">
-                Privacy Policy
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

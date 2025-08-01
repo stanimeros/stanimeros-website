@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu"
 import { Menu, Mail, Phone, MapPin, Github, Linkedin, Twitter, Send, Download, Code, Palette, Smartphone, Globe, Database, Shield } from "lucide-react"
+import Footer from "@/components/Footer"
 
 const HomePage = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -136,16 +137,6 @@ const HomePage = () => {
                   <Button variant="ghost" onClick={() => scrollToSection('contact')} className="justify-start cursor-pointer">
                     Contact
                   </Button>
-                  <Link to="/privacy-policy" className="w-full">
-                    <Button variant="ghost" className="w-full justify-start cursor-pointer">
-                      Privacy Policy
-                    </Button>
-                  </Link>
-                  <Link to="/data-deletion" className="w-full">
-                    <Button variant="ghost" className="w-full justify-start cursor-pointer">
-                      Data Deletion
-                    </Button>
-                  </Link>
                 </div>
               </SheetContent>
             </Sheet>
@@ -291,11 +282,15 @@ const HomePage = () => {
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
                   <Mail className="h-5 w-5 text-primary" />
-                  <span>hello@stanimeros.com</span>
+                  <a href="mailto:hello@stanimeros.com" className="hover:text-primary transition-colors">
+                    hello@stanimeros.com
+                  </a>
                 </div>
                 <div className="flex items-center space-x-3">
                   <Phone className="h-5 w-5 text-primary" />
-                  <span>+1 (555) 123-4567</span>
+                  <a href="tel:+15551234567" className="hover:text-primary transition-colors">
+                    +1 (555) 123-4567
+                  </a>
                 </div>
                 <div className="flex items-center space-x-3">
                   <MapPin className="h-5 w-5 text-primary" />
@@ -303,15 +298,21 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="flex space-x-4 mt-8">
-                <Button variant="outline" size="icon">
-                  <Github className="h-5 w-5" />
-                </Button>
-                <Button variant="outline" size="icon">
-                  <Linkedin className="h-5 w-5" />
-                </Button>
-                <Button variant="outline" size="icon">
-                  <Twitter className="h-5 w-5" />
-                </Button>
+                <Link to="https://github.com" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="icon">
+                    <Github className="h-5 w-5" />
+                  </Button>
+                </Link>
+                <Link to="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="icon">
+                    <Linkedin className="h-5 w-5" />
+                  </Button>
+                </Link>
+                <Link to="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="icon">
+                    <Twitter className="h-5 w-5" />
+                  </Button>
+                </Link>
               </div>
             </div>
             <div>
@@ -339,23 +340,7 @@ const HomePage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-card py-8 border-t">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-muted-foreground">
-              © 2024 Stanimeros. All rights reserved.
-            </div>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link to="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">
-                Privacy Policy
-              </Link>
-              <Link to="/data-deletion" className="text-muted-foreground hover:text-primary transition-colors">
-                Data Deletion
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }

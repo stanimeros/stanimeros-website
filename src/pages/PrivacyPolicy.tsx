@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { ArrowLeft, Shield, Eye, Lock, Database, Users, FileText } from "lucide-react"
+import Footer from "@/components/Footer"
 
 const PrivacyPolicy = () => {
   return (
@@ -214,9 +215,9 @@ const PrivacyPolicy = () => {
                 If you have any questions about this Privacy Policy, please contact us:
               </p>
               <div className="space-y-2 text-muted-foreground">
-                <p>Email: privacy@stanimeros.com</p>
+                <p>Email: <a href="mailto:privacy@stanimeros.com" className="text-primary hover:underline">privacy@stanimeros.com</a></p>
                 <p>Address: San Francisco, CA</p>
-                <p>Phone: +1 (555) 123-4567</p>
+                <p>Phone: <a href="tel:+15551234567" className="text-primary hover:underline">+1 (555) 123-4567</a></p>
               </div>
             </CardContent>
           </Card>
@@ -237,23 +238,7 @@ const PrivacyPolicy = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-card py-8 border-t mt-12">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="text-muted-foreground">
-              © 2024 Stanimeros. All rights reserved.
-            </div>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">
-                Home
-              </Link>
-              <Link to="/data-deletion" className="text-muted-foreground hover:text-primary transition-colors">
-                Data Deletion
-              </Link>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   )
 }
