@@ -221,7 +221,7 @@ const HomePage = () => {
             <div className="relative">
               <div className="w-full h-96 rounded-lg overflow-hidden">
                 <img 
-                  src="/images/pantelis.png" 
+                  src="/images/pantelis.webp" 
                   alt="Pantelis Stanimeros"
                   className="w-full h-full object-cover"
                 />
@@ -392,13 +392,13 @@ const HomePage = () => {
                 
                 {/* Status Messages */}
                 {submitStatus === "success" && (
-                  <div className="p-3 bg-green-100 border border-green-400 text-green-700 rounded">
+                  <div className="p-3 bg-green-50/20 dark:bg-green-950/30 border border-green-200 dark:border-green-800/50 text-green-700 dark:text-green-300 rounded">
                     Message sent successfully! I'll get back to you soon.
                   </div>
                 )}
                 
                 {submitStatus === "error" && (
-                  <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                  <div className="p-3 bg-red-50/20 dark:bg-red-950/30 border border-red-200 dark:border-red-800/50 text-red-700 dark:text-red-300 rounded">
                     Failed to send message. Please try again.
                   </div>
                 )}
