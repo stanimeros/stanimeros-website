@@ -16,10 +16,10 @@ const transporter = nodemailer.createTransport({
 
 exports.sendEmail = onCall(async (request) => {
   try {
-    const { name, email, message } = request.data;
+    const { name, email, message, subject } = request.data;
 
     // Validate required fields
-    if (!name || !email || !message) {
+    if (!name || !email || !message || !subject) {
       throw new Error("Missing required fields");
     }
 
@@ -27,9 +27,9 @@ exports.sendEmail = onCall(async (request) => {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER,
-      subject: `New Contact Form Submission from ${name}`,
+      subject: subject,
       html: `
-        <h2>New Contact Form Submission</h2>
+        <h2>${subject}</h2>
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Message:</strong></p>

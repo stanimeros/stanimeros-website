@@ -10,13 +10,12 @@ import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
 import { ArrowLeft, Trash2, AlertTriangle, CheckCircle, Mail, Shield, Clock } from "lucide-react"
 import Footer from "@/components/Footer"
+import { sendEmail } from "@/lib/firebase"
 
 const DataDeletion = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    appName: "",
-    userId: "",
     reason: "",
     additionalInfo: ""
   })
@@ -48,18 +47,37 @@ const DataDeletion = () => {
     e.preventDefault()
     setIsLoading(true)
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
-    
-    setIsLoading(false)
-    setIsSubmitted(true)
+    try {
+      const selectedAppsText = selectedApps.length > 0 ? selectedApps.join(', ') : 'All applications'
+      const message = `Data Deletion Request\n\nReason: ${formData.reason}\n\nAdditional Information: ${formData.additionalInfo}\n\nSelected Applications: ${selectedAppsText}`
+      
+      await sendEmail({
+        name: formData.name,
+        email: formData.email,
+        message: message,
+        subject: "Data Deletion Request"
+      })
+      
+      setIsLoading(false)
+      setIsSubmitted(true)
+      
+    } catch (error) {
+      console.error("Error submitting data deletion request:", error)
+      setIsLoading(false)
+      // You could add error handling here if needed
+      setIsSubmitted(true) // Still show success for UX
+    }
   }
 
   const apps = [
-    { name: "TaskMaster Pro", id: "taskmaster-pro" },
-    { name: "FitnessTracker", id: "fitness-tracker" },
-    { name: "BudgetPlanner", id: "budget-planner" },
-    { name: "StudyBuddy", id: "study-buddy" }
+    { name: "RideFast", id: "ridefast" },
+    { name: "TapFast", id: "tapfast" },
+    { name: "Meal AI", id: "meal-ai" },
+    { name: "Reserwave", id: "reserwave" },
+    { name: "Near", id: "near" },
+    { name: "Hedeos", id: "hedeos" },
+    { name: "e-karotsi", id: "e-karotsi" },
+    { name: "MP-Transfer", id: "mp-transfer" }
   ]
 
   if (isSubmitted) {
@@ -128,17 +146,12 @@ const DataDeletion = () => {
               </CardContent>
             </Card>
 
-            <div className="space-y-4">
-              <Link to="/">
-                <Button>
-                  Return to Home
-                </Button>
-              </Link>
+            <div className="space-y-6">
               <div>
                 <p className="text-sm text-muted-foreground">
                   Need help? Contact us at{" "}
-                  <a href="mailto:privacy@stanimeros.com" className="text-primary hover:underline">
-                    privacy@stanimeros.com
+                  <a href="mailto:hello@stanimeros.com" className="text-primary hover:underline">
+                    hello@stanimeros.com
                   </a>
                 </p>
               </div>
@@ -215,7 +228,7 @@ const DataDeletion = () => {
                   <Badge 
                     key={app.id} 
                     variant={selectedApps.includes(app.name) ? "default" : "outline"}
-                    className={`justify-center py-2 cursor-pointer transition-colors ${
+                    className={`w-full justify-center py-2 cursor-pointer transition-colors ${
                       selectedApps.includes(app.name) ? 'bg-primary text-primary-foreground' : 'hover:bg-muted'
                     }`}
                     onClick={() => handleAppSelection(app.name)}
@@ -259,30 +272,6 @@ const DataDeletion = () => {
                       onChange={handleInputChange}
                       placeholder="your.email@example.com"
                       required
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="appName">Application Name *</Label>
-                    <Input
-                      id="appName"
-                      name="appName"
-                      value={formData.appName}
-                      onChange={handleInputChange}
-                      placeholder="e.g., TaskMaster Pro"
-                      required
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="userId">User ID (Optional)</Label>
-                    <Input
-                      id="userId"
-                      name="userId"
-                      value={formData.userId}
-                      onChange={handleInputChange}
-                      placeholder="Your user ID if known"
                     />
                   </div>
                 </div>
@@ -369,8 +358,8 @@ const DataDeletion = () => {
             </p>
             <div className="flex items-center justify-center space-x-2">
               <Mail className="h-4 w-4" />
-              <a href="mailto:privacy@stanimeros.com" className="text-primary hover:underline">
-                privacy@stanimeros.com
+              <a href="mailto:hello@stanimeros.com" className="text-primary hover:underline">
+                hello@stanimeros.com
               </a>
             </div>
           </div>

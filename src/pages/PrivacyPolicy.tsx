@@ -117,14 +117,8 @@ const PrivacyPolicy = () => {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                We do not sell, trade, or otherwise transfer your personal information to third parties without your consent, except in the following circumstances:
+                We do not sell your personal information. Your data is never sold to third parties. We do not share your personal information with any third parties under any circumstances.
               </p>
-              <ul className="space-y-2 text-muted-foreground">
-                <li>• With your explicit consent</li>
-                <li>• To comply with legal requirements</li>
-                <li>• To protect our rights and safety</li>
-                <li>• With trusted service providers who assist in operating our apps</li>
-              </ul>
             </CardContent>
           </Card>
 
@@ -215,9 +209,8 @@ const PrivacyPolicy = () => {
                 If you have any questions about this Privacy Policy, please contact us:
               </p>
               <div className="space-y-2 text-muted-foreground">
-                <p>Email: <a href="mailto:privacy@stanimeros.com" className="text-primary hover:underline">privacy@stanimeros.com</a></p>
-                <p>Address: San Francisco, CA</p>
-                <p>Phone: <a href="tel:+15551234567" className="text-primary hover:underline">+1 (555) 123-4567</a></p>
+                <p>Email: <a href="mailto:hello@stanimeros.com" className="text-primary hover:underline">hello@stanimeros.com</a></p>
+                <p>Address: Thessaloniki, Greece</p>
               </div>
             </CardContent>
           </Card>

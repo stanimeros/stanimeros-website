@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Mail, MapPin, Github, Linkedin, Twitter, Send, Code, Palette, Smartphone, Database } from "lucide-react"
+import { Menu, Mail, MapPin, Github, Linkedin, Send, Code, Palette, Smartphone, Database, Instagram } from "lucide-react"
 import Footer from "@/components/Footer"
 import { sendEmail } from "@/lib/firebase"
 
@@ -54,6 +54,7 @@ const HomePage = () => {
 
     try {
       const result = await sendEmail({
+        subject: "New Contact Form Submission",
         name: contactForm.name,
         email: contactForm.email,
         message: contactForm.message
@@ -111,52 +112,59 @@ const HomePage = () => {
   const portfolioItems = [
     {
       title: "RideFast",
-      description: "A modern ride-sharing platform connecting drivers and passengers with real-time tracking and secure payments",
-      technologies: ["React Native", "Node.js", "MongoDB", "Socket.io"],
-      bgColor: "bg-gray-800",
+      description: "Comprehensive reservation management system for transfer companies and taxi services, featuring real-time booking, scheduling, and payment processing with integrated mapping and notification systems",
+      technologies: ["React", "TypeScript", "Google Maps", "Firestore", "Resend", "Stripe API"],
+      bgColor: "bg-gray-800/50",
       textColor: "text-gray-100"
     },
     {
       title: "TapFast",
-      description: "Quick and efficient food delivery service with instant order processing and real-time delivery tracking",
-      technologies: ["React", "Express.js", "PostgreSQL", "Redis"],
-      bgColor: "bg-orange-900/50",
+      description: "Advanced QR code generation and management platform for digital assets including wallet badges, shopping carts, promotional coupons, and loyalty programs with comprehensive admin controls",
+      technologies: ["React", "TypeScript", "QR Codes", "Admin Panel"],
+      bgColor: "bg-orange-800/50",
       textColor: "text-orange-100"
     },
     {
       title: "Meal AI",
-      description: "AI-powered meal planning and recipe recommendation system with personalized nutrition insights",
-      technologies: ["Python", "TensorFlow", "React", "FastAPI"],
-      bgColor: "bg-green-900/50",
-      textColor: "text-green-100"
-    },
-    {
-      title: "Reserwave",
-      description: "Advanced restaurant reservation and table management system with dynamic pricing and analytics",
-      technologies: ["Vue.js", "Laravel", "MySQL", "WebSockets"],
-      bgColor: "bg-blue-900/50",
+      description: "Intelligent mobile application leveraging computer vision and AI to automatically scan, identify, and count food items for precise nutrition tracking and dietary management",
+      technologies: ["Android", "iOS", "AI", "Computer Vision", "Mobile App"],
+      bgColor: "bg-blue-800/50",
       textColor: "text-blue-100"
     },
     {
+      title: "Reserwave",
+      description: "Sophisticated booking and discovery platform enabling users to search, compare, and reserve services while providing businesses with comprehensive reservation management tools",
+      technologies: ["PHP", "MySQL", "React", "JavaScript", "Search System"],
+      bgColor: "bg-cyan-800/50",
+      textColor: "text-cyan-100"
+    },
+    {
       title: "Near",
-      description: "Location-based social networking app helping users discover and connect with people nearby",
-      technologies: ["React Native", "Firebase", "Google Maps API", "TypeScript"],
-      bgColor: "bg-purple-900/50",
-      textColor: "text-purple-100"
+      description: "Innovative location-based social networking platform that connects users with nearby people, places, and events using advanced geolocation and machine learning algorithms",
+      technologies: ["Java", "Python", "Android", "iOS", "Google Maps", "Machine Learning"],
+      bgColor: "bg-orange-800/50",
+      textColor: "text-orange-100"
     },
     {
       title: "Hedeos",
-      description: "Comprehensive healthcare management platform for clinics and medical professionals",
-      technologies: ["Angular", "Spring Boot", "PostgreSQL", "Docker"],
-      bgColor: "bg-red-900/50",
-      textColor: "text-red-100"
+      description: "Interactive educational mobile application designed to teach Greek language through gamified learning experiences, featuring vocabulary building, interactive quizzes, and progress tracking",
+      technologies: ["iOS", "Android", "Education", "Quizzes", "Mobile App"],
+      bgColor: "bg-yellow-800/50",
+      textColor: "text-yellow-100"
     },
     {
       title: "e-karotsi",
-      description: "Digital marketplace for local farmers and consumers with secure payment processing and delivery tracking",
-      technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      bgColor: "bg-yellow-900/50",
-      textColor: "text-yellow-100"
+      description: "Full-featured e-commerce platform for Thessaloniki-based Greek supermarket, offering seamless online shopping experience with real-time inventory management and efficient delivery services",
+      technologies: ["Web", "E-commerce", "Supermarket", "Online Ordering"],
+      bgColor: "bg-green-800/50",
+      textColor: "text-green-100"
+    },
+    {
+      title: "MP-Transfer",
+      description: "Enterprise-grade appointment management system for transportation companies and hotels, facilitating seamless transfer scheduling, real-time updates, and comprehensive booking administration",
+      technologies: ["iOS", "Android", "Web", "Flutter", "Push Notifications", "Firestore"],
+      bgColor: "bg-sky-800/50",
+      textColor: "text-sky-100"
     }
   ]
 
@@ -168,7 +176,14 @@ const HomePage = () => {
       }`}>
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold">Stanimeros</div>
+            <div className="flex items-center space-x-2">
+              <img 
+                src="/images/logo-white.png" 
+                alt="Stanimeros Logo" 
+                className="h-8 w-8"
+              />
+              <div className="text-2xl font-bold">Stanimeros</div>
+            </div>
             
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
@@ -263,10 +278,14 @@ const HomePage = () => {
               <div className="flex flex-wrap gap-2">
                 <Badge variant="secondary">React</Badge>
                 <Badge variant="secondary">TypeScript</Badge>
-                <Badge variant="secondary">Node.js</Badge>
+                <Badge variant="secondary">Flutter</Badge>
                 <Badge variant="secondary">Python</Badge>
-                <Badge variant="secondary">AWS</Badge>
-                <Badge variant="secondary">Docker</Badge>
+                <Badge variant="secondary">Java</Badge>
+                <Badge variant="secondary">PHP</Badge>
+                <Badge variant="secondary">Firestore</Badge>
+                <Badge variant="secondary">MySQL</Badge>
+                <Badge variant="secondary">Google Maps</Badge>
+                <Badge variant="secondary">AI/ML</Badge>
               </div>
             </div>
             <div className="relative">
@@ -318,7 +337,7 @@ const HomePage = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolioItems.map((item, index) => (
-              <Card key={index} className="overflow-hidden hover:shadow-lg transition-all duration-300">
+              <Card key={index} className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-2 pt-0">
                 <div className={`h-48 ${item.bgColor} flex items-center justify-center`}>
                   <h3 className={`text-4xl font-bold ${item.textColor}`}>
                     {item.title}
@@ -370,19 +389,19 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="flex space-x-4 mt-8">
-                <Link to="https://github.com" target="_blank" rel="noopener noreferrer">
+                <Link to="https://github.com/stanimeros" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon">
                     <Github className="h-5 w-5" />
                   </Button>
                 </Link>
-                <Link to="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                <Link to="https://linkedin.com/in/stanimeros" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon">
                     <Linkedin className="h-5 w-5" />
                   </Button>
                 </Link>
-                <Link to="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                <Link to="https://www.instagram.com/stanimeross_" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon">
-                    <Twitter className="h-5 w-5" />
+                    <Instagram className="h-5 w-5" />
                   </Button>
                 </Link>
               </div>
