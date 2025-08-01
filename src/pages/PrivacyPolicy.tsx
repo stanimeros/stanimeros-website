@@ -2,28 +2,25 @@ import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { ArrowLeft, Shield, Eye, Lock, Database, Users, FileText } from "lucide-react"
+import { Shield, Eye, Lock, Database, Users, FileText } from "lucide-react"
 import Footer from "@/components/Footer"
+import Header from "@/components/Header"
+import { useEffect } from "react"
 
 const PrivacyPolicy = () => {
+  const scrollToSection = (sectionId: string) => {
+    // For privacy policy, just navigate to home
+    window.location.href = '/#' + sectionId
+  }
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
+
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-card border-b">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="text-2xl font-bold">
-              Stanimeros
-            </Link>
-            <Link to="/">
-              <Button variant="outline">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Home
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header onScrollToSection={scrollToSection} />
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12">

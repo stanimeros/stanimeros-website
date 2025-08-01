@@ -7,14 +7,13 @@ import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Mail, MapPin, Github, Linkedin, Send, Code, Palette, Smartphone, Database, Instagram } from "lucide-react"
+import { Mail, MapPin, Github, Linkedin, Send, Code, Palette, Smartphone, Database, Instagram } from "lucide-react"
 import Footer from "@/components/Footer"
 import { sendEmail } from "@/lib/firebase"
 import GitHubCalendarComponent from "@/components/GitHubCalendar"
+import Header from "@/components/Header"
 
 const HomePage = () => {
-  const [isScrolled, setIsScrolled] = useState(false)
   const location = useLocation()
   const [contactForm, setContactForm] = useState({
     name: "",
@@ -23,14 +22,6 @@ const HomePage = () => {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-    }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   useEffect(() => {
     if (location.hash) {
@@ -172,69 +163,7 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-background/95 backdrop-blur-sm border-b' : 'bg-transparent'
-      }`}>
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <img 
-                src="/images/logo-white.png" 
-                alt="Stanimeros Logo" 
-                className="h-8 w-8"
-              />
-              <div className="text-2xl font-bold">Stanimeros</div>
-            </div>
-            
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <Button variant="ghost" onClick={() => scrollToSection('home')} className="cursor-pointer">
-                Home
-              </Button>
-              <Button variant="ghost" onClick={() => scrollToSection('about')} className="cursor-pointer">
-                About
-              </Button>
-              <Button variant="ghost" onClick={() => scrollToSection('services')} className="cursor-pointer">
-                Services
-              </Button>
-              <Button variant="ghost" onClick={() => scrollToSection('portfolio')} className="cursor-pointer">
-                Portfolio
-              </Button>
-              <Button variant="ghost" onClick={() => scrollToSection('contact')} className="cursor-pointer">
-                Contact
-              </Button>
-            </div>
-
-            {/* Mobile Navigation */}
-            <Sheet>
-              <SheetTrigger asChild className="md:hidden">
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-6 w-6" />
-                </Button>
-              </SheetTrigger>
-              <SheetContent side="right" className="w-[300px]">
-                <div className="flex flex-col space-y-2 mt-8">
-                  <Button variant="ghost" onClick={() => scrollToSection('home')} className="justify-start cursor-pointer">
-                    Home
-                  </Button>
-                  <Button variant="ghost" onClick={() => scrollToSection('about')} className="justify-start cursor-pointer">
-                    About
-                  </Button>
-                  <Button variant="ghost" onClick={() => scrollToSection('services')} className="justify-start cursor-pointer">
-                    Services
-                  </Button>
-                  <Button variant="ghost" onClick={() => scrollToSection('portfolio')} className="justify-start cursor-pointer">
-                    Portfolio
-                  </Button>
-                  <Button variant="ghost" onClick={() => scrollToSection('contact')} className="justify-start cursor-pointer">
-                    Contact
-                  </Button>
-                </div>
-              </SheetContent>
-            </Sheet>
-          </div>
-        </div>
-      </nav>
+      <Header onScrollToSection={scrollToSection} />
 
       {/* Hero Section */}
       <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">

@@ -1,5 +1,4 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -8,9 +7,10 @@ import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
-import { ArrowLeft, Trash2, AlertTriangle, CheckCircle, Mail, Shield, Clock } from "lucide-react"
+import { Trash2, AlertTriangle, CheckCircle, Mail, Shield, Clock } from "lucide-react"
 import Footer from "@/components/Footer"
 import { sendEmail } from "@/lib/firebase"
+import Header from "@/components/Header"
 
 const DataDeletion = () => {
   const [formData, setFormData] = useState({
@@ -23,6 +23,15 @@ const DataDeletion = () => {
   const [confirmChecked, setConfirmChecked] = useState(false)
   const [verifyChecked, setVerifyChecked] = useState(false)
   const [selectedApps, setSelectedApps] = useState<string[]>([])
+
+  const scrollToSection = (sectionId: string) => {
+    // For data deletion, just navigate to home
+    window.location.href = '/#' + sectionId
+  }
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -83,21 +92,7 @@ const DataDeletion = () => {
     return (
       <div className="min-h-screen bg-background">
         {/* Header */}
-        <header className="bg-card border-b">
-          <div className="container mx-auto px-4 py-6">
-            <div className="flex items-center justify-between">
-              <Link to="/" className="text-2xl font-bold">
-                Stanimeros
-              </Link>
-              <Link to="/">
-                <Button variant="outline">
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  Back to Home
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </header>
+        <Header onScrollToSection={scrollToSection} />
 
         {/* Success Content */}
         <main className="container mx-auto px-4 py-12">
@@ -165,21 +160,7 @@ const DataDeletion = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="bg-card border-b">
-        <div className="container mx-auto px-4 py-6">
-          <div className="flex items-center justify-between">
-            <Link to="/" className="text-2xl font-bold">
-              Stanimeros
-            </Link>
-            <Link to="/">
-              <Button variant="outline">
-                <ArrowLeft className="h-4 w-4 mr-2" />
-                Back to Home
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header onScrollToSection={scrollToSection} />
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12">
@@ -196,17 +177,16 @@ const DataDeletion = () => {
           </div>
 
           {/* Important Notice */}
-          <Card className="mb-8 border-orange-200 bg-orange-50 dark:border-orange-800 dark:bg-orange-950">
+          <Card className="mb-8 border-red-200 bg-red-50/20 dark:border-red-800/50 dark:bg-red-950/30">
             <CardHeader>
-              <CardTitle className="flex items-center text-orange-800 dark:text-orange-200">
+              <CardTitle className="flex items-center text-red-700 dark:text-red-300">
                 <AlertTriangle className="h-5 w-5 mr-2" />
                 Important Information
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <ul className="space-y-2 text-orange-700 dark:text-orange-300">
+              <ul className="space-y-2 text-red-600 dark:text-red-400">
                 <li>• Data deletion is permanent and cannot be undone</li>
-                <li>• You will lose access to your account and all associated data</li>
                 <li>• This process may take up to 30 days to complete</li>
                 <li>• We may need to verify your identity before processing</li>
               </ul>
