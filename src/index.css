@@ -1,9 +1,12 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-
+@import "@fontsource/poppins";
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
