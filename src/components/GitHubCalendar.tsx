@@ -12,6 +12,7 @@ const GitHubCalendarComponent = ({ username, className = "" }: GitHubCalendarPro
         username={username}
         colorScheme="dark"
         showWeekdayLabels={true}
+        hideTotalCount={true}
       />
     </div>
   )
