@@ -11,6 +11,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Menu, Mail, MapPin, Github, Linkedin, Send, Code, Palette, Smartphone, Database, Instagram } from "lucide-react"
 import Footer from "@/components/Footer"
 import { sendEmail } from "@/lib/firebase"
+import GitHubCalendarComponent from "@/components/GitHubCalendar"
 
 const HomePage = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -297,6 +298,22 @@ const HomePage = () => {
                 />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* GitHub Activity Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">GitHub Activity</h2>
+            <Separator className="w-24 mx-auto" />
+            <p className="text-muted-foreground mt-4">
+              My coding activity and contributions over the past year
+            </p>
+          </div>
+          <div className="mx-auto w-full flex justify-center">
+            <GitHubCalendarComponent username="stanimeros" />
           </div>
         </div>
       </section>
