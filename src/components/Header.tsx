@@ -1,14 +1,11 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu } from "lucide-react"
-import { Link } from "react-router-dom"
+import { Menu, Home, User, Settings, Briefcase, Mail } from "lucide-react"
+import { Link, useNavigate } from "react-router-dom"
 
-interface HeaderProps {
-  onScrollToSection: (sectionId: string) => void
-}
-
-const Header = ({ onScrollToSection }: HeaderProps) => {
+const Header = () => {
+  const navigate = useNavigate()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -21,7 +18,7 @@ const Header = ({ onScrollToSection }: HeaderProps) => {
   }, [])
 
   const handleScrollToSection = (sectionId: string) => {
-    onScrollToSection(sectionId)
+    navigate('/#' + sectionId)
     setIsMobileMenuOpen(false)
   }
 
@@ -69,20 +66,25 @@ const Header = ({ onScrollToSection }: HeaderProps) => {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px]">
-              <div className="flex flex-col space-y-2 mt-8">
+              <div className="flex flex-col space-y-2 mt-2">
                 <Button variant="ghost" onClick={() => handleScrollToSection('home')} className="justify-start cursor-pointer">
+                  <Home className="h-4 w-4 mr-3" />
                   Home
                 </Button>
                 <Button variant="ghost" onClick={() => handleScrollToSection('about')} className="justify-start cursor-pointer">
+                  <User className="h-4 w-4 mr-3" />
                   About
                 </Button>
                 <Button variant="ghost" onClick={() => handleScrollToSection('services')} className="justify-start cursor-pointer">
+                  <Settings className="h-4 w-4 mr-3" />
                   Services
                 </Button>
                 <Button variant="ghost" onClick={() => handleScrollToSection('portfolio')} className="justify-start cursor-pointer">
+                  <Briefcase className="h-4 w-4 mr-3" />
                   Portfolio
                 </Button>
                 <Button variant="ghost" onClick={() => handleScrollToSection('contact')} className="justify-start cursor-pointer">
+                  <Mail className="h-4 w-4 mr-3" />
                   Contact
                 </Button>
               </div>

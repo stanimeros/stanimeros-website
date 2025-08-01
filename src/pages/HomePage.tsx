@@ -163,7 +163,7 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
-      <Header onScrollToSection={scrollToSection} />
+      <Header />
 
       {/* Hero Section */}
       <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -248,7 +248,7 @@ const HomePage = () => {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-20">
+      <section id="services" className="pb-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Services</h2>

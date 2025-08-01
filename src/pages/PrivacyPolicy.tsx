@@ -8,11 +8,6 @@ import Header from "@/components/Header"
 import { useEffect } from "react"
 
 const PrivacyPolicy = () => {
-  const scrollToSection = (sectionId: string) => {
-    // For privacy policy, just navigate to home
-    window.location.href = '/#' + sectionId
-  }
-
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [])
@@ -20,7 +15,7 @@ const PrivacyPolicy = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <Header onScrollToSection={scrollToSection} />
+      <Header />
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12">

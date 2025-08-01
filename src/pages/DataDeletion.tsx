@@ -23,12 +23,7 @@ const DataDeletion = () => {
   const [confirmChecked, setConfirmChecked] = useState(false)
   const [verifyChecked, setVerifyChecked] = useState(false)
   const [selectedApps, setSelectedApps] = useState<string[]>([])
-
-  const scrollToSection = (sectionId: string) => {
-    // For data deletion, just navigate to home
-    window.location.href = '/#' + sectionId
-  }
-
+  
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [])
@@ -92,7 +87,7 @@ const DataDeletion = () => {
     return (
       <div className="min-h-screen bg-background">
         {/* Header */}
-        <Header onScrollToSection={scrollToSection} />
+        <Header />
 
         {/* Success Content */}
         <main className="container mx-auto px-4 py-12">
@@ -160,7 +155,7 @@ const DataDeletion = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <Header onScrollToSection={scrollToSection} />
+      <Header />
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12">
