@@ -8,13 +8,20 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger } from "@/components/ui/navigation-menu"
-import { Menu, Mail, Phone, MapPin, Github, Linkedin, Twitter, Send, Download, Code, Palette, Smartphone, Globe, Database, Shield } from "lucide-react"
+import { Menu, Mail, Phone, MapPin, Github, Linkedin, Twitter, Send, Code, Palette, Smartphone, Globe, Database } from "lucide-react"
 import Footer from "@/components/Footer"
+import { sendEmail } from "@/lib/firebase"
 
 const HomePage = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const location = useLocation()
+  const [contactForm, setContactForm] = useState({
+    name: "",
+    email: "",
+    message: ""
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,6 +45,44 @@ const HomePage = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' })
     }
+  }
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus("idle")
+
+    try {
+      const result = await sendEmail({
+        name: contactForm.name,
+        email: contactForm.email,
+        message: contactForm.message
+      })
+      
+      console.log("Email sent successfully:", result)
+      setSubmitStatus("success")
+      setContactForm({ name: "", email: "", message: "" })
+      
+      // Reset status after 5 seconds
+      setTimeout(() => setSubmitStatus("idle"), 5000)
+      
+    } catch (error: any) {
+      console.error("Error sending email:", error)
+      setSubmitStatus("error")
+      
+      // Reset status after 5 seconds
+      setTimeout(() => setSubmitStatus("idle"), 5000)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setContactForm(prev => ({
+      ...prev,
+      [name]: value
+    }))
   }
 
   const services = [
@@ -316,22 +361,72 @@ const HomePage = () => {
               </div>
             </div>
             <div>
-              <form className="space-y-6">
+              <form onSubmit={handleContactSubmit} className="space-y-6">
                 <div className="space-y-2">
                   <Label htmlFor="name">Name</Label>
-                  <Input id="name" placeholder="Your name" />
+                  <Input 
+                    id="name" 
+                    name="name"
+                    value={contactForm.name}
+                    onChange={handleInputChange}
+                    placeholder="Your name" 
+                    required
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="your.email@example.com" />
+                  <Input 
+                    id="email" 
+                    name="email"
+                    type="email" 
+                    value={contactForm.email}
+                    onChange={handleInputChange}
+                    placeholder="your.email@example.com" 
+                    required
+                  />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="message">Message</Label>
-                  <Textarea id="message" placeholder="Tell me about your project..." rows={5} />
+                  <Textarea 
+                    id="message" 
+                    name="message"
+                    value={contactForm.message}
+                    onChange={handleInputChange}
+                    placeholder="Tell me about your project..." 
+                    rows={5} 
+                    required
+                  />
                 </div>
-                <Button type="submit" className="w-full">
-                  <Send className="h-4 w-4 mr-2" />
-                  Send Message
+                
+                {/* Status Messages */}
+                {submitStatus === "success" && (
+                  <div className="p-3 bg-green-100 border border-green-400 text-green-700 rounded">
+                    Message sent successfully! I'll get back to you soon.
+                  </div>
+                )}
+                
+                {submitStatus === "error" && (
+                  <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+                    Failed to send message. Please try again.
+                  </div>
+                )}
+                
+                <Button 
+                  type="submit" 
+                  className="w-full" 
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4 mr-2" />
+                      Send Message
+                    </>
+                  )}
                 </Button>
               </form>
             </div>
