@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Mail, Phone, MapPin, Github, Linkedin, Twitter, Send, Code, Palette, Smartphone, Globe, Database } from "lucide-react"
+import { Menu, Mail, MapPin, Github, Linkedin, Twitter, Send, Code, Palette, Smartphone, Database } from "lucide-react"
 import Footer from "@/components/Footer"
 import { sendEmail } from "@/lib/firebase"
 
@@ -110,22 +110,53 @@ const HomePage = () => {
 
   const portfolioItems = [
     {
-      title: "E-Commerce Platform",
-      description: "A full-stack e-commerce solution with payment integration",
+      title: "RideFast",
+      description: "A modern ride-sharing platform connecting drivers and passengers with real-time tracking and secure payments",
+      technologies: ["React Native", "Node.js", "MongoDB", "Socket.io"],
+      bgColor: "bg-gray-800",
+      textColor: "text-gray-100"
+    },
+    {
+      title: "TapFast",
+      description: "Quick and efficient food delivery service with instant order processing and real-time delivery tracking",
+      technologies: ["React", "Express.js", "PostgreSQL", "Redis"],
+      bgColor: "bg-orange-900/50",
+      textColor: "text-orange-100"
+    },
+    {
+      title: "Meal AI",
+      description: "AI-powered meal planning and recipe recommendation system with personalized nutrition insights",
+      technologies: ["Python", "TensorFlow", "React", "FastAPI"],
+      bgColor: "bg-green-900/50",
+      textColor: "text-green-100"
+    },
+    {
+      title: "Reserwave",
+      description: "Advanced restaurant reservation and table management system with dynamic pricing and analytics",
+      technologies: ["Vue.js", "Laravel", "MySQL", "WebSockets"],
+      bgColor: "bg-blue-900/50",
+      textColor: "text-blue-100"
+    },
+    {
+      title: "Near",
+      description: "Location-based social networking app helping users discover and connect with people nearby",
+      technologies: ["React Native", "Firebase", "Google Maps API", "TypeScript"],
+      bgColor: "bg-purple-900/50",
+      textColor: "text-purple-100"
+    },
+    {
+      title: "Hedeos",
+      description: "Comprehensive healthcare management platform for clinics and medical professionals",
+      technologies: ["Angular", "Spring Boot", "PostgreSQL", "Docker"],
+      bgColor: "bg-red-900/50",
+      textColor: "text-red-100"
+    },
+    {
+      title: "e-karotsi",
+      description: "Digital marketplace for local farmers and consumers with secure payment processing and delivery tracking",
       technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=300&fit=crop"
-    },
-    {
-      title: "Task Management App",
-      description: "A collaborative task management application with real-time updates",
-      technologies: ["Vue.js", "Firebase", "TypeScript"],
-      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop"
-    },
-    {
-      title: "Fitness Tracking App",
-      description: "Mobile app for tracking workouts and nutrition",
-      technologies: ["React Native", "Redux", "SQLite"],
-      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop"
+      bgColor: "bg-yellow-900/50",
+      textColor: "text-yellow-100"
     }
   ]
 
@@ -219,7 +250,7 @@ const HomePage = () => {
           </div>
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h3 className="text-2xl font-semibold mb-4">Passionate Developer</h3>
+              <h3 className="text-2xl font-semibold mb-4">Pantelis Stanimeros</h3>
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 I'm a dedicated full-stack developer with a passion for creating innovative digital solutions. 
                 With years of experience in web and mobile development, I specialize in building scalable, 
@@ -239,8 +270,12 @@ const HomePage = () => {
               </div>
             </div>
             <div className="relative">
-              <div className="w-full h-96 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-lg flex items-center justify-center">
-                <Globe className="h-24 w-24 text-primary" />
+              <div className="w-full h-96 rounded-lg overflow-hidden">
+                <img 
+                  src="/images/pantelis.jpg" 
+                  alt="Pantelis Stanimeros"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </div>
@@ -284,14 +319,12 @@ const HomePage = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolioItems.map((item, index) => (
               <Card key={index} className="overflow-hidden hover:shadow-lg transition-all duration-300">
-                <div className="h-48 bg-muted flex items-center justify-center">
-                  <img 
-                    src={item.image} 
-                    alt={item.title}
-                    className="w-full h-full object-cover"
-                  />
+                <div className={`h-48 ${item.bgColor} flex items-center justify-center`}>
+                  <h3 className={`text-4xl font-bold ${item.textColor}`}>
+                    {item.title}
+                  </h3>
                 </div>
-                <CardHeader>
+                <CardHeader className="pt-0">
                   <CardTitle>{item.title}</CardTitle>
                   <CardDescription>{item.description}</CardDescription>
                 </CardHeader>
@@ -332,14 +365,8 @@ const HomePage = () => {
                   </a>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <Phone className="h-5 w-5 text-primary" />
-                  <a href="tel:+15551234567" className="hover:text-primary transition-colors">
-                    +1 (555) 123-4567
-                  </a>
-                </div>
-                <div className="flex items-center space-x-3">
                   <MapPin className="h-5 w-5 text-primary" />
-                  <span>San Francisco, CA</span>
+                  <span>Thessaloniki, Greece</span>
                 </div>
               </div>
               <div className="flex space-x-4 mt-8">
