@@ -28,7 +28,7 @@ const Header = () => {
     }`}>
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <Link to="/#">
+          <Link to="/#home">
             <div className="flex items-center space-x-2">
               <img 
                 src="/images/logo-white.png" 
