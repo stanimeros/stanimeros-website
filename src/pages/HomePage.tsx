@@ -169,19 +169,27 @@ const HomePage = () => {
       <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent relative z-20">
             Pantelis Stanimeros
           </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto relative z-20">
             Full-stack developer passionate about creating innovative digital solutions
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-20">
             <Button size="lg" onClick={() => scrollToSection('services')}>
               View Services
             </Button>
             <Button size="lg" variant="outline" onClick={() => scrollToSection('contact')}>
               Get In Touch
             </Button>
+          </div>
+          {/* Logo positioned behind everything */}
+          <div className="absolute inset-0 flex items-center justify-center opacity-10 z-0 pointer-events-none">
+            <img 
+              src="/images/logo-white.png" 
+              alt="Stanimeros Logo" 
+              className="h-[300%] w-auto object-contain"
+            />
           </div>
         </div>
       </section>
