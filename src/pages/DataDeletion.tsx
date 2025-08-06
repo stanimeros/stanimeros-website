@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
-import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Trash2, AlertTriangle, CheckCircle, Mail, Shield, Clock } from "lucide-react"
 import Footer from "@/components/Footer"
@@ -16,13 +15,14 @@ const DataDeletion = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    appName: "",
     reason: "",
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [confirmChecked, setConfirmChecked] = useState(false)
   const [verifyChecked, setVerifyChecked] = useState(false)
-  const [selectedApps, setSelectedApps] = useState<string[]>([])
+  const [deleteAccount, setDeleteAccount] = useState(false)
   
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -36,23 +36,15 @@ const DataDeletion = () => {
     }))
   }
 
-  const handleAppSelection = (appName: string) => {
-    setSelectedApps(prev => {
-      if (prev.includes(appName)) {
-        return prev.filter(app => app !== appName)
-      } else {
-        return [...prev, appName]
-      }
-    })
-  }
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     
     try {
-      const selectedAppsText = selectedApps.length > 0 ? selectedApps.join(', ') : 'All applications'
-      const message = `Reason: ${formData.reason}\n\nSelected Applications: ${selectedAppsText}`
+      const deletionType = deleteAccount ? "Account and Data" : "Data Only"
+      const message = `Application: ${formData.appName}\nDeletion Type: ${deletionType}\nReason: ${formData.reason}`
       
       await sendEmail({
         name: formData.name,
@@ -72,16 +64,7 @@ const DataDeletion = () => {
     }
   }
 
-            const apps = [
-            { name: "RideFast", id: "ridefast" },
-            { name: "MP-Transfer", id: "mp-transfer" },
-            { name: "TapFast", id: "tapfast" },
-            { name: "Meal AI", id: "meal-ai" },
-            { name: "Near", id: "near" },
-            { name: "Reserwave", id: "reserwave" },
-            { name: "Hedeos", id: "hedeos" },
-            { name: "e-karotsi", id: "e-karotsi" }
-          ]
+
 
   if (isSubmitted) {
     return (
@@ -188,31 +171,7 @@ const DataDeletion = () => {
             </CardContent>
           </Card>
 
-          {/* Available Apps */}
-          <Card className="mb-8">
-            <CardHeader>
-              <CardTitle>Our Applications</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p className="text-muted-foreground mb-4">
-                Select the application(s) from which you want to delete your data:
-              </p>
-              <div className="grid grid-cols-2 gap-3">
-                {apps.map((app) => (
-                  <Badge 
-                    key={app.id} 
-                    variant={selectedApps.includes(app.name) ? "default" : "outline"}
-                    className={`w-full justify-center py-2 cursor-pointer transition-colors ${
-                      selectedApps.includes(app.name) ? 'bg-primary text-primary-foreground' : 'hover:bg-muted'
-                    }`}
-                    onClick={() => handleAppSelection(app.name)}
-                  >
-                    {app.name}
-                  </Badge>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+
 
           {/* Deletion Form */}
           <Card>
@@ -251,6 +210,18 @@ const DataDeletion = () => {
                 </div>
 
                 <div className="space-y-2">
+                  <Label htmlFor="appName">Application Name *</Label>
+                  <Input
+                    id="appName"
+                    name="appName"
+                    value={formData.appName}
+                    onChange={handleInputChange}
+                    placeholder="Enter the name of the application"
+                    required
+                  />
+                </div>
+
+                <div className="space-y-2">
                   <Label htmlFor="reason">Reason for Deletion *</Label>
                   <Textarea
                     id="reason"
@@ -266,6 +237,17 @@ const DataDeletion = () => {
                 <Separator />
 
                 <div className="space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <Checkbox
+                      id="deleteAccount"
+                      checked={deleteAccount}
+                      onCheckedChange={(checked) => setDeleteAccount(checked as boolean)}
+                    />
+                    <Label htmlFor="deleteAccount" className="text-sm cursor-pointer">
+                      I also want to delete my account (authentication credentials) in addition to my data
+                    </Label>
+                  </div>
+
                   <div className="flex items-start space-x-3">
                     <Checkbox
                       id="confirm"
@@ -293,8 +275,8 @@ const DataDeletion = () => {
 
                 <Button 
                   type="submit" 
-                  className="w-full" 
-                  disabled={isLoading || !confirmChecked || !verifyChecked}
+                  className="w-full bg-red-600 hover:bg-red-700 text-white" 
+                  disabled={isLoading || !confirmChecked || !verifyChecked || !formData.appName.trim()}
                 >
                   {isLoading ? (
                     <>

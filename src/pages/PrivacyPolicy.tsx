@@ -65,6 +65,12 @@ const PrivacyPolicy = () => {
                 </p>
               </div>
               <div>
+                <h3 className="font-semibold mb-2">Location Data</h3>
+                <p className="text-muted-foreground">
+                  Some of our apps may access your device's location data to provide location-based services and features. This location data is used solely for app functionality and is never shared with third parties or disclosed to external entities. Your location information remains private and is only processed locally on your device or within our secure systems.
+                </p>
+              </div>
+              <div>
                 <h3 className="font-semibold mb-2">Usage Data</h3>
                 <p className="text-muted-foreground">
                   We collect information about how you use our apps, including features accessed, time spent, and performance data.
