@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Mail, MapPin, Github, Linkedin, Send, Code, Palette, Smartphone, Database, Instagram } from "lucide-react"
+import { Mail, MapPin, Github, Linkedin, Send, Code, Palette, Smartphone, Database, Instagram, Check, Star } from "lucide-react"
 import Footer from "@/components/Footer"
 import { sendEmail } from "@/lib/firebase"
 import GitHubCalendarComponent from "@/components/GitHubCalendar"
@@ -176,8 +176,8 @@ const HomePage = () => {
             Full-stack developer passionate about creating innovative digital solutions
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-20">
-            <Button size="lg" onClick={() => scrollToSection('services')}>
-              View Services
+            <Button size="lg" onClick={() => scrollToSection('packages')}>
+              View Packages
             </Button>
             <Button size="lg" variant="outline" onClick={() => scrollToSection('contact')}>
               Get In Touch
@@ -240,24 +240,102 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* GitHub Activity Section */}
-      <section className="py-20 w-full overflow-hidden">
+      {/* Packages Section */}
+      <section id="packages" className="py-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">GitHub Activity</h2>
+            <h2 className="text-4xl font-bold mb-4">Packages</h2>
             <Separator className="w-24 mx-auto" />
-            <p className="text-muted-foreground mt-4">
-              My coding activity and contributions over the past year
+            <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">
+              Simple, transparent packages designed for real business needs
             </p>
           </div>
-          <div className="mx-auto w-full flex justify-center">
-            <GitHubCalendarComponent username="stanimeros" />
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Online Presence */}
+            <Card className="relative flex flex-col justify-between hover:shadow-lg transition-all duration-300 border-border/60">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle>Online Presence</CardTitle>
+                  <Badge variant="secondary" className="rounded-full">Essential</Badge>
+                </div>
+                <CardDescription>Everything you need to look professional online</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="text-2xl font-semibold">€1,200 <span className="text-sm text-muted-foreground">(incl. VAT)</span></div>
+                <div className="space-y-2 text-sm text-muted-foreground">
+                  <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>One-page website designed for your brand</span></div>
+                  <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>Contact form with the fields you need</span></div>
+                  <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>Hosting, domain, and custom email setup</span></div>
+                  <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>Google Business and Search Console</span></div>
+                  <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>2 Meta campaigns (excluding content)</span></div>
+                </div>
+              </CardContent>
+              <div className="px-6 pb-6">
+                <Button className="w-full" onClick={() => scrollToSection('contact')}>Get Started</Button>
+              </div>
+            </Card>
+
+            {/* Custom Web App - Most Popular */}
+            <Card className="relative flex flex-col justify-between hover:shadow-lg transition-all duration-300 border-primary/30 ring-1 ring-primary/30 bg-primary/5">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                <Badge className="rounded-full px-3 py-1 flex items-center gap-1"><Star className="h-3 w-3" /> Most Popular</Badge>
+              </div>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle>Custom Web App</CardTitle>
+                  <Badge variant="secondary" className="rounded-full">Business</Badge>
+                </div>
+                <CardDescription>Tailored web application built around your workflow</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="text-2xl font-semibold">€4,000 <span className="text-sm text-muted-foreground">(incl. VAT)</span></div>
+                <div className="space-y-2 text-sm text-muted-foreground">
+                  <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>Up to 5 pages</span></div>
+                  <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>Custom features built for your needs</span></div>
+                  <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>Database included</span></div>
+                  <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>Optional sign‑in</span></div>
+                  <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>Deployment & basic monitoring</span></div>
+                </div>
+              </CardContent>
+              <div className="px-6 pb-6">
+                <Button className="w-full" onClick={() => scrollToSection('contact')}>Request Quote</Button>
+              </div>
+            </Card>
+
+            {/* Custom Mobile App */}
+            <Card className="relative flex flex-col justify-between hover:shadow-lg transition-all duration-300 border-border/60">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle>Custom Mobile App</CardTitle>
+                  <Badge variant="secondary" className="rounded-full">Premium</Badge>
+                </div>
+                <CardDescription>iOS and Android application, launched properly</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="text-2xl font-semibold">€10,000 <span className="text-sm text-muted-foreground">(incl. VAT)</span></div>
+                <div className="space-y-2 text-sm text-muted-foreground">
+                  <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>iOS + Android (up to 10 screens)</span></div>
+                  <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>Custom functionality</span></div>
+                  <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>Database & sync</span></div>
+                  <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>Optional push notifications</span></div>
+                  <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>App Store / Play guidance</span></div>
+                </div>
+              </CardContent>
+              <div className="px-6 pb-6">
+                <Button className="w-full" onClick={() => scrollToSection('contact')}>Book a Call</Button>
+              </div>
+            </Card>
           </div>
+
+          <p className="text-center text-sm text-muted-foreground mt-8">
+            We’ll guide you end‑to‑end. Prices may vary for custom requirements.
+          </p>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="services" className="pb-20">
+      <section id="services" className="p-10 pb-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Services</h2>
@@ -282,6 +360,23 @@ const HomePage = () => {
           </div>
         </div>
       </section>
+
+      {/* GitHub Activity Section */}
+      <section className="pb-20 w-full overflow-hidden">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">GitHub Activity</h2>
+            <Separator className="w-24 mx-auto" />
+            <p className="text-muted-foreground mt-4">
+              My coding activity and contributions over the past year
+            </p>
+          </div>
+          <div className="mx-auto w-full flex justify-center">
+            <GitHubCalendarComponent username="stanimeros" />
+          </div>
+        </div>
+      </section>
+
 
       {/* Portfolio Section */}
       <section id="portfolio" className="py-20 bg-card">
