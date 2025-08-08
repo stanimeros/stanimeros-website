@@ -10,6 +10,7 @@ import { Label } from "@/components/ui/label"
 import { Mail, MapPin, Github, Linkedin, Send, Code, Palette, Smartphone, Database, Instagram, Check, Star } from "lucide-react"
 import Footer from "@/components/Footer"
 import { sendEmail } from "@/lib/firebase"
+import { trackMetaEvent } from "@/lib/meta-events"
 import GitHubCalendarComponent from "@/components/GitHubCalendar"
 import Header from "@/components/Header"
 
@@ -54,6 +55,13 @@ const HomePage = () => {
       })
       
       console.log("Email sent successfully:", result)
+      
+      // Track contact form submission
+      trackMetaEvent('FormSubmission', {
+        form_type: 'contact',
+        message_length: contactForm.message.length
+      });
+      
       setSubmitStatus("success")
       setContactForm({ name: "", email: "", message: "" })
       
@@ -287,7 +295,7 @@ const HomePage = () => {
                   <CardTitle>Custom Web App</CardTitle>
                   <Badge variant="secondary" className="rounded-full">Business</Badge>
                 </div>
-                <CardDescription>Tailored web application built around your workflow</CardDescription>
+                <CardDescription>A web application built around your workflow</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-xs uppercase tracking-wide text-muted-foreground">Starting from</div>

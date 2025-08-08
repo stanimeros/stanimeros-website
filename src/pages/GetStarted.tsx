@@ -11,6 +11,7 @@ import { Badge } from "@/components/ui/badge"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Star } from "lucide-react"
 import { sendEmail } from "@/lib/firebase"
+import { trackMetaEvent } from "@/lib/meta-events"
 
 type PackageKey = "online-presence" | "web-app" | "mobile-app"
 
@@ -23,7 +24,7 @@ const PACKAGE_META: Record<PackageKey, { label: string; price: string; tagline: 
   "web-app": {
     label: "Custom Web App",
     price: "Starting from €3,000 (incl. VAT)",
-    tagline: "Tailored web application built around your workflow",
+    tagline: "A web application built around your workflow",
     highlight: true,
   },
   "mobile-app": {
@@ -151,7 +152,21 @@ function GetStarted() {
         message,
       })
       
+      // Track form submission event
+      trackMetaEvent('FormSubmission', {
+        form_type: 'package_inquiry',
+        package_type: selectedPackage,
+        has_company: !!company,
+        selected_features: selectedFeatures.length
+      });
+
       if (selectedPackage === "online-presence") {
+        // Track payment initiation
+        trackMetaEvent('InitiateCheckout', {
+          value: 1200,
+          currency: 'EUR',
+          package_type: 'online_presence'
+        });
         // Redirect to Stripe payment link
         window.location.href = "https://buy.stripe.com/eVq8wP3OV1wPgKOena2Nq00"
       } else {
@@ -187,8 +202,10 @@ function GetStarted() {
                 <Card 
                   key={key} 
                   className={`relative cursor-pointer transition-all hover:shadow-lg
-                    ${isSelected ? 'border-primary ring-1 ring-primary bg-primary/5' : 'hover:border-primary/50'}
-                    ${meta.highlight ? 'border-primary/30' : ''}`}
+                    ${isSelected 
+                      ? 'bg-gradient-to-br from-primary/20 via-primary/10 to-primary/5 border-primary/50' 
+                      : 'hover:border-primary/50'}
+                    ${!isSelected && meta.highlight ? 'border-primary/30' : ''}`}
                   onClick={() => setSelectedPackage(key)}
                 >
                   {meta.highlight && (
@@ -208,7 +225,14 @@ function GetStarted() {
                     <CardDescription className="text-sm">{meta.tagline}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="text-sm font-medium">{meta.price}</div>
+                    <div className="flex items-center justify-between">
+                      <div className="text-sm font-medium">{meta.price}</div>
+                      {isSelected && (
+                        <Badge variant="default" className="rounded-full text-xs bg-primary/90">
+                          Selected
+                        </Badge>
+                      )}
+                    </div>
                   </CardContent>
                 </Card>
               )
