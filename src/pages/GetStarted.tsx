@@ -82,7 +82,7 @@ function GetStarted() {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0 })
   }, [])
 
   useEffect(() => {

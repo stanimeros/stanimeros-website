@@ -9,7 +9,7 @@ import { useEffect } from "react"
 
 const PrivacyPolicy = () => {
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0 })
   }, [])
 
   return (
