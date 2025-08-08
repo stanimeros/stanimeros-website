@@ -3,6 +3,7 @@ import { useEffect } from "react"
 import HomePage from "@/pages/HomePage"
 import PrivacyPolicy from "@/pages/PrivacyPolicy"
 import DataDeletion from "@/pages/DataDeletion"
+import GetStarted from "@/pages/GetStarted"
 
 function App() {
   useEffect(() => {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/data-deletion" element={<DataDeletion />} />
+          <Route path="/get-started" element={<GetStarted />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
       </div>

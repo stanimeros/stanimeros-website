@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { Link, useLocation } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -15,6 +15,7 @@ import Header from "@/components/Header"
 
 const HomePage = () => {
   const location = useLocation()
+  const navigate = useNavigate()
   const [contactForm, setContactForm] = useState({
     name: "",
     email: "",
@@ -268,18 +269,18 @@ const HomePage = () => {
                   <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>Contact form with the fields you need</span></div>
                   <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>Hosting, domain, and custom email setup</span></div>
                   <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>Google Business and Search Console</span></div>
-                  <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>2 Meta campaigns (excluding content)</span></div>
+                  <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>3 Meta campaigns (excluding content)</span></div>
                 </div>
               </CardContent>
               <div className="px-6 pb-6">
-                <Button className="w-full" onClick={() => scrollToSection('contact')}>Get Started</Button>
+                <Button className="w-full" onClick={() => navigate('/get-started?package=online-presence')}>Get Started</Button>
               </div>
             </Card>
 
-            {/* Custom Web App - Most Popular */}
+            {/* Custom Web App */}
             <Card className="relative flex flex-col justify-between hover:shadow-lg transition-all duration-300 border-primary/30 ring-1 ring-primary/30 bg-primary/5">
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <Badge className="rounded-full px-3 py-1 flex items-center gap-1"><Star className="h-3 w-3" /> Most Popular</Badge>
+                <Badge className="rounded-full px-3 py-1 flex items-center gap-1"><Star className="h-3 w-3" /> Powerful and affordable</Badge>
               </div>
               <CardHeader>
                 <div className="flex items-center justify-between">
@@ -289,7 +290,8 @@ const HomePage = () => {
                 <CardDescription>Tailored web application built around your workflow</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="text-2xl font-semibold">€4,000 <span className="text-sm text-muted-foreground">(incl. VAT)</span></div>
+                <div className="text-xs uppercase tracking-wide text-muted-foreground">Starting from</div>
+                <div className="text-2xl font-semibold">€3,000 <span className="text-sm text-muted-foreground">(incl. VAT)</span></div>
                 <div className="space-y-2 text-sm text-muted-foreground">
                   <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>Up to 5 pages</span></div>
                   <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>Custom features built for your needs</span></div>
@@ -299,7 +301,7 @@ const HomePage = () => {
                 </div>
               </CardContent>
               <div className="px-6 pb-6">
-                <Button className="w-full" onClick={() => scrollToSection('contact')}>Request Quote</Button>
+                <Button className="w-full" onClick={() => navigate('/get-started?package=web-app')}>Request Quote</Button>
               </div>
             </Card>
 
@@ -313,6 +315,7 @@ const HomePage = () => {
                 <CardDescription>iOS and Android application, launched properly</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
+                <div className="text-xs uppercase tracking-wide text-muted-foreground">Starting from</div>
                 <div className="text-2xl font-semibold">€10,000 <span className="text-sm text-muted-foreground">(incl. VAT)</span></div>
                 <div className="space-y-2 text-sm text-muted-foreground">
                   <div className="flex items-start gap-2"><Check className="h-4 w-4 text-primary mt-0.5" /><span>iOS + Android (up to 10 screens)</span></div>
@@ -323,7 +326,7 @@ const HomePage = () => {
                 </div>
               </CardContent>
               <div className="px-6 pb-6">
-                <Button className="w-full" onClick={() => scrollToSection('contact')}>Book a Call</Button>
+                <Button className="w-full" onClick={() => navigate('/get-started?package=mobile-app')}>Book a Call</Button>
               </div>
             </Card>
           </div>
@@ -365,10 +368,10 @@ const HomePage = () => {
       <section className="pb-20 w-full overflow-hidden">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">GitHub Activity</h2>
+            <h2 className="text-4xl font-bold mb-4">Last year's activity</h2>
             <Separator className="w-24 mx-auto" />
-            <p className="text-muted-foreground mt-4">
-              My coding activity and contributions over the past year
+            <p className="text-muted-foreground mt-4 text-lg font-medium tracking-wide">
+              Committed to delivering excellence through consistent contributions.
             </p>
           </div>
           <div className="mx-auto w-full flex justify-center">
