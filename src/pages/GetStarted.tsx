@@ -110,7 +110,7 @@ function GetStarted() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!selectedPackage) return
+    if (!selectedPackage || isSubmitting) return
 
     setIsSubmitting(true)
     setStatus("idle")
@@ -194,87 +194,85 @@ function GetStarted() {
             <p className="text-muted-foreground">{t('getStarted.subtitle')}</p>
           </div>
 
-          {/* Contact Details */}
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle>{t('getStarted.contactDetails.title')}</CardTitle>
-              <CardDescription>{t('getStarted.contactDetails.subtitle')}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <Label htmlFor="name">{t('getStarted.contactDetails.name')}</Label>
-                  <Input id="name" value={name} onChange={e => setName(e.target.value)} required />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">{t('getStarted.contactDetails.email')}</Label>
-                  <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} required />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="company">{t('getStarted.contactDetails.company')}</Label>
-                  <Input id="company" value={company} onChange={e => setCompany(e.target.value)} />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="phone">{t('getStarted.contactDetails.phone')}</Label>
-                  <Input id="phone" value={phone} onChange={e => setPhone(e.target.value)} />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Service Selection */}
-          <Card className="mb-6">
-            <CardHeader>
-              <CardTitle>{t('getStarted.serviceSelection.title')}</CardTitle>
-              <CardDescription>{t('getStarted.serviceSelection.subtitle')}</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <RadioGroup value={selectedPackage} onValueChange={(value) => setSelectedPackage(value as PackageKey)}>
-                <div className="flex flex-col space-y-6">
-                  <div className="space-y-1">
-                    <div className="flex items-center space-x-4">
-                      <RadioGroupItem value="online-presence" id="online-presence" />
-                      <Label htmlFor="online-presence" className="cursor-pointer font-medium py-0 my-0">
-                        {t('getStarted.serviceSelection.onlinePresence.title')}
-                      </Label>
-                    </div>
-                    <div className="pl-8 text-sm text-muted-foreground">
-                      {t('getStarted.serviceSelection.onlinePresence.description')}
-                    </div>
+          <form onSubmit={handleSubmit}>
+            {/* Contact Details */}
+            <Card className="mb-6">
+              <CardHeader>
+                <CardTitle>{t('getStarted.contactDetails.title')}</CardTitle>
+                <CardDescription>{t('getStarted.contactDetails.subtitle')}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">{t('getStarted.contactDetails.name')}</Label>
+                    <Input id="name" value={name} onChange={e => setName(e.target.value)} required />
                   </div>
-
-                  <div className="space-y-1">
-                    <div className="flex items-center space-x-4">
-                      <RadioGroupItem value="web-app" id="web-app" />
-                      <Label htmlFor="web-app" className="cursor-pointer font-medium py-0 my-0">
-                        {t('getStarted.serviceSelection.webApp.title')}
-                      </Label>
-                    </div>
-                    <div className="pl-8 text-sm text-muted-foreground">
-                      {t('getStarted.serviceSelection.webApp.description')}
-                    </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email">{t('getStarted.contactDetails.email')}</Label>
+                    <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} required />
                   </div>
-
-                  <div className="space-y-1">
-                    <div className="flex items-center space-x-4">
-                      <RadioGroupItem value="mobile-app" id="mobile-app" />
-                      <Label htmlFor="mobile-app" className="cursor-pointer font-medium py-0 my-0">
-                        {t('getStarted.serviceSelection.mobileApp.title')}
-                      </Label>
-                    </div>
-                    <div className="pl-8 text-sm text-muted-foreground">
-                      {t('getStarted.serviceSelection.mobileApp.description')}
-                    </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="company">{t('getStarted.contactDetails.company')}</Label>
+                    <Input id="company" value={company} onChange={e => setCompany(e.target.value)} />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">{t('getStarted.contactDetails.phone')}</Label>
+                    <Input id="phone" value={phone} onChange={e => setPhone(e.target.value)} />
                   </div>
                 </div>
-              </RadioGroup>
-            </CardContent>
-          </Card>
-          </div>
+              </CardContent>
+            </Card>
 
-          {selectedPackage ? (
-            <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
-              {selectedPackage === "online-presence" ? (
+            {/* Service Selection */}
+            <Card className="mb-6">
+              <CardHeader>
+                <CardTitle>{t('getStarted.serviceSelection.title')}</CardTitle>
+                <CardDescription>{t('getStarted.serviceSelection.subtitle')}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <RadioGroup value={selectedPackage} onValueChange={(value) => setSelectedPackage(value as PackageKey)} required>
+                  <div className="flex flex-col space-y-6">
+                    <div className="space-y-1">
+                      <div className="flex items-center space-x-4">
+                        <RadioGroupItem value="online-presence" id="online-presence" />
+                        <Label htmlFor="online-presence" className="cursor-pointer font-medium py-0 my-0">
+                          {t('getStarted.serviceSelection.onlinePresence.title')}
+                        </Label>
+                      </div>
+                      <div className="pl-8 text-sm text-muted-foreground">
+                        {t('getStarted.serviceSelection.onlinePresence.description')}
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex items-center space-x-4">
+                        <RadioGroupItem value="web-app" id="web-app" />
+                        <Label htmlFor="web-app" className="cursor-pointer font-medium py-0 my-0">
+                          {t('getStarted.serviceSelection.webApp.title')}
+                        </Label>
+                      </div>
+                      <div className="pl-8 text-sm text-muted-foreground">
+                        {t('getStarted.serviceSelection.webApp.description')}
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex items-center space-x-4">
+                        <RadioGroupItem value="mobile-app" id="mobile-app" />
+                        <Label htmlFor="mobile-app" className="cursor-pointer font-medium py-0 my-0">
+                          {t('getStarted.serviceSelection.mobileApp.title')}
+                        </Label>
+                      </div>
+                      <div className="pl-8 text-sm text-muted-foreground">
+                        {t('getStarted.serviceSelection.mobileApp.description')}
+                      </div>
+                    </div>
+                  </div>
+                </RadioGroup>
+              </CardContent>
+            </Card>
+
+            {selectedPackage === "online-presence" ? (
                 <Card className="mb-6">
                   <CardHeader>
                     <CardTitle>{t('getStarted.onlinePresence.title')}</CardTitle>
@@ -338,7 +336,17 @@ function GetStarted() {
                   </CardContent>
                 </Card>
               )}
-
+            <div className="flex justify-end mt-6">
+              <Button type="submit" disabled={isSubmitting || !selectedPackage}>
+                {isSubmitting ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    {t(selectedPackage === "online-presence" ? 'getStarted.buttons.processing' : 'getStarted.buttons.submitting')}
+                  </>
+                ) : (
+                  <>{t(selectedPackage === "online-presence" ? 'getStarted.buttons.payment' : 'getStarted.buttons.submit')}</>
+                )}
+              </Button>
               {/* Status Messages */}
               {status === "success" && selectedPackage !== "online-presence" && (
                 <div className="p-3 mb-4 bg-green-50/20 dark:bg-green-950/30 border border-green-200 dark:border-green-800/50 text-green-700 dark:text-green-300 rounded">
@@ -350,27 +358,10 @@ function GetStarted() {
                   {t('getStarted.error')}
                 </div>
               )}
-
-              <div className="flex justify-end">
-                <Button type="submit" disabled={isSubmitting}>
-                  {isSubmitting ? (
-                    <>
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                      {t(selectedPackage === "online-presence" ? 'getStarted.buttons.processing' : 'getStarted.buttons.submitting')}
-                    </>
-                  ) : (
-                    <>{t(selectedPackage === "online-presence" ? 'getStarted.buttons.payment' : 'getStarted.buttons.submit')}</>
-                  )}
-                </Button>
-              </div>
-            </form>
-          ) : (
-            <div className="text-center text-muted-foreground">
-              {t('getStarted.selectPrompt')}
             </div>
-          )}
+          </form>
+        </div>
       </section>
-
       <Footer />
     </div>
   )
