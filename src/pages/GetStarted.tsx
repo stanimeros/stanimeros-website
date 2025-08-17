@@ -15,21 +15,18 @@ import { trackMetaEvent } from "@/lib/meta-events"
 
 type PackageKey = "online-presence" | "web-app" | "mobile-app"
 
-const PACKAGE_META: Record<PackageKey, { label: string; price: string; tagline: string; highlight?: boolean }> = {
+const PACKAGE_META: Record<PackageKey, { label: string; tagline: string; highlight?: boolean }> = {
   "online-presence": {
     label: "Online Presence",
-    price: "€1,200 (incl. VAT)",
     tagline: "Everything you need to look professional online",
   },
   "web-app": {
     label: "Custom Web App",
-    price: "Starting from €3,000 (incl. VAT)",
     tagline: "A web application built around your workflow",
     highlight: true,
   },
   "mobile-app": {
     label: "Custom Mobile App",
-    price: "Starting from €10,000 (incl. VAT)",
     tagline: "iOS and Android application, launched properly",
   },
 }
@@ -119,7 +116,6 @@ function GetStarted() {
 
     const lines: string[] = []
     lines.push(`Package: ${pkg.label}`)
-    lines.push(`Price: ${pkg.price}`)
     lines.push("")
     lines.push("Contact")
     lines.push(`- Name: ${name}`)
@@ -168,8 +164,10 @@ function GetStarted() {
           currency: 'EUR',
           package_type: 'online_presence'
         });
-        // Redirect to Stripe payment link
-        window.location.href = "https://buy.stripe.com/eVq8wP3OV1wPgKOena2Nq00"
+        // Redirect to Stripe payment link with email parameter
+        const stripeUrl = new URL("https://buy.stripe.com/eVq8wP3OV1wPgKOena2Nq00")
+        stripeUrl.searchParams.set('prefilled_email', email.trim())
+        window.location.href = stripeUrl.toString()
       } else {
         setStatus("success")
         resetForm()

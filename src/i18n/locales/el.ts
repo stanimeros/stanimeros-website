@@ -9,7 +9,7 @@ export default {
   hero: {
     title: 'Παντελής Στανήμερος',
     subtitle: 'Full-stack developer που δημιουργεί σύγχρονες ψηφιακές λύσεις',
-    viewPackages: 'Δες Πακέτα',
+    viewPackages: 'Δες τα Πακέτα',
     getInTouch: 'Επικοινώνησε'
   },
   about: {
@@ -27,7 +27,6 @@ export default {
     onlinePresence: {
       title: 'Online Παρουσία',
       description: 'Όλα όσα χρειάζεσαι για επαγγελματική εικόνα online',
-      price: '€1.200',
       features: [
         'Μονοσέλιδη ιστοσελίδα',
         'Προσαρμοσμένη φόρμα επικοινωνίας',
@@ -39,7 +38,6 @@ export default {
     webApp: {
       title: 'Custom Web App',
       description: 'Προσαρμοσμένη web εφαρμογή για τις ανάγκες σου',
-      price: '€3.000',
       features: [
         'Έως 5 σελίδες',
         'Custom λειτουργίες',
@@ -51,7 +49,6 @@ export default {
     mobileApp: {
       title: 'Custom Mobile App',
       description: 'Native εφαρμογή iOS & Android, σωστά λανσαρισμένη',
-      price: '€10.000',
       features: [
         'Έως 10 οθόνες',
         'Custom λειτουργικότητα',

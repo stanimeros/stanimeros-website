@@ -251,7 +251,7 @@ const HomePage = () => {
                 <CardDescription>{t('packages.onlinePresence.description')}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="text-2xl font-semibold">{t('packages.onlinePresence.price')} <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
+                <div className="text-2xl font-semibold">1200€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
                 <div className="space-y-2 text-sm text-muted-foreground">
                   {(t('packages.onlinePresence.features', { returnObjects: true }) as string[]).map((feature, index) => (
                     <div key={index} className="flex items-start gap-2">
@@ -277,7 +277,7 @@ const HomePage = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-xs uppercase tracking-wide text-muted-foreground">{t('packages.startingFrom')}</div>
-                <div className="text-2xl font-semibold">{t('packages.webApp.price')} <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
+                <div className="text-2xl font-semibold">3000€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
                 <div className="space-y-2 text-sm text-muted-foreground">
                   {(t('packages.webApp.features', { returnObjects: true }) as string[]).map((feature, index) => (
                     <div key={index} className="flex items-start gap-2">
@@ -303,7 +303,7 @@ const HomePage = () => {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="text-xs uppercase tracking-wide text-muted-foreground">{t('packages.startingFrom')}</div>
-                <div className="text-2xl font-semibold">{t('packages.mobileApp.price')} <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
+                <div className="text-2xl font-semibold">6000€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
                 <div className="space-y-2 text-sm text-muted-foreground">
                   {(t('packages.mobileApp.features', { returnObjects: true }) as string[]).map((feature, index) => (
                     <div key={index} className="flex items-start gap-2">

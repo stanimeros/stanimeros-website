@@ -27,7 +27,6 @@ export default {
     onlinePresence: {
       title: 'Online Presence',
       description: 'Everything you need to look professional online',
-      price: '€1,200',
       features: [
         'One-page website',
         'Custom contact form',
@@ -39,7 +38,6 @@ export default {
     webApp: {
       title: 'Custom Web App',
       description: 'Tailored web application for your workflow',
-      price: '€3,000',
       features: [
         'Up to 5 pages',
         'Custom features',
@@ -51,7 +49,6 @@ export default {
     mobileApp: {
       title: 'Custom Mobile App',
       description: 'Native iOS & Android app, launched the right way',
-      price: '€10,000',
       features: [
         'Up to 10 screens',
         'Custom functionality',
