@@ -3,8 +3,11 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Menu, Home, User, Settings, Briefcase, Mail } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
+import { useTranslation } from "react-i18next"
+import LanguageSwitcher from "./LanguageSwitcher"
 
 const Header = () => {
+  const { t } = useTranslation()
   const navigate = useNavigate()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -42,20 +45,21 @@ const Header = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <Button variant="ghost" onClick={() => handleScrollToSection('home')} className="cursor-pointer">
-              Home
+              {t('nav.home')}
             </Button>
             <Button variant="ghost" onClick={() => handleScrollToSection('about')} className="cursor-pointer">
-              About
+              {t('nav.about')}
             </Button>
             <Button variant="ghost" onClick={() => handleScrollToSection('services')} className="cursor-pointer">
-              Services
+              {t('nav.services')}
             </Button>
             <Button variant="ghost" onClick={() => handleScrollToSection('portfolio')} className="cursor-pointer">
-              Portfolio
+              {t('nav.portfolio')}
             </Button>
             <Button variant="ghost" onClick={() => handleScrollToSection('contact')} className="cursor-pointer">
-              Contact
+              {t('nav.contact')}
             </Button>
+            <LanguageSwitcher />
           </div>
 
           {/* Mobile Navigation */}
@@ -69,24 +73,25 @@ const Header = () => {
               <div className="flex flex-col space-y-2 mt-2">
                 <Button variant="ghost" onClick={() => handleScrollToSection('home')} className="justify-start cursor-pointer">
                   <Home className="h-4 w-4 mr-3" />
-                  Home
+                  {t('nav.home')}
                 </Button>
                 <Button variant="ghost" onClick={() => handleScrollToSection('about')} className="justify-start cursor-pointer">
                   <User className="h-4 w-4 mr-3" />
-                  About
+                  {t('nav.about')}
                 </Button>
                 <Button variant="ghost" onClick={() => handleScrollToSection('services')} className="justify-start cursor-pointer">
                   <Settings className="h-4 w-4 mr-3" />
-                  Services
+                  {t('nav.services')}
                 </Button>
                 <Button variant="ghost" onClick={() => handleScrollToSection('portfolio')} className="justify-start cursor-pointer">
                   <Briefcase className="h-4 w-4 mr-3" />
-                  Portfolio
+                  {t('nav.portfolio')}
                 </Button>
                 <Button variant="ghost" onClick={() => handleScrollToSection('contact')} className="justify-start cursor-pointer">
                   <Mail className="h-4 w-4 mr-3" />
-                  Contact
+                  {t('nav.contact')}
                 </Button>
+                <LanguageSwitcher />
               </div>
             </SheetContent>
           </Sheet>
