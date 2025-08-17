@@ -187,7 +187,7 @@ function GetStarted() {
     <div className="min-h-screen bg-background">
       <Header />
 
-      <section className="pt-28 pb-16 max-w-3xl mx-auto">
+      <section className="pt-28 pb-16 max-w-3xl mx-auto px-4">
         <div className="container">
           <div className="text-center mb-10">
             <h1 className="text-4xl font-bold mb-3">{t('getStarted.title')}</h1>
