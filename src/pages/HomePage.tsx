@@ -571,7 +571,7 @@ const HomePage = () => {
                     <LinkedinIcon className="h-5 w-5" />
                   </Button>
                 </Link>
-                <Link to="https://www.instagram.com/stanimeross_" target="_blank" rel="noopener noreferrer">
+                <Link to="https://www.instagram.com/stanimeros_dev" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon">
                     <InstagramIcon className="h-5 w-5" />
                   </Button>

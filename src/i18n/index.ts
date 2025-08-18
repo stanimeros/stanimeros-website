@@ -9,15 +9,15 @@ i18n
   .use(initReactI18next)
   .init({
     resources: {
-      en: {
-        translation: enTranslations
-      },
       el: {
         translation: elTranslations
+      },
+      en: {
+        translation: enTranslations
       }
     },
-    fallbackLng: 'en',
-    supportedLngs: ['en', 'el'],
+    fallbackLng: 'el',
+    supportedLngs: ['el', 'en'],
     detection: {
       order: ['localStorage', 'navigator'],
       lookupLocalStorage: 'preferredLanguage',

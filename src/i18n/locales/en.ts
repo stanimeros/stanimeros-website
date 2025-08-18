@@ -15,7 +15,7 @@ export default {
   about: {
     title: 'About Me',
     name: 'Pantelis Stanimeros',
-    description1: "I help businesses grow their digital presence and streamline their operations. As your technology partner, I focus on creating practical solutions that drive real business results.",
+    description1: "Based in Thessaloniki and holding a Bachelor's degree in Computer Science, I help businesses find innovative solutions to grow their digital presence and streamline their operations. As your technology partner, I focus on creating practical solutions that drive real business results.",
     description2: "Whether you need a professional website, an online store, or a custom app, I'll guide you through the entire process — from concept to successful launch. I speak your language and translate complex tech into simple, effective solutions.",
     githubActivity: "Last year's activity",
     githubDescription: "Committed to consistent, high-quality updates."
