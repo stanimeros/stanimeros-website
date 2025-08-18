@@ -33,7 +33,8 @@ export default {
         'Hosting, domain, and email setup',
         'Google Business & Search Console',
         '3 Meta campaigns (content not included)'
-      ]
+      ],
+      recurring: '100€/year after the first year (hosting, domain & email)'
     },
     webApp: {
       title: 'E-commerce Store',
@@ -44,7 +45,8 @@ export default {
         'Brand-focused design',
         'Google Business & Search Console',
         'Domain, hosting & email setup'
-      ]
+      ],
+      recurring: '50-100€/month after first 3 months (platform & hosting fees)'
     },
     mobileApp: {
       title: 'Custom Apps',
@@ -55,7 +57,8 @@ export default {
         'Database & cloud hosting',
         'Admin dashboard',
         'Ongoing support & maintenance'
-      ]
+      ],
+      recurring: '50-100€/month after first 3 months (hosting & maintenance)'
     },
     priceNote: '(incl. VAT)',
     getStarted: 'Get Started',

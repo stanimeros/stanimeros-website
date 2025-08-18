@@ -325,6 +325,12 @@ const HomePage = () => {
                     </div>
                   ))}
                 </div>
+                <div className="mt-4 text-sm text-muted-foreground border-t border-border/60 pt-4">
+                  <div className="flex items-start gap-2">
+                    <Clock className="h-4 w-4 mt-0.5" />
+                    <span>{t('packages.onlinePresence.recurring')}</span>
+                  </div>
+                </div>
               </CardContent>
               <div className="px-6 pb-6">
                 <Button className="w-full" onClick={() => navigate('/get-started?package=online-presence')}>{t('packages.getStarted')}</Button>
@@ -341,7 +347,6 @@ const HomePage = () => {
                 <CardDescription>{t('packages.webApp.description')}</CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="text-xs uppercase tracking-wide text-muted-foreground">{t('packages.startingFrom')}</div>
                 <div className="text-2xl font-semibold">2.400€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
                 <div className="space-y-2 text-sm text-muted-foreground mt-4">
                   {(t('packages.webApp.features', { returnObjects: true }) as string[]).map((feature, index) => (
@@ -351,9 +356,15 @@ const HomePage = () => {
                     </div>
                   ))}
                 </div>
+                <div className="mt-4 text-sm text-muted-foreground border-t border-border/60 pt-4">
+                  <div className="flex items-start gap-2">
+                    <Clock className="h-4 w-4 mt-0.5" />
+                    <span>{t('packages.webApp.recurring')}</span>
+                  </div>
+                </div>
               </CardContent>
               <div className="px-6 pb-6">
-                <Button className="w-full" onClick={() => navigate('/get-started?package=web-app')}>{t('packages.requestQuote')}</Button>
+                <Button className="w-full" onClick={() => window.open('https://buy.stripe.com/14AeVd5X3b7p5265QE2Nq01', '_blank')}>{t('packages.getStarted')}</Button>
               </div>
             </Card>
 
@@ -376,6 +387,12 @@ const HomePage = () => {
                       <span>{feature}</span>
                     </div>
                   ))}
+                </div>
+                <div className="mt-4 text-sm text-muted-foreground border-t border-border/60 pt-4">
+                  <div className="flex items-start gap-2">
+                    <Clock className="h-4 w-4 mt-0.5" />
+                    <span>{t('packages.mobileApp.recurring')}</span>
+                  </div>
                 </div>
               </CardContent>
               <div className="px-6 pb-6">

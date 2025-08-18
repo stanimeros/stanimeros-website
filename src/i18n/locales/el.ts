@@ -33,7 +33,8 @@ export default {
         'Φιλοξενία, domain και email',
         'Google Business & Search Console',
         '3 καμπάνιες Meta (χωρίς περιεχόμενο)'
-      ]
+      ],
+      recurring: '100€/έτος μετά τον πρώτο χρόνο (φιλοξενία, domain & email)'
     },
     webApp: {
       title: 'Ηλεκτρονικό Κατάστημα',
@@ -44,7 +45,8 @@ export default {
         'Σχεδιασμός με βάση το brand σας',
         'Google Business & Search Console',
         'Domain, φιλοξενία & email'
-      ]
+      ],
+      recurring: '50-100€/μήνα μετά τους πρώτους 3 μήνες (πλατφόρμα & φιλοξενία)'
     },
     mobileApp: {
       title: 'Custom Εφαρμογές',
@@ -55,7 +57,8 @@ export default {
         'Βάση δεδομένων & cloud hosting',
         'Πίνακας διαχείρισης',
         'Συνεχής υποστήριξη & συντήρηση'
-      ]
+      ],
+      recurring: '50-100€/μήνα μετά τους πρώτους 3 μήνες (φιλοξενία & συντήρηση)'
     },
     priceNote: '(με ΦΠΑ)',
     getStarted: 'Ξεκίνα',
