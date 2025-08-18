@@ -9,7 +9,7 @@ import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Mail, MapPin, Github, Linkedin, Send, Code, Palette, Smartphone, Database, Instagram, Check, Clock, Target, Sparkles } from "lucide-react"
+import { Mail, MapPin, Github, Linkedin, Send, Smartphone, Instagram, Check, Clock, Target, Sparkles, Lightbulb, Store, Cog } from "lucide-react"
 import Footer from "@/components/Footer"
 import { sendEmail } from "@/lib/firebase"
 import { trackMetaEvent } from "@/lib/meta-events"
@@ -240,13 +240,26 @@ const HomePage = () => {
             <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 text-primary">
-                  <Code className="h-8 w-8" />
+                  <Lightbulb className="h-8 w-8" />
                 </div>
-                <CardTitle>{t('services.webDev.title')}</CardTitle>
+                <CardTitle>{t('services.consulting.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-center">
-                  {t('services.webDev.description')}
+                  {t('services.consulting.description')}
+                </CardDescription>
+              </CardContent>
+            </Card>
+            <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
+              <CardHeader className="text-center">
+                <div className="mx-auto mb-4 text-primary">
+                  <Store className="h-8 w-8" />
+                </div>
+                <CardTitle>{t('services.websites.title')}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <CardDescription className="text-center">
+                  {t('services.websites.description')}
                 </CardDescription>
               </CardContent>
             </Card>
@@ -255,37 +268,24 @@ const HomePage = () => {
                 <div className="mx-auto mb-4 text-primary">
                   <Smartphone className="h-8 w-8" />
                 </div>
-                <CardTitle>{t('services.mobileDev.title')}</CardTitle>
+                <CardTitle>{t('services.mobile.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-center">
-                  {t('services.mobileDev.description')}
+                  {t('services.mobile.description')}
                 </CardDescription>
               </CardContent>
             </Card>
             <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 text-primary">
-                  <Database className="h-8 w-8" />
+                  <Cog className="h-8 w-8" />
                 </div>
-                <CardTitle>{t('services.backend.title')}</CardTitle>
+                <CardTitle>{t('services.automation.title')}</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-center">
-                  {t('services.backend.description')}
-                </CardDescription>
-              </CardContent>
-            </Card>
-            <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 text-primary">
-                  <Palette className="h-8 w-8" />
-                </div>
-                <CardTitle>{t('services.uiux.title')}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-center">
-                  {t('services.uiux.description')}
+                  {t('services.automation.description')}
                 </CardDescription>
               </CardContent>
             </Card>
@@ -315,7 +315,7 @@ const HomePage = () => {
                 <CardDescription>{t('packages.onlinePresence.description')}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="text-2xl font-semibold">1200€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
+                <div className="text-2xl font-semibold">1.200€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
                 <div className="space-y-2 text-sm text-muted-foreground">
                   {(t('packages.onlinePresence.features', { returnObjects: true }) as string[]).map((feature, index) => (
                     <div key={index} className="flex items-start gap-2">
@@ -341,7 +341,7 @@ const HomePage = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-xs uppercase tracking-wide text-muted-foreground">{t('packages.startingFrom')}</div>
-                <div className="text-2xl font-semibold">3000€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
+                <div className="text-2xl font-semibold">2.400€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
                 <div className="space-y-2 text-sm text-muted-foreground mt-4">
                   {(t('packages.webApp.features', { returnObjects: true }) as string[]).map((feature, index) => (
                     <div key={index} className="flex items-start gap-2">
@@ -367,7 +367,7 @@ const HomePage = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-xs uppercase tracking-wide text-muted-foreground mt-4">{t('packages.startingFrom')}</div>
-                <div className="text-2xl font-semibold">6000€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
+                <div className="text-2xl font-semibold">5.000€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
                 <div className="space-y-2 text-sm text-muted-foreground mt-4">
                   {(t('packages.mobileApp.features', { returnObjects: true }) as string[]).map((feature, index) => (
                     <div key={index} className="flex items-start gap-2">

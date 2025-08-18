@@ -15,8 +15,8 @@ export default {
   about: {
     title: 'About Me',
     name: 'Pantelis Stanimeros',
-    description1: "I'm a full-stack developer passionate about building scalable, user-friendly applications. With years of experience in web and mobile development, I focus on practical, real-world solutions.",
-    description2: "I hold a Bachelor's in Computer Science and am pursuing a Master's in AI and Data Analytics. My skills span modern web, mobile, and cloud technologies, with a focus on clean code and great user experiences.",
+    description1: "I help businesses grow their digital presence and streamline their operations. As your technology partner, I focus on creating practical solutions that drive real business results.",
+    description2: "Whether you need a professional website, an online store, or a custom app, I'll guide you through the entire process - from idea to successful launch. I speak your language and translate complex tech into simple, effective solutions.",
     githubActivity: "Last year's activity",
     githubDescription: "Committed to consistent, high-quality contributions."
   },
@@ -36,25 +36,25 @@ export default {
       ]
     },
     webApp: {
-      title: 'Custom Web App',
-      description: 'Tailored web application for your workflow',
+      title: 'E-commerce Store',
+      description: 'Complete online store with WordPress or Shopify',
       features: [
-        'Up to 5 pages',
-        'Custom features',
-        'Database included',
-        'Optional sign-in',
-        'Deployment & basic monitoring'
+        'Professional e-commerce website',
+        'Product setup & customization',
+        'Brand-focused design',
+        'Google Business & Search Console',
+        'Domain, hosting & email setup'
       ]
     },
     mobileApp: {
-      title: 'Custom Mobile App',
-      description: 'Native iOS & Android app, launched the right way',
+      title: 'Custom Apps',
+      description: 'Custom web, iOS & Android apps for your business',
       features: [
-        'Up to 10 screens',
+        'Web app, iOS app, or Android app',
         'Custom functionality',
-        'Database & sync',
-        'Optional push notifications',
-        'App Store / Play guidance'
+        'Database & cloud hosting',
+        'Admin dashboard',
+        'Ongoing support & maintenance'
       ]
     },
     priceNote: '(incl. VAT)',
@@ -65,21 +65,21 @@ export default {
   },
   services: {
     title: 'Services',
-    webDev: {
-      title: 'Web Development',
-      description: 'Modern, responsive websites and web apps.'
+    consulting: {
+      title: 'Tech Consulting',
+      description: 'Expert guidance to choose the right digital solutions for your business.'
     },
-    mobileDev: {
-      title: 'Mobile Development',
-      description: 'Native and cross-platform apps for iOS & Android.'
+    websites: {
+      title: 'Websites & Online Stores',
+      description: 'Professional websites, e-commerce stores, and portfolios that convert visitors into customers.'
     },
-    backend: {
-      title: 'Backend Development',
-      description: 'Scalable server-side solutions and APIs.'
+    mobile: {
+      title: 'Mobile Apps',
+      description: 'Custom iOS and Android apps to reach your customers on their phones.'
     },
-    uiux: {
-      title: 'UI/UX Design',
-      description: 'Clean, intuitive interfaces with great UX.'
+    automation: {
+      title: 'Business Automation',
+      description: 'Streamline your operations with custom tools and automated processes.'
     }
   },
   portfolio: {
