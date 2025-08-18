@@ -36,7 +36,7 @@ export default {
       ],
       recurring: '100€/year after the first year (hosting fees)'
     },
-    webApp: {
+    eShop: {
       title: 'E-commerce Store',
       description: 'A complete online store built with WordPress or Shopify',
       features: [
@@ -48,7 +48,7 @@ export default {
       ],
       recurring: '50-100€/month after first 3 months (platform & hosting fees)'
     },
-    mobileApp: {
+    customApp: {
       title: 'Custom Apps',
       description: 'Custom web, iOS, and Android apps',
       features: [
@@ -176,11 +176,11 @@ export default {
         title: 'Online Presence',
         description: 'For businesses that need a professional website with all essentials.'
       },
-      webApp: {
+      eShop: {
         title: 'E-shop',
         description: 'Start selling online with a professional e-shop.'
       },
-      mobileApp: {
+      customApp: {
         title: 'Custom App',
         description: 'Web, iOS and Android apps with custom features.'
       }
@@ -201,6 +201,20 @@ export default {
       detailsPlaceholder: 'Briefly describe your idea, audience, and goals',
       features: 'Features'
     },
+    eshop: {
+      title: 'E-shop Details',
+      subtitle: 'Tell us about your online store',
+      businessType: 'Type of Business',
+      businessTypePlaceholder: 'e.g., Fashion, Electronics, Food, etc.',
+      productsCount: 'Approximate Number of Products',
+      productsCountPlaceholder: 'e.g., 50, 100, 500+',
+      features: 'E-shop Features',
+      paymentMethods: 'Payment Methods',
+      shippingNeeds: 'Shipping Requirements',
+      shippingPlaceholder: 'e.g., Local delivery, Worldwide shipping, etc.',
+      additionalNeeds: 'Additional Requirements',
+      additionalNeedsPlaceholder: 'Any specific features or requirements for your store'
+    },
     buttons: {
       submit: 'Submit Request',
       payment: 'Continue to Payment',
@@ -208,8 +222,8 @@ export default {
       submitting: 'Submitting...'
     },
     success: {
-      webApp: "Thanks for your web app inquiry! I'll review your requirements and reply within 1–2 business days with a proposal.",
-      mobileApp: "Thanks for your mobile app inquiry! I'll review your requirements and reply within 1–2 business days with a proposal."
+      eShop: "Thanks for your web app inquiry! I'll review your requirements and reply within 1–2 business days with a proposal.",
+      customApp: "Thanks for your mobile app inquiry! I'll review your requirements and reply within 1–2 business days with a proposal."
     },
     error: 'Something went wrong. Please try again.',
     selectPrompt: 'Please select a service above to continue'

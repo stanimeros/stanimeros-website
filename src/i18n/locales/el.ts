@@ -36,7 +36,7 @@ export default {
       ],
       recurring: '100€/έτος μετά τον πρώτο χρόνο (κόστος hosting)'
     },
-    webApp: {
+    eShop: {
       title: 'Ηλεκτρονικό Κατάστημα',
       description: 'Πλήρες e-shop με WordPress ή Shopify',
       features: [
@@ -48,7 +48,7 @@ export default {
       ],
       recurring: '50-100€/μήνα μετά τους 3 πρώτους μήνες (πλατφόρμα & hosting)'
     },
-    mobileApp: {
+    customApp: {
       title: 'Custom Εφαρμογές',
       description: 'Προσαρμοσμένες εφαρμογές Web, iOS και Android',
       features: [
@@ -176,11 +176,11 @@ export default {
         title: 'Online Παρουσία',
         description: 'Για επιχειρήσεις που χρειάζονται επαγγελματικό site με τα βασικά.'
       },
-      webApp: {
+      eShop: {   
         title: 'E-shop',
         description: 'Ξεκινήστε τις online πωλήσεις με ένα επαγγελματικό e-shop.'
       },
-      mobileApp: {
+      customApp: {
         title: 'Προσαρμοσμένη Εφαρμογή',
         description: 'Web, iOS και Android εφαρμογές με προσαρμοσμένες λειτουργίες.'
       }
@@ -201,6 +201,20 @@ export default {
       detailsPlaceholder: 'Περιέγραψε την ιδέα, το κοινό και τους στόχους',
       features: 'Λειτουργίες'
     },
+    eshop: {
+      title: 'Στοιχεία E-shop',
+      subtitle: 'Πες μας για το ηλεκτρονικό σου κατάστημα',
+      businessType: 'Είδος Επιχείρησης',
+      businessTypePlaceholder: 'π.χ., Ρούχα, Ηλεκτρονικά, Τρόφιμα, κλπ.',
+      productsCount: 'Περίπου Αριθμός Προϊόντων',
+      productsCountPlaceholder: 'π.χ., 50, 100, 500+',
+      features: 'Λειτουργίες E-shop',
+      paymentMethods: 'Τρόποι Πληρωμής',
+      shippingNeeds: 'Απαιτήσεις Αποστολής',
+      shippingPlaceholder: 'π.χ., Τοπική παράδοση, Αποστολές σε όλη την Ελλάδα, κλπ.',
+      additionalNeeds: 'Επιπλέον Απαιτήσεις',
+      additionalNeedsPlaceholder: 'Τυχόν ειδικές λειτουργίες ή απαιτήσεις για το κατάστημα'
+    },
     buttons: {
       submit: 'Αποστολή Αιτήματος',
       payment: 'Συνέχεια σε Πληρωμή',
@@ -208,8 +222,8 @@ export default {
       submitting: 'Αποστολή...'
     },
     success: {
-      webApp: "Ευχαριστούμε για το ενδιαφέρον για web app! Απάντηση σε 1–2 εργάσιμες με πρόταση.",
-      mobileApp: "Ευχαριστούμε για το ενδιαφέρον για mobile app! Απάντηση σε 1–2 εργάσιμες με πρόταση."
+      eShop: "Ευχαριστούμε για το ενδιαφέρον για web app! Απάντηση σε 1–2 εργάσιμες με πρόταση.",
+      customApp: "Ευχαριστούμε για το ενδιαφέρον για mobile app! Απάντηση σε 1–2 εργάσιμες με πρόταση."
     },
     error: 'Κάτι πήγε στραβά. Δοκίμασε ξανά.',
     selectPrompt: 'Επίλεξε υπηρεσία για να συνεχίσεις'

@@ -13,21 +13,21 @@ import { Checkbox } from "@/components/ui/checkbox"
 import { sendEmail } from "@/lib/firebase"
 import { trackMetaEvent } from "@/lib/meta-events"
 
-type PackageKey = "online-presence" | "web-app" | "mobile-app"
+type PackageKey = "online-presence" | "e-shop" | "custom-app"
 
 const PACKAGE_META: Record<PackageKey, { label: string; tagline: string; highlight?: boolean }> = {
   "online-presence": {
     label: "Online Presence",
     tagline: "Everything you need to look professional online",
   },
-  "web-app": {
-    label: "Custom Web App",
-    tagline: "A web application built around your workflow",
+  "e-shop": {
+    label: "E-shop",
+    tagline: "A complete online store built with WordPress or Shopify",
     highlight: true,
   },
-  "mobile-app": {
-    label: "Custom Mobile App",
-    tagline: "iOS and Android application, launched properly",
+  "custom-app": {
+    label: "Custom App",
+    tagline: "Custom web, iOS, and Android apps",
   },
 }
 
@@ -53,6 +53,15 @@ const MOBILE_FEATURES = [
   "In-app subscriptions",
 ]
 
+const PAYMENT_METHODS = [
+  "Credit Card",
+  "PayPal",
+  "Bank Transfer",
+  "Cash on Delivery",
+  "Apple Pay",
+  "Google Pay"
+]
+
 function GetStarted() {
   const { t } = useTranslation()
   const [searchParams] = useSearchParams()
@@ -73,8 +82,15 @@ function GetStarted() {
 
   // Web/Mobile
   const [projectDetails, setProjectDetails] = useState("")
-  const featureList = useMemo(() => (selectedPackage === "mobile-app" ? MOBILE_FEATURES : WEB_FEATURES), [selectedPackage])
+  const featureList = useMemo(() => (selectedPackage === "custom-app" ? MOBILE_FEATURES : WEB_FEATURES), [selectedPackage])
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([])
+
+  // E-shop specific fields
+  const [businessType, setBusinessType] = useState("")
+  const [productsCount, setProductsCount] = useState("")
+  const [shippingNeeds, setShippingNeeds] = useState("")
+  const [additionalNeeds, setAdditionalNeeds] = useState("")
+  const [paymentMethods, setPaymentMethods] = useState<string[]>([])
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
@@ -84,7 +100,7 @@ function GetStarted() {
   }, [])
 
   useEffect(() => {
-    if (initialPackage && ["online-presence", "web-app", "mobile-app"].includes(initialPackage)) {
+    if (initialPackage && ["online-presence", "e-shop", "custom-app"].includes(initialPackage)) {
       setSelectedPackage(initialPackage as PackageKey)
     }
   }, [initialPackage])
@@ -103,6 +119,11 @@ function GetStarted() {
     setAdditionalNotes("")
     setProjectDetails("")
     setSelectedFeatures([])
+    setBusinessType("")
+    setProductsCount("")
+    setShippingNeeds("")
+    setAdditionalNeeds("")
+    setPaymentMethods([])
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -129,6 +150,22 @@ function GetStarted() {
       lines.push(`- Brand name: ${brandName}`)
       if (domainPreference) lines.push(`- Domain preference: ${domainPreference}`)
       if (additionalNotes) lines.push(`- Notes: ${additionalNotes}`)
+    } else if (selectedPackage === "e-shop") {
+      lines.push("E-shop Requirements")
+      lines.push(`- Business Type: ${businessType}`)
+      lines.push(`- Products Count: ${productsCount}`)
+      if (paymentMethods.length) {
+        lines.push("- Payment Methods:")
+        paymentMethods.forEach(method => lines.push(`  • ${method}`))
+      }
+      if (shippingNeeds) {
+        lines.push("- Shipping Requirements:")
+        lines.push(`  ${shippingNeeds}`)
+      }
+      if (additionalNeeds) {
+        lines.push("- Additional Requirements:")
+        lines.push(`  ${additionalNeeds}`)
+      }
     } else {
       lines.push("Project Details")
       if (projectDetails) lines.push(projectDetails)
@@ -157,15 +194,19 @@ function GetStarted() {
         selected_features: selectedFeatures.length
       });
 
-      if (selectedPackage === "online-presence") {
+      if (selectedPackage === "online-presence" || selectedPackage === "e-shop") {
         // Track payment initiation
         trackMetaEvent('InitiateCheckout', {
-          value: 1200,
+          value: selectedPackage === "online-presence" ? 1200 : 2400,
           currency: 'EUR',
-          package_type: 'online_presence'
+          package_type: selectedPackage === "online-presence" ? 'online_presence' : 'eshop'
         });
         // Redirect to Stripe payment link with email parameter
-        const stripeUrl = new URL("https://buy.stripe.com/eVq8wP3OV1wPgKOena2Nq00")
+        const stripeUrl = new URL(
+          selectedPackage === "online-presence" 
+            ? "https://buy.stripe.com/eVq8wP3OV1wPgKOena2Nq00"
+            : "https://buy.stripe.com/14AeVd5X3b7p5265QE2Nq01"
+        )
         stripeUrl.searchParams.set('prefilled_email', email.trim())
         window.location.href = stripeUrl.toString()
       } else {
@@ -244,25 +285,25 @@ function GetStarted() {
 
                     <div className="space-y-1">
                       <div className="flex items-center space-x-4">
-                        <RadioGroupItem value="web-app" id="web-app" />
-                        <Label htmlFor="web-app" className="cursor-pointer font-medium py-0 my-0">
-                          {t('getStarted.serviceSelection.webApp.title')}
+                        <RadioGroupItem value="e-shop" id="e-shop" />
+                        <Label htmlFor="e-shop" className="cursor-pointer font-medium py-0 my-0">
+                          {t('getStarted.serviceSelection.eShop.title')}
                         </Label>
                       </div>
                       <div className="pl-8 text-sm text-muted-foreground">
-                        {t('getStarted.serviceSelection.webApp.description')}
+                        {t('getStarted.serviceSelection.eShop.description')}
                       </div>
                     </div>
 
                     <div className="space-y-1">
                       <div className="flex items-center space-x-4">
-                        <RadioGroupItem value="mobile-app" id="mobile-app" />
-                        <Label htmlFor="mobile-app" className="cursor-pointer font-medium py-0 my-0">
-                          {t('getStarted.serviceSelection.mobileApp.title')}
+                        <RadioGroupItem value="custom-app" id="custom-app" />
+                        <Label htmlFor="custom-app" className="cursor-pointer font-medium py-0 my-0">
+                          {t('getStarted.serviceSelection.customApp.title')}
                         </Label>
                       </div>
                       <div className="pl-8 text-sm text-muted-foreground">
-                        {t('getStarted.serviceSelection.mobileApp.description')}
+                        {t('getStarted.serviceSelection.customApp.description')}
                       </div>
                     </div>
                   </div>
@@ -298,6 +339,76 @@ function GetStarted() {
                         value={additionalNotes} 
                         onChange={e => setAdditionalNotes(e.target.value)} 
                         placeholder={t('getStarted.onlinePresence.notesPlaceholder')} 
+                      />
+                    </div>
+                  </CardContent>
+                </Card>
+              ) : selectedPackage === "e-shop" ? (
+                <Card className="mb-6">
+                  <CardHeader>
+                    <CardTitle>{t('getStarted.eshop.title')}</CardTitle>
+                    <CardDescription>{t('getStarted.eshop.subtitle')}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="businessType">{t('getStarted.eshop.businessType')}</Label>
+                      <Input 
+                        id="businessType" 
+                        value={businessType}
+                        onChange={e => setBusinessType(e.target.value)}
+                        placeholder={t('getStarted.eshop.businessTypePlaceholder')}
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="productsCount">{t('getStarted.eshop.productsCount')}</Label>
+                      <Input 
+                        id="productsCount"
+                        value={productsCount}
+                        onChange={e => setProductsCount(e.target.value)}
+                        placeholder={t('getStarted.eshop.productsCountPlaceholder')}
+                        required
+                      />
+                    </div>
+                    <div className="space-y-3">
+                      <Label>{t('getStarted.eshop.paymentMethods')}</Label>
+                      <div className="grid md:grid-cols-2 gap-3">
+                        {PAYMENT_METHODS.map((method) => (
+                          <label key={method} className="flex items-center gap-2 cursor-pointer">
+                            <Checkbox 
+                              checked={paymentMethods.includes(method)} 
+                              onCheckedChange={() => {
+                                setPaymentMethods(prev => 
+                                  prev.includes(method) 
+                                    ? prev.filter(m => m !== method)
+                                    : [...prev, method]
+                                )
+                              }} 
+                            />
+                            <span className="text-sm text-muted-foreground">{method}</span>
+                          </label>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="shipping">{t('getStarted.eshop.shippingNeeds')}</Label>
+                      <Textarea 
+                        id="shipping"
+                        value={shippingNeeds}
+                        onChange={e => setShippingNeeds(e.target.value)}
+                        placeholder={t('getStarted.eshop.shippingPlaceholder')}
+                        rows={3}
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="additionalNeeds">{t('getStarted.eshop.additionalNeeds')}</Label>
+                      <Textarea 
+                        id="additionalNeeds"
+                        value={additionalNeeds}
+                        onChange={e => setAdditionalNeeds(e.target.value)}
+                        placeholder={t('getStarted.eshop.additionalNeedsPlaceholder')}
+                        rows={3}
                       />
                     </div>
                   </CardContent>
@@ -339,16 +450,16 @@ function GetStarted() {
                 {isSubmitting ? (
                   <>
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                    {t(selectedPackage === "online-presence" ? 'getStarted.buttons.processing' : 'getStarted.buttons.submitting')}
+                    {t(['online-presence', 'e-shop'].includes(selectedPackage || '') ? 'getStarted.buttons.processing' : 'getStarted.buttons.submitting')}
                   </>
                 ) : (
-                  <>{t(selectedPackage === "online-presence" ? 'getStarted.buttons.payment' : 'getStarted.buttons.submit')}</>
+                  <>{t(['online-presence', 'e-shop'].includes(selectedPackage || '') ? 'getStarted.buttons.payment' : 'getStarted.buttons.submit')}</>
                 )}
               </Button>
               {/* Status Messages */}
               {status === "success" && selectedPackage !== "online-presence" && (
                 <div className="p-3 mb-4 bg-green-50/20 dark:bg-green-950/30 border border-green-200 dark:border-green-800/50 text-green-700 dark:text-green-300 rounded">
-                  {t(`getStarted.success.${selectedPackage === "web-app" ? "webApp" : "mobileApp"}`)}
+                  {t(`getStarted.success.${selectedPackage === "e-shop" ? "eShop" : "customApp"}`)}
                 </div>
               )}
               {status === "error" && (

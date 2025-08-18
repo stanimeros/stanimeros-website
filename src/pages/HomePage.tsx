@@ -226,11 +226,11 @@ const HomePage = () => {
             </div>
             <div className="space-y-8">
               <div className="relative">
-                <div className="w-full h-96 rounded-lg overflow-hidden">
+                <div className="w-full h-84 rounded-lg overflow-hidden">
                   <img 
                     src="/images/pantelis.webp" 
                     alt={t('about.name')}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover object-bottom"
                   />
                 </div>
               </div>
@@ -354,19 +354,19 @@ const HomePage = () => {
               </div>
             </Card>
 
-            {/* Custom Web App */}
+            {/* Custom E-shop */}
             <Card className="relative flex flex-col justify-between hover:shadow-lg transition-all duration-300 border-primary/30 ring-1 ring-primary/30 bg-primary/5">
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle>{t('packages.webApp.title')}</CardTitle>
+                  <CardTitle>{t('packages.eShop.title')}</CardTitle>
                   <Badge variant="secondary" className="rounded-full">Business</Badge>
                 </div>
-                <CardDescription>{t('packages.webApp.description')}</CardDescription>
+                <CardDescription>{t('packages.eShop.description')}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-semibold">2.400€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
                 <div className="space-y-2 text-sm text-muted-foreground mt-4">
-                  {(t('packages.webApp.features', { returnObjects: true }) as string[]).map((feature, index) => (
+                  {(t('packages.eShop.features', { returnObjects: true }) as string[]).map((feature, index) => (
                     <div key={index} className="flex items-start gap-2">
                       <CheckIcon className="h-4 w-4 text-primary mt-0.5" />
                       <span>{feature}</span>
@@ -376,12 +376,12 @@ const HomePage = () => {
                 <div className="mt-4 text-sm text-muted-foreground border-t border-border/60 pt-4">
                   <div className="flex items-start gap-2">
                     <ClockIcon className="h-4 w-4 mt-0.5" />
-                    <span>{t('packages.webApp.recurring')}</span>
+                    <span>{t('packages.eShop.recurring')}</span>
                   </div>
                 </div>
               </CardContent>
               <div className="px-6 pb-6">
-                <Button className="w-full" onClick={() => window.open('https://buy.stripe.com/14AeVd5X3b7p5265QE2Nq01', '_blank')}>{t('packages.getStarted')}</Button>
+                <Button className="w-full" onClick={() => navigate('/get-started?package=e-shop')}>{t('packages.getStarted')}</Button>
               </div>
             </Card>
 
@@ -389,16 +389,16 @@ const HomePage = () => {
             <Card className="relative flex flex-col justify-between hover:shadow-lg transition-all duration-300 border-border/60">
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle>{t('packages.mobileApp.title')}</CardTitle>
+                  <CardTitle>{t('packages.customApp.title')}</CardTitle>
                   <Badge variant="secondary" className="rounded-full">Premium</Badge>
                 </div>
-                <CardDescription>{t('packages.mobileApp.description')}</CardDescription>
+                <CardDescription>{t('packages.customApp.description')}</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="text-xs uppercase tracking-wide text-muted-foreground mt-4">{t('packages.startingFrom')}</div>
                 <div className="text-2xl font-semibold">5.000€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
                 <div className="space-y-2 text-sm text-muted-foreground mt-4">
-                  {(t('packages.mobileApp.features', { returnObjects: true }) as string[]).map((feature, index) => (
+                  {(t('packages.customApp.features', { returnObjects: true }) as string[]).map((feature, index) => (
                     <div key={index} className="flex items-start gap-2">
                       <CheckIcon className="h-4 w-4 text-primary mt-0.5" />
                       <span>{feature}</span>
@@ -408,12 +408,12 @@ const HomePage = () => {
                 <div className="mt-4 text-sm text-muted-foreground border-t border-border/60 pt-4">
                   <div className="flex items-start gap-2">
                     <ClockIcon className="h-4 w-4 mt-0.5" />
-                    <span>{t('packages.mobileApp.recurring')}</span>
+                    <span>{t('packages.customApp.recurring')}</span>
                   </div>
                 </div>
               </CardContent>
               <div className="px-6 pb-6">
-                <Button className="w-full" onClick={() => navigate('/get-started?package=mobile-app')}>{t('packages.bookCall')}</Button>
+                <Button className="w-full" onClick={() => navigate('/get-started?package=custom-app')}>{t('packages.getStarted')}</Button>
               </div>
             </Card>
           </div>
