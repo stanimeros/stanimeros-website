@@ -456,18 +456,18 @@ function GetStarted() {
                   <>{t(['online-presence', 'e-shop'].includes(selectedPackage || '') ? 'getStarted.buttons.payment' : 'getStarted.buttons.submit')}</>
                 )}
               </Button>
-              {/* Status Messages */}
-              {status === "success" && selectedPackage !== "online-presence" && (
-                <div className="p-3 mb-4 bg-green-50/20 dark:bg-green-950/30 border border-green-200 dark:border-green-800/50 text-green-700 dark:text-green-300 rounded">
-                  {t(`getStarted.success.${selectedPackage === "e-shop" ? "eShop" : "customApp"}`)}
-                </div>
-              )}
-              {status === "error" && (
-                <div className="p-3 mb-4 bg-red-50/20 dark:bg-red-950/30 border border-red-200 dark:border-red-800/50 text-red-700 dark:text-red-300 rounded">
-                  {t('getStarted.error')}
-                </div>
-              )}
             </div>
+            {/* Status Messages */}
+            {status === "success" && selectedPackage !== "online-presence" && (
+              <div className="p-3 mb-4 bg-green-50/20 dark:bg-green-950/30 border border-green-200 dark:border-green-800/50 text-green-700 dark:text-green-300 rounded">
+                {t('getStarted.success')}
+              </div>
+            )}
+            {status === "error" && (
+              <div className="p-3 mb-4 bg-red-50/20 dark:bg-red-950/30 border border-red-200 dark:border-red-800/50 text-red-700 dark:text-red-300 rounded">
+                {t('getStarted.error')}
+              </div>
+            )}
           </form>
         </div>
       </section>

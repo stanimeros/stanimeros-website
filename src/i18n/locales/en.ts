@@ -221,10 +221,7 @@ export default {
       processing: 'Processing...',
       submitting: 'Submitting...'
     },
-    success: {
-      eShop: "Thanks for your web app inquiry! I'll review your requirements and reply within 1–2 business days with a proposal.",
-      customApp: "Thanks for your mobile app inquiry! I'll review your requirements and reply within 1–2 business days with a proposal."
-    },
+    success: "Thanks for your inquiry! I'll review your requirements and reply within 1–2 business days with a proposal.",
     error: 'Something went wrong. Please try again.',
     selectPrompt: 'Please select a service above to continue'
   },
