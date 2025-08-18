@@ -8,7 +8,7 @@ export default {
   },
   hero: {
     title: 'Pantelis Stanimeros',
-    subtitle: 'Full-stack developer building modern digital solutions',
+    subtitle: 'Let\'s build modern digital solutions',
     viewPackages: 'View Packages',
     getInTouch: 'Get In Touch'
   },
@@ -183,20 +183,36 @@ export default {
     selectPrompt: 'Please select a service above to continue'
   },
   contact: {
-    title: 'Get In Touch',
-    subtitle: "Let's Work Together",
-    description: "I'm always open to new opportunities and projects. Whether you have a question or just want to say hi, feel free to reach out!",
+    title: 'Get Free Consultation',
+    subtitle: "Get a Free 10-Minute Solution Call",
+    description: "Fill in your details below to get a free 10-minute consultation where we'll discuss your needs and find the best solution for your case. No strings attached!",
+    freeCallBadge: "Free 10-Minute Solution Call",
+    features: {
+      consultation: {
+        title: "10-Minute Consultation",
+        description: "Quick, focused discussion to understand your needs and suggest solutions"
+      },
+      solutions: {
+        title: "Tailored Solutions",
+        description: "Get expert advice specific to your project or challenge"
+      },
+      noObligations: {
+        title: "No Obligations",
+        description: "Free consultation with no strings attached"
+      }
+    },
     form: {
+      description: "Fill in your details and I'll get back to you within 24 hours",
       name: 'Name',
       email: 'Email',
-      message: 'Message',
+      message: 'Project Details',
       namePlaceholder: 'Your name',
       emailPlaceholder: 'email@example.com',
-      messagePlaceholder: 'Tell me about your project...',
+      messagePlaceholder: 'Briefly describe your project or challenge...',
       sending: 'Sending...',
-      send: 'Send Message',
-      success: "Message sent! I'll get back to you soon.",
-      error: 'Failed to send message. Please try again.'
+      send: 'Get Free Consultation',
+      success: "Request sent! I'll contact you within 24 hours to schedule your free consultation.",
+      error: 'Failed to send request. Please try again.'
     }
   }
 };

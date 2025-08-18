@@ -9,7 +9,7 @@ import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Mail, MapPin, Github, Linkedin, Send, Code, Palette, Smartphone, Database, Instagram, Check } from "lucide-react"
+import { Mail, MapPin, Github, Linkedin, Send, Code, Palette, Smartphone, Database, Instagram, Check, Clock, Target, Sparkles } from "lucide-react"
 import Footer from "@/components/Footer"
 import { sendEmail } from "@/lib/firebase"
 import { trackMetaEvent } from "@/lib/meta-events"
@@ -158,7 +158,7 @@ const HomePage = () => {
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto relative z-20">
             {t('hero.subtitle')}
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center relative z-20">
+          <div className="flex flex-row gap-4 justify-center relative z-20">
             <Button size="lg" onClick={() => scrollToSection('packages')}>
               {t('hero.viewPackages')}
             </Button>
@@ -218,7 +218,7 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-          <div className="overflow-hidden pt-4 w-full flex justify-center">
+          <div className="overflow-hidden pt-16 w-full flex justify-center">
             <GitHubCalendarComponent username="stanimeros" />
           </div>
           <div className="overflow-hidden w-full flex justify-center">
@@ -226,102 +226,6 @@ const HomePage = () => {
               {t('about.githubDescription')}
             </p>
           </div>
-        </div>
-      </section>
-
-      {/* Packages Section */}
-      <section id="packages" className="py-10">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">{t('packages.title')}</h2>
-            <Separator className="w-24 mx-auto" />
-            <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">
-              {t('packages.subtitle')}
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Online Presence */}
-            <Card className="relative flex flex-col justify-between hover:shadow-lg transition-all duration-300 border-border/60">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle>{t('packages.onlinePresence.title')}</CardTitle>
-                  <Badge variant="secondary" className="rounded-full">Essential</Badge>
-                </div>
-                <CardDescription>{t('packages.onlinePresence.description')}</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="text-2xl font-semibold">1200€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  {(t('packages.onlinePresence.features', { returnObjects: true }) as string[]).map((feature, index) => (
-                    <div key={index} className="flex items-start gap-2">
-                      <Check className="h-4 w-4 text-primary mt-0.5" />
-                      <span>{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-              <div className="px-6 pb-6">
-                <Button className="w-full" onClick={() => navigate('/get-started?package=online-presence')}>{t('packages.getStarted')}</Button>
-              </div>
-            </Card>
-
-            {/* Custom Web App */}
-            <Card className="relative flex flex-col justify-between hover:shadow-lg transition-all duration-300 border-primary/30 ring-1 ring-primary/30 bg-primary/5">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle>{t('packages.webApp.title')}</CardTitle>
-                  <Badge variant="secondary" className="rounded-full">Business</Badge>
-                </div>
-                <CardDescription>{t('packages.webApp.description')}</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="text-xs uppercase tracking-wide text-muted-foreground">{t('packages.startingFrom')}</div>
-                <div className="text-2xl font-semibold">3000€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  {(t('packages.webApp.features', { returnObjects: true }) as string[]).map((feature, index) => (
-                    <div key={index} className="flex items-start gap-2">
-                      <Check className="h-4 w-4 text-primary mt-0.5" />
-                      <span>{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-              <div className="px-6 pb-6">
-                <Button className="w-full" onClick={() => navigate('/get-started?package=web-app')}>{t('packages.requestQuote')}</Button>
-              </div>
-            </Card>
-
-            {/* Custom Mobile App */}
-            <Card className="relative flex flex-col justify-between hover:shadow-lg transition-all duration-300 border-border/60">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle>{t('packages.mobileApp.title')}</CardTitle>
-                  <Badge variant="secondary" className="rounded-full">Premium</Badge>
-                </div>
-                <CardDescription>{t('packages.mobileApp.description')}</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="text-xs uppercase tracking-wide text-muted-foreground">{t('packages.startingFrom')}</div>
-                <div className="text-2xl font-semibold">6000€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  {(t('packages.mobileApp.features', { returnObjects: true }) as string[]).map((feature, index) => (
-                    <div key={index} className="flex items-start gap-2">
-                      <Check className="h-4 w-4 text-primary mt-0.5" />
-                      <span>{feature}</span>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-              <div className="px-6 pb-6">
-                <Button className="w-full" onClick={() => navigate('/get-started?package=mobile-app')}>{t('packages.bookCall')}</Button>
-              </div>
-            </Card>
-          </div>
-
-          <p className="text-center text-sm text-muted-foreground mt-8">
-            {t('packages.footer')}
-          </p>
         </div>
       </section>
 
@@ -389,7 +293,101 @@ const HomePage = () => {
         </div>
       </section>
 
+      {/* Packages Section */}
+      <section id="packages" className="py-10 pb-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">{t('packages.title')}</h2>
+            <Separator className="w-24 mx-auto" />
+            <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">
+              {t('packages.subtitle')}
+            </p>
+          </div>
 
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Online Presence */}
+            <Card className="relative flex flex-col justify-between hover:shadow-lg transition-all duration-300 border-border/60">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle>{t('packages.onlinePresence.title')}</CardTitle>
+                  <Badge variant="secondary" className="rounded-full">Essential</Badge>
+                </div>
+                <CardDescription>{t('packages.onlinePresence.description')}</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="text-2xl font-semibold">1200€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
+                <div className="space-y-2 text-sm text-muted-foreground">
+                  {(t('packages.onlinePresence.features', { returnObjects: true }) as string[]).map((feature, index) => (
+                    <div key={index} className="flex items-start gap-2">
+                      <Check className="h-4 w-4 text-primary mt-0.5" />
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+              <div className="px-6 pb-6">
+                <Button className="w-full" onClick={() => navigate('/get-started?package=online-presence')}>{t('packages.getStarted')}</Button>
+              </div>
+            </Card>
+
+            {/* Custom Web App */}
+            <Card className="relative flex flex-col justify-between hover:shadow-lg transition-all duration-300 border-primary/30 ring-1 ring-primary/30 bg-primary/5">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle>{t('packages.webApp.title')}</CardTitle>
+                  <Badge variant="secondary" className="rounded-full">Business</Badge>
+                </div>
+                <CardDescription>{t('packages.webApp.description')}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="text-xs uppercase tracking-wide text-muted-foreground">{t('packages.startingFrom')}</div>
+                <div className="text-2xl font-semibold">3000€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
+                <div className="space-y-2 text-sm text-muted-foreground mt-4">
+                  {(t('packages.webApp.features', { returnObjects: true }) as string[]).map((feature, index) => (
+                    <div key={index} className="flex items-start gap-2">
+                      <Check className="h-4 w-4 text-primary mt-0.5" />
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+              <div className="px-6 pb-6">
+                <Button className="w-full" onClick={() => navigate('/get-started?package=web-app')}>{t('packages.requestQuote')}</Button>
+              </div>
+            </Card>
+
+            {/* Custom Mobile App */}
+            <Card className="relative flex flex-col justify-between hover:shadow-lg transition-all duration-300 border-border/60">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <CardTitle>{t('packages.mobileApp.title')}</CardTitle>
+                  <Badge variant="secondary" className="rounded-full">Premium</Badge>
+                </div>
+                <CardDescription>{t('packages.mobileApp.description')}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="text-xs uppercase tracking-wide text-muted-foreground mt-4">{t('packages.startingFrom')}</div>
+                <div className="text-2xl font-semibold">6000€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
+                <div className="space-y-2 text-sm text-muted-foreground mt-4">
+                  {(t('packages.mobileApp.features', { returnObjects: true }) as string[]).map((feature, index) => (
+                    <div key={index} className="flex items-start gap-2">
+                      <Check className="h-4 w-4 text-primary mt-0.5" />
+                      <span>{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+              <div className="px-6 pb-6">
+                <Button className="w-full" onClick={() => navigate('/get-started?package=mobile-app')}>{t('packages.bookCall')}</Button>
+              </div>
+            </Card>
+          </div>
+
+          <p className="text-center text-sm text-muted-foreground mt-8">
+            {t('packages.footer')}
+          </p>
+        </div>
+      </section>
 
       {/* Portfolio Section */}
       <section id="portfolio" className="py-20 bg-card">
@@ -430,14 +428,46 @@ const HomePage = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">{t('contact.title')}</h2>
-            <Separator className="w-24 mx-auto" />
+            <Separator className="w-24 mx-auto mb-4" />
+                          <div className="inline-block bg-primary/10 border border-primary/20 rounded-full px-4 py-1 text-sm font-medium text-primary mb-6">
+              ✨ {t('contact.freeCallBadge')}
+            </div>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              {t('contact.description')}
+            </p>
           </div>
           <div className="grid md:grid-cols-2 gap-12">
             <div>
               <h3 className="text-2xl font-semibold mb-6">{t('contact.subtitle')}</h3>
-              <p className="text-muted-foreground mb-8">
-                {t('contact.description')}
-              </p>
+              <div className="space-y-6 mb-8">
+                <div className="flex items-start space-x-3 p-4 rounded-lg bg-card border border-border/60">
+                  <div className="mt-1">
+                    <Clock className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium">{t('contact.features.consultation.title')}</h4>
+                    <p className="text-sm text-muted-foreground">{t('contact.features.consultation.description')}</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3 p-4 rounded-lg bg-card border border-border/60">
+                  <div className="mt-1">
+                    <Target className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium">{t('contact.features.solutions.title')}</h4>
+                    <p className="text-sm text-muted-foreground">{t('contact.features.solutions.description')}</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3 p-4 rounded-lg bg-card border border-border/60">
+                  <div className="mt-1">
+                    <Sparkles className="h-5 w-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium">{t('contact.features.noObligations.title')}</h4>
+                    <p className="text-sm text-muted-foreground">{t('contact.features.noObligations.description')}</p>
+                  </div>
+                </div>
+              </div>
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
                   <Mail className="h-5 w-5 text-primary" />
@@ -469,74 +499,82 @@ const HomePage = () => {
               </div>
             </div>
             <div>
-              <form onSubmit={handleContactSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="name">{t('contact.form.name')}</Label>
-                  <Input 
-                    id="name" 
-                    name="name"
-                    value={contactForm.name}
-                    onChange={handleInputChange}
-                    placeholder={t('contact.form.namePlaceholder')}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email">{t('contact.form.email')}</Label>
-                  <Input 
-                    id="email" 
-                    name="email"
-                    type="email" 
-                    value={contactForm.email}
-                    onChange={handleInputChange}
-                    placeholder={t('contact.form.emailPlaceholder')}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="message">{t('contact.form.message')}</Label>
-                  <Textarea 
-                    id="message" 
-                    name="message"
-                    value={contactForm.message}
-                    onChange={handleInputChange}
-                    placeholder={t('contact.form.messagePlaceholder')}
-                    rows={5} 
-                    required
-                  />
-                </div>
-                
-                {/* Status Messages */}
-                {submitStatus === "success" && (
-                  <div className="p-3 bg-green-50/20 dark:bg-green-950/30 border border-green-200 dark:border-green-800/50 text-green-700 dark:text-green-300 rounded">
-                    {t('contact.form.success')}
-                  </div>
-                )}
-                
-                {submitStatus === "error" && (
-                  <div className="p-3 bg-red-50/20 dark:bg-red-950/30 border border-red-200 dark:border-red-800/50 text-red-700 dark:text-red-300 rounded">
-                    {t('contact.form.error')}
-                  </div>
-                )}
-                
-                <Button 
-                  type="submit" 
-                  className="w-full" 
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                      {t('contact.form.sending')}
-                    </>
-                  ) : (
-                    <>
-                      <Send className="h-4 w-4 mr-2" />
-                      {t('contact.form.send')}
-                    </>
-                  )}
-                </Button>
-              </form>
+              <Card>
+                <CardHeader>
+                  <CardTitle>{t('contact.form.message')}</CardTitle>
+                  <CardDescription>{t('contact.form.description')}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleContactSubmit} className="space-y-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="name">{t('contact.form.name')}</Label>
+                      <Input 
+                        id="name" 
+                        name="name"
+                        value={contactForm.name}
+                        onChange={handleInputChange}
+                        placeholder={t('contact.form.namePlaceholder')}
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="email">{t('contact.form.email')}</Label>
+                      <Input 
+                        id="email" 
+                        name="email"
+                        type="email" 
+                        value={contactForm.email}
+                        onChange={handleInputChange}
+                        placeholder={t('contact.form.emailPlaceholder')}
+                        required
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="message">{t('contact.form.message')}</Label>
+                      <Textarea 
+                        id="message" 
+                        name="message"
+                        value={contactForm.message}
+                        onChange={handleInputChange}
+                        placeholder={t('contact.form.messagePlaceholder')}
+                        rows={5} 
+                        required
+                      />
+                    </div>
+                    
+                    {/* Status Messages */}
+                    {submitStatus === "success" && (
+                      <div className="p-3 bg-green-50/20 dark:bg-green-950/30 border border-green-200 dark:border-green-800/50 text-green-700 dark:text-green-300 rounded">
+                        {t('contact.form.success')}
+                      </div>
+                    )}
+                    
+                    {submitStatus === "error" && (
+                      <div className="p-3 bg-red-50/20 dark:bg-red-950/30 border border-red-200 dark:border-red-800/50 text-red-700 dark:text-red-300 rounded">
+                        {t('contact.form.error')}
+                      </div>
+                    )}
+                    
+                    <Button 
+                      type="submit" 
+                      className="w-full" 
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                          {t('contact.form.sending')}
+                        </>
+                      ) : (
+                        <>
+                          <Send className="h-4 w-4 mr-2" />
+                          {t('contact.form.send')}
+                        </>
+                      )}
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>
