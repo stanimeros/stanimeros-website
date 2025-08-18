@@ -152,7 +152,7 @@ export default {
     }
   },
   footer: {
-    copyright: 'Stanimeros. All rights reserved.',
+    copyright: 'Stanimeros',
     links: {
       privacy: 'Privacy Policy',
       dataDeletion: 'Data Deletion'

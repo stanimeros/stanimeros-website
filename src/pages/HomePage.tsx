@@ -196,7 +196,7 @@ const HomePage = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-card">
+      <section id="about" className="py-20 bg-card scroll-mt-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">{t('about.title')}</h2>
@@ -248,7 +248,7 @@ const HomePage = () => {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="p-10 pb-20">
+      <section id="services" className="p-10 pb-20 scroll-mt-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">{t('services.title')}</h2>
@@ -312,7 +312,7 @@ const HomePage = () => {
       </section>
 
       {/* Packages Section */}
-      <section id="packages" className="py-10 pb-20">
+      <section id="packages" className="py-10 pb-20 scroll-mt-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">{t('packages.title')}</h2>
@@ -473,7 +473,7 @@ const HomePage = () => {
       </section>
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="py-20 bg-card">
+      <section id="portfolio" className="py-20 bg-card scroll-mt-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">{t('portfolio.title')}</h2>
@@ -507,7 +507,7 @@ const HomePage = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20">
+      <section id="contact" className="py-20 scroll-mt-10">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">✨ {t('contact.title')}</h2>
