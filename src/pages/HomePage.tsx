@@ -8,7 +8,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import {
   EnvelopeIcon,
@@ -41,7 +40,6 @@ const HomePage = () => {
   const [contactForm, setContactForm] = useState({
     name: "",
     email: "",
-    message: ""
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
@@ -69,22 +67,21 @@ const HomePage = () => {
 
     try {
       const result = await sendEmail({
-        subject: "New Contact Form Submission",
+        subject: "Free Consultation Request",
         name: contactForm.name,
         email: contactForm.email,
-        message: contactForm.message
+        message: 'Client filled the free consultation form'
       })
       
       console.log("Email sent successfully:", result)
       
       // Track contact form submission
       trackMetaEvent('FormSubmission', {
-        form_type: 'contact',
-        message_length: contactForm.message.length
+        form_type: 'free-consultation',
       });
       
       setSubmitStatus("success")
-      setContactForm({ name: "", email: "", message: "" })
+      setContactForm({ name: "", email: "" })
       
       // Reset status after 5 seconds
       setTimeout(() => setSubmitStatus("idle"), 5000)
@@ -548,35 +545,6 @@ const HomePage = () => {
                   </div>
                 </div>
               </div>
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <EnvelopeIcon className="h-5 w-5 text-primary" />
-                  <a href="mailto:hello@stanimeros.com" className="hover:text-primary transition-colors">
-                    hello@stanimeros.com
-                  </a>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <MapPinIcon className="h-5 w-5 text-primary" />
-                  <span>Thessaloniki, Greece</span>
-                </div>
-              </div>
-              <div className="flex space-x-4 mt-8">
-                <Link to="https://github.com/stanimeros" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="icon">
-                    <GithubIcon className="h-5 w-5" />
-                  </Button>
-                </Link>
-                <Link to="https://linkedin.com/in/stanimeros" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="icon">
-                    <LinkedinIcon className="h-5 w-5" />
-                  </Button>
-                </Link>
-                <Link to="https://www.instagram.com/stanimeros_dev" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="icon">
-                    <InstagramIcon className="h-5 w-5" />
-                  </Button>
-                </Link>
-              </div>
             </div>
             <div>
               <Card>
@@ -609,18 +577,6 @@ const HomePage = () => {
                         required
                       />
                     </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="message">{t('contact.form.message')}</Label>
-                      <Textarea 
-                        id="message" 
-                        name="message"
-                        value={contactForm.message}
-                        onChange={handleInputChange}
-                        placeholder={t('contact.form.messagePlaceholder')}
-                        rows={5} 
-                        required
-                      />
-                    </div>
                     
                     {/* Status Messages */}
                     {submitStatus === "success" && (
@@ -637,7 +593,7 @@ const HomePage = () => {
                     
                     <Button 
                       type="submit" 
-                      className="w-full" 
+                      className="w-full mt-6" 
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (
@@ -655,6 +611,37 @@ const HomePage = () => {
                   </form>
                 </CardContent>
               </Card>
+            </div>
+            <div className="flex flex-col">
+              <div className="space-y-4">
+                <div className="flex items-center space-x-3">
+                  <EnvelopeIcon className="h-5 w-5 text-primary" />
+                  <a href="mailto:hello@stanimeros.com" className="hover:text-primary transition-colors">
+                    hello@stanimeros.com
+                  </a>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <MapPinIcon className="h-5 w-5 text-primary" />
+                  <span>Thessaloniki, Greece</span>
+                </div>
+              </div>
+              <div className="flex space-x-4 mt-8">
+                <Link to="https://github.com/stanimeros" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="icon">
+                    <GithubIcon className="h-5 w-5" />
+                  </Button>
+                </Link>
+                <Link to="https://linkedin.com/in/stanimeros" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="icon">
+                    <LinkedinIcon className="h-5 w-5" />
+                  </Button>
+                </Link>
+                <Link to="https://www.instagram.com/stanimeros_dev" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="icon">
+                    <InstagramIcon className="h-5 w-5" />
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
