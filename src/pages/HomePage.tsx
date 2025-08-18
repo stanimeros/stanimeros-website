@@ -4,6 +4,7 @@ import "../i18n"
 import { Link, useLocation, useNavigate } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
@@ -386,6 +387,54 @@ const HomePage = () => {
           <p className="text-center text-sm text-muted-foreground mt-8">
             {t('packages.footer')}
           </p>
+
+          {/* FAQ Section */}
+          <div className="mt-20">
+            <h3 className="text-2xl font-semibold text-center mb-8">{t('packages.faq.title')}</h3>
+            <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto">
+              <AccordionItem value="hosting">
+                <AccordionTrigger>{t('packages.faq.items.hosting.question')}</AccordionTrigger>
+                <AccordionContent>
+                  {t('packages.faq.items.hosting.answer')}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="googleBusiness">
+                <AccordionTrigger>{t('packages.faq.items.googleBusiness.question')}</AccordionTrigger>
+                <AccordionContent>
+                  {t('packages.faq.items.googleBusiness.answer')}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="eshopPlatforms">
+                <AccordionTrigger>{t('packages.faq.items.eshopPlatforms.question')}</AccordionTrigger>
+                <AccordionContent>
+                  {t('packages.faq.items.eshopPlatforms.answer')}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="customization">
+                <AccordionTrigger>{t('packages.faq.items.customization.question')}</AccordionTrigger>
+                <AccordionContent>
+                  {t('packages.faq.items.customization.answer')}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="mobileApp">
+                <AccordionTrigger>{t('packages.faq.items.mobileApp.question')}</AccordionTrigger>
+                <AccordionContent>
+                  {t('packages.faq.items.mobileApp.answer')}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="support">
+                <AccordionTrigger>{t('packages.faq.items.support.question')}</AccordionTrigger>
+                <AccordionContent>
+                  {t('packages.faq.items.support.answer')}
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
         </div>
       </section>
 

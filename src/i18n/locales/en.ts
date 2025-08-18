@@ -61,7 +61,36 @@ export default {
     getStarted: 'Get Started',
     requestQuote: 'Request Quote',
     bookCall: 'Book a Call',
-    footer: "We'll guide you end-to-end. Prices may vary for custom needs."
+    footer: "We'll guide you end-to-end. Prices may vary for custom needs.",
+    faq: {
+      title: "Frequently Asked Questions",
+      items: {
+        hosting: {
+          question: "What are hosting, domain, and custom email?",
+          answer: "Hosting is where your website lives on the internet, like a digital shop space. A domain is your website's address (like www.yourbusiness.com). Custom email lets you have professional email addresses (like contact@yourbusiness.com). We set up all of these for you!"
+        },
+        googleBusiness: {
+          question: "What is Google Business and why do I need it?",
+          answer: "Google Business makes your business show up on Google Maps and search results with your hours, photos, and reviews. It helps local customers find you and trust your business. We'll set it up and show you how to manage it."
+        },
+        eshopPlatforms: {
+          question: "WordPress or Shopify - which is better for my store?",
+          answer: "Both are great choices! WordPress is more flexible and costs less monthly but needs more maintenance. Shopify costs more monthly but is simpler to use and includes hosting. We'll help you choose based on your needs and budget."
+        },
+        customization: {
+          question: "What kind of customization can I get for my online store?",
+          answer: "We customize everything to match your brand - colors, fonts, layout, product displays, and checkout process. We can also add special features like discount systems, product filters, or delivery tracking."
+        },
+        mobileApp: {
+          question: "Do I need both iOS and Android apps?",
+          answer: "Most businesses benefit from having both to reach all customers. However, we can start with one platform and add the other later. We'll help you decide based on where your customers are."
+        },
+        support: {
+          question: "What kind of support do I get after the project is done?",
+          answer: "All packages include initial training on how to manage your site/store. For custom apps, we offer ongoing support and maintenance to keep everything running smoothly and help with updates or changes."
+        }
+      }
+    }
   },
   services: {
     title: 'Services',
