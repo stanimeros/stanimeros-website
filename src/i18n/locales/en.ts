@@ -8,7 +8,7 @@ export default {
   },
   hero: {
     title: 'Pantelis Stanimeros',
-    subtitle: 'Let\'s build modern digital solutions',
+    subtitle: 'Let\'s create modern digital solutions',
     viewPackages: 'View Packages',
     getInTouch: 'Get In Touch'
   },
@@ -16,9 +16,9 @@ export default {
     title: 'About Me',
     name: 'Pantelis Stanimeros',
     description1: "I help businesses grow their digital presence and streamline their operations. As your technology partner, I focus on creating practical solutions that drive real business results.",
-    description2: "Whether you need a professional website, an online store, or a custom app, I'll guide you through the entire process - from idea to successful launch. I speak your language and translate complex tech into simple, effective solutions.",
+    description2: "Whether you need a professional website, an online store, or a custom app, I'll guide you through the entire process — from concept to successful launch. I speak your language and translate complex tech into simple, effective solutions.",
     githubActivity: "Last year's activity",
-    githubDescription: "Committed to consistent, high-quality contributions."
+    githubDescription: "Committed to consistent, high-quality updates."
   },
   packages: {
     title: 'Packages',
@@ -34,28 +34,28 @@ export default {
         'Google Business & Search Console',
         '3 Meta campaigns (content not included)'
       ],
-      recurring: '100€/year after the first year (hosting, domain & email)'
+      recurring: '100€/year after the first year (hosting fees)'
     },
     webApp: {
       title: 'E-commerce Store',
-      description: 'Complete online store with WordPress or Shopify',
+      description: 'A complete online store built with WordPress or Shopify',
       features: [
+        'Brand-focused design',
         'Professional e-commerce website',
         'Product setup & customization',
-        'Brand-focused design',
+        'Hosting, domain, and email setup',
         'Google Business & Search Console',
-        'Domain, hosting & email setup'
       ],
       recurring: '50-100€/month after first 3 months (platform & hosting fees)'
     },
     mobileApp: {
       title: 'Custom Apps',
-      description: 'Custom web, iOS & Android apps for your business',
+      description: 'Custom web, iOS, and Android apps',
       features: [
-        'Web app, iOS app, or Android app',
+        'Web app, iOS app, and Android app',
+        'Admin dashboard',
         'Custom functionality',
         'Database & cloud hosting',
-        'Admin dashboard',
         'Ongoing support & maintenance'
       ],
       recurring: '50-100€/month after first 3 months (hosting & maintenance)'
@@ -69,28 +69,28 @@ export default {
       title: "Frequently Asked Questions",
       items: {
         hosting: {
-          question: "What are hosting, domain, and custom email?",
-          answer: "Hosting is where your website lives on the internet, like a digital shop space. A domain is your website's address (like www.yourbusiness.com). Custom email lets you have professional email addresses (like contact@yourbusiness.com). We set up all of these for you!"
+          question: "What are hosting, domain, and email setup?",
+          answer: "Think of hosting as your digital shop space on the internet, domain as your online address (like www.yourbusiness.com), and professional email as your business mailbox (like contact@yourbusiness.com). We handle all the technical setup, so you don't have to worry about anything!"
         },
         googleBusiness: {
-          question: "What is Google Business and why do I need it?",
-          answer: "Google Business makes your business show up on Google Maps and search results with your hours, photos, and reviews. It helps local customers find you and trust your business. We'll set it up and show you how to manage it."
+          question: "What is Google Business and Search Console?",
+          answer: "These are powerful tools that help your website rank higher on Google and attract more organic traffic. Google Business Profile helps local customers find you on Google Maps and search results, showing your business hours, photos, and reviews. Search Console helps your website appear more often in Google searches by monitoring performance, fixing technical issues, and improving your site's visibility. Together, they help drive more organic (free) traffic to your business. We'll set up and optimize both tools for maximum visibility."
         },
         eshopPlatforms: {
-          question: "WordPress or Shopify - which is better for my store?",
-          answer: "Both are great choices! WordPress is more flexible and costs less monthly but needs more maintenance. Shopify costs more monthly but is simpler to use and includes hosting. We'll help you choose based on your needs and budget."
+          question: "WordPress or Shopify - which should I choose?",
+          answer: "Both are excellent choices! WordPress gives you more flexibility and lower monthly costs but requires more maintenance. Shopify is simpler to use and includes hosting but has higher monthly fees. We'll help you choose the best option based on your needs and budget."
         },
         customization: {
-          question: "What kind of customization can I get for my online store?",
-          answer: "We customize everything to match your brand - colors, fonts, layout, product displays, and checkout process. We can also add special features like discount systems, product filters, or delivery tracking."
+          question: "How do you customize my website to match my brand?",
+          answer: "We tailor everything to your brand identity — from colors and fonts to layouts and features. We can create custom product displays, unique checkout experiences, and add any specific functionality your business needs."
         },
-        mobileApp: {
-          question: "Do I need both iOS and Android apps?",
-          answer: "Most businesses benefit from having both to reach all customers. However, we can start with one platform and add the other later. We'll help you decide based on where your customers are."
+        hiddenFees: {
+          question: "Are there any hidden fees?",
+          answer: "No hidden fees! We believe in complete transparency. All costs are clearly outlined upfront in our packages. The only additional costs would be for custom requirements beyond the package scope, which we'll discuss and agree upon before proceeding with any work."
         },
-        support: {
-          question: "What kind of support do I get after the project is done?",
-          answer: "All packages include initial training on how to manage your site/store. For custom apps, we offer ongoing support and maintenance to keep everything running smoothly and help with updates or changes."
+        timeToLaunch: {
+          question: "How long does it take to launch my website?",
+          answer: "Basic websites usually launch within 2–3 weeks, while e-commerce stores take around 3–4 weeks. Custom projects' timelines vary based on complexity. We'll provide you with a detailed timeline during our initial consultation. Throughout the process, you'll have access to a development preview to watch your site come to life!"
         }
       }
     }
@@ -103,7 +103,7 @@ export default {
     },
     websites: {
       title: 'Websites & Online Stores',
-      description: 'Professional websites, e-commerce stores, and portfolios that convert visitors into customers.'
+      description: 'Professional websites, online stores, and portfolios designed to convert visitors into customers.'
     },
     mobile: {
       title: 'Mobile Apps',
@@ -177,12 +177,12 @@ export default {
         description: 'For businesses that need a professional website with all essentials.'
       },
       webApp: {
-        title: 'Custom Web App',
-        description: 'For tailored web apps with specific features.'
+        title: 'E-shop',
+        description: 'Start selling online with a professional e-shop.'
       },
       mobileApp: {
-        title: 'Custom Mobile App',
-        description: 'For native apps on iOS & Android with custom features.'
+        title: 'Custom App',
+        description: 'Web, iOS and Android apps with custom features.'
       }
     },
     onlinePresence: {
@@ -216,9 +216,9 @@ export default {
   },
   contact: {
     title: 'Get Free Consultation',
-    subtitle: "Get a Free 10-Minute Solution Call",
-    description: "Fill in your details below to get a free 10-minute consultation where we'll discuss your needs and find the best solution for your case. No strings attached!",
-    freeCallBadge: "Free 10-Minute Solution Call",
+    subtitle: "Let's talk about your business",
+    description: "Fill in your details below to get a free 10-minute consultation where we'll discuss your needs and find the best solution for you. No strings attached!",
+    freeCallBadge: "Free 10' Call",
     features: {
       consultation: {
         title: "10-Minute Consultation",
@@ -237,12 +237,12 @@ export default {
       description: "Fill in your details and I'll get back to you within 24 hours",
       name: 'Name',
       email: 'Email',
-      message: 'Project Details',
+      message: 'Details',
       namePlaceholder: 'Your name',
       emailPlaceholder: 'email@example.com',
       messagePlaceholder: 'Briefly describe your project or challenge...',
       sending: 'Sending...',
-      send: 'Get Free Consultation',
+      send: 'Get Your Free Consultation',
       success: "Request sent! I'll contact you within 24 hours to schedule your free consultation.",
       error: 'Failed to send request. Please try again.'
     }

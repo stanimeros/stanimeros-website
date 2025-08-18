@@ -10,7 +10,24 @@ import { Separator } from "@/components/ui/separator"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
-import { Mail, MapPin, Github, Linkedin, Send, Smartphone, Instagram, Check, Clock, Target, Sparkles, Lightbulb, Store, Cog } from "lucide-react"
+import {
+  EnvelopeIcon,
+  MapPinIcon,
+  PaperAirplaneIcon,
+  DevicePhoneMobileIcon,
+  CheckIcon,
+  ClockIcon,
+  SparklesIcon,
+  LightBulbIcon,
+  BuildingStorefrontIcon,
+  CogIcon,
+  CursorArrowRaysIcon
+} from "@heroicons/react/24/outline"
+import {
+  GithubIcon,
+  LinkedinIcon,
+  InstagramIcon
+} from "@/pages/icons"
 import Footer from "@/components/Footer"
 import { sendEmail } from "@/lib/firebase"
 import { trackMetaEvent } from "@/lib/meta-events"
@@ -241,7 +258,7 @@ const HomePage = () => {
             <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 text-primary">
-                  <Lightbulb className="h-8 w-8" />
+                  <LightBulbIcon className="h-8 w-8" />
                 </div>
                 <CardTitle>{t('services.consulting.title')}</CardTitle>
               </CardHeader>
@@ -254,7 +271,7 @@ const HomePage = () => {
             <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 text-primary">
-                  <Store className="h-8 w-8" />
+                  <BuildingStorefrontIcon className="h-8 w-8" />
                 </div>
                 <CardTitle>{t('services.websites.title')}</CardTitle>
               </CardHeader>
@@ -267,7 +284,7 @@ const HomePage = () => {
             <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 text-primary">
-                  <Smartphone className="h-8 w-8" />
+                  <DevicePhoneMobileIcon className="h-8 w-8" />
                 </div>
                 <CardTitle>{t('services.mobile.title')}</CardTitle>
               </CardHeader>
@@ -280,7 +297,7 @@ const HomePage = () => {
             <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
               <CardHeader className="text-center">
                 <div className="mx-auto mb-4 text-primary">
-                  <Cog className="h-8 w-8" />
+                  <CogIcon className="h-8 w-8" />
                 </div>
                 <CardTitle>{t('services.automation.title')}</CardTitle>
               </CardHeader>
@@ -320,14 +337,14 @@ const HomePage = () => {
                 <div className="space-y-2 text-sm text-muted-foreground">
                   {(t('packages.onlinePresence.features', { returnObjects: true }) as string[]).map((feature, index) => (
                     <div key={index} className="flex items-start gap-2">
-                      <Check className="h-4 w-4 text-primary mt-0.5" />
+                      <CheckIcon className="h-4 w-4 text-primary mt-0.5" />
                       <span>{feature}</span>
                     </div>
                   ))}
                 </div>
                 <div className="mt-4 text-sm text-muted-foreground border-t border-border/60 pt-4">
                   <div className="flex items-start gap-2">
-                    <Clock className="h-4 w-4 mt-0.5" />
+                    <ClockIcon className="h-4 w-4 mt-0.5" />
                     <span>{t('packages.onlinePresence.recurring')}</span>
                   </div>
                 </div>
@@ -351,14 +368,14 @@ const HomePage = () => {
                 <div className="space-y-2 text-sm text-muted-foreground mt-4">
                   {(t('packages.webApp.features', { returnObjects: true }) as string[]).map((feature, index) => (
                     <div key={index} className="flex items-start gap-2">
-                      <Check className="h-4 w-4 text-primary mt-0.5" />
+                      <CheckIcon className="h-4 w-4 text-primary mt-0.5" />
                       <span>{feature}</span>
                     </div>
                   ))}
                 </div>
                 <div className="mt-4 text-sm text-muted-foreground border-t border-border/60 pt-4">
                   <div className="flex items-start gap-2">
-                    <Clock className="h-4 w-4 mt-0.5" />
+                    <ClockIcon className="h-4 w-4 mt-0.5" />
                     <span>{t('packages.webApp.recurring')}</span>
                   </div>
                 </div>
@@ -383,14 +400,14 @@ const HomePage = () => {
                 <div className="space-y-2 text-sm text-muted-foreground mt-4">
                   {(t('packages.mobileApp.features', { returnObjects: true }) as string[]).map((feature, index) => (
                     <div key={index} className="flex items-start gap-2">
-                      <Check className="h-4 w-4 text-primary mt-0.5" />
+                      <CheckIcon className="h-4 w-4 text-primary mt-0.5" />
                       <span>{feature}</span>
                     </div>
                   ))}
                 </div>
                 <div className="mt-4 text-sm text-muted-foreground border-t border-border/60 pt-4">
                   <div className="flex items-start gap-2">
-                    <Clock className="h-4 w-4 mt-0.5" />
+                    <ClockIcon className="h-4 w-4 mt-0.5" />
                     <span>{t('packages.mobileApp.recurring')}</span>
                   </div>
                 </div>
@@ -437,17 +454,17 @@ const HomePage = () => {
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="mobileApp">
-                <AccordionTrigger>{t('packages.faq.items.mobileApp.question')}</AccordionTrigger>
+              <AccordionItem value="hiddenFees">
+                <AccordionTrigger>{t('packages.faq.items.hiddenFees.question')}</AccordionTrigger>
                 <AccordionContent>
-                  {t('packages.faq.items.mobileApp.answer')}
+                  {t('packages.faq.items.hiddenFees.answer')}
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="support">
-                <AccordionTrigger>{t('packages.faq.items.support.question')}</AccordionTrigger>
+              <AccordionItem value="timeToLaunch">
+                <AccordionTrigger>{t('packages.faq.items.timeToLaunch.question')}</AccordionTrigger>
                 <AccordionContent>
-                  {t('packages.faq.items.support.answer')}
+                  {t('packages.faq.items.timeToLaunch.answer')}
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -493,11 +510,8 @@ const HomePage = () => {
       <section id="contact" className="py-20">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">{t('contact.title')}</h2>
+            <h2 className="text-4xl font-bold mb-4">✨ {t('contact.title')}</h2>
             <Separator className="w-24 mx-auto mb-4" />
-                          <div className="inline-block bg-primary/10 border border-primary/20 rounded-full px-4 py-1 text-sm font-medium text-primary mb-6">
-              ✨ {t('contact.freeCallBadge')}
-            </div>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               {t('contact.description')}
             </p>
@@ -508,7 +522,7 @@ const HomePage = () => {
               <div className="space-y-6 mb-8">
                 <div className="flex items-start space-x-3 p-4 rounded-lg bg-card border border-border/60">
                   <div className="mt-1">
-                    <Clock className="h-5 w-5 text-primary" />
+                    <ClockIcon className="h-5 w-5 text-primary" />
                   </div>
                   <div>
                     <h4 className="font-medium">{t('contact.features.consultation.title')}</h4>
@@ -517,7 +531,7 @@ const HomePage = () => {
                 </div>
                 <div className="flex items-start space-x-3 p-4 rounded-lg bg-card border border-border/60">
                   <div className="mt-1">
-                    <Target className="h-5 w-5 text-primary" />
+                    <CursorArrowRaysIcon className="h-5 w-5 text-primary" />
                   </div>
                   <div>
                     <h4 className="font-medium">{t('contact.features.solutions.title')}</h4>
@@ -526,7 +540,7 @@ const HomePage = () => {
                 </div>
                 <div className="flex items-start space-x-3 p-4 rounded-lg bg-card border border-border/60">
                   <div className="mt-1">
-                    <Sparkles className="h-5 w-5 text-primary" />
+                    <SparklesIcon className="h-5 w-5 text-primary" />
                   </div>
                   <div>
                     <h4 className="font-medium">{t('contact.features.noObligations.title')}</h4>
@@ -536,30 +550,30 @@ const HomePage = () => {
               </div>
               <div className="space-y-4">
                 <div className="flex items-center space-x-3">
-                  <Mail className="h-5 w-5 text-primary" />
+                  <EnvelopeIcon className="h-5 w-5 text-primary" />
                   <a href="mailto:hello@stanimeros.com" className="hover:text-primary transition-colors">
                     hello@stanimeros.com
                   </a>
                 </div>
                 <div className="flex items-center space-x-3">
-                  <MapPin className="h-5 w-5 text-primary" />
+                  <MapPinIcon className="h-5 w-5 text-primary" />
                   <span>Thessaloniki, Greece</span>
                 </div>
               </div>
               <div className="flex space-x-4 mt-8">
                 <Link to="https://github.com/stanimeros" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon">
-                    <Github className="h-5 w-5" />
+                    <GithubIcon className="h-5 w-5" />
                   </Button>
                 </Link>
                 <Link to="https://linkedin.com/in/stanimeros" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon">
-                    <Linkedin className="h-5 w-5" />
+                    <LinkedinIcon className="h-5 w-5" />
                   </Button>
                 </Link>
                 <Link to="https://www.instagram.com/stanimeross_" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon">
-                    <Instagram className="h-5 w-5" />
+                    <InstagramIcon className="h-5 w-5" />
                   </Button>
                 </Link>
               </div>
@@ -633,7 +647,7 @@ const HomePage = () => {
                         </>
                       ) : (
                         <>
-                          <Send className="h-4 w-4 mr-2" />
+                          <PaperAirplaneIcon className="h-4 w-4 mr-2" />
                           {t('contact.form.send')}
                         </>
                       )}

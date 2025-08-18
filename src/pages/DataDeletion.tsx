@@ -6,7 +6,14 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Trash2, AlertTriangle, CheckCircle, Mail, Shield, Clock } from "lucide-react"
+import {
+  TrashIcon as Trash2,
+  ExclamationTriangleIcon as AlertTriangle,
+  CheckCircleIcon,
+  EnvelopeIcon as Mail,
+  ShieldCheckIcon as Shield,
+  ClockIcon as Clock
+} from "@heroicons/react/24/outline"
 import Footer from "@/components/Footer"
 import { sendEmail } from "@/lib/firebase"
 import Header from "@/components/Header"
@@ -76,7 +83,7 @@ const DataDeletion = () => {
         <main className="container mx-auto px-4 py-12">
           <div className="max-w-2xl mx-auto text-center">
             <div className="flex justify-center mb-6">
-              <CheckCircle className="h-16 w-16 text-green-500" />
+              <CheckCircleIcon className="h-16 w-16 text-green-500" />
             </div>
             <h1 className="text-3xl font-bold mb-4">Request Submitted Successfully</h1>
             <p className="text-muted-foreground mb-8">

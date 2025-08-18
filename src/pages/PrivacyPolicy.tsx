@@ -2,7 +2,14 @@ import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { Shield, Eye, Lock, Database, Users, FileText } from "lucide-react"
+import {
+  ShieldCheckIcon as Shield,
+  EyeIcon,
+  LockClosedIcon as Lock,
+  CircleStackIcon as Database,
+  UsersIcon,
+  DocumentTextIcon as FileText
+} from "@heroicons/react/24/outline"
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
 import { useEffect } from "react"
@@ -89,7 +96,7 @@ const PrivacyPolicy = () => {
           <Card className="mb-8">
             <CardHeader>
               <CardTitle className="flex items-center">
-                <Eye className="h-5 w-5 mr-2" />
+                <EyeIcon className="h-5 w-5 mr-2" />
                 How We Use Your Information
               </CardTitle>
             </CardHeader>
@@ -109,7 +116,7 @@ const PrivacyPolicy = () => {
           <Card className="mb-8">
             <CardHeader>
               <CardTitle className="flex items-center">
-                <Users className="h-5 w-5 mr-2" />
+                <UsersIcon className="h-5 w-5 mr-2" />
                 Information Sharing
               </CardTitle>
             </CardHeader>

@@ -1,7 +1,14 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Home, User, Settings, Briefcase, Mail } from "lucide-react"
+import {
+  Bars3Icon as Menu,
+  HomeIcon,
+  UserIcon,
+  Cog6ToothIcon as Settings,
+  BriefcaseIcon,
+  EnvelopeIcon as Mail
+} from "@heroicons/react/24/outline"
 import { Link, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import LanguageSwitcher from "./LanguageSwitcher"
@@ -72,11 +79,11 @@ const Header = () => {
             <SheetContent side="right" className="w-[300px]">
               <div className="flex flex-col space-y-2 mt-2">
                 <Button variant="ghost" onClick={() => handleScrollToSection('home')} className="justify-start cursor-pointer">
-                  <Home className="h-4 w-4 mr-3" />
+                  <HomeIcon className="h-4 w-4 mr-3" />
                   {t('nav.home')}
                 </Button>
                 <Button variant="ghost" onClick={() => handleScrollToSection('about')} className="justify-start cursor-pointer">
-                  <User className="h-4 w-4 mr-3" />
+                  <UserIcon className="h-4 w-4 mr-3" />
                   {t('nav.about')}
                 </Button>
                 <Button variant="ghost" onClick={() => handleScrollToSection('services')} className="justify-start cursor-pointer">
@@ -84,7 +91,7 @@ const Header = () => {
                   {t('nav.services')}
                 </Button>
                 <Button variant="ghost" onClick={() => handleScrollToSection('portfolio')} className="justify-start cursor-pointer">
-                  <Briefcase className="h-4 w-4 mr-3" />
+                  <BriefcaseIcon className="h-4 w-4 mr-3" />
                   {t('nav.portfolio')}
                 </Button>
                 <Button variant="ghost" onClick={() => handleScrollToSection('contact')} className="justify-start cursor-pointer">
