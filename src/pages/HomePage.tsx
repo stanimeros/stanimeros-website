@@ -33,7 +33,7 @@ import { sendEmail } from "@/lib/firebase"
 import GitHubCalendarComponent from "@/components/GitHubCalendar"
 import Header from "@/components/Header"
 import { trackEvent } from "@/lib/events"
-import { useScrollAnimation } from "@/lib/hooks"
+import { useScrollAnimation, useMobileCardAnimation } from "@/lib/hooks"
 
 const HomePage = () => {
   const { t } = useTranslation()
@@ -50,6 +50,11 @@ const HomePage = () => {
   const packagesRef = useRef<HTMLElement>(null)
   const portfolioRef = useRef<HTMLElement>(null)
   const contactRef = useRef<HTMLElement>(null)
+  
+  // Refs for card animations
+  const serviceCardRefs = Array(4).fill(null).map(() => useRef<HTMLDivElement>(null))
+  const packageCardRefs = Array(3).fill(null).map(() => useRef<HTMLDivElement>(null))
+  const portfolioCardRefs = Array(8).fill(null).map(() => useRef<HTMLDivElement>(null))
   
   // Get animation props for each section
   const aboutAnimation = useScrollAnimation(aboutRef)
@@ -304,58 +309,49 @@ const HomePage = () => {
             <Separator className="w-24 mx-auto" />
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 text-primary">
-                  <LightBulbIcon className="h-8 w-8" />
-                </div>
-                <CardTitle>{t('services.consulting.title')}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-center">
-                  {t('services.consulting.description')}
-                </CardDescription>
-              </CardContent>
-            </Card>
-            <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 text-primary">
-                  <BuildingStorefrontIcon className="h-8 w-8" />
-                </div>
-                <CardTitle>{t('services.websites.title')}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-center">
-                  {t('services.websites.description')}
-                </CardDescription>
-              </CardContent>
-            </Card>
-            <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 text-primary">
-                  <DevicePhoneMobileIcon className="h-8 w-8" />
-                </div>
-                <CardTitle>{t('services.mobile.title')}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-center">
-                  {t('services.mobile.description')}
-                </CardDescription>
-              </CardContent>
-            </Card>
-            <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
-              <CardHeader className="text-center">
-                <div className="mx-auto mb-4 text-primary">
-                  <CogIcon className="h-8 w-8" />
-                </div>
-                <CardTitle>{t('services.automation.title')}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-center">
-                  {t('services.automation.description')}
-                </CardDescription>
-              </CardContent>
-            </Card>
+            {[
+              {
+                icon: <LightBulbIcon className="h-8 w-8" />,
+                title: 'services.consulting.title',
+                description: 'services.consulting.description'
+              },
+              {
+                icon: <BuildingStorefrontIcon className="h-8 w-8" />,
+                title: 'services.websites.title',
+                description: 'services.websites.description'
+              },
+              {
+                icon: <DevicePhoneMobileIcon className="h-8 w-8" />,
+                title: 'services.mobile.title',
+                description: 'services.mobile.description'
+              },
+              {
+                icon: <CogIcon className="h-8 w-8" />,
+                title: 'services.automation.title',
+                description: 'services.automation.description'
+              }
+            ].map((service, index) => (
+              <motion.div
+                key={index}
+                ref={serviceCardRefs[index]}
+                {...useMobileCardAnimation(serviceCardRefs[index], index)}
+                className="md:transform-none"
+              >
+                <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
+                  <CardHeader className="text-center">
+                    <div className="mx-auto mb-4 text-primary">
+                      {service.icon}
+                    </div>
+                    <CardTitle>{t(service.title)}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <CardDescription className="text-center">
+                      {t(service.description)}
+                    </CardDescription>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
       </motion.section>
@@ -376,114 +372,84 @@ const HomePage = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Online Presence */}
-            <Card className="relative flex flex-col justify-between hover:shadow-lg transition-all duration-300 border-border/60">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle>{t('packages.onlinePresence.title')}</CardTitle>
-                  <Badge variant="secondary" className="rounded-full">Essential</Badge>
-                </div>
-                <CardDescription>{t('packages.onlinePresence.description')}</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="text-2xl font-semibold">1.200€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  {(t('packages.onlinePresence.features', { returnObjects: true }) as string[]).map((feature, index) => (
-                    <div key={index} className="flex items-start gap-2">
-                      <CheckIcon className="h-4 w-4 text-primary mt-0.5" />
-                      <span>{feature}</span>
+            {[
+              {
+                title: 'packages.onlinePresence.title',
+                description: 'packages.onlinePresence.description',
+                badge: 'Essential',
+                price: '1.200€',
+                features: 'packages.onlinePresence.features',
+                recurring: 'packages.onlinePresence.recurring',
+                package: 'online-presence',
+                className: 'border-border/60'
+              },
+              {
+                title: 'packages.eShop.title',
+                description: 'packages.eShop.description',
+                badge: 'Business',
+                price: '2.400€',
+                features: 'packages.eShop.features',
+                recurring: 'packages.eShop.recurring',
+                package: 'e-shop',
+                className: 'border-primary/30 ring-1 ring-primary/30 bg-primary/5'
+              },
+              {
+                title: 'packages.customApp.title',
+                description: 'packages.customApp.description',
+                badge: 'Premium',
+                price: '5.000€',
+                features: 'packages.customApp.features',
+                recurring: 'packages.customApp.recurring',
+                package: 'custom-app',
+                className: 'border-border/60',
+                showStartingFrom: true
+              }
+            ].map((pkg, index) => (
+              <motion.div
+                key={index}
+                ref={packageCardRefs[index]}
+                {...useMobileCardAnimation(packageCardRefs[index], index)}
+                className="md:transform-none"
+              >
+                <Card className={`relative flex flex-col justify-between hover:shadow-lg transition-all duration-300 ${pkg.className}`}>
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <CardTitle>{t(pkg.title)}</CardTitle>
+                      <Badge variant="secondary" className="rounded-full">{pkg.badge}</Badge>
                     </div>
-                  ))}
-                </div>
-                <div className="mt-4 text-sm text-muted-foreground border-t border-border/60 pt-4">
-                  <div className="flex items-start gap-2">
-                    <ClockIcon className="h-4 w-4 mt-0.5" />
-                    <span>{t('packages.onlinePresence.recurring')}</span>
-                  </div>
-                </div>
-              </CardContent>
-              <div className="px-6 pb-6">
-                <Button className="w-full" onClick={() => {
-                  trackEvent('packageSelected', {
-                    package: 'online-presence'
-                  });
-                  navigate('/get-started?package=online-presence');
-                }}>{t('packages.getStarted')}</Button>
-              </div>
-            </Card>
-
-            {/* Custom E-shop */}
-            <Card className="relative flex flex-col justify-between hover:shadow-lg transition-all duration-300 border-primary/30 ring-1 ring-primary/30 bg-primary/5">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle>{t('packages.eShop.title')}</CardTitle>
-                  <Badge variant="secondary" className="rounded-full">Business</Badge>
-                </div>
-                <CardDescription>{t('packages.eShop.description')}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-semibold">2.400€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
-                <div className="space-y-2 text-sm text-muted-foreground mt-4">
-                  {(t('packages.eShop.features', { returnObjects: true }) as string[]).map((feature, index) => (
-                    <div key={index} className="flex items-start gap-2">
-                      <CheckIcon className="h-4 w-4 text-primary mt-0.5" />
-                      <span>{feature}</span>
+                    <CardDescription>{t(pkg.description)}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    {pkg.showStartingFrom && (
+                      <div className="text-xs uppercase tracking-wide text-muted-foreground">{t('packages.startingFrom')}</div>
+                    )}
+                    <div className="text-2xl font-semibold">{pkg.price} <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
+                    <div className="space-y-2 text-sm text-muted-foreground">
+                      {(t(pkg.features, { returnObjects: true }) as string[]).map((feature, featureIndex) => (
+                        <div key={featureIndex} className="flex items-start gap-2">
+                          <CheckIcon className="h-4 w-4 text-primary mt-0.5" />
+                          <span>{feature}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-                <div className="mt-4 text-sm text-muted-foreground border-t border-border/60 pt-4">
-                  <div className="flex items-start gap-2">
-                    <ClockIcon className="h-4 w-4 mt-0.5" />
-                    <span>{t('packages.eShop.recurring')}</span>
-                  </div>
-                </div>
-              </CardContent>
-              <div className="px-6 pb-6">
-                <Button className="w-full" onClick={() => {
-                  trackEvent('packageSelected', {
-                    package: 'e-shop'
-                  });
-                  navigate('/get-started?package=e-shop');
-                }}>{t('packages.getStarted')}</Button>
-              </div>
-            </Card>
-
-            {/* Custom Mobile App */}
-            <Card className="relative flex flex-col justify-between hover:shadow-lg transition-all duration-300 border-border/60">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle>{t('packages.customApp.title')}</CardTitle>
-                  <Badge variant="secondary" className="rounded-full">Premium</Badge>
-                </div>
-                <CardDescription>{t('packages.customApp.description')}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="text-xs uppercase tracking-wide text-muted-foreground mt-4">{t('packages.startingFrom')}</div>
-                <div className="text-2xl font-semibold">5.000€ <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
-                <div className="space-y-2 text-sm text-muted-foreground mt-4">
-                  {(t('packages.customApp.features', { returnObjects: true }) as string[]).map((feature, index) => (
-                    <div key={index} className="flex items-start gap-2">
-                      <CheckIcon className="h-4 w-4 text-primary mt-0.5" />
-                      <span>{feature}</span>
+                    <div className="mt-4 text-sm text-muted-foreground border-t border-border/60 pt-4">
+                      <div className="flex items-start gap-2">
+                        <ClockIcon className="h-4 w-4 mt-0.5" />
+                        <span>{t(pkg.recurring)}</span>
+                      </div>
                     </div>
-                  ))}
-                </div>
-                <div className="mt-4 text-sm text-muted-foreground border-t border-border/60 pt-4">
-                  <div className="flex items-start gap-2">
-                    <ClockIcon className="h-4 w-4 mt-0.5" />
-                    <span>{t('packages.customApp.recurring')}</span>
+                  </CardContent>
+                  <div className="px-6 pb-6">
+                    <Button className="w-full" onClick={() => {
+                      trackEvent('packageSelected', {
+                        package: pkg.package
+                      });
+                      navigate(`/get-started?package=${pkg.package}`);
+                    }}>{t('packages.getStarted')}</Button>
                   </div>
-                </div>
-              </CardContent>
-              <div className="px-6 pb-6">
-                <Button className="w-full" onClick={() => {
-                  trackEvent('packageSelected', {
-                    package: 'custom-app'
-                  });
-                  navigate('/get-started?package=custom-app');
-                }}>{t('packages.getStarted')}</Button>
-              </div>
-            </Card>
+                </Card>
+              </motion.div>
+            ))}
           </div>
 
           <p className="text-center text-sm text-muted-foreground mt-8">
@@ -553,26 +519,33 @@ const HomePage = () => {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolioItems.map((item, index) => (
-              <Card key={index} className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-2 pt-0">
-                <div className={`h-48 ${item.bgColor} flex items-center justify-center`}>
-                  <h3 className={`text-4xl font-bold ${item.textColor}`}>
-                    {t(`portfolio.items.${item.key}.title`)}
-                  </h3>
-                </div>
-                <CardHeader className="pt-0">
-                  <CardTitle>{t(`portfolio.items.${item.key}.title`)}</CardTitle>
-                  <CardDescription>{t(`portfolio.items.${item.key}.description`)}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {item.technologies.map((tech, techIndex) => (
-                      <Badge key={techIndex} variant="outline">
-                        {tech}
-                      </Badge>
-                    ))}
+              <motion.div
+                key={index}
+                ref={portfolioCardRefs[index]}
+                {...useMobileCardAnimation(portfolioCardRefs[index], index)}
+                className="md:transform-none"
+              >
+                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-2 pt-0">
+                  <div className={`h-48 ${item.bgColor} flex items-center justify-center`}>
+                    <h3 className={`text-4xl font-bold ${item.textColor}`}>
+                      {t(`portfolio.items.${item.key}.title`)}
+                    </h3>
                   </div>
-                </CardContent>
-              </Card>
+                  <CardHeader className="pt-0">
+                    <CardTitle>{t(`portfolio.items.${item.key}.title`)}</CardTitle>
+                    <CardDescription>{t(`portfolio.items.${item.key}.description`)}</CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {item.technologies.map((tech, techIndex) => (
+                        <Badge key={techIndex} variant="outline">
+                          {tech}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             ))}
           </div>
         </div>
