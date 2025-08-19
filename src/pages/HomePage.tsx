@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
 import "../i18n"
 import { Link, useLocation, useNavigate } from "react-router-dom"
+import { motion, useScroll, useTransform, useSpring, type HTMLMotionProps } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
@@ -32,11 +33,32 @@ import { sendEmail } from "@/lib/firebase"
 import GitHubCalendarComponent from "@/components/GitHubCalendar"
 import Header from "@/components/Header"
 import { trackEvent } from "@/lib/events"
+import { useScrollAnimation } from "@/lib/hooks"
 
 const HomePage = () => {
   const { t } = useTranslation()
   const location = useLocation()
   const navigate = useNavigate()
+  const { scrollY } = useScroll()
+  const logoY = useTransform(scrollY, [0, 500], [0, 100])
+  const logoScale = useTransform(scrollY, [0, 500], [1, 0.8])
+  const logoOpacity = useTransform(scrollY, [0, 500], [0.1, 0])
+  const smoothLogoY = useSpring(logoY, { stiffness: 100, damping: 30 })
+  
+  // Refs for scroll animations
+  const aboutRef = useRef<HTMLElement>(null)
+  const servicesRef = useRef<HTMLElement>(null)
+  const packagesRef = useRef<HTMLElement>(null)
+  const portfolioRef = useRef<HTMLElement>(null)
+  const contactRef = useRef<HTMLElement>(null)
+  
+  // Get animation props for each section
+  const aboutAnimation = useScrollAnimation(aboutRef)
+  const servicesAnimation = useScrollAnimation(servicesRef)
+  const packagesAnimation = useScrollAnimation(packagesRef)
+  const portfolioAnimation = useScrollAnimation(portfolioRef)
+  const contactAnimation = useScrollAnimation(contactRef)
+  
   const [contactForm, setContactForm] = useState({
     name: "",
     email: "",
@@ -190,18 +212,29 @@ const HomePage = () => {
             </Button>
           </div>
           {/* Logo positioned behind everything */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-10 z-0 pointer-events-none">
+          <motion.div 
+            className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none"
+            style={{ 
+              y: smoothLogoY,
+              scale: logoScale,
+              opacity: logoOpacity
+            }}
+          >
             <img 
               src="/images/logo-white.png" 
               alt="Stanimeros Logo" 
               className="h-[300%] w-auto object-contain"
             />
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 bg-card scroll-mt-10">
+      <motion.section 
+        ref={aboutRef}
+        id="about" 
+        className="py-20 bg-card scroll-mt-10"
+        {...(aboutAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">{t('about.title')}</h2>
@@ -250,10 +283,14 @@ const HomePage = () => {
             </p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Services Section */}
-      <section id="services" className="p-10 pb-20 scroll-mt-10">
+      <motion.section 
+        ref={servicesRef}
+        id="services" 
+        className="p-10 pb-20 scroll-mt-10"
+        {...(servicesAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">{t('services.title')}</h2>
@@ -314,10 +351,14 @@ const HomePage = () => {
             </Card>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Packages Section */}
-      <section id="packages" className="py-10 pb-20 scroll-mt-10">
+      <motion.section 
+        ref={packagesRef}
+        id="packages" 
+        className="py-10 pb-20 scroll-mt-10"
+        {...(packagesAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">{t('packages.title')}</h2>
@@ -490,10 +531,14 @@ const HomePage = () => {
             </Accordion>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Portfolio Section */}
-      <section id="portfolio" className="py-20 bg-card scroll-mt-10">
+      <motion.section 
+        ref={portfolioRef}
+        id="portfolio" 
+        className="py-20 bg-card scroll-mt-10"
+        {...(portfolioAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">{t('portfolio.title')}</h2>
@@ -524,10 +569,14 @@ const HomePage = () => {
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 scroll-mt-10">
+      <motion.section 
+        ref={contactRef}
+        id="contact" 
+        className="py-20 scroll-mt-10"
+        {...(contactAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">✨ {t('contact.title')}</h2>
@@ -668,7 +717,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Footer */}
       <Footer />
