@@ -49,10 +49,20 @@ const CUSTOM_APP_FEATURES = [
 ]
 
 const PAYMENT_METHODS = [
-  "Apple / Google Pay",
+  "Apple & Google Pay",
   "Bank Transfer",
   "Cash on Delivery",
   "Cards (Visa, Mastercard, etc.)",
+]
+
+const DELIVERY_METHODS = [
+  "ACS",
+  "ELTA",
+  "Geniki",
+  "Speedex",
+  "BOX Now",
+  "Pickup",
+  "Other"
 ]
 
 function GetStarted() {
@@ -81,9 +91,9 @@ function GetStarted() {
   // E-shop specific fields
   const [businessType, setBusinessType] = useState("")
   const [productsCount, setProductsCount] = useState("")
-  const [shippingNeeds, setShippingNeeds] = useState("")
   const [additionalNeeds, setAdditionalNeeds] = useState("")
   const [paymentMethods, setPaymentMethods] = useState<string[]>([])
+  const [deliveryMethods, setDeliveryMethods] = useState<string[]>([])
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
@@ -117,9 +127,9 @@ function GetStarted() {
     setSelectedFeatures([])
     setBusinessType("")
     setProductsCount("")
-    setShippingNeeds("")
     setAdditionalNeeds("")
     setPaymentMethods([])
+    setDeliveryMethods([])
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -154,9 +164,9 @@ function GetStarted() {
         lines.push("- Payment Methods:")
         paymentMethods.forEach(method => lines.push(`  • ${method}`))
       }
-      if (shippingNeeds) {
-        lines.push("- Shipping Requirements:")
-        lines.push(`  ${shippingNeeds}`)
+      if (deliveryMethods.length) {
+        lines.push("- Delivery Methods:")
+        deliveryMethods.forEach(method => lines.push(`  • ${method}`))
       }
       if (additionalNeeds) {
         lines.push("- Additional Requirements:")
@@ -356,15 +366,19 @@ function GetStarted() {
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="shipping">{t('getStarted.eshop.shippingNeeds')}</Label>
-                      <Textarea 
-                        id="shipping"
-                        value={shippingNeeds}
-                        onChange={e => setShippingNeeds(e.target.value)}
-                        placeholder={t('getStarted.eshop.shippingPlaceholder')}
-                        rows={3}
-                        required
-                      />
+                      <Label htmlFor="deliveryMethods">{t('getStarted.eshop.deliveryMethods')}</Label>
+                      <div className="grid md:grid-cols-2 gap-3">
+                        {DELIVERY_METHODS.map((method) => (
+                          <label key={method} className="flex items-center gap-2 cursor-pointer">
+                            <Checkbox checked={deliveryMethods.includes(method)} onCheckedChange={() => setDeliveryMethods(prev => 
+                              prev.includes(method) 
+                                ? prev.filter(m => m !== method)
+                                : [...prev, method]
+                            )} />
+                            <span className="text-sm text-muted-foreground">{method}</span>
+                          </label>
+                        ))}
+                      </div>
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="additionalNeeds">{t('getStarted.eshop.additionalNeeds')}</Label>

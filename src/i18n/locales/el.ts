@@ -142,7 +142,7 @@ export default {
         description: 'Πλατφόρμα κρατήσεων και ανακαλύψεων για επιχειρήσεις και χρήστες.'
       },
       hedeos: {
-        title: 'Hedeos',
+        title: 'Ηδέως',
         description: 'Gamified εφαρμογή για εκμάθηση Ελληνικών με quizzes και πρόοδο.'
       },
       ekarotsi: {
@@ -210,14 +210,13 @@ export default {
       productsCountPlaceholder: 'π.χ., 50, 100, 500+',
       features: 'Λειτουργίες E-shop',
       paymentMethods: 'Τρόποι Πληρωμής',
-      shippingNeeds: 'Απαιτήσεις Αποστολής',
-      shippingPlaceholder: 'π.χ., Τοπική παράδοση, Αποστολές σε όλη την Ελλάδα, κλπ.',
+      deliveryMethods: 'Τρόποι Αποστολής',
       additionalNeeds: 'Επιπλέον Απαιτήσεις',
       additionalNeedsPlaceholder: 'Τυχόν ειδικές λειτουργίες ή απαιτήσεις για το κατάστημα'
     },
     buttons: {
       submit: 'Ολοκλήρωση',
-      payment: 'Συνέχεια σε Πληρωμή',
+      payment: 'Συνέχεια στην πληρωμή',
       processing: 'Σε εξέλιξη...',
     },
     success: "Ευχαριστούμε για το ενδιαφέρον σου! Θα λάβεις απάντηση μέσα σε 1–2 εργάσιμες.",

@@ -210,8 +210,7 @@ export default {
       productsCountPlaceholder: 'e.g., 50, 100, 500+',
       features: 'E-shop Features',
       paymentMethods: 'Payment Methods',
-      shippingNeeds: 'Shipping Requirements',
-      shippingPlaceholder: 'e.g., Local delivery, Worldwide shipping, etc.',
+      deliveryMethods: 'Delivery Methods',
       additionalNeeds: 'Additional Requirements',
       additionalNeedsPlaceholder: 'Any specific features or requirements for your store'
     },
