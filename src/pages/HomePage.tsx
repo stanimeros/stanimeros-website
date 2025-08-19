@@ -41,7 +41,6 @@ const HomePage = () => {
   const navigate = useNavigate()
   const { scrollY } = useScroll()
   const logoY = useTransform(scrollY, [0, 500], [0, 100])
-  const logoScale = useTransform(scrollY, [0, 500], [1, 0.8])
   const logoOpacity = useTransform(scrollY, [0, 500], [0.1, 0])
   const smoothLogoY = useSpring(logoY, { stiffness: 100, damping: 30 })
   
@@ -216,8 +215,16 @@ const HomePage = () => {
             className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none"
             style={{ 
               y: smoothLogoY,
-              scale: logoScale,
               opacity: logoOpacity
+            }}
+            animate={{ 
+              scale: [1, 1.05, 1],
+            }}
+            transition={{
+              repeat: Infinity,
+              duration: 4,
+              ease: "easeInOut",
+              times: [0, 0.5, 1]
             }}
           >
             <img 
