@@ -29,9 +29,9 @@ import {
 } from "@/pages/icons"
 import Footer from "@/components/Footer"
 import { sendEmail } from "@/lib/firebase"
-import { trackMetaEvent } from "@/lib/meta-events"
 import GitHubCalendarComponent from "@/components/GitHubCalendar"
 import Header from "@/components/Header"
+import { trackEvent } from "@/lib/events"
 
 const HomePage = () => {
   const { t } = useTranslation()
@@ -43,6 +43,12 @@ const HomePage = () => {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+
+  useEffect(() => {
+    trackEvent('pageView', {
+      page: 'home'
+    });
+  }, []);
 
   useEffect(() => {
     if (location.hash) {
@@ -76,8 +82,10 @@ const HomePage = () => {
       console.log("Email sent successfully:", result)
       
       // Track contact form submission
-      trackMetaEvent('FormSubmission', {
-        form_type: 'free-consultation',
+      trackEvent('beginCheckout', {
+        value: 0,
+        currency: 'EUR',
+        package: 'free-consultation'
       });
       
       setSubmitStatus("success")
@@ -227,7 +235,7 @@ const HomePage = () => {
                   <img 
                     src="/images/pantelis.webp" 
                     alt={t('about.name')}
-                    className="w-full h-full object-cover object-bottom"
+                    className="w-full h-full object-cover object-center"
                   />
                 </div>
               </div>
@@ -347,7 +355,12 @@ const HomePage = () => {
                 </div>
               </CardContent>
               <div className="px-6 pb-6">
-                <Button className="w-full" onClick={() => navigate('/get-started?package=online-presence')}>{t('packages.getStarted')}</Button>
+                <Button className="w-full" onClick={() => {
+                  trackEvent('packageSelected', {
+                    package: 'online-presence'
+                  });
+                  navigate('/get-started?package=online-presence');
+                }}>{t('packages.getStarted')}</Button>
               </div>
             </Card>
 
@@ -378,7 +391,12 @@ const HomePage = () => {
                 </div>
               </CardContent>
               <div className="px-6 pb-6">
-                <Button className="w-full" onClick={() => navigate('/get-started?package=e-shop')}>{t('packages.getStarted')}</Button>
+                <Button className="w-full" onClick={() => {
+                  trackEvent('packageSelected', {
+                    package: 'e-shop'
+                  });
+                  navigate('/get-started?package=e-shop');
+                }}>{t('packages.getStarted')}</Button>
               </div>
             </Card>
 
@@ -410,7 +428,12 @@ const HomePage = () => {
                 </div>
               </CardContent>
               <div className="px-6 pb-6">
-                <Button className="w-full" onClick={() => navigate('/get-started?package=custom-app')}>{t('packages.getStarted')}</Button>
+                <Button className="w-full" onClick={() => {
+                  trackEvent('packageSelected', {
+                    package: 'custom-app'
+                  });
+                  navigate('/get-started?package=custom-app');
+                }}>{t('packages.getStarted')}</Button>
               </div>
             </Card>
           </div>

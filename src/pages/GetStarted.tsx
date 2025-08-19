@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
 import { sendEmail } from "@/lib/firebase"
-import { trackMetaEvent } from "@/lib/meta-events"
+import { trackEvent } from "@/lib/events"
 
 type PackageKey = "online-presence" | "e-shop" | "custom-app"
 
@@ -31,35 +31,28 @@ const PACKAGE_META: Record<PackageKey, { label: string; tagline: string; highlig
   },
 }
 
-const WEB_FEATURES = [
+const CUSTOM_APP_FEATURES = [
   "Database",
   "Email sign-in",
   "Google sign-in",
   "Apple sign-in",
   "Stripe payments",
   "Subscriptions",
-  "Maps & location",
+  "Maps & Location",
   "Multi-language",
   "Camera & Photos",
   "Documents & Files",
   "Analytics",
-]
-
-const MOBILE_FEATURES = [
-  ...WEB_FEATURES,
   "Reminders",
   "Push notifications",
-  "In-app ads",
-  "In-app subscriptions",
+  "Ads",
 ]
 
 const PAYMENT_METHODS = [
-  "Credit Card",
-  "PayPal",
+  "Apple / Google Pay",
   "Bank Transfer",
   "Cash on Delivery",
-  "Apple Pay",
-  "Google Pay"
+  "Cards (Visa, Mastercard, etc.)",
 ]
 
 function GetStarted() {
@@ -82,7 +75,7 @@ function GetStarted() {
 
   // Web/Mobile
   const [projectDetails, setProjectDetails] = useState("")
-  const featureList = useMemo(() => (selectedPackage === "custom-app" ? MOBILE_FEATURES : WEB_FEATURES), [selectedPackage])
+  const featureList = useMemo(() => (selectedPackage === "custom-app" ? CUSTOM_APP_FEATURES : []), [selectedPackage])
   const [selectedFeatures, setSelectedFeatures] = useState<string[]>([])
 
   // E-shop specific fields
@@ -97,6 +90,9 @@ function GetStarted() {
 
   useEffect(() => {
     window.scrollTo({ top: 0 })
+    trackEvent('pageView', {
+      page: 'get-started'
+    });
   }, [])
 
   useEffect(() => {
@@ -185,21 +181,13 @@ function GetStarted() {
         email,
         message,
       })
-      
-      // Track form submission event
-      trackMetaEvent('FormSubmission', {
-        form_type: 'package_inquiry',
-        package_type: selectedPackage,
-        has_company: !!company,
-        selected_features: selectedFeatures.length
-      });
 
       if (selectedPackage === "online-presence" || selectedPackage === "e-shop") {
         // Track payment initiation
-        trackMetaEvent('InitiateCheckout', {
-          value: selectedPackage === "online-presence" ? 1200 : 2400,
+        trackEvent('beginCheckout', {
           currency: 'EUR',
-          package_type: selectedPackage === "online-presence" ? 'online_presence' : 'eshop'
+          package: selectedPackage,
+          value: selectedPackage === "online-presence" ? 1200 : 2400,
         });
         // Redirect to Stripe payment link with email parameter
         const stripeUrl = new URL(
@@ -210,6 +198,11 @@ function GetStarted() {
         stripeUrl.searchParams.set('prefilled_email', email.trim())
         window.location.href = stripeUrl.toString()
       } else {
+        trackEvent('beginCheckout', {
+          currency: 'EUR',
+          value: 5000,
+          package: selectedPackage
+        });
         setStatus("success")
         resetForm()
         setTimeout(() => setStatus("idle"), 5000)
@@ -234,34 +227,6 @@ function GetStarted() {
           </div>
 
           <form onSubmit={handleSubmit}>
-            {/* Contact Details */}
-            <Card className="mb-6">
-              <CardHeader>
-                <CardTitle>{t('getStarted.contactDetails.title')}</CardTitle>
-                <CardDescription>{t('getStarted.contactDetails.subtitle')}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name">{t('getStarted.contactDetails.name')}</Label>
-                    <Input id="name" value={name} onChange={e => setName(e.target.value)} required />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="email">{t('getStarted.contactDetails.email')}</Label>
-                    <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} required />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="company">{t('getStarted.contactDetails.company')}</Label>
-                    <Input id="company" value={company} onChange={e => setCompany(e.target.value)} />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="phone">{t('getStarted.contactDetails.phone')}</Label>
-                    <Input id="phone" value={phone} onChange={e => setPhone(e.target.value)} />
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
             {/* Service Selection */}
             <Card className="mb-6">
               <CardHeader>
@@ -445,12 +410,41 @@ function GetStarted() {
                   </CardContent>
                 </Card>
               )}
+
+               {/* Contact Details */}
+            <Card className="mb-6">
+              <CardHeader>
+                <CardTitle>{t('getStarted.contactDetails.title')}</CardTitle>
+                <CardDescription>{t('getStarted.contactDetails.subtitle')}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <Label htmlFor="name">{t('getStarted.contactDetails.name')}</Label>
+                    <Input id="name" value={name} onChange={e => setName(e.target.value)} required />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="email">{t('getStarted.contactDetails.email')}</Label>
+                    <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} required />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="company">{t('getStarted.contactDetails.company')}</Label>
+                    <Input id="company" value={company} onChange={e => setCompany(e.target.value)} />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone">{t('getStarted.contactDetails.phone')}</Label>
+                    <Input id="phone" value={phone} onChange={e => setPhone(e.target.value)} />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             <div className="flex justify-end mt-6">
               <Button type="submit" disabled={isSubmitting || !selectedPackage}>
                 {isSubmitting ? (
                   <>
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                    {t(['online-presence', 'e-shop'].includes(selectedPackage || '') ? 'getStarted.buttons.processing' : 'getStarted.buttons.submitting')}
+                    {t('getStarted.buttons.processing')}
                   </>
                 ) : (
                   <>{t(['online-presence', 'e-shop'].includes(selectedPackage || '') ? 'getStarted.buttons.payment' : 'getStarted.buttons.submit')}</>

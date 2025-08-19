@@ -32,7 +32,7 @@ export default {
         'Custom contact form',
         'Hosting, domain, and email setup',
         'Google Business & Search Console',
-        '3 Meta campaigns (content not included)'
+        'Advertising campaign on Meta (Facebook & Instagram)'
       ],
       recurring: '100€/year after the first year (hosting fees)'
     },
@@ -54,9 +54,9 @@ export default {
       features: [
         'Web app, iOS app, and Android app',
         'Admin dashboard',
-        'Custom functionality',
+        'Custom functionality & APIs',
         'Database & cloud hosting',
-        'Ongoing support & maintenance'
+        'Posting to App Store and Google Play'
       ],
       recurring: '50-100€/month after first 3 months (hosting & maintenance)'
     },
@@ -73,9 +73,9 @@ export default {
           answer: "Think of hosting as your digital shop space on the internet, domain as your online address (like www.yourbusiness.com), and professional email as your business mailbox (like contact@yourbusiness.com). We handle all the technical setup, so you don't have to worry about anything!"
         },
         googleBusiness: {
-          question: "What is Google Business and Search Console?",
-          answer: "These are powerful tools that help your website rank higher on Google and attract more organic traffic. Google Business Profile helps local customers find you on Google Maps and search results, showing your business hours, photos, and reviews. Search Console helps your website appear more often in Google searches by monitoring performance, fixing technical issues, and improving your site's visibility. Together, they help drive more organic (free) traffic to your business. We'll set up and optimize both tools for maximum visibility."
-        },
+          question: "What are Google Business and Search Console?",
+          answer: "These are tools that help a website appear higher on Google and attract free visitors. Google Business Profile allows customers to find the business on Google Maps and search results, with details like opening hours, photos, and reviews. Search Console takes care of indexing the website so it appears in Google searches, and provides checks and optimizations for better visibility."
+        },        
         eshopPlatforms: {
           question: "WordPress or Shopify - which should I choose?",
           answer: "Both are excellent choices! WordPress gives you more flexibility and lower monthly costs but requires more maintenance. Shopify is simpler to use and includes hosting but has higher monthly fees. We'll help you choose the best option based on your needs and budget."
@@ -218,8 +218,7 @@ export default {
     buttons: {
       submit: 'Submit Request',
       payment: 'Continue to Payment',
-      processing: 'Processing...',
-      submitting: 'Submitting...'
+      processing: 'Processing...'
     },
     success: "Thanks for your inquiry! I'll review your requirements and reply within 1–2 business days with a proposal.",
     error: 'Something went wrong. Please try again.',
