@@ -245,7 +245,7 @@ const HomePage = () => {
       <motion.section 
         ref={aboutRef}
         id="about" 
-        className="py-20 bg-card scroll-mt-10"
+        className="py-20 bg-card scroll-mt-10 overflow-hidden"
         {...(aboutAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -301,14 +301,14 @@ const HomePage = () => {
       <motion.section 
         ref={servicesRef}
         id="services" 
-        className="p-10 pb-20 scroll-mt-10"
+        className="p-10 pb-20 scroll-mt-10 overflow-hidden"
         {...(servicesAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">{t('services.title')}</h2>
             <Separator className="w-24 mx-auto" />
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
             {[
               {
                 icon: <LightBulbIcon className="h-8 w-8" />,
@@ -335,7 +335,7 @@ const HomePage = () => {
                 key={index}
                 ref={serviceCardRefs[index]}
                 {...useMobileCardAnimation(serviceCardRefs[index], index)}
-                className="md:transform-none"
+                className="md:transform-none w-full"
               >
                 <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2 h-full flex flex-col">
                   <CardHeader className="text-center flex-none">
@@ -360,7 +360,7 @@ const HomePage = () => {
       <motion.section 
         ref={packagesRef}
         id="packages" 
-        className="py-10 pb-20 scroll-mt-10"
+        className="py-10 pb-20 scroll-mt-10 overflow-hidden"
         {...(packagesAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -371,7 +371,7 @@ const HomePage = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
             {[
               {
                 title: 'packages.onlinePresence.title',
@@ -409,7 +409,7 @@ const HomePage = () => {
                 key={index}
                 ref={packageCardRefs[index]}
                 {...useMobileCardAnimation(packageCardRefs[index], index)}
-                className="md:transform-none"
+                className="md:transform-none w-full"
               >
                 <Card className={`relative flex flex-col hover:shadow-lg transition-all duration-300 h-full ${pkg.className}`}>
                   <CardHeader className="flex-none">
@@ -510,22 +510,22 @@ const HomePage = () => {
       <motion.section 
         ref={portfolioRef}
         id="portfolio" 
-        className="py-20 bg-card scroll-mt-10"
+        className="py-20 bg-card scroll-mt-10 overflow-hidden"
         {...(portfolioAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">{t('portfolio.title')}</h2>
             <Separator className="w-24 mx-auto" />
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
             {portfolioItems.map((item, index) => (
               <motion.div
                 key={index}
                 ref={portfolioCardRefs[index]}
                 {...useMobileCardAnimation(portfolioCardRefs[index], index)}
-                className="md:transform-none"
+                className="md:transform-none w-full"
               >
-                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-2 pt-0 h-full flex flex-col">
+                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-2 pt-0 h-full flex flex-col w-full">
                   <div className={`h-48 ${item.bgColor} flex items-center justify-center flex-none`}>
                     <h3 className={`text-4xl font-bold ${item.textColor}`}>
                       {t(`portfolio.items.${item.key}.title`)}
@@ -555,7 +555,7 @@ const HomePage = () => {
       <motion.section 
         ref={contactRef}
         id="contact" 
-        className="py-20 scroll-mt-10"
+        className="py-20 scroll-mt-10 overflow-hidden"
         {...(contactAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
