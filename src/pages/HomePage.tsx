@@ -337,14 +337,14 @@ const HomePage = () => {
                 {...useMobileCardAnimation(serviceCardRefs[index], index)}
                 className="md:transform-none"
               >
-                <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2">
-                  <CardHeader className="text-center">
+                <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2 h-full flex flex-col">
+                  <CardHeader className="text-center flex-none">
                     <div className="mx-auto mb-4 text-primary">
                       {service.icon}
                     </div>
                     <CardTitle>{t(service.title)}</CardTitle>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="flex-grow">
                     <CardDescription className="text-center">
                       {t(service.description)}
                     </CardDescription>
@@ -411,15 +411,15 @@ const HomePage = () => {
                 {...useMobileCardAnimation(packageCardRefs[index], index)}
                 className="md:transform-none"
               >
-                <Card className={`relative flex flex-col justify-between hover:shadow-lg transition-all duration-300 ${pkg.className}`}>
-                  <CardHeader>
+                <Card className={`relative flex flex-col hover:shadow-lg transition-all duration-300 h-full ${pkg.className}`}>
+                  <CardHeader className="flex-none">
                     <div className="flex items-center justify-between">
                       <CardTitle>{t(pkg.title)}</CardTitle>
                       <Badge variant="secondary" className="rounded-full">{pkg.badge}</Badge>
                     </div>
                     <CardDescription>{t(pkg.description)}</CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-4">
+                  <CardContent className="flex-grow space-y-4">
                     {pkg.showStartingFrom && (
                       <div className="text-xs uppercase tracking-wide text-muted-foreground">{t('packages.startingFrom')}</div>
                     )}
@@ -439,7 +439,7 @@ const HomePage = () => {
                       </div>
                     </div>
                   </CardContent>
-                  <div className="px-6 pb-6">
+                  <div className="px-6 pb-6 mt-auto">
                     <Button className="w-full" onClick={() => {
                       trackEvent('packageSelected', {
                         package: pkg.package
@@ -525,17 +525,17 @@ const HomePage = () => {
                 {...useMobileCardAnimation(portfolioCardRefs[index], index)}
                 className="md:transform-none"
               >
-                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-2 pt-0">
-                  <div className={`h-48 ${item.bgColor} flex items-center justify-center`}>
+                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-2 pt-0 h-full flex flex-col">
+                  <div className={`h-48 ${item.bgColor} flex items-center justify-center flex-none`}>
                     <h3 className={`text-4xl font-bold ${item.textColor}`}>
                       {t(`portfolio.items.${item.key}.title`)}
                     </h3>
                   </div>
-                  <CardHeader className="pt-0">
+                  <CardHeader className="pt-0 flex-none">
                     <CardTitle>{t(`portfolio.items.${item.key}.title`)}</CardTitle>
                     <CardDescription>{t(`portfolio.items.${item.key}.description`)}</CardDescription>
                   </CardHeader>
-                  <CardContent>
+                  <CardContent className="flex-grow flex flex-col justify-end">
                     <div className="flex flex-wrap gap-2">
                       {item.technologies.map((tech, techIndex) => (
                         <Badge key={techIndex} variant="outline">
