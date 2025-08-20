@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import Header from "@/components/Header"
+import ParticlesBackground from "@/components/ParticlesBackground"
 import Footer from "@/components/Footer"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -228,8 +229,9 @@ function GetStarted() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
+      <ParticlesBackground />
 
-      <section className="pt-28 pb-16 max-w-3xl mx-auto px-4">
+      <section className="pt-28 pb-16 max-w-3xl mx-auto px-4 relative z-10">
         <div className="container">
           <div className="text-center mb-10">
             <h1 className="text-4xl font-bold mb-3">{t('getStarted.title')}</h1>

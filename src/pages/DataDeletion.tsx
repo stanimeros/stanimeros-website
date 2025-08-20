@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import ParticlesBackground from "@/components/ParticlesBackground"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
@@ -78,9 +79,10 @@ const DataDeletion = () => {
       <div className="min-h-screen bg-background">
         {/* Header */}
         <Header />
+      <ParticlesBackground />
 
         {/* Success Content */}
-        <main className="container mx-auto px-4 py-12">
+        <main className="container mx-auto px-4 py-12 relative z-10">
           <div className="max-w-2xl mx-auto text-center">
             <div className="flex justify-center mb-6">
               <CheckCircleIcon className="h-16 w-16 text-green-500" />
@@ -146,9 +148,10 @@ const DataDeletion = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <Header />
+      <ParticlesBackground />
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-12">
+      <main className="container mx-auto px-4 py-12 relative z-10">
         <div className="max-w-2xl mx-auto">
           {/* Title */}
           <div className="text-center mb-12">

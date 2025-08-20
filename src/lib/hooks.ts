@@ -23,8 +23,8 @@ export const useScrollAnimation = (ref: React.RefObject<HTMLElement | null>): HT
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   
   return {
-    initial: { y: 50, opacity: 0 },
-    animate: isInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 },
+    initial: { y: 0 },
+    animate: { y: isInView ? 0 : 50 },
     transition: { type: "spring", bounce: 0.2 }
   } as HTMLMotionProps<"section">;
 };
@@ -38,7 +38,9 @@ export const useMobileCardAnimation = (ref: React.RefObject<HTMLDivElement | nul
     transition: { 
       type: "spring" as const,
       bounce: 0.2,
-      delay: index * 0.1 // Stagger effect based on card index
+      stiffness: 150,
+      damping: 15,
+      delay: index * 0.05 // Faster stagger effect
     }
   } as HTMLMotionProps<"div">;
 }

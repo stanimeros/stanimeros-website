@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
+import ParticlesBackground from "@/components/ParticlesBackground"
 import {
   ShieldCheckIcon as Shield,
   EyeIcon,
@@ -23,9 +24,10 @@ const PrivacyPolicy = () => {
     <div className="min-h-screen bg-background">
       {/* Header */}
       <Header />
+      <ParticlesBackground />
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-12">
+      <main className="container mx-auto px-4 py-12 relative z-10">
         <div className="max-w-4xl mx-auto">
           {/* Title */}
           <div className="text-center mb-12">
