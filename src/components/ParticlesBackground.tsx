@@ -1,22 +1,9 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { loadSlim } from "tsparticles-slim";
 import type { Container, Engine } from "tsparticles-engine";
 import { Particles } from "react-tsparticles";
 
 const ParticlesBackground = () => {
-  const [isDark, setIsDark] = useState(false);
-
-  useEffect(() => {
-    // Check if user prefers dark mode
-    const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    setIsDark(darkModeMediaQuery.matches);
-
-    // Listen for changes
-    const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
-    darkModeMediaQuery.addEventListener('change', handler);
-    return () => darkModeMediaQuery.removeEventListener('change', handler);
-  }, []);
-
   const particlesInit = useCallback(async (engine: Engine) => {
     await loadSlim(engine);
   }, []);
@@ -50,10 +37,10 @@ const ParticlesBackground = () => {
         },
         particles: {
           color: {
-            value: isDark ? "#ffffff" : "#000000",
+            value: "#ffffff",
           },
           links: {
-            color: isDark ? "#ffffff" : "#000000",
+            color: "#ffffff",
             distance: 150,
             enable: true,
             opacity: 0.1,
@@ -66,8 +53,8 @@ const ParticlesBackground = () => {
               default: "bounce",
             },
             random: false,
-            speed: 1,
-            straight: false,
+            speed: { min: 0.8, max: 1.2 },
+            straight: false
           },
           number: {
             density: {
@@ -80,7 +67,10 @@ const ParticlesBackground = () => {
             value: 0.1,
           },
           shape: {
-            type: "circle",
+            type: ["circle", "polygon", "star"],
+            polygon: {
+              sides: 3
+            }
           },
           size: {
             value: { min: 1, max: 3 },

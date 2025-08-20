@@ -237,7 +237,7 @@ const HomePage = () => {
             <img 
               src="/images/logo-white.png" 
               alt="Stanimeros Logo" 
-              className="h-[300%] w-auto object-contain"
+              className="h-[400%] w-auto object-contain"
             />
           </motion.div>
         </div>
