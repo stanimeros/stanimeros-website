@@ -247,7 +247,7 @@ const HomePage = () => {
       <motion.section 
         ref={aboutRef}
         id="about" 
-        className="py-20 bg-card/50 scroll-mt-10 overflow-hidden"
+        className="py-20 bg-card/70 scroll-mt-10 overflow-hidden"
         {...(aboutAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -339,7 +339,7 @@ const HomePage = () => {
                 {...useMobileCardAnimation(serviceCardRefs[index], index)}
                 className="md:transform-none w-full"
               >
-                <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2 h-full flex flex-col bg-card/50 hover:bg-card/50">
+                <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2 h-full flex flex-col bg-card/70 hover:bg-card/70">
                   <CardHeader className="text-center flex-none">
                     <div className="mx-auto mb-4 text-primary">
                       {service.icon}
@@ -413,7 +413,7 @@ const HomePage = () => {
                 {...useMobileCardAnimation(packageCardRefs[index], index)}
                 className="md:transform-none w-full"
               >
-                <Card className={`relative flex flex-col hover:shadow-lg transition-all duration-300 h-full bg-card/50 hover:bg-card/50 ${pkg.className}`}>
+                <Card className={`relative flex flex-col hover:shadow-lg transition-all duration-300 h-full bg-card/70 hover:bg-card/70 ${pkg.className}`}>
                   <CardHeader className="flex-none">
                     <div className="flex items-center justify-between">
                       <CardTitle>{t(pkg.title)}</CardTitle>
@@ -512,7 +512,7 @@ const HomePage = () => {
       <motion.section 
         ref={portfolioRef}
         id="portfolio" 
-        className="py-20 bg-card/50 scroll-mt-10 overflow-hidden"
+        className="py-20 bg-card/70 scroll-mt-10 overflow-hidden"
         {...(portfolioAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -527,7 +527,7 @@ const HomePage = () => {
                 {...useMobileCardAnimation(portfolioCardRefs[index], index)}
                 className="md:transform-none w-full"
               >
-                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-2 pt-0 h-full flex flex-col w-full bg-card/50 hover:bg-card/50">
+                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-2 pt-0 h-full flex flex-col w-full bg-card/70 hover:bg-card/70">
                   <div className={`h-48 ${item.bgColor} flex items-center justify-center flex-none`}>
                     <h3 className={`text-4xl font-bold ${item.textColor}`}>
                       {t(`portfolio.items.${item.key}.title`)}
@@ -571,7 +571,7 @@ const HomePage = () => {
             <div>
               <h3 className="text-2xl font-semibold mb-6">{t('contact.subtitle')}</h3>
               <div className="space-y-6 mb-8">
-                <div className="flex items-start space-x-3 p-4 rounded-lg bg-card/50 border border-border/60">
+                <div className="flex items-start space-x-3 p-4 rounded-lg bg-card/70 border border-border/60">
                   <div className="mt-1">
                     <ClockIcon className="h-5 w-5 text-primary" />
                   </div>
@@ -580,7 +580,7 @@ const HomePage = () => {
                     <p className="text-sm text-muted-foreground">{t('contact.features.consultation.description')}</p>
                   </div>
                 </div>
-                <div className="flex items-start space-x-3 p-4 rounded-lg bg-card/50 border border-border/60">
+                <div className="flex items-start space-x-3 p-4 rounded-lg bg-card/70 border border-border/60">
                   <div className="mt-1">
                     <CursorArrowRaysIcon className="h-5 w-5 text-primary" />
                   </div>
@@ -589,7 +589,7 @@ const HomePage = () => {
                     <p className="text-sm text-muted-foreground">{t('contact.features.solutions.description')}</p>
                   </div>
                 </div>
-                <div className="flex items-start space-x-3 p-4 rounded-lg bg-card/50 border border-border/60">
+                <div className="flex items-start space-x-3 p-4 rounded-lg bg-card/70 border border-border/60">
                   <div className="mt-1">
                     <SparklesIcon className="h-5 w-5 text-primary" />
                   </div>

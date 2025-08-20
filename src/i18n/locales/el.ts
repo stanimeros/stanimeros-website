@@ -190,7 +190,7 @@ export default {
       subtitle: 'Μερικά απλά στοιχεία για να ξεκινήσουμε',
       brandName: 'Όνομα brand',
       domain: 'Προτίμηση domain',
-      domainPlaceholder: 'π.χ. tobrandmou.com',
+      domainPlaceholder: 'π.χ. example.com',
       notes: 'Σημειώσεις',
       notesPlaceholder: "Οτιδήποτε άλλο θες να προστεθεί"
     },

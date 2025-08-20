@@ -190,7 +190,7 @@ export default {
       subtitle: 'Help me set up your website',
       brandName: 'Brand name',
       domain: 'Domain preference',
-      domainPlaceholder: 'e.g. yourbrand.com',
+      domainPlaceholder: 'e.g. example.com',
       notes: 'Additional notes',
       notesPlaceholder: "Anything else you'd like to add"
     },
