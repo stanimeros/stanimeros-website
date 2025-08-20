@@ -50,32 +50,38 @@ const Header = () => {
           </Link>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Button variant="ghost" onClick={() => handleScrollToSection('home')} className="cursor-pointer">
-              {t('nav.home')}
-            </Button>
-            <Button variant="ghost" onClick={() => handleScrollToSection('about')} className="cursor-pointer">
-              {t('nav.about')}
-            </Button>
-            <Button variant="ghost" onClick={() => handleScrollToSection('services')} className="cursor-pointer">
-              {t('nav.services')}
-            </Button>
-            <Button variant="ghost" onClick={() => handleScrollToSection('portfolio')} className="cursor-pointer">
-              {t('nav.portfolio')}
-            </Button>
-            <Button variant="ghost" onClick={() => handleScrollToSection('contact')} className="cursor-pointer">
-              {t('nav.contact')}
-            </Button>
-            <LanguageSwitcher />
+          <div className="hidden md:flex items-center">
+            <div className="flex items-center space-x-6 mr-6">
+              <Button variant="ghost" onClick={() => handleScrollToSection('home')} className="cursor-pointer">
+                {t('nav.home')}
+              </Button>
+              <Button variant="ghost" onClick={() => handleScrollToSection('about')} className="cursor-pointer">
+                {t('nav.about')}
+              </Button>
+              <Button variant="ghost" onClick={() => handleScrollToSection('services')} className="cursor-pointer">
+                {t('nav.services')}
+              </Button>
+              <Button variant="ghost" onClick={() => handleScrollToSection('portfolio')} className="cursor-pointer">
+                {t('nav.portfolio')}
+              </Button>
+              <Button variant="ghost" onClick={() => handleScrollToSection('contact')} className="cursor-pointer">
+                {t('nav.contact')}
+              </Button>
+            </div>
+            <div className="border-l border-border/60 pl-6">
+              <LanguageSwitcher />
+            </div>
           </div>
 
           {/* Mobile Navigation */}
-          <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-            <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon">
-                <Menu className="h-6 w-6" />
-              </Button>
-            </SheetTrigger>
+          <div className="flex items-center space-x-2 md:hidden">
+            <LanguageSwitcher variant="compact" />
+            <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-6 w-6" />
+                </Button>
+              </SheetTrigger>
             <SheetContent side="right" className="w-[300px]">
               <div className="flex flex-col space-y-2 mt-2">
                 <Button variant="ghost" onClick={() => handleScrollToSection('home')} className="justify-start cursor-pointer">
@@ -98,12 +104,12 @@ const Header = () => {
                   <Mail className="h-4 w-4 mr-3" />
                   {t('nav.contact')}
                 </Button>
-                <LanguageSwitcher />
               </div>
             </SheetContent>
           </Sheet>
         </div>
       </div>
+    </div>
     </nav>
   )
 }

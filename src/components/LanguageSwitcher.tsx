@@ -2,7 +2,11 @@ import { Button } from "@/components/ui/button"
 import { GlobeAltIcon } from "@heroicons/react/24/outline"
 import { useTranslation } from "react-i18next"
 
-const LanguageSwitcher = () => {
+interface LanguageSwitcherProps {
+  variant?: 'default' | 'compact'
+}
+
+const LanguageSwitcher = ({ variant = 'default' }: LanguageSwitcherProps) => {
   const { i18n } = useTranslation()
 
   const toggleLanguage = () => {
@@ -11,9 +15,17 @@ const LanguageSwitcher = () => {
   }
 
   return (
-    <Button variant="ghost" onClick={toggleLanguage} className="justify-start cursor-pointer">
-      <GlobeAltIcon className="h-4 w-4 mr-3" />
-      {i18n.language === 'en' ? 'Αλλαγή στα Ελληνικά' : 'Switch to English'}
+    <Button 
+      variant={variant === 'compact' ? 'outline' : 'ghost'} 
+      onClick={toggleLanguage} 
+      className={`cursor-pointer ${variant === 'compact' ? 'px-2 h-8 text-xs' : 'justify-start'}`}
+      size={variant === 'compact' ? 'sm' : 'default'}
+    >
+      <GlobeAltIcon className={`h-4 w-4 ${variant === 'compact' ? 'mr-1' : 'mr-3'}`} />
+      {variant === 'compact' 
+        ? i18n.language === 'en' ? 'EL' : 'EN'
+        : i18n.language === 'en' ? 'Αλλαγή στα Ελληνικά' : 'Switch to English'
+      }
     </Button>
   )
 }
