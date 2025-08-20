@@ -1,4 +1,23 @@
 import { useInView, type HTMLMotionProps } from 'framer-motion';
+import { useEffect, useState } from 'react';
+
+export const useTheme = () => {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    // Check if user prefers dark mode
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    setTheme(isDark ? 'dark' : 'light');
+
+    // Listen for changes in system theme
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handler = (e: MediaQueryListEvent) => setTheme(e.matches ? 'dark' : 'light');
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  return { theme, setTheme };
+};
 
 export const useScrollAnimation = (ref: React.RefObject<HTMLElement | null>): HTMLMotionProps<"section"> => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
