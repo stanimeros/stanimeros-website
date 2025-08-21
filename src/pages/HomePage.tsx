@@ -35,6 +35,7 @@ import Header from "@/components/Header"
 import { trackEvent } from "@/lib/events"
 import { useScrollAnimation, useMobileCardAnimation } from "@/lib/hooks"
 import ParticlesBackground from "@/components/ParticlesBackground"
+import { FacebookIcon } from "lucide-react"
 
 const HomePage = () => {
   const { t } = useTranslation()
@@ -680,19 +681,24 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="flex space-x-4 mt-8">
-                <Link to="https://github.com/stanimeros" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="icon">
-                    <GithubIcon className="h-5 w-5" />
-                  </Button>
-                </Link>
                 <Link to="https://linkedin.com/in/stanimeros" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon">
                     <LinkedinIcon className="h-5 w-5" />
                   </Button>
                 </Link>
+                <Link to="https://www.facebook.com/stanimeros.dev" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="icon">
+                    <FacebookIcon className="h-5 w-5" />
+                  </Button>
+                </Link>
                 <Link to="https://www.instagram.com/stanimeros_dev" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon">
                     <InstagramIcon className="h-5 w-5" />
+                  </Button>
+                </Link>
+                <Link to="https://github.com/stanimeros" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="icon">
+                    <GithubIcon className="h-5 w-5" />
                   </Button>
                 </Link>
               </div>
