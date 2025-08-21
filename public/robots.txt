@@ -1,0 +1,9 @@
+# robots.txt for stanimeros.com
+User-agent: *
+Allow: /
+
+# Allow crawling of static assets
+Allow: /images/
+
+# Crawl-delay
+Crawl-delay: 10
