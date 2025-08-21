@@ -23,11 +23,6 @@ import {
   CogIcon,
   CursorArrowRaysIcon
 } from "@heroicons/react/24/outline"
-import {
-  GithubIcon,
-  LinkedinIcon,
-  InstagramIcon
-} from "@/pages/icons"
 import Footer from "@/components/Footer"
 import { sendEmail } from "@/lib/firebase"
 import GitHubCalendarComponent from "@/components/GitHubCalendar"
@@ -35,7 +30,7 @@ import Header from "@/components/Header"
 import { trackEvent } from "@/lib/events"
 import { useScrollAnimation, useMobileCardAnimation } from "@/lib/hooks"
 import ParticlesBackground from "@/components/ParticlesBackground"
-import { FacebookIcon } from "lucide-react"
+import { FacebookIcon, InstagramIcon, LinkedinIcon, GithubIcon } from "lucide-react"
 
 const HomePage = () => {
   const { t } = useTranslation()
