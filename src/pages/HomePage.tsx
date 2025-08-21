@@ -233,7 +233,11 @@ const HomePage = () => {
             <img 
               src="/images/logo-white.png" 
               alt="Stanimeros Logo" 
+              width="400"
+              height="400"
+              loading="lazy"
               className="h-[400%] w-auto object-contain"
+              fetchPriority="low"
             />
           </motion.div>
         </div>
@@ -278,7 +282,11 @@ const HomePage = () => {
                   <img 
                     src="/images/pantelis.webp" 
                     alt={t('about.name')}
+                    width="600"
+                    height="600"
+                    loading="lazy"
                     className="w-full h-full object-cover object-center"
+                    fetchPriority="high"
                   />
                 </div>
               </div>
