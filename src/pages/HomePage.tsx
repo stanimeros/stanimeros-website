@@ -383,9 +383,7 @@ const HomePage = () => {
                 title: 'packages.onlinePresence.title',
                 description: 'packages.onlinePresence.description',
                 badge: 'Essential',
-                price: '1.200€',
                 features: 'packages.onlinePresence.features',
-                recurring: 'packages.onlinePresence.recurring',
                 package: 'online-presence',
                 className: 'border-border/60'
               },
@@ -393,9 +391,7 @@ const HomePage = () => {
                 title: 'packages.eShop.title',
                 description: 'packages.eShop.description',
                 badge: 'Business',
-                price: '2.400€',
                 features: 'packages.eShop.features',
-                recurring: 'packages.eShop.recurring',
                 package: 'e-shop',
                 className: 'border-primary/30 ring-1 ring-primary/30 bg-primary/5'
               },
@@ -403,12 +399,9 @@ const HomePage = () => {
                 title: 'packages.customApp.title',
                 description: 'packages.customApp.description',
                 badge: 'Premium',
-                price: '5.000€',
                 features: 'packages.customApp.features',
-                recurring: 'packages.customApp.recurring',
                 package: 'custom-app',
                 className: 'border-border/60',
-                showStartingFrom: true
               }
             ].map((pkg, index) => (
               <motion.div
@@ -426,10 +419,7 @@ const HomePage = () => {
                     <CardDescription>{t(pkg.description)}</CardDescription>
                   </CardHeader>
                   <CardContent className="flex-grow space-y-4">
-                    {pkg.showStartingFrom && (
-                      <div className="text-xs uppercase tracking-wide text-muted-foreground">{t('packages.startingFrom')}</div>
-                    )}
-                    <div className="text-2xl font-semibold">{pkg.price} <span className="text-sm text-muted-foreground">{t('packages.priceNote')}</span></div>
+                    <div className="text-lg"> {t('packages.getQuote')}</div>
                     <div className="space-y-2 text-sm text-muted-foreground">
                       {(t(pkg.features, { returnObjects: true }) as string[]).map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-start gap-2">
@@ -437,12 +427,6 @@ const HomePage = () => {
                           <span>{feature}</span>
                         </div>
                       ))}
-                    </div>
-                    <div className="mt-4 text-sm text-muted-foreground border-t border-border/60 pt-4">
-                      <div className="flex items-start gap-2">
-                        <ClockIcon className="h-4 w-4 mt-0.5" />
-                        <span>{t(pkg.recurring)}</span>
-                      </div>
                     </div>
                   </CardContent>
                   <div className="px-6 pb-6 mt-auto">

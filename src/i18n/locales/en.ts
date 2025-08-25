@@ -23,7 +23,7 @@ export default {
   packages: {
     title: 'Packages',
     subtitle: 'Simple, transparent packages for real business needs',
-    startingFrom: 'Starting from',
+    getQuote: 'Get a custom quote',
     onlinePresence: {
       title: 'Online Presence',
       description: 'Everything you need to look professional online',
@@ -34,7 +34,6 @@ export default {
         'Google Business & Search Console',
         'Advertising campaign on Meta (Facebook & Instagram)'
       ],
-      recurring: '100€/year after the first year (hosting fees)'
     },
     eShop: {
       title: 'E-commerce Store',
@@ -46,7 +45,6 @@ export default {
         'Hosting, domain, and email setup',
         'Google Business & Search Console',
       ],
-      recurring: '50-100€/month after first 3 months (platform & hosting fees)'
     },
     customApp: {
       title: 'Custom Apps',
@@ -58,13 +56,12 @@ export default {
         'Database & cloud hosting',
         'Posting to App Store and Google Play'
       ],
-      recurring: '50-100€/month after first 3 months (hosting & maintenance)'
     },
     priceNote: '(incl. VAT)',
     getStarted: 'Get Started',
     requestQuote: 'Request Quote',
     bookCall: 'Book a Call',
-    footer: "We'll guide you end-to-end. Prices may vary for custom needs.",
+    footer: "You will get a quote within 24 hours. We'll guide you end-to-end.",
     faq: {
       title: "Frequently Asked Questions",
       items: {
@@ -216,7 +213,6 @@ export default {
     },
     buttons: {
       submit: 'Submit Request',
-      payment: 'Continue to Payment',
       processing: 'Processing...'
     },
     success: "Thanks for your inquiry! I'll review your requirements and reply within 1–2 business days with a proposal.",

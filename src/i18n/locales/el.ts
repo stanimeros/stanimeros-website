@@ -23,7 +23,7 @@ export default {
   packages: {
     title: 'Πακέτα',
     subtitle: 'Απλά πακέτα με ό,τι χρειάζεται μια επιχείρηση',
-    startingFrom: 'Από',
+    getQuote: 'Ζήτα προσφορά',
     onlinePresence: {
       title: 'Online Παρουσία',
       description: 'Επαγγελματική εικόνα στο διαδίκτυο',
@@ -34,7 +34,6 @@ export default {
         'Google Business & Search Console',
         'Διαφημιστική καμπάνια στη Meta (Facebook & Instagram)'
       ],
-      recurring: '100€/έτος μετά τον πρώτο χρόνο (κόστος hosting)'
     },
     eShop: {
       title: 'Ηλεκτρονικό Κατάστημα',
@@ -46,7 +45,6 @@ export default {
         'Ρύθμιση hosting, domain και email',
         'Google Business & Search Console',
       ],
-      recurring: '50-100€/μήνα μετά τους πρώτους 3 μήνες (πλατφόρμα & hosting)'
     },
     customApp: {
       title: 'Custom Εφαρμογές',
@@ -58,13 +56,12 @@ export default {
         'Προσαρμοσμένες λειτουργίες & APIs',
         'Δημοσίευση στο App Store και Google Play'
       ],
-      recurring: '50-100€/μήνα μετά τους πρώτους 3 μήνες (hosting & συντήρηση)'
     },
     priceNote: '(με ΦΠΑ)',
     getStarted: 'Ξεκίνα σήμερα',
     requestQuote: 'Ζήτα Προσφορά',
     bookCall: 'Κλείσε μια Κλήση',
-    footer: "Καθοδήγηση από την αρχή μέχρι το τέλος. Οι τιμές ενδέχεται να διαφέρουν ανάλογα με τις ανάγκες.",
+    footer: "Θα λάβεις προσφορά μέσα σε 24 ώρες. Καθοδήγηση από την αρχή μέχρι το τέλος.",
     faq: {
       title: "Συχνές Ερωτήσεις",
       items: {
@@ -216,7 +213,6 @@ export default {
     },
     buttons: {
       submit: 'Ολοκλήρωση',
-      payment: 'Συνέχεια στην πληρωμή',
       processing: 'Σε εξέλιξη...',
     },
     success: "Ευχαριστούμε για το ενδιαφέρον σου! Θα λάβεις απάντηση μέσα σε 1–2 εργάσιμες.",

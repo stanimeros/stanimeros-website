@@ -193,31 +193,16 @@ function GetStarted() {
         message,
       })
 
-      if (selectedPackage === "online-presence" || selectedPackage === "e-shop") {
-        // Track payment initiation
-        trackEvent('beginCheckout', {
-          currency: 'EUR',
-          package: selectedPackage,
-          value: selectedPackage === "online-presence" ? 1200 : 2400,
-        });
-        // Redirect to Stripe payment link with email parameter
-        const stripeUrl = new URL(
-          selectedPackage === "online-presence" 
-            ? "https://buy.stripe.com/eVq8wP3OV1wPgKOena2Nq00"
-            : "https://buy.stripe.com/14AeVd5X3b7p5265QE2Nq01"
-        )
-        stripeUrl.searchParams.set('prefilled_email', email.trim())
-        window.location.href = stripeUrl.toString()
-      } else {
-        trackEvent('beginCheckout', {
-          currency: 'EUR',
-          value: 5000,
-          package: selectedPackage
-        });
-        setStatus("success")
-        resetForm()
-        setTimeout(() => setStatus("idle"), 5000)
-      }
+      // Track contact form submission
+      trackEvent('beginCheckout', {
+        package: selectedPackage,
+        value: 0,
+        currency: 'EUR'
+      });
+      
+      setStatus("success")
+      resetForm()
+      setTimeout(() => setStatus("idle"), 5000)
     } catch (err) {
       setStatus("error")
       setTimeout(() => setStatus("idle"), 5000)
@@ -454,8 +439,8 @@ function GetStarted() {
                 </div>
               </CardContent>
             </Card>
-
-            <div className="flex justify-end mt-6">
+            
+            <div className="flex justify-end my-6">
               <Button type="submit" disabled={isSubmitting || !selectedPackage}>
                 {isSubmitting ? (
                   <>
@@ -463,12 +448,12 @@ function GetStarted() {
                     {t('getStarted.buttons.processing')}
                   </>
                 ) : (
-                  <>{t(['online-presence', 'e-shop'].includes(selectedPackage || '') ? 'getStarted.buttons.payment' : 'getStarted.buttons.submit')}</>
+                  t('getStarted.buttons.submit')
                 )}
               </Button>
             </div>
             {/* Status Messages */}
-            {status === "success" && selectedPackage !== "online-presence" && (
+            {status === "success" && (
               <div className="p-3 mb-4 bg-green-50/20 dark:bg-green-950/30 border border-green-200 dark:border-green-800/50 text-green-700 dark:text-green-300 rounded">
                 {t('getStarted.success')}
               </div>
