@@ -419,7 +419,7 @@ const HomePage = () => {
                     <CardDescription>{t(pkg.description)}</CardDescription>
                   </CardHeader>
                   <CardContent className="flex-grow space-y-4">
-                    <div className="text-lg"> {t('packages.getQuote')}</div>
+                    <div className="text-lg font-semibold"> {t('packages.getQuote')}</div>
                     <div className="space-y-2 text-sm text-muted-foreground">
                       {(t(pkg.features, { returnObjects: true }) as string[]).map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-start gap-2">
