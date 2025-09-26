@@ -1,9 +1,6 @@
 import { useEffect, useMemo, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
-import Header from "@/components/Header"
-import ParticlesBackground from "@/components/ParticlesBackground"
-import Footer from "@/components/Footer"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
@@ -13,6 +10,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
 import { sendEmail } from "@/lib/firebase"
 import { trackEvent } from "@/lib/events"
+import Layout from "@/components/Layout"
 
 type PackageKey = "online-presence" | "e-shop" | "custom-app"
 
@@ -212,10 +210,7 @@ function GetStarted() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      <ParticlesBackground />
-
+    <Layout>
       <section className="pt-28 pb-16 max-w-3xl mx-auto px-4 relative z-10">
         <div className="container">
           <div className="text-center mb-10">
@@ -466,8 +461,7 @@ function GetStarted() {
           </form>
         </div>
       </section>
-      <Footer />
-    </div>
+    </Layout>
   )
 }
 

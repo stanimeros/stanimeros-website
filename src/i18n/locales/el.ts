@@ -4,7 +4,8 @@ export default {
     about: 'Σχετικά με εμένα',
     services: 'Υπηρεσίες',
     portfolio: 'Έργα',
-    contact: 'Επικοινωνία'
+    contact: 'Επικοινωνία',
+    tools: 'Εργαλεία'
   },
   hero: {
     title: 'Παντελής Στανήμερος',
@@ -218,6 +219,33 @@ export default {
     success: "Ευχαριστούμε για το ενδιαφέρον σου! Θα λάβεις απάντηση μέσα σε 1–2 εργάσιμες.",
     error: 'Κάτι πήγε στραβά. Δοκίμασε ξανά.',
     selectPrompt: 'Επέλεξε υπηρεσία για να συνεχίσεις'
+  },
+  tools: {
+    qrcode: {
+      title: 'Μετατροπή URL σε QR Code',
+      description: 'Δημιούργησε QR codes από οποιοδήποτε URL. Ιδανικό για διαμοιρασμό συνδέσμων, ιστοσελίδων ή οποιουδήποτε online περιεχομένου σε σαρώσιμη μορφή.',
+      urlLabel: 'Εισαγωγή URL',
+      urlPlaceholder: 'https://example.com',
+      sizeLabel: 'Μέγεθος QR Code (pixels)',
+      downloadButton: 'Λήψη QR Code'
+    },
+    imageConverter: {
+      title: 'Μετατροπή & Συμπίεση Εικόνων',
+      description: 'Μετέτρεψε εικόνες σε διαφορετικές μορφές (WebP, JPEG, PNG) και συμπίεσε τις για μείωση του μεγέθους διατηρώντας την ποιότητα.',
+      sourceImage: 'Αρχική Εικόνα',
+      selectImage: 'Επιλογή Εικόνας',
+      originalSize: 'Αρχικό Μέγεθος',
+      settings: 'Ρυθμίσεις Μετατροπής',
+      format: 'Μορφή Εξόδου',
+      quality: 'Ποιότητα',
+      maxWidth: 'Μέγιστο Πλάτος',
+      processing: 'Επεξεργασία...',
+      convert: 'Μετατροπή Εικόνας',
+      result: 'Μετατρεμμένη Εικόνα',
+      newSize: 'Νέο Μέγεθος',
+      reduction: 'Μείωση Μεγέθους',
+      download: 'Λήψη Μετατρεμμένης Εικόνας'
+    }
   },
   contact: {
     title: 'Δωρεάν Συμβουλευτική',

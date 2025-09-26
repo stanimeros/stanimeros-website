@@ -23,14 +23,12 @@ import {
   CogIcon,
   CursorArrowRaysIcon
 } from "@heroicons/react/24/outline"
-import Footer from "@/components/Footer"
 import { sendEmail } from "@/lib/firebase"
 import GitHubCalendarComponent from "@/components/GitHubCalendar"
-import Header from "@/components/Header"
 import { trackEvent } from "@/lib/events"
 import { useScrollAnimation, useMobileCardAnimation } from "@/lib/hooks"
-import ParticlesBackground from "@/components/ParticlesBackground"
 import { FacebookIcon, InstagramIcon, LinkedinIcon, GithubIcon } from "lucide-react"
+import Layout from "@/components/Layout"
 
 const HomePage = () => {
   const { t } = useTranslation()
@@ -190,14 +188,9 @@ const HomePage = () => {
           ]
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <Header />
-
+    <Layout>
       {/* Hero Section */}
       <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <ParticlesBackground />
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent relative z-20">
             {t('hero.title')}
@@ -693,10 +686,7 @@ const HomePage = () => {
           </div>
         </div>
       </motion.section>
-
-      {/* Footer */}
-      <Footer />
-    </div>
+    </Layout>
   )
 }
 

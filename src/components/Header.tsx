@@ -2,12 +2,20 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu"
+import {
   Bars3Icon as Menu,
   HomeIcon,
   UserIcon,
   Cog6ToothIcon as Settings,
   BriefcaseIcon,
-  EnvelopeIcon as Mail
+  EnvelopeIcon as Mail,
+  WrenchScrewdriverIcon as Tools
 } from "@heroicons/react/24/outline"
 import { Link, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
@@ -67,6 +75,29 @@ const Header = () => {
               <Button variant="ghost" onClick={() => handleScrollToSection('contact')} className="cursor-pointer">
                 {t('nav.contact')}
               </Button>
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger>{t('nav.tools')}</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <div className="grid gap-3 p-4 w-[400px]">
+                        <Link to="/tools/qr-code" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                          <div className="text-sm font-medium leading-none">{t('tools.qrcode.title')}</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            {t('tools.qrcode.description')}
+                          </p>
+                        </Link>
+                        <Link to="/tools/image-converter" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                          <div className="text-sm font-medium leading-none">{t('tools.imageConverter.title')}</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            {t('tools.imageConverter.description')}
+                          </p>
+                        </Link>
+                      </div>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
             </div>
             <div className="border-l border-border/60 pl-6">
               <LanguageSwitcher />
@@ -104,6 +135,21 @@ const Header = () => {
                   <Mail className="h-4 w-4 mr-3" />
                   {t('nav.contact')}
                 </Button>
+                <div className="pt-2">
+                  <div className="px-3 text-sm font-medium">{t('nav.tools')}</div>
+                  <Link to="/tools/qr-code">
+                    <Button variant="ghost" className="justify-start cursor-pointer w-full">
+                      <Tools className="h-4 w-4 mr-3" />
+                      {t('tools.qrcode.title')}
+                    </Button>
+                  </Link>
+                  <Link to="/tools/image-converter">
+                    <Button variant="ghost" className="justify-start cursor-pointer w-full">
+                      <Tools className="h-4 w-4 mr-3" />
+                      {t('tools.imageConverter.title')}
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </SheetContent>
           </Sheet>

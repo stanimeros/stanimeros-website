@@ -4,7 +4,8 @@ export default {
     about: 'About',
     services: 'Services',
     portfolio: 'Portfolio',
-    contact: 'Contact'
+    contact: 'Contact',
+    tools: 'Tools'
   },
   hero: {
     title: 'Pantelis Stanimeros',
@@ -218,6 +219,33 @@ export default {
     success: "Thanks for your inquiry! I'll review your requirements and reply within 1–2 business days with a proposal.",
     error: 'Something went wrong. Please try again.',
     selectPrompt: 'Please select a service above to continue'
+  },
+  tools: {
+    qrcode: {
+      title: 'URL to QR Code Generator',
+      description: 'Generate QR codes from any URL. Perfect for sharing links, websites, or any online content in a scannable format.',
+      urlLabel: 'Enter URL',
+      urlPlaceholder: 'https://example.com',
+      sizeLabel: 'QR Code Size (pixels)',
+      downloadButton: 'Download QR Code'
+    },
+    imageConverter: {
+      title: 'Image Converter & Compressor',
+      description: 'Convert images between formats (WebP, JPEG, PNG) and compress them to reduce file size while maintaining quality.',
+      sourceImage: 'Source Image',
+      selectImage: 'Select Image',
+      originalSize: 'Original Size',
+      settings: 'Conversion Settings',
+      format: 'Target Format',
+      quality: 'Quality',
+      maxWidth: 'Maximum Width',
+      processing: 'Processing...',
+      convert: 'Convert Image',
+      result: 'Converted Image',
+      newSize: 'New Size',
+      reduction: 'Size Reduction',
+      download: 'Download Converted Image'
+    }
   },
   contact: {
     title: 'Get Free Consultation',

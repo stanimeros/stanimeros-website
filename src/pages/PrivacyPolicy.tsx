@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import ParticlesBackground from "@/components/ParticlesBackground"
 import {
   ShieldCheckIcon as Shield,
   EyeIcon,
@@ -11,9 +10,8 @@ import {
   UsersIcon,
   DocumentTextIcon as FileText
 } from "@heroicons/react/24/outline"
-import Footer from "@/components/Footer"
-import Header from "@/components/Header"
 import { useEffect } from "react"
+import Layout from "@/components/Layout"
 
 const PrivacyPolicy = () => {
   useEffect(() => {
@@ -21,10 +19,7 @@ const PrivacyPolicy = () => {
   }, [])
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <Header />
-      <ParticlesBackground />
+    <Layout>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12 relative z-10">
@@ -236,10 +231,7 @@ const PrivacyPolicy = () => {
           </div>
         </div>
       </main>
-
-      {/* Footer */}
-      <Footer />
-    </div>
+    </Layout>
   )
 }
 

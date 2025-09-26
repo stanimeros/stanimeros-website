@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import ParticlesBackground from "@/components/ParticlesBackground"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
@@ -15,9 +14,8 @@ import {
   ShieldCheckIcon as Shield,
   ClockIcon as Clock
 } from "@heroicons/react/24/outline"
-import Footer from "@/components/Footer"
 import { sendEmail } from "@/lib/firebase"
-import Header from "@/components/Header"
+import Layout from "@/components/Layout"
 
 const DataDeletion = () => {
   const [formData, setFormData] = useState({
@@ -43,8 +41,6 @@ const DataDeletion = () => {
       [name]: value
     }))
   }
-
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -72,15 +68,9 @@ const DataDeletion = () => {
     }
   }
 
-
-
   if (isSubmitted) {
     return (
-      <div className="min-h-screen bg-background">
-        {/* Header */}
-        <Header />
-      <ParticlesBackground />
-
+      <Layout>
         {/* Success Content */}
         <main className="container mx-auto px-4 py-12 relative z-10">
           <div className="max-w-2xl mx-auto text-center">
@@ -139,17 +129,12 @@ const DataDeletion = () => {
             </div>
           </div>
         </main>
-        <Footer />
-      </div>
+      </Layout>
     )
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Header */}
-      <Header />
-      <ParticlesBackground />
-
+    <Layout>
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12 relative z-10">
         <div className="max-w-2xl mx-auto">
@@ -319,10 +304,7 @@ const DataDeletion = () => {
           </div>
         </div>
       </main>
-
-      {/* Footer */}
-      <Footer />
-    </div>
+    </Layout>
   )
 }
 
