@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { QRCodeSVG } from 'qrcode.react'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
@@ -13,6 +13,10 @@ export default function QRCodeGenerator() {
   const { t } = useTranslation()
   const [url, setUrl] = useState('https://stanimeros.com')
   const [qrSize, setQrSize] = useState(256)
+
+  useEffect(() => {
+    scrollTo(0, 0)
+  }, [])
 
   const handleDownload = () => {
     const svg = document.getElementById('qr-code')

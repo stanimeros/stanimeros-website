@@ -15,7 +15,7 @@ import Layout from "@/components/Layout"
 
 const PrivacyPolicy = () => {
   useEffect(() => {
-    window.scrollTo({ top: 0 })
+    scrollTo(0, 0)
   }, [])
 
   return (

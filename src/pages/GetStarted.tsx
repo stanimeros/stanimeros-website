@@ -98,7 +98,7 @@ function GetStarted() {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
 
   useEffect(() => {
-    window.scrollTo({ top: 0 })
+    scrollTo(0, 0)
     trackEvent('pageView', {
       page: 'get-started'
     });

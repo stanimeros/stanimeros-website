@@ -36,6 +36,7 @@ export default function ImageConverter() {
 
   // Load and convert default image
   useEffect(() => {
+    scrollTo(0, 0)
     fetch('/images/logo-white.png')
       .then(response => response.blob())
       .then(async blob => {

@@ -31,7 +31,7 @@ const DataDeletion = () => {
   const [deleteAccount, setDeleteAccount] = useState(false)
   
   useEffect(() => {
-    window.scrollTo({ top: 0 })
+    scrollTo(0, 0)
   }, [])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
