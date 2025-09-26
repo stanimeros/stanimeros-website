@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 import { Button } from '@/components/ui/button';
@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import Layout from '@/components/Layout';
 import { Card } from '@/components/ui/card';
 import ContactSection from '@/components/ContactSection';
+import { trackEvent } from '@/lib/events';
 
 const ffmpeg = createFFmpeg({ log: true });
 
@@ -85,8 +86,15 @@ export default function VideoCompressor() {
     }
   });
 
+  useEffect(() => {
+    scrollTo(0, 0);
+    trackEvent('pageView', {
+      page: 'video-compressor'
+    });
+  }, []);
+
   // Create object URL for preview when video is selected
-  React.useEffect(() => {
+  useEffect(() => {
     if (video) {
       const url = URL.createObjectURL(video);
       setPreviewUrl(url);
@@ -95,7 +103,7 @@ export default function VideoCompressor() {
   }, [video]);
 
   // Update preview position based on progress
-  React.useEffect(() => {
+  useEffect(() => {
     if (previewRef.current && videoRef.current && isProcessing) {
       const duration = videoRef.current.duration;
       if (duration) {

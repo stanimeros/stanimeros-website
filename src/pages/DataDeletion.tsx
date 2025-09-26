@@ -16,6 +16,7 @@ import {
 } from "@heroicons/react/24/outline"
 import { sendEmail } from "@/lib/firebase"
 import Layout from "@/components/Layout"
+import { trackEvent } from "@/lib/events"
 
 const DataDeletion = () => {
   const [formData, setFormData] = useState({
@@ -32,6 +33,9 @@ const DataDeletion = () => {
   
   useEffect(() => {
     scrollTo(0, 0)
+    trackEvent('pageView', {
+      page: 'data-deletion'
+    });
   }, [])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

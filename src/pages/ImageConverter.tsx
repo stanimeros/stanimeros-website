@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { trackEvent } from '@/lib/events'
 
 type ImageInfo = {
   file: File
@@ -34,11 +35,17 @@ export default function ImageConverter() {
   const [isProcessing, setIsProcessing] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
+  useEffect(() => {
+    scrollTo(0, 0)
+    trackEvent('pageView', {
+      page: 'image-converter'
+    });
+  }, [])
+
   // Load and convert default image only when no image is selected
   useEffect(() => {
     if (sourceImage) return // Skip if we already have an image
 
-    scrollTo(0, 0)
     fetch('/images/logo-white.png')
       .then(response => response.blob())
       .then(async blob => {

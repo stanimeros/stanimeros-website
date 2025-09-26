@@ -8,6 +8,7 @@ import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import Layout from '@/components/Layout'
 import ContactSection from '@/components/ContactSection'
+import { trackEvent } from '@/lib/events'
 
 export default function QRCodeGenerator() {
   const { t } = useTranslation()
@@ -16,6 +17,9 @@ export default function QRCodeGenerator() {
 
   useEffect(() => {
     scrollTo(0, 0)
+    trackEvent('pageView', {
+      page: 'qr-code-generator'
+    });
   }, [])
 
   const handleDownload = () => {

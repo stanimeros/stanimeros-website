@@ -12,10 +12,14 @@ import {
 } from "@heroicons/react/24/outline"
 import { useEffect } from "react"
 import Layout from "@/components/Layout"
+import { trackEvent } from "@/lib/events"
 
 const PrivacyPolicy = () => {
   useEffect(() => {
     scrollTo(0, 0)
+    trackEvent('pageView', {
+      page: 'privacy-policy'
+    });
   }, [])
 
   return (
