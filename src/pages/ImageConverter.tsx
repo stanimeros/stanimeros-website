@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import type { ChangeEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import imageCompression from 'browser-image-compression'
@@ -33,6 +33,44 @@ export default function ImageConverter() {
   const [maxWidth, setMaxWidth] = useState<number>(1920)
   const [isProcessing, setIsProcessing] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+
+  // Load and convert default image
+  useEffect(() => {
+    fetch('/images/logo-white.png')
+      .then(response => response.blob())
+      .then(async blob => {
+        const file = new File([blob], 'logo-white.png', { type: 'image/png' })
+        const initialImage = {
+          file,
+          preview: '/images/logo-white.png',
+          size: blob.size
+        }
+        setSourceImage(initialImage)
+
+        // Auto convert the image
+        setIsProcessing(true)
+        try {
+          const compressedFile = await imageCompression(file, {
+            maxSizeMB: 1,
+            maxWidthOrHeight: maxWidth,
+            useWebWorker: true,
+            fileType: `image/${targetFormat}`,
+            initialQuality: quality / 100,
+          })
+
+          const preview = URL.createObjectURL(compressedFile)
+          setConvertedImage({
+            file: compressedFile,
+            preview,
+            size: compressedFile.size
+          })
+        } catch (error) {
+          console.error('Error converting default image:', error)
+        } finally {
+          setIsProcessing(false)
+        }
+      })
+  }, [])
 
   const handleFileSelect = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -126,7 +164,7 @@ export default function ImageConverter() {
               </div>
 
               {/* Settings Section */}
-              {sourceImage && (
+              {(
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div className="space-y-4">
