@@ -68,11 +68,12 @@ export default function VideoCompressor() {
     }
   };
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, getInputProps, isDragActive, fileRejections } = useDropzone({
     accept: {
       'video/*': []
     },
     maxFiles: 1,
+    maxSize: 10 * 1024 * 1024, // 10MB
     onDrop: async (acceptedFiles) => {
       resetState(); // Reset state before setting new video
       setVideo(acceptedFiles[0]);
@@ -198,6 +199,10 @@ export default function VideoCompressor() {
                   <>
                     <FileVideo className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
                     <p className="text-muted-foreground">{t('tools.videoCompressor.dropzone')}</p>
+                    <p className="text-sm text-muted-foreground mt-2">{t('tools.videoCompressor.maxSize')}</p>
+                    {fileRejections.length > 0 && (
+                      <p className="text-sm text-destructive mt-2">{t('tools.videoCompressor.fileTooLarge')}</p>
+                    )}
                   </>
                 )}
               </div>

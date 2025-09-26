@@ -35,36 +35,36 @@ export default function VideoSettings({ settings, onSettingsChange }: VideoSetti
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <Label>{t('tools.videoCompressor.frameRate')}</Label>
-            <Select
-              value={settings.frameRate}
-              onValueChange={(value) => handleSettingChange('frameRate', value)}
-            >
-              <SelectTrigger>
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="24">24 fps</SelectItem>
-                <SelectItem value="30">30 fps</SelectItem>
-                <SelectItem value="60">60 fps</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="space-y-2">
+        <div className="space-y-2">
             <Label>{t('tools.videoCompressor.resolution')}</Label>
             <Select
               value={settings.resolution}
               onValueChange={(value) => handleSettingChange('resolution', value)}
             >
-              <SelectTrigger>
+              <SelectTrigger className="w-full">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="1920x1080">1080p (1920px)</SelectItem>
                 <SelectItem value="1280x720">720p (1280px)</SelectItem>
                 <SelectItem value="854x480">480p (854px)</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          
+          <div className="space-y-2">
+            <Label>{t('tools.videoCompressor.frameRate')}</Label>
+            <Select
+              value={settings.frameRate}
+              onValueChange={(value) => handleSettingChange('frameRate', value)}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="24">24 fps</SelectItem>
+                <SelectItem value="30">30 fps</SelectItem>
+                <SelectItem value="60">60 fps</SelectItem>
               </SelectContent>
             </Select>
           </div>

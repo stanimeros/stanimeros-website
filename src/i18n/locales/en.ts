@@ -252,6 +252,8 @@ export default {
       handbrakeNote: 'For larger videos or batch processing, consider using',
       dropzoneTitle: 'Video Compressor',
       dropzone: 'Drag and drop a video file here, or click to select',
+      maxSize: 'Maximum file size: 10MB',
+      fileTooLarge: 'File is too large. Please select a video under 10MB.',
       loading: 'Loading video processor...',
       compress: 'Compress Video',
       compressing: 'Compressing',
