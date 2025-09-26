@@ -11,7 +11,7 @@ import ContactSection from '@/components/ContactSection'
 
 export default function QRCodeGenerator() {
   const { t } = useTranslation()
-  const [url, setUrl] = useState('')
+  const [url, setUrl] = useState('https://stanimeros.com')
   const [qrSize, setQrSize] = useState(256)
 
   const handleDownload = () => {
@@ -65,37 +65,33 @@ export default function QRCodeGenerator() {
                 </div>
                 <Slider
                   id="size"
-                  min={128}
-                  max={512}
-                  step={32}
+                  min={200}
+                  max={2000}
+                  step={100}
                   value={[qrSize]}
                   onValueChange={([value]) => setQrSize(value)}
                   className="w-full"
                 />
               </div>
 
-              <div className="flex justify-center">
-                {url && (
-                  <div className="p-4 bg-white rounded-lg">
-                    <QRCodeSVG
-                      id="qr-code"
-                      value={url}
-                      size={qrSize}
-                      level="H"
-                      includeMargin
-                    />
-                  </div>
-                )}
+            <div className="flex justify-center">
+              <div className="p-4 bg-white rounded-lg">
+                <QRCodeSVG
+                  id="qr-code"
+                  value={url}
+                  size={300}
+                  marginSize={1}
+                  level="H"
+                />
               </div>
+            </div>
 
-              {url && (
-                <Button
-                  onClick={handleDownload}
-                  className="w-full"
-                >
-                  {t('tools.qrcode.downloadButton')}
-                </Button>
-              )}
+            <Button
+              onClick={handleDownload}
+              className="w-full"
+            >
+              {t('tools.qrcode.downloadButton')}
+            </Button>
             </div>
           </Card>
         </div>
