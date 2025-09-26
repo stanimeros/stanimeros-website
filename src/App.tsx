@@ -6,6 +6,7 @@ import DataDeletion from "@/pages/DataDeletion"
 import GetStarted from "@/pages/GetStarted"
 import QRCodeGenerator from "@/pages/QRCodeGenerator"
 import ImageConverter from "@/pages/ImageConverter"
+import VideoCompressor from "@/pages/VideoCompressor"
 
 function App() {
   useEffect(() => {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/get-started" element={<GetStarted />} />
           <Route path="/tools/qr-code" element={<QRCodeGenerator />} />
           <Route path="/tools/image-converter" element={<ImageConverter />} />
+          <Route path="/tools/video-compressor" element={<VideoCompressor />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
       </div>

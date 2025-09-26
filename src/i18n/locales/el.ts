@@ -245,6 +245,36 @@ export default {
       newSize: 'Νέο Μέγεθος',
       reduction: 'Μείωση Μεγέθους',
       download: 'Λήψη Μετατρεμμένης Εικόνας'
+    },
+    videoCompressor: {
+      title: 'Συμπίεση Βίντεο',
+      description: 'Συμπίεσε βίντεο απευθείας στον browser μέχρι και 90% δωρεάν. Χωρίς ανέβασμα σε server.',
+      dropzoneTitle: 'Συμπίεση Βίντεο',
+      dropzone: 'Σύρε και άφησε ένα βίντεο εδώ, ή κάνε κλικ για επιλογή',
+      loading: 'Φόρτωση επεξεργαστή βίντεο...',
+      compress: 'Συμπίεση Βίντεο',
+      compressing: 'Συμπίεση',
+      original: 'Αρχικό',
+      compressed: 'Συμπιεσμένο',
+      saved: 'Εξοικονόμηση',
+      download: 'Λήψη Συμπιεσμένου Βίντεο',
+      settings: 'Ρυθμίσεις Μετατροπής',
+      compressionMethod: 'Μέθοδος Συμπίεσης',
+      methods: {
+        bitrate: 'Στόχευση μέγιστου bitrate',
+        percentage: 'Στόχευση ποσοστού ποιότητας',
+        filesize: 'Στόχευση μεγέθους αρχείου (MB)',
+        crf: 'Στόχευση ποιότητας βίντεο (CRF)'
+      },
+      targetQuality: 'Ποσοστό Ποιότητας Στόχου',
+      targetFilesize: 'Μέγεθος Αρχείου Στόχου (MB)',
+      videoQuality: 'Ποιότητα Βίντεο (CRF)',
+      videoBitrate: 'Bitrate Βίντεο',
+      videoCodec: 'Κωδικοποιητής Βίντεο',
+      audioCodec: 'Κωδικοποιητής Ήχου',
+      audioBitrate: 'Bitrate Ήχου',
+      frameRate: 'Ρυθμός Καρέ',
+      resolution: 'Μέγιστη Ανάλυση'
     }
   },
   contact: {

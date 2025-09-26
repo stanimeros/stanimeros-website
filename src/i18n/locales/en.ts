@@ -245,6 +245,36 @@ export default {
       newSize: 'New Size',
       reduction: 'Size Reduction',
       download: 'Download Converted Image'
+    },
+    videoCompressor: {
+      title: 'Video Compressor',
+      description: 'Compress videos right in the browser by up to 90% for free. No upload needed.',
+      dropzoneTitle: 'Video Compressor',
+      dropzone: 'Drag and drop a video file here, or click to select',
+      loading: 'Loading video processor...',
+      compress: 'Compress Video',
+      compressing: 'Compressing',
+      original: 'Original',
+      compressed: 'Compressed',
+      saved: 'Saved',
+      download: 'Download Compressed Video',
+      settings: 'Conversion Settings',
+      compressionMethod: 'Compression Method',
+      methods: {
+        bitrate: 'Target a max bitrate',
+        percentage: 'Target a quality percentage',
+        filesize: 'Target a file size (MB)',
+        crf: 'Target a video quality (CRF)'
+      },
+      targetQuality: 'Target Quality Percentage',
+      targetFilesize: 'Target File Size (MB)',
+      videoQuality: 'Video Quality (CRF)',
+      videoBitrate: 'Video Bitrate',
+      videoCodec: 'Video Codec',
+      audioCodec: 'Audio Codec',
+      audioBitrate: 'Audio Bitrate',
+      frameRate: 'Frame Rate',
+      resolution: 'Max Resolution'
     }
   },
   contact: {
