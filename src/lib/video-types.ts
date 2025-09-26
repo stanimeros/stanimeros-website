@@ -1,9 +1,6 @@
 export interface ConversionSettings {
-  compressionMethod: 'bitrate' | 'percentage' | 'filesize' | 'crf';
-  targetPercentage?: string;
-  targetFilesize?: string;
-  crfValue?: string;
-  videoBitrate: string;
+  compressionMethod: 'percentage';
+  targetPercentage: string;
   videoCodec: string;
   audioCodec: string;
   audioBitrate: string;
@@ -12,8 +9,8 @@ export interface ConversionSettings {
 }
 
 export const defaultSettings: ConversionSettings = {
-  compressionMethod: 'bitrate',
-  videoBitrate: '2500k',
+  compressionMethod: 'percentage',
+  targetPercentage: '80',
   videoCodec: 'libx264',
   audioCodec: 'aac',
   audioBitrate: '128k',

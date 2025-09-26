@@ -4,7 +4,7 @@ import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { FileVideo, Upload, X, Loader2 } from 'lucide-react';
-import VideoSettings, { SettingsButton } from '@/components/VideoSettings';
+import VideoSettings from '@/components/VideoSettings';
 import type { ConversionSettings } from '@/lib/video-types';
 import { defaultSettings } from '@/lib/video-types';
 import { useTranslation } from 'react-i18next';
@@ -25,7 +25,6 @@ export default function VideoCompressor() {
   const [processedSize, setProcessedSize] = useState<number | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string>('');
   const [settings, setSettings] = useState<ConversionSettings>(defaultSettings);
-  const [showSettings, setShowSettings] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const previewRef = useRef<HTMLVideoElement>(null);
 
@@ -127,23 +126,9 @@ export default function VideoCompressor() {
       '-c:v', settings.videoCodec,
     ];
 
-    // Add compression method specific arguments
-    switch (settings.compressionMethod) {
-      case 'bitrate':
-        args.push('-b:v', settings.videoBitrate);
-        break;
-      case 'crf':
-        args.push('-crf', settings.crfValue || '23');
-        break;
-      case 'percentage':
-        const crf = Math.round(51 - (parseInt(settings.targetPercentage || '100') / 100) * 33);
-        args.push('-crf', crf.toString());
-        break;
-      case 'filesize':
-        const targetBitrate = Math.round((parseInt(settings.targetFilesize || '100') * 8192) / (videoRef.current?.duration || 60));
-        args.push('-b:v', `${targetBitrate}k`);
-        break;
-    }
+    // Calculate CRF based on quality percentage
+    const crf = Math.round(51 - (parseInt(settings.targetPercentage || '80') / 100) * 33);
+    args.push('-crf', crf.toString());
 
     // Add remaining settings
     args.push(
@@ -187,10 +172,14 @@ export default function VideoCompressor() {
         </p>
 
         <div className="max-w-4xl mx-auto">
+          <VideoSettings 
+            settings={settings}
+            onSettingsChange={setSettings}
+          />
+          
           <Card className="p-6 bg-card/70 backdrop-blur-sm">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-2xl font-bold">{t('tools.videoCompressor.dropzoneTitle')}</h2>
-              <SettingsButton onClick={() => setShowSettings(true)} />
             </div>
 
             {!video ? (
@@ -318,12 +307,6 @@ export default function VideoCompressor() {
       </div>
       <ContactSection />
 
-      <VideoSettings 
-        settings={settings}
-        onSettingsChange={setSettings}
-        open={showSettings}
-        onOpenChange={setShowSettings}
-      />
     </Layout>
   );
 }
