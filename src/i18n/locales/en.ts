@@ -249,6 +249,7 @@ export default {
     videoCompressor: {
       title: 'Video Compressor',
       description: 'Compress videos right in the browser by up to 90% for free. No upload needed.',
+      handbrakeNote: 'For larger videos or batch processing, consider using',
       dropzoneTitle: 'Video Compressor',
       dropzone: 'Drag and drop a video file here, or click to select',
       loading: 'Loading video processor...',

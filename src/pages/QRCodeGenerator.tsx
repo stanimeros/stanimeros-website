@@ -11,7 +11,7 @@ import ContactSection from '@/components/ContactSection'
 
 export default function QRCodeGenerator() {
   const { t } = useTranslation()
-  const [url, setUrl] = useState('https://stanimeros.com')
+  const [url, setUrl] = useState('')
   const [qrSize, setQrSize] = useState(500)
 
   useEffect(() => {

@@ -95,6 +95,12 @@ const Header = () => {
                             {t('tools.imageConverter.description')}
                           </p>
                         </Link>
+                        <Link to="/tools/video-compressor" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                          <div className="text-sm font-medium leading-none">{t('tools.videoCompressor.title')}</div>
+                          <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                            {t('tools.videoCompressor.description')}
+                          </p>
+                        </Link>
                       </div>
                     </NavigationMenuContent>
                   </NavigationMenuItem>
@@ -156,6 +162,12 @@ const Header = () => {
                             <div className="text-sm font-medium leading-none">{t('tools.imageConverter.title')}</div>
                             <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
                               {t('tools.imageConverter.description')}
+                            </p>
+                          </Link>
+                          <Link to="/tools/video-compressor" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                            <div className="text-sm font-medium leading-none">{t('tools.videoCompressor.title')}</div>
+                            <p className="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                              {t('tools.videoCompressor.description')}
                             </p>
                           </Link>
                         </div>
