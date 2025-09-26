@@ -34,8 +34,10 @@ export default function ImageConverter() {
   const [isProcessing, setIsProcessing] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  // Load and convert default image
+  // Load and convert default image only when no image is selected
   useEffect(() => {
+    if (sourceImage) return // Skip if we already have an image
+
     scrollTo(0, 0)
     fetch('/images/logo-white.png')
       .then(response => response.blob())
@@ -71,19 +73,42 @@ export default function ImageConverter() {
           setIsProcessing(false)
         }
       })
-  }, [])
+  }, [sourceImage]) // Only run when sourceImage changes to null
 
   const handleFileSelect = async (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (!file) return
 
     const preview = URL.createObjectURL(file)
-    setSourceImage({
+    const initialImage = {
       file,
       preview,
       size: file.size
-    })
-    setConvertedImage(null)
+    }
+    setSourceImage(initialImage)
+
+    // Auto convert with current settings
+    setIsProcessing(true)
+    try {
+      const compressedFile = await imageCompression(file, {
+        maxSizeMB: 1,
+        maxWidthOrHeight: maxWidth,
+        useWebWorker: true,
+        fileType: `image/${targetFormat}`,
+        initialQuality: quality / 100,
+      })
+
+      const convertedPreview = URL.createObjectURL(compressedFile)
+      setConvertedImage({
+        file: compressedFile,
+        preview: convertedPreview,
+        size: compressedFile.size
+      })
+    } catch (error) {
+      console.error('Error converting image:', error)
+    } finally {
+      setIsProcessing(false)
+    }
   }
 
   const convertImage = async () => {
@@ -147,72 +172,82 @@ export default function ImageConverter() {
         <div className="max-w-4xl mx-auto">
           <Card className="p-6 bg-card/70 backdrop-blur-sm">
             <div className="space-y-8">
-              {/* Upload Section */}
-              <div>
-                <Input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/*"
-                  onChange={handleFileSelect}
-                  className="hidden"
-                />
-                <Button
-                  onClick={() => fileInputRef.current?.click()}
-                  className="w-full"
-                >
-                  {t('tools.imageConverter.selectImage')}
-                </Button>
+              {/* Upload and Format Section */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <Label>{t('tools.imageConverter.sourceImage')}</Label>
+                  <div className="mt-2">
+                    <Input
+                      ref={fileInputRef}
+                      type="file"
+                      accept="image/*"
+                      onChange={handleFileSelect}
+                      className="hidden"
+                    />
+                    <Button
+                      onClick={() => fileInputRef.current?.click()}
+                      className="w-full"
+                    >
+                      {t('tools.imageConverter.selectImage')}
+                    </Button>
+                  </div>
+                </div>
+
+                <div>
+                  <Label>{t('tools.imageConverter.format')}</Label>
+                  <div className="mt-2">
+                    <Select
+                      value={targetFormat}
+                      onValueChange={setTargetFormat}
+                    >
+                      <SelectTrigger className="w-full">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="webp">WebP</SelectItem>
+                        <SelectItem value="jpeg">JPEG</SelectItem>
+                        <SelectItem value="png">PNG</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
               </div>
 
               {/* Settings Section */}
               {(
                 <div className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div className="space-y-4">
-                      <Label>{t('tools.imageConverter.format')}</Label>
-                      <Select
-                        value={targetFormat}
-                        onValueChange={setTargetFormat}
-                      >
-                        <SelectTrigger>
-                          <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="webp">WebP</SelectItem>
-                          <SelectItem value="jpeg">JPEG</SelectItem>
-                          <SelectItem value="png">PNG</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
+                  <div className="space-y-6">
 
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center">
-                        <Label>{t('tools.imageConverter.quality')}</Label>
-                        <span className="text-sm text-muted-foreground">{quality}%</span>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-4">
+                        <div className="flex justify-between items-center">
+                          <Label>{t('tools.imageConverter.quality')}</Label>
+                          <span className="text-sm text-muted-foreground">{quality}%</span>
+                        </div>
+                        <Slider
+                          min={1}
+                          max={100}
+                          step={1}
+                          value={[quality]}
+                          onValueChange={([value]) => setQuality(value)}
+                          className="w-full"
+                        />
                       </div>
-                      <Slider
-                        min={1}
-                        max={100}
-                        step={1}
-                        value={[quality]}
-                        onValueChange={([value]) => setQuality(value)}
-                        className="w-full"
-                      />
-                    </div>
 
-                    <div className="space-y-4">
-                      <div className="flex justify-between items-center">
-                        <Label>{t('tools.imageConverter.maxWidth')}</Label>
-                        <span className="text-sm text-muted-foreground">{maxWidth}px</span>
+                      <div className="space-y-4">
+                        <div className="flex justify-between items-center">
+                          <Label>{t('tools.imageConverter.maxWidth')}</Label>
+                          <span className="text-sm text-muted-foreground">{maxWidth}px</span>
+                        </div>
+                        <Slider
+                          min={100}
+                          max={4000}
+                          step={100}
+                          value={[maxWidth]}
+                          onValueChange={([value]) => setMaxWidth(value)}
+                          className="w-full"
+                        />
                       </div>
-                      <Slider
-                        min={100}
-                        max={4000}
-                        step={100}
-                        value={[maxWidth]}
-                        onValueChange={([value]) => setMaxWidth(value)}
-                        className="w-full"
-                      />
                     </div>
                   </div>
 
@@ -229,7 +264,7 @@ export default function ImageConverter() {
               {/* Image Comparison Section */}
               {sourceImage && convertedImage && (
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center">
+                  <div className="flex flex-col space-y-4">
                     <div className="space-y-1">
                       <h2 className="text-xl font-semibold">{t('tools.imageConverter.result')}</h2>
                       <p className="text-sm text-muted-foreground">
@@ -238,7 +273,7 @@ export default function ImageConverter() {
                     </div>
                     <Button
                       onClick={handleDownload}
-                      size="sm"
+                      className="w-full"
                     >
                       {t('tools.imageConverter.download')}
                     </Button>
