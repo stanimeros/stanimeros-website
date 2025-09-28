@@ -49,7 +49,7 @@ const HomePage = () => {
   // Refs for card animations
   const serviceCardRefs = Array(4).fill(null).map(() => useRef<HTMLDivElement>(null))
   const packageCardRefs = Array(3).fill(null).map(() => useRef<HTMLDivElement>(null))
-  const portfolioCardRefs = Array(8).fill(null).map(() => useRef<HTMLDivElement>(null))
+  const portfolioCardRefs = Array(10).fill(null).map(() => useRef<HTMLDivElement>(null))
   
   // Get animation props for each section
   const aboutAnimation = useScrollAnimation(aboutRef)
@@ -134,58 +134,68 @@ const HomePage = () => {
     }))
   }
 
-
-
-            const portfolioItems = [
-            {
-              key: 'ridefast',
-              technologies: ["React", "TypeScript", "Google Maps", "Firestore", "Resend", "Stripe API"],
-              bgColor: "bg-gray-900/30",
-              textColor: "text-gray-200"
-            },
-            {
-              key: 'mpTransfer',
-              technologies: ["iOS", "Android", "Web", "Flutter", "Push Notifications", "Firestore"],
-              bgColor: "bg-sky-900/30",
-              textColor: "text-sky-200"
-            },
-            {
-              key: 'tapfast',
-              technologies: ["React", "TypeScript", "QR Codes", "Admin Panel"],
-              bgColor: "bg-orange-900/30",
-              textColor: "text-orange-200"
-            },
-            {
-              key: 'mealAi',
-              technologies: ["Android", "iOS", "AI", "Computer Vision", "Mobile App"],
-              bgColor: "bg-blue-900/30",
-              textColor: "text-blue-200"
-            },
-            {
-              key: 'near',
-              technologies: ["Java", "Python", "Android", "iOS", "Google Maps", "Machine Learning"],
-              bgColor: "bg-orange-900/30",
-              textColor: "text-orange-200"
-            },
-            {
-              key: 'reserwave',
-              technologies: ["PHP", "MySQL", "React", "JavaScript", "Search System"],
-              bgColor: "bg-cyan-900/30",
-              textColor: "text-cyan-200"
-            },
-            {
-              key: 'hedeos',
-              technologies: ["iOS", "Android", "Education", "Quizzes", "Mobile App"],
-              bgColor: "bg-yellow-900/30",
-              textColor: "text-yellow-200"
-            },
-            {
-              key: 'ekarotsi',
-              technologies: ["Web", "E-commerce", "Supermarket", "Online Ordering"],
-              bgColor: "bg-green-900/30",
-              textColor: "text-green-200"
-            }
-          ]
+  const portfolioItems = [
+    {
+      key: 'tattooHealer',
+      technologies: ["Web App", "iOS", "Android", "Push Notifications", "Admin Dashboard", "Educational Content"],
+      bgColor: "bg-purple-900/30",
+      textColor: "text-purple-200"
+    },
+    {
+      key: 'transHellas',
+      technologies: ["Web App", "Parcel Management", "Admin Panel", "Tracking System", "Logistics"],
+      bgColor: "bg-blue-900/30",
+      textColor: "text-blue-200"
+    },
+    {
+      key: 'ridefast',
+      technologies: ["React", "TypeScript", "Google Maps", "Firestore", "Resend", "Stripe API"],
+      bgColor: "bg-gray-900/30",
+      textColor: "text-gray-200"
+    },
+    {
+      key: 'mpTransfer',
+      technologies: ["iOS", "Android", "Web", "Flutter", "Push Notifications", "Firestore"],
+      bgColor: "bg-sky-900/30",
+      textColor: "text-sky-200"
+    },
+    {
+      key: 'tapfast',
+      technologies: ["React", "TypeScript", "QR Codes", "Admin Panel"],
+      bgColor: "bg-orange-900/30",
+      textColor: "text-orange-200"
+    },
+    {
+      key: 'mealAi',
+      technologies: ["Android", "iOS", "AI", "Computer Vision", "Mobile App"],
+      bgColor: "bg-blue-900/30",
+      textColor: "text-blue-200"
+    },
+    {
+      key: 'near',
+      technologies: ["Java", "Python", "Android", "iOS", "Google Maps", "Machine Learning"],
+      bgColor: "bg-orange-900/30",
+      textColor: "text-orange-200"
+    },
+    {
+      key: 'reserwave',
+      technologies: ["PHP", "MySQL", "React", "JavaScript", "Search System"],
+      bgColor: "bg-cyan-900/30",
+      textColor: "text-cyan-200"
+    },
+    {
+      key: 'hedeos',
+      technologies: ["iOS", "Android", "Education", "Quizzes", "Mobile App"],
+      bgColor: "bg-yellow-900/30",
+      textColor: "text-yellow-200"
+    },
+    {
+      key: 'ekarotsi',
+      technologies: ["Web", "E-commerce", "Supermarket", "Online Ordering"],
+      bgColor: "bg-green-900/30",
+      textColor: "text-green-200"
+    }
+  ]
 
   return (
     <Layout>

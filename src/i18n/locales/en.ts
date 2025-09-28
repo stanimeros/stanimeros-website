@@ -146,6 +146,14 @@ export default {
       ekarotsi: {
         title: 'e-karotsi',
         description: 'E-commerce platform for a Greek supermarket with delivery and inventory management.'
+      },
+      transHellas: {
+        title: 'Trans Hellas',
+        description: 'Transportation and logistics management system for a Greek transport company.'
+      },
+      tattooHealer: {
+        title: 'Tattoo Healer',
+        description: 'Platform for personalized tattoo aftercare with educational content and artist connections.'
       }
     }
   },

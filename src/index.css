@@ -121,3 +121,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+[data-scroll-locked][data-scroll-locked] {
+  overflow-y: auto !important;
+  margin-right: 0 !important;
+}

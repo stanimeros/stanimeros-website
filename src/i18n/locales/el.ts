@@ -146,6 +146,14 @@ export default {
       ekarotsi: {
         title: 'e-karotsi',
         description: 'E-shop σούπερ μάρκετ με παραδόσεις και διαχείριση αποθήκης.'
+      },
+      transHellas: {
+        title: 'Trans Hellas',
+        description: 'Σύστημα διαχείρισης μεταφορών και logistics για ελληνική μεταφορική εταιρεία.'
+      },
+      tattooHealer: {
+        title: 'Tattoo Healer',
+        description: 'Πλατφόρμα εξατομικευμένης φροντίδας τατουάζ με εκπαιδευτικό περιεχόμενο και σύνδεση με καλλιτέχνες.'
       }
     }
   },

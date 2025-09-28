@@ -17,7 +17,7 @@ export default function Layout({ children }: LayoutProps) {
       {/* Content */}
       <div className="relative z-10">
         <Header />
-        <div className="mt-24">
+        <div className="pt-24">
           {children}
         </div>
         <Footer />
