@@ -73,9 +73,9 @@ export default function QRCodeGenerator() {
                 </div>
                 <Slider
                   id="size"
-                  min={200}
-                  max={2000}
-                  step={100}
+                  min={100}
+                  max={500}
+                  step={50}
                   value={[qrSize]}
                   onValueChange={([value]) => setQrSize(value)}
                   className="w-full"
@@ -87,7 +87,7 @@ export default function QRCodeGenerator() {
                 <QRCodeSVG
                   id="qr-code"
                   value={url}
-                  size={300}
+                  size={qrSize}
                   marginSize={1}
                   level="H"
                 />
