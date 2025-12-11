@@ -49,9 +49,9 @@ const Header = () => {
           <Link to="/#home">
             <div className="flex items-center space-x-2">
               <img 
-                src="/images/logo-white.png" 
+                src="/images/logo-glass.png" 
                 alt="Stanimeros Logo" 
-                className="h-8 w-8"
+                className="h-12 w-12"
               />
               <div className="text-2xl font-bold">Stanimeros</div>
             </div>
