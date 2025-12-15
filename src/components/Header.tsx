@@ -2,20 +2,12 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu"
-import {
   Bars3Icon as Menu,
   HomeIcon,
   UserIcon,
   Cog6ToothIcon as Settings,
   BriefcaseIcon,
   EnvelopeIcon as Mail,
-  WrenchScrewdriverIcon as Tools
 } from "@heroicons/react/24/outline"
 import { Link, useNavigate } from "react-router-dom"
 import { useTranslation } from "react-i18next"
@@ -143,7 +135,7 @@ const Header = () => {
                   <Mail className="h-4 w-4 mr-3" />
                   {t('nav.contact')}
                 </Button>
-                <NavigationMenu className="w-full">
+                {/* <NavigationMenu className="w-full">
                   <NavigationMenuList>
                     <NavigationMenuItem className="w-full">
                       <NavigationMenuTrigger className="w-full bg-transparent justify-start">
@@ -174,7 +166,7 @@ const Header = () => {
                       </NavigationMenuContent>
                     </NavigationMenuItem>
                   </NavigationMenuList>
-                </NavigationMenu>
+                </NavigationMenu> */}
               </div>
             </SheetContent>
           </Sheet>

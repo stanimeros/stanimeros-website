@@ -1,0 +1,62 @@
+# agents.txt for stanimeros.com
+# This file provides guidance for AI agents and crawlers
+
+# Contact Information
+Contact: https://stanimeros.com/get-started
+Owner: Pantelis Stanimeros
+
+# Site Information
+Site: https://stanimeros.com
+Description: Digital Solutions for Your Business - Professional websites, e-commerce stores, mobile apps, and business automation tools
+
+# Allowed AI Agents
+# Allow all AI agents to crawl and index content
+User-agent: *
+Allow: /
+
+# Specific AI Agent Rules
+# Allow major AI crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Preferred content locations
+# Main pages
+Allow: /
+Allow: /get-started
+Allow: /privacy-policy
+Allow: /data-deletion
+
+# Tools
+Allow: /tools/qr-code
+Allow: /tools/image-converter
+Allow: /tools/video-compressor
+
+# Static assets
+Allow: /images/
+
+# Crawl instructions
+# AI agents should respect rate limits and be considerate
+# Preferred crawl frequency: Moderate
+# Last updated: 2025
+
