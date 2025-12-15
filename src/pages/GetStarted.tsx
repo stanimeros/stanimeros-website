@@ -1,13 +1,11 @@
-import { useEffect, useMemo, useState } from "react"
+import { useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Checkbox } from "@/components/ui/checkbox"
 import { sendEmail } from "@/lib/firebase"
 import { trackEvent } from "@/lib/events"
 import Layout from "@/components/Layout"
@@ -30,40 +28,6 @@ const PACKAGE_META: Record<PackageKey, { label: string; tagline: string; highlig
   },
 }
 
-const CUSTOM_APP_FEATURES = [
-  "Database",
-  "Email sign-in",
-  "Google sign-in",
-  "Apple sign-in",
-  "Stripe payments",
-  "Subscriptions",
-  "Maps & Location",
-  "Multi-language",
-  "Camera & Photos",
-  "Documents & Files",
-  "Analytics",
-  "Reminders",
-  "Push notifications",
-  "Ads",
-]
-
-const PAYMENT_METHODS = [
-  "Apple & Google Pay",
-  "Bank Transfer",
-  "Cash on Delivery",
-  "Cards (Visa, Mastercard, etc.)",
-]
-
-const DELIVERY_METHODS = [
-  "ACS",
-  "ELTA",
-  "Geniki",
-  "Speedex",
-  "BOX Now",
-  "Pickup",
-  "Other"
-]
-
 function GetStarted() {
   const { t } = useTranslation()
   const [searchParams] = useSearchParams()
@@ -76,23 +40,6 @@ function GetStarted() {
   const [email, setEmail] = useState("")
   const [company, setCompany] = useState("")
   const [phone, setPhone] = useState("")
-
-  // Online presence fields
-  const [brandName, setBrandName] = useState("")
-  const [domainPreference, setDomainPreference] = useState("")
-  const [additionalNotes, setAdditionalNotes] = useState("")
-
-  // Web/Mobile
-  const [projectDetails, setProjectDetails] = useState("")
-  const featureList = useMemo(() => (selectedPackage === "custom-app" ? CUSTOM_APP_FEATURES : []), [selectedPackage])
-  const [selectedFeatures, setSelectedFeatures] = useState<string[]>([])
-
-  // E-shop specific fields
-  const [businessType, setBusinessType] = useState("")
-  const [productsCount, setProductsCount] = useState("")
-  const [additionalNeeds, setAdditionalNeeds] = useState("")
-  const [paymentMethods, setPaymentMethods] = useState<string[]>([])
-  const [deliveryMethods, setDeliveryMethods] = useState<string[]>([])
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
@@ -110,25 +57,11 @@ function GetStarted() {
     }
   }, [initialPackage])
 
-  const toggleFeature = (feature: string) => {
-    setSelectedFeatures(prev => prev.includes(feature) ? prev.filter(f => f !== feature) : [...prev, feature])
-  }
-
   const resetForm = () => {
     setName("")
     setEmail("")
     setCompany("")
     setPhone("")
-    setBrandName("")
-    setDomainPreference("")
-    setAdditionalNotes("")
-    setProjectDetails("")
-    setSelectedFeatures([])
-    setBusinessType("")
-    setProductsCount("")
-    setAdditionalNeeds("")
-    setPaymentMethods([])
-    setDeliveryMethods([])
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -141,51 +74,19 @@ function GetStarted() {
     const pkg = PACKAGE_META[selectedPackage]
 
     const lines: string[] = []
-    lines.push(`Package: ${pkg.label}`)
+    lines.push(`Service: ${pkg.label}`)
     lines.push("")
-    lines.push("Contact")
+    lines.push("Contact Details")
     lines.push(`- Name: ${name}`)
     lines.push(`- Email: ${email}`)
     if (company) lines.push(`- Company: ${company}`)
     if (phone) lines.push(`- Phone: ${phone}`)
-    lines.push("")
-
-    if (selectedPackage === "online-presence") {
-      lines.push("Online Presence Requirements")
-      lines.push(`- Brand name: ${brandName}`)
-      if (domainPreference) lines.push(`- Domain preference: ${domainPreference}`)
-      if (additionalNotes) lines.push(`- Notes: ${additionalNotes}`)
-    } else if (selectedPackage === "e-shop") {
-      lines.push("E-shop Requirements")
-      lines.push(`- Business Type: ${businessType}`)
-      lines.push(`- Products Count: ${productsCount}`)
-      if (paymentMethods.length) {
-        lines.push("- Payment Methods:")
-        paymentMethods.forEach(method => lines.push(`  • ${method}`))
-      }
-      if (deliveryMethods.length) {
-        lines.push("- Delivery Methods:")
-        deliveryMethods.forEach(method => lines.push(`  • ${method}`))
-      }
-      if (additionalNeeds) {
-        lines.push("- Additional Requirements:")
-        lines.push(`  ${additionalNeeds}`)
-      }
-    } else {
-      lines.push("Project Details")
-      if (projectDetails) lines.push(projectDetails)
-      if (selectedFeatures.length) {
-        lines.push("")
-        lines.push("Requested Features")
-        for (const f of selectedFeatures) lines.push(`- ${f}`)
-      }
-    }
 
     const message = lines.join("\n")
 
     try {
       await sendEmail({
-        subject: `Package Inquiry - ${pkg.label}`,
+        subject: `Service Inquiry - ${pkg.label}`,
         name,
         email,
         message,
@@ -268,146 +169,7 @@ function GetStarted() {
               </CardContent>
             </Card>
 
-            {selectedPackage === "online-presence" ? (
-                <Card className="mb-6">
-                  <CardHeader>
-                    <CardTitle>{t('getStarted.onlinePresence.title')}</CardTitle>
-                    <CardDescription>{t('getStarted.onlinePresence.subtitle')}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="brand">{t('getStarted.onlinePresence.brandName')}</Label>
-                      <Input id="brand" value={brandName} onChange={e => setBrandName(e.target.value)} required />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="domain">{t('getStarted.onlinePresence.domain')}</Label>
-                      <Input 
-                        id="domain" 
-                        placeholder={t('getStarted.onlinePresence.domainPlaceholder')} 
-                        value={domainPreference} 
-                        onChange={e => setDomainPreference(e.target.value)} 
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="notes">{t('getStarted.onlinePresence.notes')}</Label>
-                      <Textarea 
-                        id="notes" 
-                        rows={4} 
-                        value={additionalNotes} 
-                        onChange={e => setAdditionalNotes(e.target.value)} 
-                        placeholder={t('getStarted.onlinePresence.notesPlaceholder')} 
-                      />
-                    </div>
-                  </CardContent>
-                </Card>
-              ) : selectedPackage === "e-shop" ? (
-                <Card className="mb-6">
-                  <CardHeader>
-                    <CardTitle>{t('getStarted.eshop.title')}</CardTitle>
-                    <CardDescription>{t('getStarted.eshop.subtitle')}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="businessType">{t('getStarted.eshop.businessType')}</Label>
-                      <Input 
-                        id="businessType" 
-                        value={businessType}
-                        onChange={e => setBusinessType(e.target.value)}
-                        placeholder={t('getStarted.eshop.businessTypePlaceholder')}
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="productsCount">{t('getStarted.eshop.productsCount')}</Label>
-                      <Input 
-                        id="productsCount"
-                        value={productsCount}
-                        onChange={e => setProductsCount(e.target.value)}
-                        placeholder={t('getStarted.eshop.productsCountPlaceholder')}
-                        required
-                      />
-                    </div>
-                    <div className="space-y-3">
-                      <Label>{t('getStarted.eshop.paymentMethods')}</Label>
-                      <div className="grid md:grid-cols-2 gap-3">
-                        {PAYMENT_METHODS.map((method) => (
-                          <label key={method} className="flex items-center gap-2 cursor-pointer">
-                            <Checkbox 
-                              checked={paymentMethods.includes(method)} 
-                              onCheckedChange={() => {
-                                setPaymentMethods(prev => 
-                                  prev.includes(method) 
-                                    ? prev.filter(m => m !== method)
-                                    : [...prev, method]
-                                )
-                              }} 
-                            />
-                            <span className="text-sm text-muted-foreground">{method}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="deliveryMethods">{t('getStarted.eshop.deliveryMethods')}</Label>
-                      <div className="grid md:grid-cols-2 gap-3">
-                        {DELIVERY_METHODS.map((method) => (
-                          <label key={method} className="flex items-center gap-2 cursor-pointer">
-                            <Checkbox checked={deliveryMethods.includes(method)} onCheckedChange={() => setDeliveryMethods(prev => 
-                              prev.includes(method) 
-                                ? prev.filter(m => m !== method)
-                                : [...prev, method]
-                            )} />
-                            <span className="text-sm text-muted-foreground">{method}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="additionalNeeds">{t('getStarted.eshop.additionalNeeds')}</Label>
-                      <Textarea 
-                        id="additionalNeeds"
-                        value={additionalNeeds}
-                        onChange={e => setAdditionalNeeds(e.target.value)}
-                        placeholder={t('getStarted.eshop.additionalNeedsPlaceholder')}
-                        rows={3}
-                      />
-                    </div>
-                  </CardContent>
-                </Card>
-              ) : (
-                <Card className="mb-6">
-                  <CardHeader>
-                    <CardTitle>{t('getStarted.customApp.title')}</CardTitle>
-                    <CardDescription>{t('getStarted.customApp.subtitle')}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="details">{t('getStarted.customApp.details')}</Label>
-                      <Textarea 
-                        id="details" 
-                        rows={6} 
-                        value={projectDetails} 
-                        onChange={e => setProjectDetails(e.target.value)} 
-                        placeholder={t('getStarted.customApp.detailsPlaceholder')} 
-                        required 
-                      />
-                    </div>
-                    <div className="space-y-3">
-                      <Label>{t('getStarted.customApp.features')}</Label>
-                      <div className="grid md:grid-cols-2 gap-3">
-                        {featureList.map((feat) => (
-                          <label key={feat} className="flex items-center gap-2 cursor-pointer">
-                            <Checkbox checked={selectedFeatures.includes(feat)} onCheckedChange={() => toggleFeature(feat)} />
-                            <span className="text-sm text-muted-foreground">{feat}</span>
-                          </label>
-                        ))}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
-
-               {/* Contact Details */}
+            {/* Contact Details */}
             <Card className="mb-6">
               <CardHeader>
                 <CardTitle>{t('getStarted.contactDetails.title')}</CardTitle>

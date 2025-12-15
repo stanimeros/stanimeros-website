@@ -75,7 +75,7 @@ const Header = () => {
               <Button variant="ghost" onClick={() => handleScrollToSection('contact')} className="cursor-pointer">
                 {t('nav.contact')}
               </Button>
-              <NavigationMenu>
+              {/* <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
                     <NavigationMenuTrigger
@@ -105,7 +105,7 @@ const Header = () => {
                     </NavigationMenuContent>
                   </NavigationMenuItem>
                 </NavigationMenuList>
-              </NavigationMenu>
+              </NavigationMenu> */}
             </div>
             <div className="border-l border-border/60 pl-6">
               <LanguageSwitcher />
