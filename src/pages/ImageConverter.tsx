@@ -248,7 +248,7 @@ export default function ImageConverter() {
                         </div>
                         <Slider
                           min={100}
-                          max={4000}
+                          max={4096}
                           step={100}
                           value={[maxWidth]}
                           onValueChange={([value]) => setMaxWidth(value)}

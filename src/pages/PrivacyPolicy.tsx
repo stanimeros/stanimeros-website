@@ -8,7 +8,8 @@ import {
   LockClosedIcon as Lock,
   CircleStackIcon as Database,
   UsersIcon,
-  DocumentTextIcon as FileText
+  DocumentTextIcon as FileText,
+  KeyIcon
 } from "@heroicons/react/24/outline"
 import { useEffect } from "react"
 import Layout from "@/components/Layout"
@@ -35,7 +36,7 @@ const PrivacyPolicy = () => {
             </div>
             <h1 className="text-4xl font-bold mb-4">Privacy Policy</h1>
             <p className="text-muted-foreground">
-              Last updated: {new Date().toLocaleDateString()}
+              Last updated: 18/12/2025
             </p>
           </div>
 
@@ -124,6 +125,24 @@ const PrivacyPolicy = () => {
             <CardContent>
               <p className="text-muted-foreground mb-4">
                 We do not sell your personal information. Your data is never sold to third parties. We do not share your personal information with any third parties under any circumstances.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* API Keys and Service Account Keys */}
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <KeyIcon className="h-5 w-5 mr-2" />
+                API Keys and Service Account Keys
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground mb-4">
+                We do not collect, store, or share any API keys or service account keys. Any API keys or service account keys that you may use with our services are your sole responsibility.
+              </p>
+              <p className="text-muted-foreground mb-4">
+                We are not liable for any lost API keys, service account keys, or any billing charges incurred through the use of your keys. You are solely responsible for your actions and the use of your API keys and service account keys, including any associated costs, charges, or consequences resulting from their use.
               </p>
             </CardContent>
           </Card>
