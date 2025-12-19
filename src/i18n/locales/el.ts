@@ -115,6 +115,10 @@ export default {
   portfolio: {
     title: 'Έργα',
     items: {
+      fireMessage: {
+        title: 'Fire Message',
+        description: 'Εφαρμογή για iOS και Android για αποστολή push notifications με Firebase Cloud Messaging.'
+      },
       ridefast: {
         title: 'RideFast',
         description: 'Σύστημα κρατήσεων για ταξί και μεταφορές με online πληρωμές και χάρτες.'

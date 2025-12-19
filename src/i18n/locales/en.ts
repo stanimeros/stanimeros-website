@@ -115,6 +115,10 @@ export default {
   portfolio: {
     title: 'Portfolio',
     items: {
+      fireMessage: {
+        title: 'Fire Message',
+        description: 'Mobile app for iOS and Android to send push notifications with Firebase Cloud Messaging.'
+      },
       ridefast: {
         title: 'RideFast',
         description: 'Reservation system for transfers and taxis with real-time booking, payments, and mapping.'

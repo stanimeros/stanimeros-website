@@ -49,7 +49,7 @@ const HomePage = () => {
   // Refs for card animations
   const serviceCardRefs = Array(4).fill(null).map(() => useRef<HTMLDivElement>(null))
   const packageCardRefs = Array(3).fill(null).map(() => useRef<HTMLDivElement>(null))
-  const portfolioCardRefs = Array(10).fill(null).map(() => useRef<HTMLDivElement>(null))
+  const portfolioCardRefs = Array(11).fill(null).map(() => useRef<HTMLDivElement>(null))
   
   // Get animation props for each section
   const aboutAnimation = useScrollAnimation(aboutRef)
@@ -135,6 +135,12 @@ const HomePage = () => {
   }
 
   const portfolioItems = [
+    {
+      key: 'fireMessage',
+      technologies: ["iOS", "Android", "Push Notifications", "Firebase Cloud Messaging", "In-App Purchases"],
+      bgColor: "bg-red-900/30",
+      textColor: "text-red-200"
+    },
     {
       key: 'tattooHealer',
       technologies: ["Web App", "iOS", "Android", "Push Notifications", "Admin Dashboard", "Educational Content"],
