@@ -12,29 +12,17 @@ const __dirname = path.dirname(__filename);
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const LOCALES_PATH = path.join(__dirname, '../src/i18n/locales');
 const SOURCE_PATH = path.join(__dirname, '../src');
-const TARGET_LANGUAGES = ['el', 'de'];
+const TARGET_LANGUAGES = ['el'];
 const BATCH_SIZE = 50;
 
 // Custom translation prompts with domain context
 const TRANSLATION_PROMPTS = {
-  generationPrompt: `You are a professional translator specializing in business software and service management platforms.
+  generationPrompt: `You are a professional translator working for stanimeros.com developer.
 
 IMPORTANT DOMAIN CONTEXT:
-This is a ticketing system platform used by agencies, accountants, consultants, and professional service providers.
+This is a website and portfolio for stanimeros.com developer, featuring various web development tools, utilities, and projects.
 
-KEY TERMINOLOGY:
-- "Tickets" refers to SUPPORT TICKETS or SERVICE REQUESTS (help desk tickets, client service requests, work orders), NOT event tickets or concert tickets
-- "Assignee" refers to the staff member assigned to handle a support ticket
-- "Client" refers to the customer or business requesting service
-- "Agent" refers to a support staff member
-- "Admin" refers to an administrator managing the system
-- "Categories" and "statuses" refer to ticket categorization and workflow states
-- "Packages" refer to service packages or subscription plans offered to clients
-- "Payments" refer to invoices and payment tracking for services rendered
-- "Tutorials" refer to training materials or guides for users
-- "Brands" refer to the companies using the platform
-
-When translating, maintain the professional/business context and ensure technical terms are appropriate for a service management platform.
+When translating, maintain a professional developer/technical context appropriate for a developer's portfolio website and web applications.
 
 Translate from \${inputLanguage} to \${outputLanguage}.
 
