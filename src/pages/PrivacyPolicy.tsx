@@ -12,10 +12,14 @@ import {
   KeyIcon
 } from "@heroicons/react/24/outline"
 import { useEffect } from "react"
+import { useTranslation } from "react-i18next"
+import "../i18n"
 import Layout from "@/components/Layout"
 import { trackEvent } from "@/lib/events"
 
 const PrivacyPolicy = () => {
+  const { t } = useTranslation()
+  
   useEffect(() => {
     scrollTo(0, 0)
     trackEvent('pageView', {
@@ -34,9 +38,9 @@ const PrivacyPolicy = () => {
             <div className="flex justify-center mb-4">
               <Shield className="h-12 w-12 text-primary" />
             </div>
-            <h1 className="text-4xl font-bold mb-4">Privacy Policy</h1>
+            <h1 className="text-4xl font-bold mb-4">{t('privacyPolicy.title')}</h1>
             <p className="text-muted-foreground">
-              Last updated: 18/12/2025
+              {t('privacyPolicy.lastUpdated')}
             </p>
           </div>
 
@@ -45,15 +49,15 @@ const PrivacyPolicy = () => {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <FileText className="h-5 w-5 mr-2" />
-                Introduction
+                {t('privacyPolicy.introduction.title')}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                This Privacy Policy describes how Stanimeros ("we," "us," or "our") collects, uses, and shares your personal information when you use our mobile applications and services.
+                {t('privacyPolicy.introduction.paragraph1')}
               </p>
               <p className="text-muted-foreground">
-                By using our apps, you agree to the collection and use of information in accordance with this policy.
+                {t('privacyPolicy.introduction.paragraph2')}
               </p>
             </CardContent>
           </Card>
@@ -63,32 +67,32 @@ const PrivacyPolicy = () => {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Database className="h-5 w-5 mr-2" />
-                Information We Collect
+                {t('privacyPolicy.informationWeCollect.title')}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">Personal Information</h3>
+                <h3 className="font-semibold mb-2">{t('privacyPolicy.informationWeCollect.personalInformation.title')}</h3>
                 <p className="text-muted-foreground">
-                  We may collect personal information such as your name, email address, and device information when you use our apps.
+                  {t('privacyPolicy.informationWeCollect.personalInformation.description')}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Location Data</h3>
+                <h3 className="font-semibold mb-2">{t('privacyPolicy.informationWeCollect.locationData.title')}</h3>
                 <p className="text-muted-foreground">
-                  Some of our apps may access your device's location data to provide location-based services and features. This location data is used solely for app functionality and is never shared with third parties or disclosed to external entities. Your location information remains private and is only processed locally on your device or within our secure systems.
+                  {t('privacyPolicy.informationWeCollect.locationData.description')}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Usage Data</h3>
+                <h3 className="font-semibold mb-2">{t('privacyPolicy.informationWeCollect.usageData.title')}</h3>
                 <p className="text-muted-foreground">
-                  We collect information about how you use our apps, including features accessed, time spent, and performance data.
+                  {t('privacyPolicy.informationWeCollect.usageData.description')}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Device Information</h3>
+                <h3 className="font-semibold mb-2">{t('privacyPolicy.informationWeCollect.deviceInformation.title')}</h3>
                 <p className="text-muted-foreground">
-                  We may collect device-specific information such as device model, operating system version, and unique device identifiers.
+                  {t('privacyPolicy.informationWeCollect.deviceInformation.description')}
                 </p>
               </div>
             </CardContent>
@@ -99,17 +103,14 @@ const PrivacyPolicy = () => {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <EyeIcon className="h-5 w-5 mr-2" />
-                How We Use Your Information
+                {t('privacyPolicy.howWeUseInformation.title')}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• To provide and maintain our apps and services</li>
-                <li>• To improve and personalize your experience</li>
-                <li>• To communicate with you about updates and features</li>
-                <li>• To analyze usage patterns and optimize performance</li>
-                <li>• To ensure security and prevent fraud</li>
-                <li>• To comply with legal obligations</li>
+                {(t('privacyPolicy.howWeUseInformation.items', { returnObjects: true }) as string[]).map((item, index) => (
+                  <li key={index}>• {item}</li>
+                ))}
               </ul>
             </CardContent>
           </Card>
@@ -119,12 +120,12 @@ const PrivacyPolicy = () => {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <UsersIcon className="h-5 w-5 mr-2" />
-                Information Sharing
+                {t('privacyPolicy.informationSharing.title')}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                We do not sell your personal information. Your data is never sold to third parties. We do not share your personal information with any third parties under any circumstances.
+                {t('privacyPolicy.informationSharing.description')}
               </p>
             </CardContent>
           </Card>
@@ -134,15 +135,15 @@ const PrivacyPolicy = () => {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <KeyIcon className="h-5 w-5 mr-2" />
-                API Keys and Service Account Keys
+                {t('privacyPolicy.apiKeys.title')}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                We do not collect, store, or share any API keys or service account keys. Any API keys or service account keys that you may use with our services are your sole responsibility.
+                {t('privacyPolicy.apiKeys.paragraph1')}
               </p>
               <p className="text-muted-foreground mb-4">
-                We are not liable for any lost API keys, service account keys, or any billing charges incurred through the use of your keys. You are solely responsible for your actions and the use of your API keys and service account keys, including any associated costs, charges, or consequences resulting from their use.
+                {t('privacyPolicy.apiKeys.paragraph2')}
               </p>
             </CardContent>
           </Card>
@@ -152,18 +153,17 @@ const PrivacyPolicy = () => {
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Lock className="h-5 w-5 mr-2" />
-                Data Security
+                {t('privacyPolicy.dataSecurity.title')}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                We implement appropriate security measures to protect your personal information:
+                {t('privacyPolicy.dataSecurity.description')}
               </p>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• Encryption of data in transit and at rest</li>
-                <li>• Regular security assessments and updates</li>
-                <li>• Access controls and authentication measures</li>
-                <li>• Secure data storage practices</li>
+                {(t('privacyPolicy.dataSecurity.items', { returnObjects: true }) as string[]).map((item, index) => (
+                  <li key={index}>• {item}</li>
+                ))}
               </ul>
             </CardContent>
           </Card>
@@ -171,19 +171,16 @@ const PrivacyPolicy = () => {
           {/* Your Rights */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>Your Rights</CardTitle>
+              <CardTitle>{t('privacyPolicy.yourRights.title')}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                You have the following rights regarding your personal information:
+                {t('privacyPolicy.yourRights.description')}
               </p>
               <ul className="space-y-2 text-muted-foreground">
-                <li>• Access your personal information</li>
-                <li>• Correct inaccurate information</li>
-                <li>• Request deletion of your data</li>
-                <li>• Object to processing of your data</li>
-                <li>• Data portability</li>
-                <li>• Withdraw consent</li>
+                {(t('privacyPolicy.yourRights.items', { returnObjects: true }) as string[]).map((item, index) => (
+                  <li key={index}>• {item}</li>
+                ))}
               </ul>
             </CardContent>
           </Card>
@@ -191,11 +188,11 @@ const PrivacyPolicy = () => {
           {/* Data Retention */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>Data Retention</CardTitle>
+              <CardTitle>{t('privacyPolicy.dataRetention.title')}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                We retain your personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy, unless a longer retention period is required or permitted by law.
+                {t('privacyPolicy.dataRetention.description')}
               </p>
             </CardContent>
           </Card>
@@ -203,11 +200,11 @@ const PrivacyPolicy = () => {
           {/* Children's Privacy */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>Children's Privacy</CardTitle>
+              <CardTitle>{t('privacyPolicy.childrensPrivacy.title')}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                Our apps are not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us.
+                {t('privacyPolicy.childrensPrivacy.description')}
               </p>
             </CardContent>
           </Card>
@@ -215,11 +212,11 @@ const PrivacyPolicy = () => {
           {/* Changes to Policy */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>Changes to This Privacy Policy</CardTitle>
+              <CardTitle>{t('privacyPolicy.changesToPolicy.title')}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
-                We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date. You are advised to review this Privacy Policy periodically for any changes.
+                {t('privacyPolicy.changesToPolicy.description')}
               </p>
             </CardContent>
           </Card>
@@ -227,15 +224,15 @@ const PrivacyPolicy = () => {
           {/* Contact Information */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>Contact Us</CardTitle>
+              <CardTitle>{t('privacyPolicy.contactUs.title')}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                If you have any questions about this Privacy Policy, please contact us:
+                {t('privacyPolicy.contactUs.description')}
               </p>
               <div className="space-y-2 text-muted-foreground">
-                <p>Email: <a href="mailto:hello@stanimeros.com" className="text-primary hover:underline">hello@stanimeros.com</a></p>
-                <p>Address: Thessaloniki, Greece</p>
+                <p>{t('privacyPolicy.contactUs.email')} <a href="mailto:hello@stanimeros.com" className="text-primary hover:underline">hello@stanimeros.com</a></p>
+                <p>{t('privacyPolicy.contactUs.address')}</p>
               </div>
             </CardContent>
           </Card>
@@ -244,11 +241,11 @@ const PrivacyPolicy = () => {
           <div className="text-center">
             <Separator className="my-8" />
             <p className="text-muted-foreground mb-4">
-              To request deletion of your data, please visit our data deletion page.
+              {t('privacyPolicy.dataDeletionLink.description')}
             </p>
             <Link to="/data-deletion">
               <Button>
-                Request Data Deletion
+                {t('privacyPolicy.dataDeletionLink.button')}
               </Button>
             </Link>
           </div>
