@@ -7,7 +7,7 @@ import { translate } from "i18n-ai-translate";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const GEMINI_API_KEY = 'AIzaSyAdOjS4h9jDdj5AnTSiqNQiSXxZwW8Xhyw';
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const LOCALES_PATH = path.join(__dirname, '../src/i18n/locales');
 const SOURCE_PATH = path.join(__dirname, '../src');
 const TARGET_LANGUAGES = ['el', 'de'];

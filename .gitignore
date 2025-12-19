@@ -25,3 +25,5 @@ dist-ssr
 
 .firebase
 src/lib/firebase.ts
+
+.env
