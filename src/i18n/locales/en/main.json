@@ -63,6 +63,17 @@
         "Posting to App Store and Google Play"
       ]
     },
+    "aiAgent": {
+      "title": "AI Conversational Agent",
+      "description": "Train an AI chatbot with your business documents and integrate it into your website",
+      "features": [
+        "AI chatbot trained with your PDF/DOCX documents",
+        "Website integration (any platform)",
+        "Customizable appearance to match your brand",
+        "24/7 automated customer support",
+        "Analytics and conversation insights"
+      ]
+    },
     "getStarted": "Get Started",
     "footer": "You will get a quote within 24 hours. We'll guide you end-to-end.",
     "faq": {
@@ -109,9 +120,9 @@
       "title": "Mobile Apps",
       "description": "Custom iOS and Android apps to reach your customers on their phones."
     },
-    "automation": {
-      "title": "Business Automation",
-      "description": "Streamline your operations with custom tools and automated processes."
+    "aiAgent": {
+      "title": "AI Conversational Agent",
+      "description": "Train an AI chatbot with your documents (PDF, DOCX) and integrate it into any website to provide instant, accurate information about your business."
     }
   },
   "portfolio": {
@@ -195,6 +206,10 @@
       "customApp": {
         "title": "Custom App",
         "description": "Web, iOS and Android apps with custom features."
+      },
+      "aiAgent": {
+        "title": "AI Conversational Agent",
+        "description": "Train an AI chatbot with your documents (PDF, DOCX) and integrate it into any website."
       }
     },
     "buttons": {

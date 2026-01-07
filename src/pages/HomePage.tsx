@@ -20,8 +20,8 @@ import {
   SparklesIcon,
   LightBulbIcon,
   BuildingStorefrontIcon,
-  CogIcon,
-  CursorArrowRaysIcon
+  CursorArrowRaysIcon,
+  ChatBubbleLeftRightIcon
 } from "@heroicons/react/24/outline"
 import { sendEmail } from "@/lib/firebase"
 import GitHubCalendarComponent from "@/components/GitHubCalendar"
@@ -47,8 +47,8 @@ const HomePage = () => {
   const contactRef = useRef<HTMLElement>(null)
   
   // Refs for card animations
-  const serviceCardRefs = Array(4).fill(null).map(() => useRef<HTMLDivElement>(null))
-  const packageCardRefs = Array(3).fill(null).map(() => useRef<HTMLDivElement>(null))
+  const serviceCardRefs = Array(5).fill(null).map(() => useRef<HTMLDivElement>(null))
+  const packageCardRefs = Array(4).fill(null).map(() => useRef<HTMLDivElement>(null))
   const portfolioCardRefs = Array(11).fill(null).map(() => useRef<HTMLDivElement>(null))
   
   // Get animation props for each section
@@ -341,9 +341,9 @@ const HomePage = () => {
                 description: 'services.mobile.description'
               },
               {
-                icon: <CogIcon className="h-8 w-8" />,
-                title: 'services.automation.title',
-                description: 'services.automation.description'
+                icon: <ChatBubbleLeftRightIcon className="h-8 w-8" />,
+                title: 'services.aiAgent.title',
+                description: 'services.aiAgent.description'
               }
             ].map((service, index) => (
               <motion.div
@@ -386,7 +386,7 @@ const HomePage = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
             {[
               {
                 title: 'packages.onlinePresence.title',
@@ -410,6 +410,14 @@ const HomePage = () => {
                 badge: 'Premium',
                 features: 'packages.customApp.features',
                 package: 'custom-app',
+                className: 'border-border/60',
+              },
+              {
+                title: 'packages.aiAgent.title',
+                description: 'packages.aiAgent.description',
+                badge: 'AI',
+                features: 'packages.aiAgent.features',
+                package: 'ai-agent',
                 className: 'border-border/60',
               }
             ].map((pkg, index) => (

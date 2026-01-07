@@ -10,7 +10,7 @@ import { sendEmail } from "@/lib/firebase"
 import { trackEvent } from "@/lib/events"
 import Layout from "@/components/Layout"
 
-type PackageKey = "online-presence" | "e-shop" | "custom-app"
+type PackageKey = "online-presence" | "e-shop" | "custom-app" | "ai-agent"
 
 const PACKAGE_META: Record<PackageKey, { label: string; tagline: string; highlight?: boolean }> = {
   "online-presence": {
@@ -25,6 +25,10 @@ const PACKAGE_META: Record<PackageKey, { label: string; tagline: string; highlig
   "custom-app": {
     label: "Custom App",
     tagline: "Custom web, iOS, and Android apps",
+  },
+  "ai-agent": {
+    label: "AI Conversational Agent",
+    tagline: "Train an AI chatbot with your business documents and integrate it into your website",
   },
 }
 
@@ -52,7 +56,7 @@ function GetStarted() {
   }, [])
 
   useEffect(() => {
-    if (initialPackage && ["online-presence", "e-shop", "custom-app"].includes(initialPackage)) {
+    if (initialPackage && ["online-presence", "e-shop", "custom-app", "ai-agent"].includes(initialPackage)) {
       setSelectedPackage(initialPackage as PackageKey)
     }
   }, [initialPackage])
@@ -162,6 +166,18 @@ function GetStarted() {
                       </div>
                       <div className="pl-8 text-sm text-muted-foreground">
                         {t('getStarted.serviceSelection.customApp.description')}
+                      </div>
+                    </div>
+
+                    <div className="space-y-1">
+                      <div className="flex items-center space-x-4">
+                        <RadioGroupItem value="ai-agent" id="ai-agent" />
+                        <Label htmlFor="ai-agent" className="cursor-pointer font-medium py-0 my-0">
+                          {t('getStarted.serviceSelection.aiAgent.title')}
+                        </Label>
+                      </div>
+                      <div className="pl-8 text-sm text-muted-foreground">
+                        {t('getStarted.serviceSelection.aiAgent.description')}
                       </div>
                     </div>
                   </div>
