@@ -1,10 +1,23 @@
-import { useEffect, useRef, useState } from "react"
-import Layout from "@/components/Layout"
-import { Button } from "@/components/ui/button"
+import { useEffect, useRef } from "react"
+import Header from "@/components/Header"
+import ParticlesBackground from "@/components/ParticlesBackground"
+import CustomChat from "@/components/CustomChat"
+
+// Extend Window interface to include Dialogflow utility and messenger
+declare global {
+  interface Window {
+    dfInstallUtil?: (feature: string, options: { bucketName: string }) => void
+  }
+  
+  interface HTMLElementTagNameMap {
+    'df-messenger': HTMLElement & {
+      renderCustomText?: (text: string, isBot?: boolean) => void
+    }
+  }
+}
 
 const DialogflowTest = () => {
   const messengerRef = useRef<HTMLDivElement>(null)
-  const [isBubbleMode, setIsBubbleMode] = useState(true)
   const scriptLoadedRef = useRef(false)
 
   // Load script and CSS only once
@@ -77,23 +90,12 @@ const DialogflowTest = () => {
           dfMessenger.setAttribute("language-code", "el")
           dfMessenger.setAttribute("max-query-length", "-1")
           dfMessenger.setAttribute("allow-feedback", "all")
-          dfMessenger.setAttribute("gcs-upload", "testing-bucket-upload-photo")
           
-          if (isBubbleMode) {
-            const chatBubble = document.createElement("df-messenger-chat-bubble")
-            chatBubble.setAttribute("chat-title", "Βοηθός της Νίκης")
-            chatBubble.setAttribute("placeholder-text", "Ρωτήστε κάτι...")
-            // chatBubble.setAttribute("enable-file-upload", "")
-            // chatBubble.setAttribute("enable-audio-input", "")
-            dfMessenger.appendChild(chatBubble)
-          } else {
-            const chat = document.createElement("df-messenger-chat")
-            chat.setAttribute("chat-title", "Βοηθός της Νίκης")
-            chat.setAttribute("placeholder-text", "Ρωτήστε κάτι...")
-            // chat.setAttribute("enable-file-upload", "")
-            // chat.setAttribute("enable-audio-input", "")
-            dfMessenger.appendChild(chat)
-          }
+          // Use chat-bubble (no file upload for now)
+          const chatBubble = document.createElement("df-messenger-chat-bubble")
+          chatBubble.setAttribute("chat-title", "Βοηθός της Νίκης")
+          chatBubble.setAttribute("placeholder-text", "Ρωτήστε κάτι...")
+          dfMessenger.appendChild(chatBubble)
           
           messengerRef.current.appendChild(dfMessenger)
         } else {
@@ -116,23 +118,28 @@ const DialogflowTest = () => {
     
     style.textContent = `
       df-messenger {
-        z-index: 999;
+        /* Hide the messenger visually but keep it functional */
         position: fixed;
+        opacity: 0;
+        pointer-events: none;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        z-index: -1;
+        top: -9999px;
+        left: -9999px;
+        /* Keep all the CSS variables for internal functionality */
         --df-messenger-font-color: #000;
         --df-messenger-font-family: Google Sans;
         --df-messenger-chat-background: #f3f6fc;
         --df-messenger-message-user-background: #d3e3fd;
         --df-messenger-message-bot-background: #fff;
-        ${isBubbleMode 
-          ? `bottom: 16px; right: 16px;` 
-          : `bottom: 0; right: 0; top: 0; width: 350px;`
-        }
       }
     `
 
     createMessenger()
 
-    // Cleanup function - remove all messengers when component unmounts or mode changes
+    // Cleanup function - remove all messengers when component unmounts
     return () => {
       // Remove all df-messenger elements from the entire DOM
       const allMessengers = document.querySelectorAll('df-messenger')
@@ -148,73 +155,30 @@ const DialogflowTest = () => {
         messengerRef.current.innerHTML = ""
       }
     }
-  }, [isBubbleMode])
+  }, [])
+
 
   return (
-    <Layout>
-      <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="text-center max-w-3xl">
-          <h1 className="text-4xl font-bold mb-6">Σελίδα Δοκιμής AI Agent</h1>
-          
-          <div className="mb-6">
-            <Button 
-              onClick={() => setIsBubbleMode(!isBubbleMode)}
-              variant="outline"
-            >
-              {isBubbleMode ? "Εμφάνιση Πλήρους Chat" : "Εμφάνιση Chat Bubble"}
-            </Button>
-          </div>
-          
-          <div className="bg-card/70 border border-border/60 rounded-lg p-6 mb-8 text-left">
-            <h2 className="text-2xl font-semibold mb-4">Πληροφορίες</h2>
-            <p className="text-muted-foreground mb-4">
-              Αυτή είναι μια σελίδα δοκιμής για τον AI βοηθό της <strong>Νίκης Μαργαρίτη</strong>.
-            </p>
-            <p className="text-muted-foreground mb-4">
-              Ο βοηθός έχει φορτωθεί με βιβλία <strong>Βιολογίας Β' και Γ' Λυκείου</strong> και είναι έτοιμος να απαντήσει σε ερωτήσεις σχετικές με τη βιολογία.
-            </p>
-            <p className="text-muted-foreground">
-              Το widget συνομιλίας εμφανίζεται στην κάτω δεξιά γωνία της σελίδας.
-            </p>
-          </div>
-
-          <div className="bg-card/70 border border-border/60 rounded-lg p-6 text-left">
-            <h2 className="text-2xl font-semibold mb-4">Προτεινόμενες Ερωτήσεις</h2>
-            <ul className="space-y-3 text-muted-foreground">
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Τι είναι το DNA και πώς λειτουργεί;</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Πώς γίνεται η φωτοσύνθεση;</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Εξήγησε τη διαδικασία της κυτταρικής αναπαραγωγής</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Τι είναι τα ενζύμια και ποιος ο ρόλος τους;</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Πώς λειτουργεί το ανοσοποιητικό σύστημα;</span>
-              </li>
-              <li className="flex items-start">
-                <span className="mr-2">•</span>
-                <span>Εξήγησε τη διαφορά μεταξύ μίτωσης και μείωσης</span>
-              </li>
-            </ul>
+    <div className="min-h-screen bg-background">
+      {/* Background Effects */}
+      <ParticlesBackground />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10" />
+      
+      {/* Content */}
+      <div className="relative z-10">
+        <Header />
+        <div className="fixed inset-0 pt-24 flex flex-col">
+          {/* Full screen chatbot */}
+          <div className="flex-1 overflow-hidden">
+            <CustomChat />
           </div>
         </div>
       </div>
       
-      {/* Container for Dialogflow Messenger Component */}
+      {/* Hidden Dialogflow Messenger Component - handles API communication */}
       <div ref={messengerRef} />
-    </Layout>
+    </div>
   )
 }
 
 export default DialogflowTest
-
