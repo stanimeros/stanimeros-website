@@ -16,7 +16,6 @@ interface Message {
 }
 
 const CUSTOM_MESSAGES_KEY = "custom-chat-messages"
-const DIALOGFLOW_MESSAGES_KEY = "df-messenger-messages"
 
 const SUGGESTED_QUESTIONS = [
   "Τι είναι το DNA και πώς λειτουργεί;",
@@ -143,91 +142,20 @@ export default function CustomChat() {
   }, [addMessage])
 
   const sendMessageToDialogflow = (text: string): boolean => {
-    const messenger = dialogflowMessengerRef.current?.getMessenger() || document.querySelector("df-messenger")
-    if (!messenger) {
-      console.error("df-messenger not found")
-      return false
-    }
-
-    // Wait for messenger to be ready
-    const trySend = (attempts = 0): boolean => {
-      if (attempts > 10) {
-        console.error("Failed to send message after multiple attempts")
-        return false
-      }
-
-      const chatBubble = messenger.querySelector("df-messenger-chat-bubble")
-      if (!chatBubble) {
-        setTimeout(() => trySend(attempts + 1), 100)
-        return false
-      }
-
-      const chatBubbleShadow = chatBubble.shadowRoot
-      if (!chatBubbleShadow) {
-        setTimeout(() => trySend(attempts + 1), 100)
-        return false
-      }
-
-      const chat = chatBubbleShadow.querySelector("df-messenger-chat")
-      if (!chat?.shadowRoot) {
-        setTimeout(() => trySend(attempts + 1), 100)
-        return false
-      }
-
-      const userInput = chat.shadowRoot.querySelector("df-messenger-user-input")
-      if (!userInput?.shadowRoot) {
-        setTimeout(() => trySend(attempts + 1), 100)
-        return false
-      }
-
-      // Find textarea
-      const textarea = userInput.shadowRoot.querySelector(
-        'textarea.input-box'
-      ) as HTMLTextAreaElement
-
-      // Find send button
-      const sendButton = userInput.shadowRoot.querySelector(
-        'button#send-icon-button'
-      ) as HTMLButtonElement
-
-      if (!textarea) {
-        setTimeout(() => trySend(attempts + 1), 100)
-        return false
-      }
-
-      // Set the text value
-      textarea.value = text
-      
-      // Trigger input event to update the messenger's internal state
-      const inputEvent = new Event("input", { bubbles: true, cancelable: true })
-      textarea.dispatchEvent(inputEvent)
-      
-      // Also trigger change event
-      const changeEvent = new Event("change", { bubbles: true, cancelable: true })
-      textarea.dispatchEvent(changeEvent)
-
-      // Click send button if available
-      if (sendButton && !sendButton.disabled) {
-        console.log("[CustomChat:sendMessage] Using send button click method")
-        sendButton.click()
+    try {
+      const dfMessenger = document.querySelector('df-messenger') as any
+      if (dfMessenger && typeof dfMessenger.sendQuery === 'function') {
+        dfMessenger.sendQuery(text)
+        console.log("[CustomChat:sendMessage] Sent message via sendQuery")
         return true
       } else {
-        // Try Enter key as fallback
-        console.log("[CustomChat:sendMessage] Send button not available, using Enter key fallback")
-        const enterEvent = new KeyboardEvent("keydown", {
-          key: "Enter",
-          code: "Enter",
-          keyCode: 13,
-          which: 13,
-          bubbles: true,
-          cancelable: true,
-        })
-        textarea.dispatchEvent(enterEvent)
-        return true
+        console.error("[CustomChat:sendMessage] df-messenger or sendQuery method not found")
+        return false
       }
+    } catch (error) {
+      console.error("[CustomChat:sendMessage] Error sending message:", error)
+      return false
     }
-
-    return trySend()
   }
 
   const handleSend = async (overrideTextOrEvent?: string | React.MouseEvent<HTMLButtonElement>) => {
@@ -344,12 +272,25 @@ export default function CustomChat() {
     setMessages([])
     sentMessagesRef.current.clear()
     
-    // Clear both custom messages and Dialogflow messages from sessionStorage
+    // Clear custom messages from sessionStorage
     try {
       sessionStorage.removeItem(CUSTOM_MESSAGES_KEY)
-      sessionStorage.removeItem(DIALOGFLOW_MESSAGES_KEY)
     } catch (error) {
-      console.error("[CustomChat] Error clearing messages from sessionStorage:", error)
+      console.error("[CustomChat] Error clearing custom messages from sessionStorage:", error)
+    }
+    
+    // Reset Dialogflow session using startNewSession
+    try {
+      const dfMessenger = document.querySelector('df-messenger') as any
+      if (dfMessenger && typeof dfMessenger.startNewSession === 'function') {
+        dfMessenger.startNewSession({
+          retainHistory: false,
+          clearAuthentication: false
+        })
+        console.log("[CustomChat] Dialogflow session reset via startNewSession")
+      }
+    } catch (error) {
+      console.error("[CustomChat] Error resetting Dialogflow session:", error)
     }
   }
 
