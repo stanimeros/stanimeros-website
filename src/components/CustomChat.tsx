@@ -1,23 +1,11 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState, useCallback } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Send, Loader2, Paperclip, X, Trash2, User, Bot } from "lucide-react"
 import { analyzeFileWithGemini } from "@/lib/gemini"
 import Header from "@/components/Header"
 import ParticlesBackground from "@/components/ParticlesBackground"
-
-// Extend Window interface to include Dialogflow utility and messenger
-declare global {
-  interface Window {
-    dfInstallUtil?: (feature: string, options: { bucketName: string }) => void
-  }
-  
-  interface HTMLElementTagNameMap {
-    'df-messenger': HTMLElement & {
-      renderCustomText?: (text: string, isBot?: boolean) => void
-    }
-  }
-}
+import DialogflowMessenger, { type DialogflowMessengerRef } from "@/components/DialogflowMessenger"
 
 interface Message {
   id: string
@@ -40,9 +28,6 @@ const SUGGESTED_QUESTIONS = [
 ]
 
 export default function CustomChat() {
-  // Flag to hide/show the actual df-messenger UI
-  const HIDE_DF_MESSENGER = true
-  
   const [messages, setMessages] = useState<Message[]>([])
   const [inputText, setInputText] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -53,95 +38,7 @@ export default function CustomChat() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
-  const messengerRef = useRef<HTMLDivElement>(null)
-  const scriptLoadedRef = useRef(false)
-
-  // Load Dialogflow script and CSS
-  useEffect(() => {
-    // Add the Dialogflow CSS link
-    const link = document.createElement("link")
-    link.rel = "stylesheet"
-    link.href = "https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css"
-    document.head.appendChild(link)
-
-    // Load the Dialogflow script
-    const existingScript = document.querySelector('script[src*="df-messenger.js"]')
-    if (!existingScript) {
-      const script = document.createElement("script")
-      script.src = "https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"
-      script.async = true
-      script.onload = () => {
-        scriptLoadedRef.current = true
-      }
-      document.body.appendChild(script)
-    } else {
-      scriptLoadedRef.current = true
-    }
-  }, [])
-
-  // Create/update messenger
-  useEffect(() => {
-    const createMessenger = () => {
-      if (messengerRef.current && (scriptLoadedRef.current || window.customElements?.get('df-messenger'))) {
-        // Clear any existing messenger in the ref container
-        if (messengerRef.current) {
-          messengerRef.current.innerHTML = ""
-        }
-
-        const dfMessenger = document.createElement("df-messenger")
-        dfMessenger.setAttribute("location", "eu")
-        dfMessenger.setAttribute("project-id", "biology-assistant")
-        dfMessenger.setAttribute("agent-id", "86d66a1b-f8e8-40d3-bc74-920824fee993")
-        dfMessenger.setAttribute("language-code", "el")
-        dfMessenger.setAttribute("max-query-length", "-1")
-        dfMessenger.setAttribute("allow-feedback", "all")
-        dfMessenger.setAttribute("storage-option", "sessionStorage")
-        
-        const chatBubble = document.createElement("df-messenger-chat-bubble")
-        chatBubble.setAttribute("chat-title", "Βοηθός της Νίκης")
-        chatBubble.setAttribute("placeholder-text", "Ρωτήστε κάτι...")
-        dfMessenger.appendChild(chatBubble)
-        
-        messengerRef.current.appendChild(dfMessenger)
-      } else {
-        setTimeout(createMessenger, 100)
-      }
-    }
-
-    // Add/update styles based on mode
-    const styleId = "df-messenger-styles"
-    let style = document.getElementById(styleId) as HTMLStyleElement
-    if (!style) {
-      style = document.createElement("style")
-      style.id = styleId
-      document.head.appendChild(style)
-    }
-    
-    style.textContent = `
-      df-messenger {
-        ${HIDE_DF_MESSENGER ? 'display: none !important; visibility: hidden !important; opacity: 0 !important;' : ''}
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        z-index: 9999;
-        /* Keep all the CSS variables for internal functionality */
-        --df-messenger-font-color: #000;
-        --df-messenger-font-family: Google Sans;
-        --df-messenger-chat-background: #f3f6fc;
-        --df-messenger-message-user-background: #d3e3fd;
-        --df-messenger-message-bot-background: #fff;
-      }
-    `
-
-    createMessenger()
-
-    // Cleanup function
-    return () => {
-      if (messengerRef.current) {
-        messengerRef.current.innerHTML = ""
-      }
-    }
-  }, [])
+  const dialogflowMessengerRef = useRef<DialogflowMessengerRef>(null)
 
   // Scroll to bottom when new messages arrive
   useEffect(() => {
@@ -152,6 +49,17 @@ export default function CustomChat() {
 
   // Track sent messages to avoid duplicates
   const sentMessagesRef = useRef<Set<string>>(new Set())
+
+  const addMessage = useCallback((text: string, isBot: boolean, fileName?: string) => {
+    const newMessage: Message = {
+      id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
+      text,
+      isBot,
+      timestamp: new Date(),
+      fileName,
+    }
+    setMessages((prev) => [...prev, newMessage])
+  }, [])
 
   // Listen to Dialogflow events
   useEffect(() => {
@@ -446,21 +354,10 @@ export default function CustomChat() {
       window.removeEventListener("df-messenger-loaded", handleMessengerLoaded)
       window.removeEventListener("df-messenger-message-list-loaded", handleMessageListLoaded)
     }
-  }, [])
-
-  const addMessage = (text: string, isBot: boolean, fileName?: string) => {
-    const newMessage: Message = {
-      id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
-      text,
-      isBot,
-      timestamp: new Date(),
-      fileName,
-    }
-    setMessages((prev) => [...prev, newMessage])
-  }
+  }, [addMessage])
 
   const sendMessageToDialogflow = (text: string): boolean => {
-    const messenger = document.querySelector("df-messenger")
+    const messenger = dialogflowMessengerRef.current?.getMessenger() || document.querySelector("df-messenger")
     if (!messenger) {
       console.error("df-messenger not found")
       return false
@@ -900,7 +797,7 @@ export default function CustomChat() {
       </div>
       
       {/* Hidden Dialogflow Messenger Component - handles API communication */}
-      <div ref={messengerRef} />
+      <DialogflowMessenger ref={dialogflowMessengerRef} />
     </div>
   )
 }
