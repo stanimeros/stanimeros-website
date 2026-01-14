@@ -1,8 +1,23 @@
 import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Send, Loader2, Paperclip, X, Trash2 } from "lucide-react"
+import { Send, Loader2, Paperclip, X, Trash2, User, Bot } from "lucide-react"
 import { analyzeFileWithGemini } from "@/lib/gemini"
+import Header from "@/components/Header"
+import ParticlesBackground from "@/components/ParticlesBackground"
+
+// Extend Window interface to include Dialogflow utility and messenger
+declare global {
+  interface Window {
+    dfInstallUtil?: (feature: string, options: { bucketName: string }) => void
+  }
+  
+  interface HTMLElementTagNameMap {
+    'df-messenger': HTMLElement & {
+      renderCustomText?: (text: string, isBot?: boolean) => void
+    }
+  }
+}
 
 interface Message {
   id: string
@@ -25,6 +40,9 @@ const SUGGESTED_QUESTIONS = [
 ]
 
 export default function CustomChat() {
+  // Flag to hide/show the actual df-messenger UI
+  const HIDE_DF_MESSENGER = true
+  
   const [messages, setMessages] = useState<Message[]>([])
   const [inputText, setInputText] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -35,12 +53,148 @@ export default function CustomChat() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const messengerRef = useRef<HTMLDivElement>(null)
+  const scriptLoadedRef = useRef(false)
+
+  // Load Dialogflow script and CSS
+  useEffect(() => {
+    // Add the Dialogflow CSS link
+    const link = document.createElement("link")
+    link.rel = "stylesheet"
+    link.href = "https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css"
+    document.head.appendChild(link)
+
+    // Load the Dialogflow script
+    const existingScript = document.querySelector('script[src*="df-messenger.js"]')
+    if (!existingScript) {
+      const script = document.createElement("script")
+      script.src = "https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"
+      script.async = true
+      script.onload = () => {
+        scriptLoadedRef.current = true
+      }
+      document.body.appendChild(script)
+    } else {
+      scriptLoadedRef.current = true
+    }
+
+    // Cleanup function
+    return () => {
+      // Don't remove link/script on cleanup as they might be needed
+    }
+  }, [])
+
+  // Create/update messenger
+  useEffect(() => {
+    const removeAllMessengers = () => {
+      // Remove all df-messenger elements from the entire DOM, not just the ref container
+      const allMessengers = document.querySelectorAll('df-messenger')
+      allMessengers.forEach(messenger => {
+        // Remove from parent if it exists
+        if (messenger.parentNode) {
+          messenger.parentNode.removeChild(messenger)
+        }
+        // Also try to remove it directly
+        messenger.remove()
+      })
+      
+      // Also clear the ref container
+      if (messengerRef.current) {
+        messengerRef.current.innerHTML = ""
+      }
+    }
+
+    const createMessenger = () => {
+      // First, completely remove any existing messengers
+      removeAllMessengers()
+
+      // Wait a bit for script to be ready and for cleanup to complete
+      const checkAndCreate = () => {
+        // Double check that no messengers exist
+        const existingMessengers = document.querySelectorAll('df-messenger')
+        if (existingMessengers.length > 0) {
+          removeAllMessengers()
+          setTimeout(checkAndCreate, 50)
+          return
+        }
+
+        if (messengerRef.current && (scriptLoadedRef.current || window.customElements?.get('df-messenger'))) {
+          const dfMessenger = document.createElement("df-messenger")
+          dfMessenger.setAttribute("location", "eu")
+          dfMessenger.setAttribute("project-id", "biology-assistant")
+          dfMessenger.setAttribute("agent-id", "86d66a1b-f8e8-40d3-bc74-920824fee993")
+          dfMessenger.setAttribute("language-code", "el")
+          dfMessenger.setAttribute("max-query-length", "-1")
+          dfMessenger.setAttribute("allow-feedback", "all")
+          dfMessenger.setAttribute("storage-option", "sessionStorage")
+          
+          // Use chat-bubble (no file upload for now)
+          const chatBubble = document.createElement("df-messenger-chat-bubble")
+          chatBubble.setAttribute("chat-title", "Βοηθός της Νίκης")
+          chatBubble.setAttribute("placeholder-text", "Ρωτήστε κάτι...")
+          dfMessenger.appendChild(chatBubble)
+          
+          messengerRef.current.appendChild(dfMessenger)
+        } else {
+          setTimeout(checkAndCreate, 100)
+        }
+      }
+      
+      // Small delay to ensure cleanup is complete
+      setTimeout(checkAndCreate, 100)
+    }
+
+    // Add/update styles based on mode
+    const styleId = "df-messenger-styles"
+    let style = document.getElementById(styleId) as HTMLStyleElement
+    if (!style) {
+      style = document.createElement("style")
+      style.id = styleId
+      document.head.appendChild(style)
+    }
+    
+    style.textContent = `
+      df-messenger {
+        ${HIDE_DF_MESSENGER ? 'display: none !important; visibility: hidden !important; opacity: 0 !important;' : ''}
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+        /* Keep all the CSS variables for internal functionality */
+        --df-messenger-font-color: #000;
+        --df-messenger-font-family: Google Sans;
+        --df-messenger-chat-background: #f3f6fc;
+        --df-messenger-message-user-background: #d3e3fd;
+        --df-messenger-message-bot-background: #fff;
+      }
+    `
+
+    createMessenger()
+
+    // Cleanup function - remove all messengers when component unmounts
+    return () => {
+      // Remove all df-messenger elements from the entire DOM
+      const allMessengers = document.querySelectorAll('df-messenger')
+      allMessengers.forEach(messenger => {
+        if (messenger.parentNode) {
+          messenger.parentNode.removeChild(messenger)
+        }
+        messenger.remove()
+      })
+      
+      // Also clear the ref container
+      if (messengerRef.current) {
+        messengerRef.current.innerHTML = ""
+      }
+    }
+  }, [])
 
   // Scroll to bottom when new messages arrive
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+    }
   }, [messages])
-
 
   // Track sent messages to avoid duplicates
   const sentMessagesRef = useRef<Set<string>>(new Set())
@@ -400,7 +554,15 @@ export default function CustomChat() {
           restoredMessages.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime())
           setMessages(prev => {
             const existingIds = new Set(prev.map(m => m.id))
-            const newMessages = restoredMessages.filter(m => !existingIds.has(m.id))
+            const existingTexts = new Set(prev.map(m => `${m.text}-${m.isBot}`))
+            const newMessages = restoredMessages.filter(m => {
+              const existsById = existingIds.has(m.id)
+              const existsByText = existingTexts.has(`${m.text}-${m.isBot}`)
+              if (existsById || existsByText) {
+                console.log('[loadMessagesFromDialogflow] Filtering duplicate:', { text: m.text.substring(0, 50), existsById, existsByText })
+              }
+              return !existsById && !existsByText
+            })
             if (newMessages.length > 0) {
               return [...prev, ...newMessages].sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime())
             }
@@ -530,6 +692,7 @@ export default function CustomChat() {
     const textToUse = typeof overrideTextOrEvent === 'string' 
       ? overrideTextOrEvent 
       : inputText.trim()
+       
     if (!textToUse && !selectedFile) return
 
     const text = textToUse
@@ -660,24 +823,112 @@ export default function CustomChat() {
   }
 
   return (
-    <div className="flex flex-col h-full">
-      {/* Header with Clear Button */}
-      {messages.length > 0 && (
-        <div className="flex justify-end p-2 border-b border-border">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={handleClearChat}
-            className="text-muted-foreground hover:text-destructive"
-          >
-            <Trash2 className="h-4 w-4 mr-2" />
-            Καθαρισμός
-          </Button>
-        </div>
-      )}
+    <div className="min-h-screen bg-background">
+      {/* Background Effects */}
+      <ParticlesBackground />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10" />
       
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      {/* Content */}
+      <div className="relative z-10">
+        <Header />
+        
+        {/* Fixed Input Area at bottom */}
+        <div className="fixed bottom-0 left-0 right-0 border-t border-border bg-background z-50">
+          <div className="max-w-[1000px] mx-auto p-4">
+            <div className="flex flex-col gap-2">
+              {/* Selected File Display */}
+              {selectedFile && (
+                <div className="flex items-center gap-2 px-3 py-2 bg-muted rounded-md">
+                  <Paperclip className="h-4 w-4 text-muted-foreground" />
+                  <span className="text-sm flex-1 truncate">{selectedFile.name}</span>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="h-6 w-6"
+                    onClick={handleRemoveFile}
+                  >
+                    <X className="h-3 w-3" />
+                  </Button>
+                </div>
+              )}
+              
+              <div className="flex gap-2">
+                {/* File Input (hidden) */}
+                <Input
+                  ref={fileInputRef}
+                  type="file"
+                  accept="image/*,application/pdf,.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                  onChange={handleFileSelect}
+                  className="hidden"
+                  id="file-upload"
+                />
+                
+                {/* File Upload Button */}
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="icon"
+                  onClick={() => fileInputRef.current?.click()}
+                  disabled={isLoading || isAnalyzingImage}
+                >
+                  <Paperclip className="h-4 w-4" />
+                </Button>
+
+                {/* Text Input */}
+                <Input
+                  ref={inputRef}
+                  value={inputText}
+                  onChange={(e) => setInputText(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Ρωτήστε κάτι..."
+                  className="flex-1"
+                  disabled={isAnalyzingImage}
+                />
+
+                {/* Send Button */}
+                <Button
+                  onClick={handleSend}
+                  disabled={(!inputText.trim() && !selectedFile) || isLoading || isAnalyzingImage}
+                  size="icon"
+                >
+                  {(isLoading || isAnalyzingImage) ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Send className="h-4 w-4" />
+                  )}
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Scrollable Content */}
+        <section className="pt-28 pb-32 max-w-[1000px] mx-auto px-4 w-full">
+          {/* Agent Title Header */}
+          <div className="border-b border-border p-4 bg-background/50 backdrop-blur-sm rounded-lg mb-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-xl font-semibold text-foreground">Βοηθός της Νίκης</h1>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Εξειδικευμένος βοηθός για ερωτήσεις βιολογίας. Ρωτήστε με για έννοιες, διαδικασίες και έννοιες της βιολογίας.
+                </p>
+              </div>
+              {messages.length > 0 && (
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleClearChat}
+                  className="text-muted-foreground hover:text-destructive"
+                >
+                  <Trash2 className="h-4 w-4 mr-2" />
+                  Καθαρισμός
+                </Button>
+              )}
+            </div>
+          </div>
+          
+          {/* Messages */}
+          <div className="space-y-4">
         {messages.length === 0 && (
           <div className="text-center py-8">
             <p className="text-muted-foreground mb-6">Καλώς ήρθατε! Επιλέξτε μια ερώτηση ή ρωτήστε κάτι:</p>
@@ -701,120 +952,100 @@ export default function CustomChat() {
         {messages.map((message) => (
           <div
             key={message.id}
-            className={`flex ${message.isBot ? "justify-start" : "justify-end"}`}
+            className={`flex items-start gap-3 w-full ${message.isBot ? "justify-start" : "justify-end"}`}
           >
-            <div
-              className={`max-w-[80%] rounded-lg p-3 ${
-                message.isBot
-                  ? "bg-muted text-foreground"
-                  : "bg-primary text-primary-foreground"
-              }`}
-            >
-              {message.fileName && (
-                <div className={`text-xs mb-2 pb-2 border-b ${
-                  message.isBot ? "border-muted-foreground/20" : "border-primary-foreground/20"
-                }`}>
-                  📎 {message.fileName}
+            {message.isBot ? (
+              <>
+                {/* Bot Avatar */}
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+                  <Bot className="h-4 w-4 text-muted-foreground" />
                 </div>
-              )}
-              <div className="whitespace-pre-wrap break-words">{message.text}</div>
-              <div
-                className={`text-xs mt-1 ${
-                  message.isBot ? "text-muted-foreground" : "text-primary-foreground/70"
-                }`}
-              >
-                {message.timestamp.toLocaleTimeString("el-GR", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
-              </div>
-            </div>
+                
+                {/* Bot Message Content */}
+                <div className="flex flex-col items-start max-w-[70%]">
+                  {/* Username */}
+                  <div className="text-xs mb-1 px-1 text-muted-foreground">
+                    Βοηθός
+                  </div>
+                  
+                  {/* Message Bubble */}
+                  <div className="rounded-lg rounded-tl-none p-3 bg-muted text-foreground">
+                    {message.fileName && (
+                      <div className="text-xs mb-2 pb-2 border-b border-muted-foreground/20">
+                        📎 {message.fileName}
+                      </div>
+                    )}
+                    <div className="whitespace-pre-wrap break-words">{message.text}</div>
+                    <div className="text-xs mt-2 text-muted-foreground">
+                      {message.timestamp.toLocaleTimeString("el-GR", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                {/* User Message Content */}
+                <div className="flex flex-col items-end max-w-[70%]">
+                  {/* Username */}
+                  <div className="text-xs mb-1 px-1 text-foreground">
+                    Εσύ
+                  </div>
+                  
+                  {/* Message Bubble */}
+                  <div className="rounded-lg rounded-tr-none p-3 bg-primary text-primary-foreground">
+                    {message.fileName && (
+                      <div className="text-xs mb-2 pb-2 border-b border-primary-foreground/20">
+                        📎 {message.fileName}
+                      </div>
+                    )}
+                    <div className="whitespace-pre-wrap break-words">{message.text}</div>
+                    <div className="text-xs mt-2 text-primary-foreground/70">
+                      {message.timestamp.toLocaleTimeString("el-GR", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </div>
+                  </div>
+                </div>
+                
+                {/* User Avatar */}
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary flex items-center justify-center">
+                  <User className="h-4 w-4 text-primary-foreground" />
+                </div>
+              </>
+            )}
           </div>
         ))}
 
         {(isLoading || isAnalyzingImage) && (
-          <div className="flex justify-start">
-            <div className="bg-muted rounded-lg p-3 flex items-center gap-2">
-              <Loader2 className="h-4 w-4 animate-spin" />
-              {isAnalyzingImage && analyzingFileName ? (
-                <span className="text-sm text-muted-foreground">Ανάλυση {analyzingFileType?.toLowerCase() || 'αρχείου'}: {analyzingFileName}</span>
-              ) : (
-                <span className="text-sm text-muted-foreground">Αναμονή απάντησης...</span>
-              )}
+          <div className="flex items-start gap-3 justify-start">
+            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+              <Bot className="h-4 w-4 text-muted-foreground" />
+            </div>
+            <div className="flex flex-col items-start">
+              <div className="text-xs mb-1 px-1 text-muted-foreground">Βοηθός</div>
+              <div className="bg-muted rounded-lg rounded-tl-none p-3 flex items-center gap-2">
+                <Loader2 className="h-4 w-4 animate-spin" />
+                {isAnalyzingImage && analyzingFileName ? (
+                  <span className="text-sm text-muted-foreground">Ανάλυση {analyzingFileType?.toLowerCase() || 'αρχείου'}: {analyzingFileName}</span>
+                ) : (
+                  <span className="text-sm text-muted-foreground">Αναμονή απάντησης...</span>
+                )}
+              </div>
             </div>
           </div>
         )}
 
-        <div ref={messagesEndRef} />
-      </div>
-
-      {/* Input Area */}
-      <div className="border-t border-border p-4 bg-background">
-        <div className="flex flex-col gap-2 max-w-4xl mx-auto">
-          {/* Selected File Display */}
-          {selectedFile && (
-            <div className="flex items-center gap-2 px-3 py-2 bg-muted rounded-md">
-              <Paperclip className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm flex-1 truncate">{selectedFile.name}</span>
-              <Button
-                variant="ghost"
-                size="icon"
-                className="h-6 w-6"
-                onClick={handleRemoveFile}
-              >
-                <X className="h-3 w-3" />
-              </Button>
-            </div>
-          )}
-          
-          <div className="flex gap-2">
-            {/* File Input (hidden) */}
-            <Input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*,application/pdf,.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-              onChange={handleFileSelect}
-              className="hidden"
-              id="file-upload"
-            />
-            
-            {/* File Upload Button */}
-            <Button
-              type="button"
-              variant="outline"
-              size="icon"
-              onClick={() => fileInputRef.current?.click()}
-              disabled={isLoading || isAnalyzingImage}
-            >
-              <Paperclip className="h-4 w-4" />
-            </Button>
-
-            {/* Text Input */}
-            <Input
-              ref={inputRef}
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              onKeyPress={handleKeyPress}
-              placeholder="Ρωτήστε κάτι..."
-              className="flex-1"
-              disabled={isAnalyzingImage}
-            />
-
-            {/* Send Button */}
-            <Button
-              onClick={handleSend}
-              disabled={(!inputText.trim() && !selectedFile) || isLoading || isAnalyzingImage}
-              size="icon"
-            >
-              {(isLoading || isAnalyzingImage) ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                <Send className="h-4 w-4" />
-              )}
-            </Button>
+          <div ref={messagesEndRef} />
           </div>
-        </div>
+        </section>
       </div>
+      
+      {/* Hidden Dialogflow Messenger Component - handles API communication */}
+      <div ref={messengerRef} />
     </div>
   )
 }

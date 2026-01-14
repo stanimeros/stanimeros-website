@@ -7,7 +7,7 @@ import GetStarted from "@/pages/GetStarted"
 import QRCodeGenerator from "@/pages/QRCodeGenerator"
 import ImageConverter from "@/pages/ImageConverter"
 import VideoCompressor from "@/pages/VideoCompressor"
-import DialogflowTest from "@/pages/DialogflowTest"
+import CustomChat from "./components/CustomChat"
 
 function App() {
   useEffect(() => {
@@ -26,7 +26,7 @@ function App() {
           <Route path="/tools/qr-code" element={<QRCodeGenerator />} />
           <Route path="/tools/image-converter" element={<ImageConverter />} />
           <Route path="/tools/video-compressor" element={<VideoCompressor />} />
-          <Route path="test/86d66a1b-f8e8-40d3-bc74-920824fee993" element={<DialogflowTest />} />
+          <Route path="test/86d66a1b-f8e8-40d3-bc74-920824fee993" element={<CustomChat />} />
           <Route path="*" element={<HomePage />} />
         </Routes>
       </div>
