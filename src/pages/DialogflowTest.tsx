@@ -90,6 +90,7 @@ const DialogflowTest = () => {
           dfMessenger.setAttribute("language-code", "el")
           dfMessenger.setAttribute("max-query-length", "-1")
           dfMessenger.setAttribute("allow-feedback", "all")
+          dfMessenger.setAttribute("storage-option", "sessionStorage")
           
           // Use chat-bubble (no file upload for now)
           const chatBubble = document.createElement("df-messenger-chat-bubble")
@@ -118,16 +119,11 @@ const DialogflowTest = () => {
     
     style.textContent = `
       df-messenger {
-        /* Hide the messenger visually but keep it functional */
+        /* Temporarily visible for debugging - to inspect HTML structure */
         position: fixed;
-        opacity: 0;
-        pointer-events: none;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        z-index: -1;
-        top: -9999px;
-        left: -9999px;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
         /* Keep all the CSS variables for internal functionality */
         --df-messenger-font-color: #000;
         --df-messenger-font-family: Google Sans;
