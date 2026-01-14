@@ -77,71 +77,35 @@ export default function CustomChat() {
     } else {
       scriptLoadedRef.current = true
     }
-
-    // Cleanup function
-    return () => {
-      // Don't remove link/script on cleanup as they might be needed
-    }
   }, [])
 
   // Create/update messenger
   useEffect(() => {
-    const removeAllMessengers = () => {
-      // Remove all df-messenger elements from the entire DOM, not just the ref container
-      const allMessengers = document.querySelectorAll('df-messenger')
-      allMessengers.forEach(messenger => {
-        // Remove from parent if it exists
-        if (messenger.parentNode) {
-          messenger.parentNode.removeChild(messenger)
-        }
-        // Also try to remove it directly
-        messenger.remove()
-      })
-      
-      // Also clear the ref container
-      if (messengerRef.current) {
-        messengerRef.current.innerHTML = ""
-      }
-    }
-
     const createMessenger = () => {
-      // First, completely remove any existing messengers
-      removeAllMessengers()
-
-      // Wait a bit for script to be ready and for cleanup to complete
-      const checkAndCreate = () => {
-        // Double check that no messengers exist
-        const existingMessengers = document.querySelectorAll('df-messenger')
-        if (existingMessengers.length > 0) {
-          removeAllMessengers()
-          setTimeout(checkAndCreate, 50)
-          return
+      if (messengerRef.current && (scriptLoadedRef.current || window.customElements?.get('df-messenger'))) {
+        // Clear any existing messenger in the ref container
+        if (messengerRef.current) {
+          messengerRef.current.innerHTML = ""
         }
 
-        if (messengerRef.current && (scriptLoadedRef.current || window.customElements?.get('df-messenger'))) {
-          const dfMessenger = document.createElement("df-messenger")
-          dfMessenger.setAttribute("location", "eu")
-          dfMessenger.setAttribute("project-id", "biology-assistant")
-          dfMessenger.setAttribute("agent-id", "86d66a1b-f8e8-40d3-bc74-920824fee993")
-          dfMessenger.setAttribute("language-code", "el")
-          dfMessenger.setAttribute("max-query-length", "-1")
-          dfMessenger.setAttribute("allow-feedback", "all")
-          dfMessenger.setAttribute("storage-option", "sessionStorage")
-          
-          // Use chat-bubble (no file upload for now)
-          const chatBubble = document.createElement("df-messenger-chat-bubble")
-          chatBubble.setAttribute("chat-title", "Βοηθός της Νίκης")
-          chatBubble.setAttribute("placeholder-text", "Ρωτήστε κάτι...")
-          dfMessenger.appendChild(chatBubble)
-          
-          messengerRef.current.appendChild(dfMessenger)
-        } else {
-          setTimeout(checkAndCreate, 100)
-        }
+        const dfMessenger = document.createElement("df-messenger")
+        dfMessenger.setAttribute("location", "eu")
+        dfMessenger.setAttribute("project-id", "biology-assistant")
+        dfMessenger.setAttribute("agent-id", "86d66a1b-f8e8-40d3-bc74-920824fee993")
+        dfMessenger.setAttribute("language-code", "el")
+        dfMessenger.setAttribute("max-query-length", "-1")
+        dfMessenger.setAttribute("allow-feedback", "all")
+        dfMessenger.setAttribute("storage-option", "sessionStorage")
+        
+        const chatBubble = document.createElement("df-messenger-chat-bubble")
+        chatBubble.setAttribute("chat-title", "Βοηθός της Νίκης")
+        chatBubble.setAttribute("placeholder-text", "Ρωτήστε κάτι...")
+        dfMessenger.appendChild(chatBubble)
+        
+        messengerRef.current.appendChild(dfMessenger)
+      } else {
+        setTimeout(createMessenger, 100)
       }
-      
-      // Small delay to ensure cleanup is complete
-      setTimeout(checkAndCreate, 100)
     }
 
     // Add/update styles based on mode
@@ -171,18 +135,8 @@ export default function CustomChat() {
 
     createMessenger()
 
-    // Cleanup function - remove all messengers when component unmounts
+    // Cleanup function
     return () => {
-      // Remove all df-messenger elements from the entire DOM
-      const allMessengers = document.querySelectorAll('df-messenger')
-      allMessengers.forEach(messenger => {
-        if (messenger.parentNode) {
-          messenger.parentNode.removeChild(messenger)
-        }
-        messenger.remove()
-      })
-      
-      // Also clear the ref container
       if (messengerRef.current) {
         messengerRef.current.innerHTML = ""
       }
@@ -198,10 +152,6 @@ export default function CustomChat() {
 
   // Track sent messages to avoid duplicates
   const sentMessagesRef = useRef<Set<string>>(new Set())
-
-  // Initial load of messages from Dialogflow's sessionStorage on mount
-  // Note: Messages are loaded via the df-messenger-message-list-loaded event handler
-  // This effect is kept as a fallback but the main loading happens in event handlers
 
   // Listen to Dialogflow events
   useEffect(() => {
@@ -233,100 +183,15 @@ export default function CustomChat() {
       }
     }
 
-    const handleRequestSent = () => {
-      // Request was sent successfully
-    }
-
     const handleMessengerLoaded = () => {
-      // Restore messages when messenger is loaded
       loadMessagesFromDialogflow()
     }
 
     const handleMessageListLoaded = () => {
-      // Dialogflow has loaded its message list, wait longer for sessionStorage to be updated
-      // Try multiple times with increasing delays
+      // Wait for sessionStorage to be updated
       setTimeout(() => {
         loadMessagesFromDialogflow()
-        // Also try DOM extraction as fallback
-        extractFromDOM()
       }, 500)
-      setTimeout(() => {
-        loadMessagesFromDialogflow()
-        extractFromDOM()
-      }, 1000)
-      setTimeout(() => {
-        loadMessagesFromDialogflow()
-        extractFromDOM()
-      }, 2000)
-    }
-    
-    const extractFromDOM = () => {
-      try {
-        // Find .entry.user and .entry.bot elements directly in the DOM
-        const entries = document.querySelectorAll(".entry.user, .entry.bot")
-        
-        if (entries.length > 0) {
-          extractMessagesFromEntries(Array.from(entries))
-        }
-      } catch (error) {
-        console.error("Error extracting from DOM:", error)
-      }
-    }
-    
-    const extractMessagesFromEntries = (entries: Element[]) => {
-      const restoredMessages: Message[] = []
-      
-      entries.forEach((entry: Element, index: number) => {
-        const isBot = entry.classList.contains('bot')
-        
-        // Find the df-messenger-utterance inside the entry
-        const utterance = entry.querySelector("df-messenger-utterance")
-        if (!utterance?.shadowRoot) return
-
-        // Find the message element inside the utterance shadow DOM
-        // Could be df-text-message or df-markdown-message
-        const textMessage = utterance.shadowRoot.querySelector("df-text-message")
-        const markdownMessage = utterance.shadowRoot.querySelector("df-markdown-message")
-        
-        let messageElement: Element | null = null
-        if (textMessage?.shadowRoot) {
-          messageElement = textMessage.shadowRoot.querySelector(".message.user-message, .message.bot-message")
-        } else if (markdownMessage?.shadowRoot) {
-          messageElement = markdownMessage.shadowRoot.querySelector(".message.user-message, .message.bot-message")
-        }
-
-        if (!messageElement) return
-
-        // Extract text content - could be in a div or p tag
-        let textContent = ""
-        const textDiv = messageElement.querySelector("div, p")
-        if (textDiv) {
-          textContent = textDiv.textContent?.trim() || ""
-        } else {
-          textContent = messageElement.textContent?.trim() || ""
-        }
-
-        if (textContent && textContent.length > 0) {
-          // Skip if it's a duplicate
-          const existingText = restoredMessages.find(m => m.text === textContent)
-          if (!existingText) {
-            restoredMessages.push({
-              id: `dom-${index}-${Date.now()}`,
-              text: textContent,
-              isBot: isBot,
-              timestamp: new Date(),
-            })
-          }
-        }
-      })
-      
-      if (restoredMessages.length > 0) {
-        setMessages(prev => {
-          const existingTexts = new Set(prev.map(m => m.text))
-          const newMessages = restoredMessages.filter(m => !existingTexts.has(m.text))
-          return newMessages.length > 0 ? [...prev, ...newMessages] : prev
-        })
-      }
     }
 
     const loadMessagesFromDialogflow = () => {
@@ -411,13 +276,11 @@ export default function CustomChat() {
             if (parsedObjects.length > 0) {
               dialogflowData = parsedObjects
             } else {
-              console.error("Could not extract any valid JSON objects, trying DOM extraction")
-              extractFromDOM()
+              console.error("Could not extract any valid JSON objects from sessionStorage")
               return
             }
           } catch (e) {
-            console.error("Failed to parse Dialogflow messages, trying DOM extraction:", e)
-            extractFromDOM()
+            console.error("Failed to parse Dialogflow messages:", e)
             return
           }
         }
@@ -558,9 +421,6 @@ export default function CustomChat() {
             const newMessages = restoredMessages.filter(m => {
               const existsById = existingIds.has(m.id)
               const existsByText = existingTexts.has(`${m.text}-${m.isBot}`)
-              if (existsById || existsByText) {
-                console.log('[loadMessagesFromDialogflow] Filtering duplicate:', { text: m.text.substring(0, 50), existsById, existsByText })
-              }
               return !existsById && !existsByText
             })
             if (newMessages.length > 0) {
@@ -577,14 +437,12 @@ export default function CustomChat() {
 
     window.addEventListener("df-response-received", handleResponseReceived)
     window.addEventListener("df-user-input-entered", handleUserInputEntered)
-    window.addEventListener("df-request-sent", handleRequestSent)
     window.addEventListener("df-messenger-loaded", handleMessengerLoaded)
     window.addEventListener("df-messenger-message-list-loaded", handleMessageListLoaded)
 
     return () => {
       window.removeEventListener("df-response-received", handleResponseReceived)
       window.removeEventListener("df-user-input-entered", handleUserInputEntered)
-      window.removeEventListener("df-request-sent", handleRequestSent)
       window.removeEventListener("df-messenger-loaded", handleMessengerLoaded)
       window.removeEventListener("df-messenger-message-list-loaded", handleMessageListLoaded)
     }
@@ -805,7 +663,7 @@ export default function CustomChat() {
     try {
       sessionStorage.removeItem(DIALOGFLOW_MESSAGES_KEY)
       
-      // Also try to clear other Dialogflow-related keys
+      // Clear other Dialogflow-related keys
       const keysToRemove: string[] = []
       for (let i = 0; i < sessionStorage.length; i++) {
         const key = sessionStorage.key(i)
@@ -814,9 +672,6 @@ export default function CustomChat() {
         }
       }
       keysToRemove.forEach(key => sessionStorage.removeItem(key))
-      
-      // Trigger Dialogflow to refresh by dispatching a custom event
-      window.dispatchEvent(new CustomEvent('df-clear-messages'))
     } catch (error) {
       console.error("Error clearing Dialogflow messages:", error)
     }
