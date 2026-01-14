@@ -15,7 +15,7 @@ interface Message {
   fileName?: string
 }
 
-// Dialogflow stores messages in sessionStorage with key "df-messenger-messages"
+const CUSTOM_MESSAGES_KEY = "custom-chat-messages"
 const DIALOGFLOW_MESSAGES_KEY = "df-messenger-messages"
 
 const SUGGESTED_QUESTIONS = [
@@ -39,11 +39,47 @@ export default function CustomChat() {
   const inputRef = useRef<HTMLInputElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const dialogflowMessengerRef = useRef<DialogflowMessengerRef>(null)
+  const isInitializedRef = useRef(false)
 
   // Scroll to bottom when new messages arrive
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: "smooth" })
+    }
+  }, [messages])
+
+  // Restore messages from sessionStorage on mount
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem(CUSTOM_MESSAGES_KEY)
+      if (stored) {
+        const parsed = JSON.parse(stored)
+        if (Array.isArray(parsed)) {
+          const restoredMessages: Message[] = parsed.map((msg: any) => ({
+            ...msg,
+            timestamp: new Date(msg.timestamp)
+          }))
+          setMessages(restoredMessages)
+        }
+      }
+    } catch (error) {
+      console.error("[CustomChat] Error loading messages from sessionStorage:", error)
+    }
+    isInitializedRef.current = true
+  }, [])
+
+  // Save messages to sessionStorage whenever messages change (but skip initial mount)
+  useEffect(() => {
+    if (!isInitializedRef.current) return
+    
+    try {
+      const serialized = JSON.stringify(messages.map(msg => ({
+        ...msg,
+        timestamp: msg.timestamp.toISOString()
+      })))
+      sessionStorage.setItem(CUSTOM_MESSAGES_KEY, serialized)
+    } catch (error) {
+      console.error("[CustomChat] Error saving messages to sessionStorage:", error)
     }
   }, [messages])
 
@@ -97,131 +133,12 @@ export default function CustomChat() {
       }
     }
 
-    const handleMessengerLoaded = () => {
-      console.log("[CustomChat:events] df-messenger-loaded event triggered")
-      loadMessagesFromDialogflow()
-    }
-
-    const handleMessageListLoaded = () => {
-      console.log("[CustomChat:events] df-messenger-message-list-loaded event triggered")
-      // Wait for sessionStorage to be updated
-      setTimeout(() => {
-        loadMessagesFromDialogflow()
-      }, 500)
-    }
-
-    const loadMessagesFromDialogflow = () => {
-      console.log("[CustomChat:loadMessages] Starting loadMessagesFromDialogflow")
-      try {
-        const stored = sessionStorage.getItem(DIALOGFLOW_MESSAGES_KEY)
-        
-        if (!stored) {
-          console.log("[CustomChat:loadMessages] No messages found in sessionStorage")
-          return
-        }
-        
-        console.log("[CustomChat:loadMessages] Found messages using default key")
-        
-        // Parse the data - Dialogflow stores multiple JSON objects that need regex extraction
-        let dialogflowData: any
-        try {
-          dialogflowData = JSON.parse(stored)
-          console.log("[CustomChat:loadMessages] Successfully parsed JSON directly")
-        } catch (parseError: any) {
-          console.log("[CustomChat:loadMessages] Direct JSON parse failed, using regex extraction")
-          // Dialogflow stores multiple JSON objects, extract them using regex
-          const jsonPattern = /\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}/g
-          const parsedObjects: any[] = []
-          let match
-          
-          while ((match = jsonPattern.exec(stored)) !== null) {
-            try {
-              const parsed = JSON.parse(match[0])
-              if (parsed.utteranceId || parsed.queryText || parsed.responseMessages) {
-                parsedObjects.push(parsed)
-              }
-            } catch (e) {
-              // Skip invalid JSON
-            }
-          }
-          
-          if (parsedObjects.length > 0) {
-            dialogflowData = parsedObjects
-            console.log(`[CustomChat:loadMessages] Successfully parsed ${parsedObjects.length} objects using regex`)
-          } else {
-            console.error("[CustomChat:loadMessages] Could not extract any valid JSON objects from sessionStorage")
-            return
-          }
-        }
-        
-        const restoredMessages: Message[] = []
-        
-        if (!Array.isArray(dialogflowData)) {
-          console.error("[CustomChat:loadMessages] Expected array but got:", typeof dialogflowData)
-          return
-        }
-        
-        const messagesArray = dialogflowData
-        console.log(`[CustomChat:loadMessages] Processing ${messagesArray.length} messages`)
-        
-        messagesArray.forEach((msg: any, index: number) => {
-          const isBot = msg.isBot === true
-          
-          // Extract messages from messages array (Dialogflow CX format)
-          if (msg.messages && Array.isArray(msg.messages)) {
-            msg.messages.forEach((messageItem: any, msgIndex: number) => {
-              // Extract text - Dialogflow uses messageItem.text as a string
-              if (messageItem.text && typeof messageItem.text === 'string') {
-                const textContent = messageItem.text.trim()
-                if (textContent) {
-                  restoredMessages.push({
-                    id: `${msg.utteranceId || 'msg'}-${index}-${msgIndex}`,
-                    text: textContent,
-                    isBot: isBot,
-                    timestamp: msg.timestamp ? new Date(msg.timestamp) : new Date(),
-                  })
-                }
-              }
-            })
-          }
-        })
-        
-        if (restoredMessages.length > 0) {
-          console.log(`[CustomChat:loadMessages] Restored ${restoredMessages.length} messages total`)
-          restoredMessages.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime())
-          setMessages(prev => {
-            const existingIds = new Set(prev.map(m => m.id))
-            const existingTexts = new Set(prev.map(m => `${m.text}-${m.isBot}`))
-            const newMessages = restoredMessages.filter(m => {
-              const existsById = existingIds.has(m.id)
-              const existsByText = existingTexts.has(`${m.text}-${m.isBot}`)
-              return !existsById && !existsByText
-            })
-            console.log(`[CustomChat:loadMessages] Adding ${newMessages.length} new messages (${restoredMessages.length - newMessages.length} duplicates filtered)`)
-            if (newMessages.length > 0) {
-              return [...prev, ...newMessages].sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime())
-            }
-            return prev
-          })
-        } else {
-          console.log("[CustomChat:loadMessages] No messages restored")
-        }
-      } catch (error) {
-        console.error("[CustomChat:loadMessages] Error loading messages from Dialogflow sessionStorage:", error)
-      }
-    }
-
-
     window.addEventListener("df-response-received", handleResponseReceived)
     window.addEventListener("df-user-input-entered", handleUserInputEntered)
-    window.addEventListener("df-messenger-loaded", handleMessengerLoaded)
-    window.addEventListener("df-messenger-message-list-loaded", handleMessageListLoaded)
 
     return () => {
       window.removeEventListener("df-response-received", handleResponseReceived)
       window.removeEventListener("df-user-input-entered", handleUserInputEntered)
-      window.removeEventListener("df-messenger-loaded", handleMessengerLoaded)
-      window.removeEventListener("df-messenger-message-list-loaded", handleMessageListLoaded)
     }
   }, [addMessage])
 
@@ -427,21 +344,12 @@ export default function CustomChat() {
     setMessages([])
     sentMessagesRef.current.clear()
     
-    // Clear Dialogflow's messages from sessionStorage
+    // Clear both custom messages and Dialogflow messages from sessionStorage
     try {
+      sessionStorage.removeItem(CUSTOM_MESSAGES_KEY)
       sessionStorage.removeItem(DIALOGFLOW_MESSAGES_KEY)
-      
-      // Clear other Dialogflow-related keys
-      const keysToRemove: string[] = []
-      for (let i = 0; i < sessionStorage.length; i++) {
-        const key = sessionStorage.key(i)
-        if (key && (key.includes('dfMessenger') || key.includes('reaction') || key === 'chatBubbleExpansion' || key === 'chatScrollDistance')) {
-          keysToRemove.push(key)
-        }
-      }
-      keysToRemove.forEach(key => sessionStorage.removeItem(key))
     } catch (error) {
-      console.error("Error clearing Dialogflow messages:", error)
+      console.error("[CustomChat] Error clearing messages from sessionStorage:", error)
     }
   }
 

@@ -88,8 +88,6 @@ const DialogflowMessenger = forwardRef<DialogflowMessengerRef, DialogflowMesseng
           dfMessenger.setAttribute("agent-id", agentId)
           dfMessenger.setAttribute("language-code", languageCode)
           dfMessenger.setAttribute("max-query-length", "-1")
-          dfMessenger.setAttribute("allow-feedback", "all")
-          dfMessenger.setAttribute("storage-option", "sessionStorage")
           
           const chatBubble = document.createElement("df-messenger-chat-bubble")
           chatBubble.setAttribute("chat-title", chatTitle)
