@@ -64,8 +64,10 @@ export default function CustomChat() {
   // Listen to Dialogflow events
   useEffect(() => {
     const handleResponseReceived = (event: Event) => {
+      console.log("[CustomChat:events] df-response-received event triggered")
       const customEvent = event as CustomEvent<{ messages: Array<{ type: string; text: string }> }>
       const responseMessages = customEvent.detail?.messages || []
+      console.log(`[CustomChat:events] Received ${responseMessages.length} response messages`)
 
       responseMessages.forEach((msg) => {
         if (msg.type === "text" && msg.text) {
@@ -77,6 +79,7 @@ export default function CustomChat() {
     }
 
     const handleUserInputEntered = (event: Event) => {
+      console.log("[CustomChat:events] df-user-input-entered event triggered")
       const customEvent = event as CustomEvent<{ input: string; file?: File }>
       const input = customEvent.detail?.input
 
@@ -84,18 +87,23 @@ export default function CustomChat() {
         // Only add if we haven't already added this message
         // (handleSend/handleSuggestedQuestion add it before sending)
         if (!sentMessagesRef.current.has(input)) {
+          console.log("[CustomChat:events] Adding user input message (not already sent)")
           addMessage(input, false)
           sentMessagesRef.current.add(input)
+        } else {
+          console.log("[CustomChat:events] User input already sent, skipping")
         }
         setIsLoading(true)
       }
     }
 
     const handleMessengerLoaded = () => {
+      console.log("[CustomChat:events] df-messenger-loaded event triggered")
       loadMessagesFromDialogflow()
     }
 
     const handleMessageListLoaded = () => {
+      console.log("[CustomChat:events] df-messenger-message-list-loaded event triggered")
       // Wait for sessionStorage to be updated
       setTimeout(() => {
         loadMessagesFromDialogflow()
@@ -103,225 +111,83 @@ export default function CustomChat() {
     }
 
     const loadMessagesFromDialogflow = () => {
+      console.log("[CustomChat:loadMessages] Starting loadMessagesFromDialogflow")
       try {
-        // Check all sessionStorage keys to find Dialogflow messages
-        let stored = sessionStorage.getItem(DIALOGFLOW_MESSAGES_KEY)
-        
-        // If not found with default key, check all keys
-        if (!stored) {
-          for (let i = 0; i < sessionStorage.length; i++) {
-            const key = sessionStorage.key(i)
-            if (!key) continue
-            
-            // Skip non-Dialogflow keys
-            if (key.includes('-reaction') || key === 'chatBubbleExpansion' || key === 'chatScrollDistance' || 
-                key === 'sessionID' || key === 'isWaitingForElement' || key === 'lastResponseInstant' ||
-                key.startsWith('dfMessenger-') && !key.includes('message')) {
-              continue
-            }
-            
-            const value = sessionStorage.getItem(key)
-            if (value && value.length > 10) { // At least some content
-              try {
-                const parsed = JSON.parse(value)
-                // Check if it looks like Dialogflow message data
-                if (parsed.utteranceId || 
-                    (Array.isArray(parsed) && parsed.length > 0 && parsed[0]?.utteranceId) ||
-                    (typeof parsed === 'object' && Object.keys(parsed).some(k => k.includes('utterance') || k.includes('message')))) {
-                  stored = value
-                  break
-                }
-              } catch (e) {
-                // Not JSON, skip
-              }
-            }
-          }
-        }
+        const stored = sessionStorage.getItem(DIALOGFLOW_MESSAGES_KEY)
         
         if (!stored) {
+          console.log("[CustomChat:loadMessages] No messages found in sessionStorage")
           return
         }
         
-        // Try to parse the data - it might be multiple JSON objects or malformed
+        console.log("[CustomChat:loadMessages] Found messages using default key")
+        
+        // Parse the data - Dialogflow stores multiple JSON objects that need regex extraction
         let dialogflowData: any
         try {
           dialogflowData = JSON.parse(stored)
+          console.log("[CustomChat:loadMessages] Successfully parsed JSON directly")
         } catch (parseError: any) {
-          // If parsing fails, try to extract valid JSON objects
-          try {
-            // Try splitting by potential separators or finding individual objects
-            // Dialogflow might store multiple JSON objects
-            const lines = stored.split('\n').filter(l => l.trim())
-            const parsedObjects: any[] = []
-            
-            for (const line of lines) {
-              try {
-                const parsed = JSON.parse(line.trim())
-                if (parsed.utteranceId || parsed.queryText || parsed.responseMessages) {
-                  parsedObjects.push(parsed)
-                }
-              } catch (e) {
-                // Not a valid JSON line, skip
+          console.log("[CustomChat:loadMessages] Direct JSON parse failed, using regex extraction")
+          // Dialogflow stores multiple JSON objects, extract them using regex
+          const jsonPattern = /\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}/g
+          const parsedObjects: any[] = []
+          let match
+          
+          while ((match = jsonPattern.exec(stored)) !== null) {
+            try {
+              const parsed = JSON.parse(match[0])
+              if (parsed.utteranceId || parsed.queryText || parsed.responseMessages) {
+                parsedObjects.push(parsed)
               }
+            } catch (e) {
+              // Skip invalid JSON
             }
-            
-            // If that didn't work, try regex to find JSON objects
-            if (parsedObjects.length === 0) {
-              const jsonPattern = /\{[^{}]*(?:\{[^{}]*\}[^{}]*)*\}/g
-              let match
-              while ((match = jsonPattern.exec(stored)) !== null) {
-                try {
-                  const parsed = JSON.parse(match[0])
-                  if (parsed.utteranceId || parsed.queryText || parsed.responseMessages) {
-                    parsedObjects.push(parsed)
-                  }
-                } catch (e) {
-                  // Skip invalid JSON
-                }
-              }
-            }
-            
-            if (parsedObjects.length > 0) {
-              dialogflowData = parsedObjects
-            } else {
-              console.error("Could not extract any valid JSON objects from sessionStorage")
-              return
-            }
-          } catch (e) {
-            console.error("Failed to parse Dialogflow messages:", e)
+          }
+          
+          if (parsedObjects.length > 0) {
+            dialogflowData = parsedObjects
+            console.log(`[CustomChat:loadMessages] Successfully parsed ${parsedObjects.length} objects using regex`)
+          } else {
+            console.error("[CustomChat:loadMessages] Could not extract any valid JSON objects from sessionStorage")
             return
           }
         }
         
         const restoredMessages: Message[] = []
-        let messagesArray: any[] = []
         
-        if (Array.isArray(dialogflowData)) {
-          messagesArray = dialogflowData
-        } else if (dialogflowData.utteranceId) {
-          // Single message object
-          messagesArray = [dialogflowData]
-        } else if (dialogflowData.messages && Array.isArray(dialogflowData.messages)) {
-          messagesArray = dialogflowData.messages
-        } else {
-          // Try to find messages in nested structure
-          const findMessages = (obj: any, depth = 0): any[] => {
-            if (depth > 3) return []
-            if (Array.isArray(obj)) return obj
-            if (obj && typeof obj === 'object') {
-              if (obj.utteranceId) return [obj]
-              for (const key in obj) {
-                if (key.toLowerCase().includes('message') || key.toLowerCase().includes('utterance')) {
-                  const found = findMessages(obj[key], depth + 1)
-                  if (found.length > 0) return found
-                }
-              }
-            }
-            return []
-          }
-          messagesArray = findMessages(dialogflowData)
+        if (!Array.isArray(dialogflowData)) {
+          console.error("[CustomChat:loadMessages] Expected array but got:", typeof dialogflowData)
+          return
         }
+        
+        const messagesArray = dialogflowData
+        console.log(`[CustomChat:loadMessages] Processing ${messagesArray.length} messages`)
         
         messagesArray.forEach((msg: any, index: number) => {
           const isBot = msg.isBot === true
           
-          // Check if it has messages array (Dialogflow CX format)
+          // Extract messages from messages array (Dialogflow CX format)
           if (msg.messages && Array.isArray(msg.messages)) {
             msg.messages.forEach((messageItem: any, msgIndex: number) => {
-              // Extract text from the message item
-              let textContent = ""
-              
-              if (messageItem.text) {
-                // Handle different text formats
-                if (typeof messageItem.text === 'string') {
-                  textContent = messageItem.text
-                } else if (messageItem.text.text) {
-                  if (Array.isArray(messageItem.text.text)) {
-                    textContent = messageItem.text.text.join(' ')
-                  } else if (typeof messageItem.text.text === 'string') {
-                    textContent = messageItem.text.text
-                  }
+              // Extract text - Dialogflow uses messageItem.text as a string
+              if (messageItem.text && typeof messageItem.text === 'string') {
+                const textContent = messageItem.text.trim()
+                if (textContent) {
+                  restoredMessages.push({
+                    id: `${msg.utteranceId || 'msg'}-${index}-${msgIndex}`,
+                    text: textContent,
+                    isBot: isBot,
+                    timestamp: msg.timestamp ? new Date(msg.timestamp) : new Date(),
+                  })
                 }
-              } else if (messageItem.payload) {
-                // Might be in payload - try to extract text
-                if (typeof messageItem.payload === 'string') {
-                  try {
-                    const payload = JSON.parse(messageItem.payload)
-                    if (payload.text) {
-                      textContent = typeof payload.text === 'string' ? payload.text : JSON.stringify(payload.text)
-                    }
-                  } catch (e) {
-                    textContent = messageItem.payload
-                  }
-                } else if (messageItem.payload?.text) {
-                  textContent = typeof messageItem.payload.text === 'string' ? messageItem.payload.text : JSON.stringify(messageItem.payload.text)
-                } else {
-                  // Try to stringify the whole payload
-                  textContent = JSON.stringify(messageItem.payload)
-                }
-              } else if (messageItem.type === 'text' && messageItem.content) {
-                // Alternative format
-                textContent = messageItem.content
-              } else if (typeof messageItem === 'string') {
-                // Message item is directly a string
-                textContent = messageItem
-              }
-              
-              if (textContent && textContent.trim()) {
-                restoredMessages.push({
-                  id: `${msg.utteranceId || 'msg'}-${index}-${msgIndex}`,
-                  text: textContent.trim(),
-                  isBot: isBot,
-                  timestamp: msg.timestamp ? new Date(msg.timestamp) : new Date(),
-                })
-              }
-            })
-          }
-          
-          // Fallback: check for queryText (user input)
-          if (msg.queryText) {
-            const userText = msg.queryText
-            if (!sentMessagesRef.current.has(userText)) {
-              restoredMessages.push({
-                id: msg.utteranceId || `user-${Date.now()}-${index}`,
-                text: userText,
-                isBot: false,
-                timestamp: msg.timestamp ? new Date(msg.timestamp) : new Date(),
-              })
-              sentMessagesRef.current.add(userText)
-            }
-          }
-          
-          // Fallback: check for responseMessages (old format)
-          if (msg.responseMessages && Array.isArray(msg.responseMessages)) {
-            msg.responseMessages.forEach((response: any, respIndex: number) => {
-              if (response.text) {
-                // Handle different response formats
-                let texts: string[] = []
-                if (response.text.text && Array.isArray(response.text.text)) {
-                  texts = response.text.text
-                } else if (typeof response.text === 'string') {
-                  texts = [response.text]
-                } else if (response.text.text && typeof response.text.text === 'string') {
-                  texts = [response.text.text]
-                }
-                
-                texts.forEach((text: string) => {
-                  if (text && text.trim()) {
-                    restoredMessages.push({
-                      id: `${msg.utteranceId || 'response'}-${index}-${respIndex}-${Math.random().toString(36).substr(2, 9)}`,
-                      text: text.trim(),
-                      isBot: true,
-                      timestamp: msg.timestamp ? new Date(msg.timestamp) : new Date(),
-                    })
-                  }
-                })
               }
             })
           }
         })
         
         if (restoredMessages.length > 0) {
+          console.log(`[CustomChat:loadMessages] Restored ${restoredMessages.length} messages total`)
           restoredMessages.sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime())
           setMessages(prev => {
             const existingIds = new Set(prev.map(m => m.id))
@@ -331,14 +197,17 @@ export default function CustomChat() {
               const existsByText = existingTexts.has(`${m.text}-${m.isBot}`)
               return !existsById && !existsByText
             })
+            console.log(`[CustomChat:loadMessages] Adding ${newMessages.length} new messages (${restoredMessages.length - newMessages.length} duplicates filtered)`)
             if (newMessages.length > 0) {
               return [...prev, ...newMessages].sort((a, b) => a.timestamp.getTime() - b.timestamp.getTime())
             }
             return prev
           })
+        } else {
+          console.log("[CustomChat:loadMessages] No messages restored")
         }
       } catch (error) {
-        console.error("Error loading messages from Dialogflow sessionStorage:", error)
+        console.error("[CustomChat:loadMessages] Error loading messages from Dialogflow sessionStorage:", error)
       }
     }
 
@@ -422,10 +291,12 @@ export default function CustomChat() {
 
       // Click send button if available
       if (sendButton && !sendButton.disabled) {
+        console.log("[CustomChat:sendMessage] Using send button click method")
         sendButton.click()
         return true
       } else {
         // Try Enter key as fallback
+        console.log("[CustomChat:sendMessage] Send button not available, using Enter key fallback")
         const enterEvent = new KeyboardEvent("keydown", {
           key: "Enter",
           code: "Enter",
