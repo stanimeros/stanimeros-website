@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { Send, Loader2, Paperclip, X, Trash2 } from "lucide-react"
-import { analyzeImageWithGemini } from "@/lib/gemini"
+import { analyzeFileWithGemini } from "@/lib/gemini"
 
 interface Message {
   id: string
@@ -32,8 +31,9 @@ export default function CustomChat() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [isAnalyzingImage, setIsAnalyzingImage] = useState(false)
   const [analyzingFileName, setAnalyzingFileName] = useState<string | null>(null)
+  const [analyzingFileType, setAnalyzingFileType] = useState<string | null>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
-  const textareaRef = useRef<HTMLTextAreaElement>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   // Scroll to bottom when new messages arrive
@@ -41,13 +41,6 @@ export default function CustomChat() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
   }, [messages])
 
-  // Auto-resize textarea
-  useEffect(() => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = "auto"
-      textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
-    }
-  }, [inputText])
 
   // Track sent messages to avoid duplicates
   const sentMessagesRef = useRef<Set<string>>(new Set())
@@ -532,10 +525,14 @@ export default function CustomChat() {
     return trySend()
   }
 
-  const handleSend = async () => {
-    if (!inputText.trim() && !selectedFile) return
+  const handleSend = async (overrideTextOrEvent?: string | React.MouseEvent<HTMLButtonElement>) => {
+    // Handle both direct call with text and event handler call
+    const textToUse = typeof overrideTextOrEvent === 'string' 
+      ? overrideTextOrEvent 
+      : inputText.trim()
+    if (!textToUse && !selectedFile) return
 
-    const text = inputText.trim()
+    const text = textToUse
     const fileName = selectedFile?.name || undefined
     const fileToAnalyze = selectedFile
     
@@ -543,38 +540,53 @@ export default function CustomChat() {
     setSelectedFile(null)
     setInputText("")
     
+    // Determine file type and display text
+    const isImage = fileToAnalyze?.type.startsWith('image/')
+    const isPDF = fileToAnalyze?.type === 'application/pdf'
+    const isDOCX = fileToAnalyze?.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || 
+                   fileToAnalyze?.name.toLowerCase().endsWith('.docx')
+    
+    let fileTypeLabel = ''
+    if (isImage) fileTypeLabel = 'Εικόνα'
+    else if (isPDF) fileTypeLabel = 'PDF'
+    else if (isDOCX) fileTypeLabel = 'DOCX'
+    
     // Display only the input text in the chat (not the analysis)
-    const displayText = text || (fileName ? `Εικόνα: ${fileName}` : "")
+    const displayText = text || (fileName ? `${fileTypeLabel}: ${fileName}` : "")
     
     // If there's a file, analyze it first for Dialogflow
     let finalText = text
     if (fileToAnalyze && fileName) {
       setIsAnalyzingImage(true)
       setAnalyzingFileName(fileName)
+      setAnalyzingFileType(fileTypeLabel)
       try {
-        const analysis = await analyzeImageWithGemini(fileToAnalyze)
+        const analysis = await analyzeFileWithGemini(fileToAnalyze)
         if (analysis.error) {
           // Show error message
-          addMessage(`Σφάλμα ανάλυσης εικόνας: ${analysis.error}`, false, fileName)
+          addMessage(`Σφάλμα ανάλυσης ${fileTypeLabel.toLowerCase()}: ${analysis.error}`, false, fileName)
           setIsAnalyzingImage(false)
           setAnalyzingFileName(null)
+          setAnalyzingFileType(null)
           return
         }
         // Combine input text with Gemini analysis for Dialogflow
         if (text) {
-          finalText = `${text}\n\n[Ανάλυση εικόνας "${fileName}"]:\n${analysis.text}`
+          finalText = `${text}\n\n[Ανάλυση ${fileTypeLabel.toLowerCase()} "${fileName}"]:\n${analysis.text}`
         } else {
-          finalText = `[Ανάλυση εικόνας "${fileName}"]:\n${analysis.text}`
+          finalText = `[Ανάλυση ${fileTypeLabel.toLowerCase()} "${fileName}"]:\n${analysis.text}`
         }
       } catch (error) {
-        console.error("Error analyzing image:", error)
-        addMessage(`Σφάλμα ανάλυσης εικόνας: ${error instanceof Error ? error.message : "Άγνωστο σφάλμα"}`, false, fileName)
+        console.error(`Error analyzing ${fileTypeLabel.toLowerCase()}:`, error)
+        addMessage(`Σφάλμα ανάλυσης ${fileTypeLabel.toLowerCase()}: ${error instanceof Error ? error.message : "Άγνωστο σφάλμα"}`, false, fileName)
         setIsAnalyzingImage(false)
         setAnalyzingFileName(null)
+        setAnalyzingFileType(null)
         return
       } finally {
         setIsAnalyzingImage(false)
         setAnalyzingFileName(null)
+        setAnalyzingFileType(null)
       }
     }
     
@@ -587,18 +599,8 @@ export default function CustomChat() {
     sendMessageToDialogflow(finalText)
   }
 
-  const handleSuggestedQuestion = (question: string) => {
-    // Add user message to UI immediately
-    addMessage(question, false)
-    sentMessagesRef.current.add(question)
-    setIsLoading(true)
-
-    // Send to Dialogflow
-    sendMessageToDialogflow(question)
-  }
-
-  const handleKeyPress = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === "Enter" && !e.shiftKey) {
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
       e.preventDefault()
       handleSend()
     }
@@ -607,9 +609,14 @@ export default function CustomChat() {
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
-      // Check if it's an image
-      if (!file.type.startsWith('image/')) {
-        alert('Παρακαλώ επιλέξτε ένα αρχείο εικόνας')
+      // Check if it's a supported file type (image, PDF, or DOCX)
+      const isImage = file.type.startsWith('image/')
+      const isPDF = file.type === 'application/pdf'
+      const isDOCX = file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || 
+                     file.name.toLowerCase().endsWith('.docx')
+      
+      if (!isImage && !isPDF && !isDOCX) {
+        alert('Παρακαλώ επιλέξτε ένα αρχείο εικόνας, PDF ή DOCX')
         return
       }
       setSelectedFile(file)
@@ -682,7 +689,7 @@ export default function CustomChat() {
                   key={index}
                   variant="outline"
                   className="text-left h-auto py-3 px-4 whitespace-normal justify-start"
-                  onClick={() => handleSuggestedQuestion(question)}
+                  onClick={() => handleSend(question)}
                 >
                   {question}
                 </Button>
@@ -730,7 +737,7 @@ export default function CustomChat() {
             <div className="bg-muted rounded-lg p-3 flex items-center gap-2">
               <Loader2 className="h-4 w-4 animate-spin" />
               {isAnalyzingImage && analyzingFileName ? (
-                <span className="text-sm text-muted-foreground">Ανάλυση εικόνας: {analyzingFileName}</span>
+                <span className="text-sm text-muted-foreground">Ανάλυση {analyzingFileType?.toLowerCase() || 'αρχείου'}: {analyzingFileName}</span>
               ) : (
                 <span className="text-sm text-muted-foreground">Αναμονή απάντησης...</span>
               )}
@@ -765,7 +772,7 @@ export default function CustomChat() {
             <Input
               ref={fileInputRef}
               type="file"
-              accept="image/*"
+              accept="image/*,application/pdf,.docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
               onChange={handleFileSelect}
               className="hidden"
               id="file-upload"
@@ -776,7 +783,6 @@ export default function CustomChat() {
               type="button"
               variant="outline"
               size="icon"
-              className="h-[60px] w-[60px]"
               onClick={() => fileInputRef.current?.click()}
               disabled={isLoading || isAnalyzingImage}
             >
@@ -784,14 +790,13 @@ export default function CustomChat() {
             </Button>
 
             {/* Text Input */}
-            <Textarea
-              ref={textareaRef}
+            <Input
+              ref={inputRef}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="Ρωτήστε κάτι..."
-              className="flex-1 min-h-[60px] max-h-[120px] resize-none"
-              rows={1}
+              className="flex-1"
               disabled={isAnalyzingImage}
             />
 
@@ -800,7 +805,6 @@ export default function CustomChat() {
               onClick={handleSend}
               disabled={(!inputText.trim() && !selectedFile) || isLoading || isAnalyzingImage}
               size="icon"
-              className="h-[60px] w-[60px]"
             >
               {(isLoading || isAnalyzingImage) ? (
                 <Loader2 className="h-4 w-4 animate-spin" />

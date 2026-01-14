@@ -17,6 +17,9 @@ declare global {
 }
 
 const DialogflowTest = () => {
+  // Flag to hide/show the actual df-messenger UI
+  const HIDE_DF_MESSENGER = true
+  
   const messengerRef = useRef<HTMLDivElement>(null)
   const scriptLoadedRef = useRef(false)
 
@@ -119,7 +122,7 @@ const DialogflowTest = () => {
     
     style.textContent = `
       df-messenger {
-        /* Temporarily visible for debugging - to inspect HTML structure */
+        ${HIDE_DF_MESSENGER ? 'display: none !important; visibility: hidden !important; opacity: 0 !important;' : ''}
         position: fixed;
         bottom: 20px;
         right: 20px;
