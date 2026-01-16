@@ -5,7 +5,7 @@
 
 import mammoth from "mammoth"
 
-const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY
+const GEMINI_API_KEY = import.meta.env.GEMINI_API_KEY
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent'
 
 export interface GeminiFileAnalysis {
@@ -82,7 +82,7 @@ export async function analyzeFileWithGemini(
   if (!GEMINI_API_KEY) {
     return {
       text: '',
-      error: 'Gemini API key not configured. Please set VITE_GEMINI_API_KEY environment variable.'
+      error: 'Gemini API key not configured. Please set GEMINI_API_KEY environment variable.'
     }
   }
 

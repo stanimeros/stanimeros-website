@@ -9,7 +9,7 @@ dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const GEMINI_API_KEY = process.env.VITE_GEMINI_API_KEY;
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const LOCALES_PATH = path.join(__dirname, '../src/i18n/locales');
 const SOURCE_PATH = path.join(__dirname, '../src');
 const TARGET_LANGUAGES = ['el'];
