@@ -140,10 +140,6 @@
         "title": "MP-Transfer",
         "description": "Διαχείριση ραντεβού και μεταφορών για ξενοδοχεία και τουριστικές εταιρείες."
       },
-      "tapfast": {
-        "title": "TapFast",
-        "description": "Πλατφόρμα QR για badges, κάρτες, κουπόνια και loyalty προγράμματα."
-      },
       "mealAi": {
         "title": "Meal AI",
         "description": "Εφαρμογή με AI που αναγνωρίζει τρόφιμα για παρακολούθηση διατροφής."
@@ -151,10 +147,6 @@
       "near": {
         "title": "Near",
         "description": "Social εφαρμογή με έμφαση στην ιδιωτικότητα και τον έλεγχο δεδομένων."
-      },
-      "reserwave": {
-        "title": "Reserwave",
-        "description": "Πλατφόρμα κρατήσεων και ανακαλύψεων για επιχειρήσεις και χρήστες."
       },
       "hedeos": {
         "title": "Ηδέως",
@@ -171,6 +163,22 @@
       "tattooHealer": {
         "title": "Tattoo Healer",
         "description": "Πλατφόρμα εξατομικευμένης φροντίδας τατουάζ με εκπαιδευτικό περιεχόμενο και σύνδεση με καλλιτέχνες."
+      },
+      "veridictum": {
+        "title": "Veridictum",
+        "description": "Πλατφόρμα νομικής τεχνολογίας με τεχνητή νοημοσύνη."
+      },
+      "process": {
+        "title": "Process",
+        "description": "Σύστημα παρακολούθησης παραγωγής για βιομηχανικές μονάδες."
+      },
+      "skiGreece": {
+        "title": "Ski Greece",
+        "description": "Πλατφόρμα για ελληνικά χιονοδρομικά κέντρα και χειμερινά αθλήματα."
+      },
+      "nikiMargariti": {
+        "title": "Niki Margariti Lab",
+        "description": "AI chatbot για μαθητές στην Ελλάδα με εκπαιδευτική υποστήριξη."
       }
     }
   },

@@ -50,7 +50,7 @@ const HomePage = () => {
   // Refs for card animations
   const serviceCardRefs = Array(5).fill(null).map(() => useRef<HTMLDivElement>(null))
   const packageCardRefs = Array(4).fill(null).map(() => useRef<HTMLDivElement>(null))
-  const portfolioCardRefs = Array(11).fill(null).map(() => useRef<HTMLDivElement>(null))
+  const portfolioCardRefs = Array(13).fill(null).map(() => useRef<HTMLDivElement>(null))
   
   // Get animation props for each section
   const aboutAnimation = useScrollAnimation(aboutRef)
@@ -141,77 +141,105 @@ const HomePage = () => {
       technologies: ["iOS", "Android", "Push Notifications", "Firebase Cloud Messaging", "In-App Purchases"],
       bgColor: "bg-red-900/30",
       textColor: "text-red-200",
-      bgImage: "/assets/portfolio/fire-message.jpg"
+      bgImage: "/assets/portfolio/fire-message.jpg",
+      logo: "/assets/logos/fire-message.png"
     },
     {
       key: 'tattooHealer',
       technologies: ["Web App", "iOS", "Android", "Push Notifications", "Admin Dashboard", "Educational Content"],
       bgColor: "bg-purple-900/30",
       textColor: "text-purple-200",
-      bgImage: "/assets/portfolio/tattoo-healer.jpg"
+      bgImage: "/assets/portfolio/tattoo-healer.jpg",
+      logo: "/assets/logos/tattoo-healer.png"
     },
     {
       key: 'transHellas',
       technologies: ["Web App", "Parcel Management", "Admin Panel", "Tracking System", "Logistics"],
       bgColor: "bg-blue-900/30",
       textColor: "text-blue-200",
-      bgImage: "/assets/portfolio/trans-hellas.jpg"
+      bgImage: "/assets/portfolio/trans-hellas.jpg",
+      logo: "/assets/logos/trans-hellas.jpg"
     },
     {
       key: 'ridefast',
       technologies: ["React", "TypeScript", "Google Maps", "Firestore", "Resend", "Stripe API"],
       bgColor: "bg-gray-900/30",
       textColor: "text-gray-200",
-      bgImage: "/assets/portfolio/ridefast.jpg"
+      bgImage: "/assets/portfolio/ridefast.jpg",
+      logo: "/assets/logos/ridefast.png"
     },
     {
       key: 'mpTransfer',
       technologies: ["iOS", "Android", "Web", "Flutter", "Push Notifications", "Firestore"],
       bgColor: "bg-sky-900/30",
       textColor: "text-sky-200",
-      bgImage: "/assets/portfolio/mp-transfer.jpg"
-    },
-    {
-      key: 'tapfast',
-      technologies: ["React", "TypeScript", "QR Codes", "Admin Panel"],
-      bgColor: "bg-orange-900/30",
-      textColor: "text-orange-200",
-      bgImage: "/assets/portfolio/tapfast.jpg"
+      bgImage: "/assets/portfolio/mp-transfer.jpg",
+      logo: "/assets/logos/mp-transfer.png"
     },
     {
       key: 'mealAi',
       technologies: ["Android", "iOS", "AI", "Computer Vision", "Mobile App"],
       bgColor: "bg-blue-900/30",
       textColor: "text-blue-200",
-      bgImage: "/assets/portfolio/meal-ai.jpg"
+      bgImage: "/assets/portfolio/meal-ai.jpg",
+      logo: "/assets/logos/meal-ai.png"
     },
     {
       key: 'near',
       technologies: ["Java", "Python", "Android", "iOS", "Google Maps", "Machine Learning"],
       bgColor: "bg-orange-900/30",
       textColor: "text-orange-200",
-      bgImage: "/assets/portfolio/near.jpg"
-    },
-    {
-      key: 'reserwave',
-      technologies: ["PHP", "MySQL", "React", "JavaScript", "Search System"],
-      bgColor: "bg-cyan-900/30",
-      textColor: "text-cyan-200",
-      bgImage: "/assets/portfolio/reserwave.jpg"
+      bgImage: "/assets/portfolio/near.jpg",
+      logo: "/assets/logos/near.png"
     },
     {
       key: 'hedeos',
       technologies: ["iOS", "Android", "Education", "Quizzes", "Mobile App"],
       bgColor: "bg-yellow-900/30",
       textColor: "text-yellow-200",
-      bgImage: "/assets/portfolio/hedeos.jpg"
+      bgImage: "/assets/portfolio/hedeos.jpg",
+      logo: "/assets/logos/hedeos.png"
     },
     {
       key: 'ekarotsi',
       technologies: ["Web", "E-commerce", "Supermarket", "Online Ordering"],
       bgColor: "bg-green-900/30",
       textColor: "text-green-200",
-      bgImage: "/assets/portfolio/ekarotsi.jpg"
+      bgImage: "/assets/portfolio/ekarotsi.jpg",
+      logo: "/assets/logos/e-karotsi.png"
+    },
+    {
+      key: 'veridictum',
+      technologies: ["Web", "AI", "Legal Tech"],
+      bgColor: "bg-indigo-900/30",
+      textColor: "text-indigo-200",
+      bgImage: "/assets/portfolio/veridictum.jpg",
+      url: "https://veridictum.ai/"
+    },
+    {
+      key: 'process',
+      technologies: ["Web", "React", "Firebase", "Production Monitoring"],
+      bgColor: "bg-amber-900/30",
+      textColor: "text-amber-200",
+      bgImage: "/assets/portfolio/process.jpg",
+      url: "https://process-a7a0f.web.app/"
+    },
+    {
+      key: 'skiGreece',
+      technologies: ["Web", "Ski Centers", "Greece"],
+      bgColor: "bg-slate-900/30",
+      textColor: "text-slate-200",
+      bgImage: "/assets/portfolio/ski-greece.jpg",
+      logo: "/assets/logos/ski-greece.png",
+      url: "https://ski-greece.gr/"
+    },
+    {
+      key: 'nikiMargariti',
+      technologies: ["Web", "AI", "Chatbot", "Education"],
+      bgColor: "bg-violet-900/30",
+      textColor: "text-violet-200",
+      bgImage: "/assets/portfolio/niki-margariti.jpg",
+      url: "https://ai.nikimargariti.gr/chats"
     }
   ]
 
@@ -551,6 +579,8 @@ const HomePage = () => {
                   bgColor={item.bgColor}
                   textColor={item.textColor}
                   bgImage={item.bgImage}
+                  logo={item.logo}
+                  url={item.url}
                 />
               </motion.div>
             ))}

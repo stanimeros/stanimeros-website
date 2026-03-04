@@ -15,6 +15,8 @@ export interface PortfolioCardProps {
   logo?: string
   /** Optional alt text for logo */
   logoAlt?: string
+  /** Optional link URL - when set, card becomes clickable */
+  url?: string
   /** Translated title (passed from parent for display) */
   title: string
   /** Translated description (passed from parent for display) */
@@ -29,6 +31,7 @@ export function PortfolioCard({
   textColor,
   logo,
   logoAlt,
+  url,
   title,
   description,
   className,
@@ -40,7 +43,7 @@ export function PortfolioCard({
     .toUpperCase()
     .slice(0, 2)
 
-  return (
+  const card = (
     <Card
       className={cn(
         "overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-2 h-full flex flex-col w-full bg-card/70 hover:bg-card/70 pt-0",
@@ -92,4 +95,14 @@ export function PortfolioCard({
       <CardContent className="flex-grow" />
     </Card>
   )
+
+  if (url) {
+    return (
+      <a href={url} target="_blank" rel="noopener noreferrer" className="block h-full">
+        {card}
+      </a>
+    )
+  }
+
+  return card
 }

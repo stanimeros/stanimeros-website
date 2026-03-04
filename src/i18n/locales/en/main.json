@@ -140,10 +140,6 @@
         "title": "MP-Transfer",
         "description": "Appointment and transfer management for hotels and transport companies."
       },
-      "tapfast": {
-        "title": "TapFast",
-        "description": "QR code platform for badges, carts, coupons, and loyalty programs."
-      },
       "mealAi": {
         "title": "Meal AI",
         "description": "AI-powered app that scans food items for nutrition tracking."
@@ -151,10 +147,6 @@
       "near": {
         "title": "Near",
         "description": "Privacy-focused social app for location sharing with full data control."
-      },
-      "reserwave": {
-        "title": "Reserwave",
-        "description": "Booking and discovery platform with tools for businesses and users."
       },
       "hedeos": {
         "title": "Hedeos",
@@ -171,6 +163,22 @@
       "tattooHealer": {
         "title": "Tattoo Healer",
         "description": "Platform for personalized tattoo aftercare with educational content and artist connections."
+      },
+      "veridictum": {
+        "title": "Veridictum",
+        "description": "AI-powered legal technology platform."
+      },
+      "process": {
+        "title": "Process",
+        "description": "Production monitoring and tracking system for manufacturing."
+      },
+      "skiGreece": {
+        "title": "Ski Greece",
+        "description": "Platform for Greek ski resorts and winter sports centers."
+      },
+      "nikiMargariti": {
+        "title": "Niki Margariti Lab",
+        "description": "AI chatbot for students in Greece with educational support."
       }
     }
   },

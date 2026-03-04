@@ -28,6 +28,10 @@ const PEXELS_QUERIES = {
   'reserwave': 'beach waves booking resort',
   'hedeos': 'education books learning',
   'ekarotsi': 'supermarket grocery shopping',
+  'veridictum': 'legal law courthouse',
+  'process': 'factory production manufacturing',
+  'ski-greece': 'ski mountain snow',
+  'niki-margariti': 'AI chatbot education',
 };
 
 // Curated Picsum IDs (from Lorem Picsum / Unsplash) - best thematic matches available
@@ -43,6 +47,10 @@ const PICSUM_FALLBACK = {
   'reserwave': 16,       // beach
   'hedeos': 349,         // learning/books
   'ekarotsi': 96,        // food/grocery (Pawel Kadysz)
+  'veridictum': 26,      // professional/serious
+  'process': 197,        // industrial
+  'ski-greece': 26,      // mountains
+  'niki-margariti': 349, // education
 };
 
 async function downloadImage(url, filepath) {
