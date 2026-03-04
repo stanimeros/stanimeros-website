@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom"
 import { motion, useScroll, useTransform, useSpring, type HTMLMotionProps } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { PortfolioCard } from "@/components/PortfolioCard"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
@@ -527,31 +528,18 @@ const HomePage = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
             {portfolioItems.map((item, index) => (
               <motion.div
-                key={index}
+                key={item.key}
                 ref={portfolioCardRefs[index]}
                 {...useMobileCardAnimation(portfolioCardRefs[index], index)}
                 className="md:transform-none w-full"
               >
-                <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-2 pt-0 h-full flex flex-col w-full bg-card/70 hover:bg-card/70">
-                  <div className={`h-48 ${item.bgColor} flex items-center justify-center flex-none`}>
-                    <h3 className={`text-4xl font-bold ${item.textColor}`}>
-                      {t(`portfolio.items.${item.key}.title`)}
-                    </h3>
-                  </div>
-                  <CardHeader className="pt-0 flex-none">
-                    <CardTitle>{t(`portfolio.items.${item.key}.title`)}</CardTitle>
-                    <CardDescription>{t(`portfolio.items.${item.key}.description`)}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="flex-grow flex flex-col justify-end">
-                    <div className="flex flex-wrap gap-2">
-                      {item.technologies.map((tech, techIndex) => (
-                        <Badge key={techIndex} variant="outline">
-                          {tech}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+                <PortfolioCard
+                  title={t(`portfolio.items.${item.key}.title`)}
+                  description={t(`portfolio.items.${item.key}.description`)}
+                  technologies={item.technologies}
+                  bgColor={item.bgColor}
+                  textColor={item.textColor}
+                />
               </motion.div>
             ))}
           </div>
