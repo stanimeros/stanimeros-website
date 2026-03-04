@@ -5,8 +5,10 @@ import { cn } from "@/lib/utils"
 export interface PortfolioCardProps {
   /** Technology badges to display */
   technologies: string[]
-  /** Background color class (e.g. 'bg-red-900/30') */
+  /** Background color class (e.g. 'bg-red-900/30') - used as fallback or overlay */
   bgColor: string
+  /** Optional background image URL - when set, used as card header background */
+  bgImage?: string
   /** Text color class for the logo area (e.g. 'text-red-200') */
   textColor: string
   /** Optional logo/image URL - if not provided, shows initials */
@@ -23,6 +25,7 @@ export interface PortfolioCardProps {
 export function PortfolioCard({
   technologies,
   bgColor,
+  bgImage,
   textColor,
   logo,
   logoAlt,
@@ -47,13 +50,17 @@ export function PortfolioCard({
       {/* Background with circle logo at bottom left */}
       <div
         className={cn(
-          "h-40 flex items-end justify-start flex-none relative overflow-hidden p-4",
-          bgColor
+          "h-40 flex items-end justify-start flex-none relative overflow-hidden p-4 bg-cover bg-center",
+          !bgImage && bgColor
         )}
+        style={bgImage ? { backgroundImage: `url(${bgImage})` } : undefined}
       >
+        {bgImage && (
+          <div className="absolute inset-0 bg-black/40" aria-hidden />
+        )}
         <div
           className={cn(
-            "w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold shrink-0",
+            "relative z-10 w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold shrink-0",
             "bg-white/95 dark:bg-white/10 backdrop-blur-sm border-2 border-white/30 shadow-lg",
             !logo && textColor
           )}

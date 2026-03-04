@@ -140,67 +140,78 @@ const HomePage = () => {
       key: 'fireMessage',
       technologies: ["iOS", "Android", "Push Notifications", "Firebase Cloud Messaging", "In-App Purchases"],
       bgColor: "bg-red-900/30",
-      textColor: "text-red-200"
+      textColor: "text-red-200",
+      bgImage: "/assets/portfolio/fire-message.jpg"
     },
     {
       key: 'tattooHealer',
       technologies: ["Web App", "iOS", "Android", "Push Notifications", "Admin Dashboard", "Educational Content"],
       bgColor: "bg-purple-900/30",
-      textColor: "text-purple-200"
+      textColor: "text-purple-200",
+      bgImage: "/assets/portfolio/tattoo-healer.jpg"
     },
     {
       key: 'transHellas',
       technologies: ["Web App", "Parcel Management", "Admin Panel", "Tracking System", "Logistics"],
       bgColor: "bg-blue-900/30",
-      textColor: "text-blue-200"
+      textColor: "text-blue-200",
+      bgImage: "/assets/portfolio/trans-hellas.jpg"
     },
     {
       key: 'ridefast',
       technologies: ["React", "TypeScript", "Google Maps", "Firestore", "Resend", "Stripe API"],
       bgColor: "bg-gray-900/30",
-      textColor: "text-gray-200"
+      textColor: "text-gray-200",
+      bgImage: "/assets/portfolio/ridefast.jpg"
     },
     {
       key: 'mpTransfer',
       technologies: ["iOS", "Android", "Web", "Flutter", "Push Notifications", "Firestore"],
       bgColor: "bg-sky-900/30",
-      textColor: "text-sky-200"
+      textColor: "text-sky-200",
+      bgImage: "/assets/portfolio/mp-transfer.jpg"
     },
     {
       key: 'tapfast',
       technologies: ["React", "TypeScript", "QR Codes", "Admin Panel"],
       bgColor: "bg-orange-900/30",
-      textColor: "text-orange-200"
+      textColor: "text-orange-200",
+      bgImage: "/assets/portfolio/tapfast.jpg"
     },
     {
       key: 'mealAi',
       technologies: ["Android", "iOS", "AI", "Computer Vision", "Mobile App"],
       bgColor: "bg-blue-900/30",
-      textColor: "text-blue-200"
+      textColor: "text-blue-200",
+      bgImage: "/assets/portfolio/meal-ai.jpg"
     },
     {
       key: 'near',
       technologies: ["Java", "Python", "Android", "iOS", "Google Maps", "Machine Learning"],
       bgColor: "bg-orange-900/30",
-      textColor: "text-orange-200"
+      textColor: "text-orange-200",
+      bgImage: "/assets/portfolio/near.jpg"
     },
     {
       key: 'reserwave',
       technologies: ["PHP", "MySQL", "React", "JavaScript", "Search System"],
       bgColor: "bg-cyan-900/30",
-      textColor: "text-cyan-200"
+      textColor: "text-cyan-200",
+      bgImage: "/assets/portfolio/reserwave.jpg"
     },
     {
       key: 'hedeos',
       technologies: ["iOS", "Android", "Education", "Quizzes", "Mobile App"],
       bgColor: "bg-yellow-900/30",
-      textColor: "text-yellow-200"
+      textColor: "text-yellow-200",
+      bgImage: "/assets/portfolio/hedeos.jpg"
     },
     {
       key: 'ekarotsi',
       technologies: ["Web", "E-commerce", "Supermarket", "Online Ordering"],
       bgColor: "bg-green-900/30",
-      textColor: "text-green-200"
+      textColor: "text-green-200",
+      bgImage: "/assets/portfolio/ekarotsi.jpg"
     }
   ]
 
@@ -539,6 +550,7 @@ const HomePage = () => {
                   technologies={item.technologies}
                   bgColor={item.bgColor}
                   textColor={item.textColor}
+                  bgImage={item.bgImage}
                 />
               </motion.div>
             ))}
