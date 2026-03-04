@@ -27,7 +27,7 @@ const PEXELS_QUERIES = {
   'hedeos': 'books education learning',
   'ekarotsi': 'supermarket grocery store',
   'veridictum': 'law books courthouse legal',
-  'process': 'factory assembly line manufacturing',
+  'process': 'wood workshop carpentry manufacturing timber',
   'ski-greece': 'ski slope snow mountains',
   'niki-margariti': 'student laptop AI chatbot',
 };
@@ -44,7 +44,7 @@ async function downloadFromPexels(apiKey, queries = PEXELS_QUERIES) {
   for (const [filename, query] of Object.entries(queries)) {
     try {
       const res = await fetch(
-        `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=1`,
+        `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=15`,
         { headers: { Authorization: apiKey } }
       );
       const data = await res.json();
@@ -52,7 +52,7 @@ async function downloadFromPexels(apiKey, queries = PEXELS_QUERIES) {
         console.warn(`No results for "${query}"`);
         continue;
       }
-      const photo = data.photos[0];
+      const photo = data.photos[Math.floor(Math.random() * data.photos.length)];
       const imageUrl = photo.src?.large2x || photo.src?.large || photo.src?.medium;
       const filepath = `${OUTPUT_DIR}/${filename}.jpg`;
       await downloadImage(imageUrl, filepath);
