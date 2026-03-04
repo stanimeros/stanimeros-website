@@ -74,6 +74,17 @@
         "Analytics and conversation insights"
       ]
     },
+    "optimization": {
+      "title": "Optimization & Problem Solving",
+      "description": "Optimize schedules, logistics, or resources. Find the best solution for complex decisions.",
+      "features": [
+        "Schedule and workforce optimization",
+        "Logistics, routing, and delivery",
+        "Resource allocation and cost reduction",
+        "Data-driven decision support",
+        "Custom algorithms for your business"
+      ]
+    },
     "getStarted": "Get Started",
     "footer": "You will get a quote within 24 hours. We'll guide you end-to-end.",
     "faq": {
@@ -223,6 +234,10 @@
       "aiAgent": {
         "title": "Chats with AI",
         "description": "AI chat trained on your documents and integrated into your website."
+      },
+      "optimization": {
+        "title": "Optimization & Problem Solving",
+        "description": "Optimize schedules, logistics, or resources. Find the best solution for complex decisions."
       }
     },
     "buttons": {

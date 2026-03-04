@@ -49,7 +49,7 @@ const HomePage = () => {
   
   // Refs for card animations
   const serviceCardRefs = Array(5).fill(null).map(() => useRef<HTMLDivElement>(null))
-  const packageCardRefs = Array(4).fill(null).map(() => useRef<HTMLDivElement>(null))
+  const packageCardRefs = Array(5).fill(null).map(() => useRef<HTMLDivElement>(null))
   const portfolioCardRefs = Array(14).fill(null).map(() => useRef<HTMLDivElement>(null))
   
   // Get animation props for each section
@@ -440,7 +440,9 @@ const HomePage = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+          <div className="space-y-6 w-full">
+            {/* Row 1: 3 packages */}
+            <div className="grid md:grid-cols-3 gap-6 w-full">
             {[
               {
                 title: 'packages.onlinePresence.title',
@@ -464,14 +466,6 @@ const HomePage = () => {
                 badge: 'Premium',
                 features: 'packages.customApp.features',
                 package: 'custom-app',
-                className: 'border-border/60',
-              },
-              {
-                title: 'packages.aiAgent.title',
-                description: 'packages.aiAgent.description',
-                badge: 'AI',
-                features: 'packages.aiAgent.features',
-                package: 'ai-agent',
                 className: 'border-border/60',
               }
             ].map((pkg, index) => (
@@ -511,6 +505,64 @@ const HomePage = () => {
                 </Card>
               </motion.div>
             ))}
+            </div>
+            {/* Row 2: 2 packages (AI + Optimization) - full width */}
+            <div className="grid md:grid-cols-2 gap-6 w-full">
+            {[
+              {
+                title: 'packages.aiAgent.title',
+                description: 'packages.aiAgent.description',
+                badge: 'AI',
+                features: 'packages.aiAgent.features',
+                package: 'ai-agent',
+                className: 'border-border/60',
+              },
+              {
+                title: 'packages.optimization.title',
+                description: 'packages.optimization.description',
+                badge: 'Optimization',
+                features: 'packages.optimization.features',
+                package: 'optimization',
+                className: 'border-border/60',
+              }
+            ].map((pkg, index) => (
+              <motion.div
+                key={index + 3}
+                ref={packageCardRefs[index + 3]}
+                {...useMobileCardAnimation(packageCardRefs[index + 3], index + 3)}
+                className="md:transform-none w-full"
+              >
+                <Card className={`relative flex flex-col hover:shadow-lg transition-all duration-300 h-full bg-card/70 hover:bg-card/70 ${pkg.className}`}>
+                  <CardHeader className="flex-none">
+                    <div className="flex items-center justify-between">
+                      <CardTitle>{t(pkg.title)}</CardTitle>
+                      <Badge variant="secondary" className="rounded-full">{pkg.badge}</Badge>
+                    </div>
+                    <CardDescription>{t(pkg.description)}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex-grow space-y-4">
+                    <div className="text-lg font-semibold"> {t('packages.getQuote')}</div>
+                    <div className="space-y-2 text-sm text-muted-foreground">
+                      {(t(pkg.features, { returnObjects: true }) as string[]).map((feature, featureIndex) => (
+                        <div key={featureIndex} className="flex items-start gap-2">
+                          <CheckIcon className="h-4 w-4 text-primary mt-0.5" />
+                          <span>{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                  <div className="px-6 pb-6 mt-auto">
+                    <Button className="w-full" onClick={() => {
+                      trackEvent('packageSelected', {
+                        package: pkg.package
+                      });
+                      navigate(`/get-started?package=${pkg.package}`);
+                    }}>{t('packages.getStarted')}</Button>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+            </div>
           </div>
 
           <p className="text-center text-sm text-muted-foreground mt-8">
