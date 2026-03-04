@@ -83,7 +83,7 @@ export function PortfolioCard({
         </div>
       </div>
 
-      <CardHeader className="pt-6 flex-none">
+      <CardHeader className="pt-3 flex-none">
         <CardTitle className="text-lg">{title}</CardTitle>
         <div className="flex flex-wrap gap-2 mt-2">
           {technologies.map((tech, techIndex) => (
