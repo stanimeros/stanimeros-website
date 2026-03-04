@@ -64,8 +64,8 @@
       ]
     },
     "aiAgent": {
-      "title": "AI Conversational Agent",
-      "description": "Train an AI chatbot with your business documents and integrate it into your website",
+      "title": "Chats with AI",
+      "description": "AI chat trained on your documents and integrated into your website.",
       "features": [
         "AI chatbot trained with your PDF/DOCX documents",
         "Website integration (any platform)",
@@ -121,8 +121,8 @@
       "description": "Custom iOS and Android apps to reach your customers on their phones."
     },
     "aiAgent": {
-      "title": "AI Conversational Agent",
-      "description": "Train an AI chatbot with your documents (PDF, DOCX) and integrate it into any website to provide instant, accurate information about your business."
+      "title": "Chats with AI",
+      "description": "AI chat trained on your documents and integrated into your website."
     }
   },
   "portfolio": {
@@ -221,8 +221,8 @@
         "description": "Web, iOS and Android apps with custom features."
       },
       "aiAgent": {
-        "title": "AI Conversational Agent",
-        "description": "Train an AI chatbot with your documents (PDF, DOCX) and integrate it into any website."
+        "title": "Chats with AI",
+        "description": "AI chat trained on your documents and integrated into your website."
       }
     },
     "buttons": {
