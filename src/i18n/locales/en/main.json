@@ -149,16 +149,16 @@
         "description": "Privacy-focused social app for location sharing with full data control."
       },
       "hedeos": {
-        "title": "Hedeos",
+        "title": "hedeos.gr",
         "description": "Gamified app for learning Greek with quizzes and progress tracking."
       },
       "ekarotsi": {
-        "title": "e-karotsi",
+        "title": "e-karotsi.gr",
         "description": "E-commerce platform for a Greek supermarket with delivery and inventory management."
       },
       "transHellas": {
         "title": "Trans Hellas",
-        "description": "Transportation and logistics management system for a Greek transport company."
+        "description": "Logistic app for parcels Germany to Greece."
       },
       "tattooHealer": {
         "title": "Tattoo Healer",
@@ -184,7 +184,7 @@
   },
   "footer": {
     "copyright": "Stanimeros",
-    "pexels": "Photos provided by Pexels",
+    "pexels": "Photos by Pexels",
     "links": {
       "privacy": "Privacy Policy",
       "dataDeletion": "Data Deletion"

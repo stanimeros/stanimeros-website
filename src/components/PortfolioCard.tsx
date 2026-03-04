@@ -36,12 +36,15 @@ export function PortfolioCard({
   description,
   className,
 }: PortfolioCardProps) {
-  const initials = title
+  const fromWords = title
     .split(/\s+/)
     .map((word) => word[0])
     .join("")
     .toUpperCase()
-    .slice(0, 2)
+  const initials =
+    fromWords.length >= 2
+      ? fromWords.slice(0, 2)
+      : (title.replace(/\s/g, "").slice(0, 2).toUpperCase() || "??").padEnd(2, "?")
 
   const card = (
     <Card

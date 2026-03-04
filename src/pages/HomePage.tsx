@@ -137,80 +137,8 @@ const HomePage = () => {
 
   const portfolioItems = [
     {
-      key: 'fireMessage',
-      technologies: ["iOS", "Android", "Push Notifications", "Firebase Cloud Messaging", "In-App Purchases"],
-      bgColor: "bg-red-900/30",
-      textColor: "text-red-200",
-      bgImage: "/assets/portfolio/fire-message.jpg",
-      logo: "/assets/logos/fire-message.png"
-    },
-    {
-      key: 'tattooHealer',
-      technologies: ["Web App", "iOS", "Android", "Push Notifications", "Admin Dashboard", "Educational Content"],
-      bgColor: "bg-purple-900/30",
-      textColor: "text-purple-200",
-      bgImage: "/assets/portfolio/tattoo-healer.jpg",
-      logo: "/assets/logos/tattoo-healer.png"
-    },
-    {
-      key: 'transHellas',
-      technologies: ["Web App", "Parcel Management", "Admin Panel", "Tracking System", "Logistics"],
-      bgColor: "bg-blue-900/30",
-      textColor: "text-blue-200",
-      bgImage: "/assets/portfolio/trans-hellas.jpg",
-      logo: "/assets/logos/trans-hellas.jpg"
-    },
-    {
-      key: 'ridefast',
-      technologies: ["React", "TypeScript", "Google Maps", "Firestore", "Resend", "Stripe API"],
-      bgColor: "bg-gray-900/30",
-      textColor: "text-gray-200",
-      bgImage: "/assets/portfolio/ridefast.jpg",
-      logo: "/assets/logos/ridefast.png"
-    },
-    {
-      key: 'mpTransfer',
-      technologies: ["iOS", "Android", "Web", "Flutter", "Push Notifications", "Firestore"],
-      bgColor: "bg-sky-900/30",
-      textColor: "text-sky-200",
-      bgImage: "/assets/portfolio/mp-transfer.jpg",
-      logo: "/assets/logos/mp-transfer.png"
-    },
-    {
-      key: 'mealAi',
-      technologies: ["Android", "iOS", "AI", "Computer Vision", "Mobile App"],
-      bgColor: "bg-blue-900/30",
-      textColor: "text-blue-200",
-      bgImage: "/assets/portfolio/meal-ai.jpg",
-      logo: "/assets/logos/meal-ai.png"
-    },
-    {
-      key: 'near',
-      technologies: ["Java", "Python", "Android", "iOS", "Google Maps", "Machine Learning"],
-      bgColor: "bg-orange-900/30",
-      textColor: "text-orange-200",
-      bgImage: "/assets/portfolio/near.jpg",
-      logo: "/assets/logos/near.png"
-    },
-    {
-      key: 'hedeos',
-      technologies: ["iOS", "Android", "Education", "Quizzes", "Mobile App"],
-      bgColor: "bg-yellow-900/30",
-      textColor: "text-yellow-200",
-      bgImage: "/assets/portfolio/hedeos.jpg",
-      logo: "/assets/logos/hedeos.png"
-    },
-    {
-      key: 'ekarotsi',
-      technologies: ["Web", "E-commerce", "Supermarket", "Online Ordering"],
-      bgColor: "bg-green-900/30",
-      textColor: "text-green-200",
-      bgImage: "/assets/portfolio/ekarotsi.jpg",
-      logo: "/assets/logos/e-karotsi.png"
-    },
-    {
       key: 'veridictum',
-      technologies: ["Web", "AI", "Legal Tech"],
+      technologies: ["Website", "AI", "LLM", "Legal Tech", "Document Analysis", "Automation"],
       bgColor: "bg-indigo-900/30",
       textColor: "text-indigo-200",
       bgImage: "/assets/portfolio/veridictum.jpg",
@@ -218,7 +146,7 @@ const HomePage = () => {
     },
     {
       key: 'process',
-      technologies: ["Web", "React", "Firebase", "Production Monitoring"],
+      technologies: ["Website", "Production Monitoring", "Manufacturing", "Real-time", "Dashboard", "Analytics"],
       bgColor: "bg-amber-900/30",
       textColor: "text-amber-200",
       bgImage: "/assets/portfolio/process.jpg",
@@ -226,7 +154,7 @@ const HomePage = () => {
     },
     {
       key: 'skiGreece',
-      technologies: ["Web", "Ski Centers", "Greece"],
+      technologies: ["Website", "Ski Centers", "Greece", "Winter Sports", "Resort Info", "Maps"],
       bgColor: "bg-slate-900/30",
       textColor: "text-slate-200",
       bgImage: "/assets/portfolio/ski-greece.jpg",
@@ -235,11 +163,87 @@ const HomePage = () => {
     },
     {
       key: 'nikiMargariti',
-      technologies: ["Web", "AI", "Chatbot", "Education"],
+      technologies: ["Website", "AI", "Chatbot", "Education", "Students", "Greece"],
       bgColor: "bg-violet-900/30",
       textColor: "text-violet-200",
       bgImage: "/assets/portfolio/niki-margariti.jpg",
       url: "https://ai.nikimargariti.gr/chats"
+    },
+    {
+      key: 'fireMessage',
+      technologies: ["iOS", "Android", "Mobile App", "Push Notifications", "Monetization"],
+      bgColor: "bg-red-900/30",
+      textColor: "text-red-200",
+      bgImage: "/assets/portfolio/fire-message.jpg",
+      logo: "/assets/logos/fire-message.png"
+    },
+    {
+      key: 'tattooHealer',
+      technologies: ["Web App", "iOS", "Android", "Push Notifications", "Admin Panel", "Education"],
+      bgColor: "bg-purple-900/30",
+      textColor: "text-purple-200",
+      bgImage: "/assets/portfolio/tattoo-healer.jpg",
+      logo: "/assets/logos/tattoo-healer.png",
+      url: "https://tattoo-healer.com"
+    },
+    {
+      key: 'transHellas',
+      technologies: ["Web App", "Parcel Management", "Admin Panel", "Tracking System", "Logistics", "Germany-Greece"],
+      bgColor: "bg-blue-900/30",
+      textColor: "text-blue-200",
+      bgImage: "/assets/portfolio/trans-hellas.jpg",
+      logo: "/assets/logos/trans-hellas.jpg",
+      url: "https://thr.topaketo.de"
+    },
+    {
+      key: 'ridefast',
+      technologies: ["Web App", "Maps", "Payments", "Bookings", "Real-time", "Taxi & Transfers"],
+      bgColor: "bg-gray-900/30",
+      textColor: "text-gray-200",
+      bgImage: "/assets/portfolio/ridefast.jpg",
+      logo: "/assets/logos/ridefast.png"
+    },
+    {
+      key: 'mpTransfer',
+      technologies: ["iOS", "Android", "Web App", "Push Notifications", "Bookings", "Transport"],
+      bgColor: "bg-sky-900/30",
+      textColor: "text-sky-200",
+      bgImage: "/assets/portfolio/mp-transfer.jpg",
+      logo: "/assets/logos/mp-transfer.png"
+    },
+    {
+      key: 'mealAi',
+      technologies: ["iOS", "Android", "AI", "Computer Vision", "Mobile App", "Nutrition"],
+      bgColor: "bg-blue-900/30",
+      textColor: "text-blue-200",
+      bgImage: "/assets/portfolio/meal-ai.jpg",
+      logo: "/assets/logos/meal-ai.png"
+    },
+    {
+      key: 'near',
+      technologies: ["iOS", "Android", "Mobile App", "Maps", "AI", "Privacy-focused"],
+      bgColor: "bg-orange-900/30",
+      textColor: "text-orange-200",
+      bgImage: "/assets/portfolio/near.jpg",
+      logo: "/assets/logos/near.png"
+    },
+    {
+      key: 'hedeos',
+      technologies: ["iOS", "Android", "Education", "Quizzes", "Mobile App", "Language Learning"],
+      bgColor: "bg-yellow-900/30",
+      textColor: "text-yellow-200",
+      bgImage: "/assets/portfolio/hedeos.jpg",
+      logo: "/assets/logos/hedeos.png",
+      url: "https://hedeos.gr"
+    },
+    {
+      key: 'ekarotsi',
+      technologies: ["Website", "E-commerce", "Supermarket", "Online Ordering", "Delivery", "Inventory"],
+      bgColor: "bg-green-900/30",
+      textColor: "text-green-200",
+      bgImage: "/assets/portfolio/ekarotsi.jpg",
+      logo: "/assets/logos/e-karotsi.png",
+      url: "https://e-karotsi.gr"
     }
   ]
 
@@ -313,16 +317,16 @@ const HomePage = () => {
                 {t('about.description2')}
               </p>
               <div className="flex flex-wrap gap-2 mb-8">
-                <Badge variant="secondary">React</Badge>
-                <Badge variant="secondary">TypeScript</Badge>
-                <Badge variant="secondary">Flutter</Badge>
-                <Badge variant="secondary">Python</Badge>
-                <Badge variant="secondary">Java</Badge>
-                <Badge variant="secondary">PHP</Badge>
-                <Badge variant="secondary">Firestore</Badge>
-                <Badge variant="secondary">MySQL</Badge>
-                <Badge variant="secondary">Google Maps</Badge>
-                <Badge variant="secondary">AI/ML</Badge>
+                <Badge variant="secondary">Web App</Badge>
+                <Badge variant="secondary">Mobile App</Badge>
+                <Badge variant="secondary">Website</Badge>
+                <Badge variant="secondary">E-commerce</Badge>
+                <Badge variant="secondary">AI</Badge>
+                <Badge variant="secondary">Maps</Badge>
+                <Badge variant="secondary">Cloud</Badge>
+                <Badge variant="secondary">Cross-platform</Badge>
+                <Badge variant="secondary">Payments</Badge>
+                <Badge variant="secondary">Education</Badge>
               </div>
             </div>
             <div className="space-y-8">
