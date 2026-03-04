@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "translate": "node scripts/translate.js"
+    "translate": "node scripts/translate.js",
+    "download-portfolio-images": "node scripts/download-portfolio-images.js"
   },
   "dependencies": {
     "@ffmpeg/core": "^0.11.0",
