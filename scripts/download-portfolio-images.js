@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 /**
- * Downloads product-matching portfolio images.
- * Option 1 (recommended): Add PEXELS_API_KEY to .env for semantic search
- * Option 2: Run without key to use Picsum fallback (less accurate matches)
- * Run: npm run download-portfolio-images
+ * Downloads product-matching portfolio images from Pexels.
+ * Add PEXELS_API_KEY to .env (get a free key at https://www.pexels.com/api/documentation/)
+ * Run: npm run download-portfolio-images [optional: single project key e.g. mp-transfer]
  */
 
 import dotenv from 'dotenv';
@@ -19,10 +18,10 @@ const OUTPUT_DIR = `${__dirname}/../public/assets/portfolio`;
 // Semantic search queries - Pexels returns content-matching photos
 const PEXELS_QUERIES = {
   'fire-message': 'smartphone app notification message social',
-  'tattoo-healer': 'tattoo artist studio',
+  'tattoo-healer': 'tattoo ink on skin arm',
   'trans-hellas': 'freight truck cargo warehouse logistics',
   'ridefast': 'yellow taxi car',
-  'mp-transfer': 'limousine private transfer luxury car chauffeur',
+  'mp-transfer': 'black executive car chauffeur transfer',
   'meal-ai': 'healthy food salad nutrition',
   'near': 'smartphone map GPS location',
   'hedeos': 'books education learning',
@@ -33,23 +32,6 @@ const PEXELS_QUERIES = {
   'niki-margariti': 'student laptop AI chatbot',
 };
 
-// Picsum fallback - limited thematic matches (Pexels gives much better results)
-const PICSUM_FALLBACK = {
-  'fire-message': 40,
-  'tattoo-healer': 77,
-  'trans-hellas': 197,
-  'ridefast': 370,
-  'mp-transfer': 324,
-  'meal-ai': 373,
-  'near': 434,
-  'hedeos': 349,
-  'ekarotsi': 96,
-  'veridictum': 26,
-  'process': 197,
-  'ski-greece': 26,
-  'niki-margariti': 349,
-};
-
 async function downloadImage(url, filepath) {
   const response = await fetch(url, { redirect: 'follow' });
   if (!response.ok) throw new Error(`HTTP ${response.status}: ${url}`);
@@ -58,8 +40,8 @@ async function downloadImage(url, filepath) {
   await writeFile(filepath, Buffer.from(buffer));
 }
 
-async function downloadFromPexels(apiKey) {
-  for (const [filename, query] of Object.entries(PEXELS_QUERIES)) {
+async function downloadFromPexels(apiKey, queries = PEXELS_QUERIES) {
+  for (const [filename, query] of Object.entries(queries)) {
     try {
       const res = await fetch(
         `https://api.pexels.com/v1/search?query=${encodeURIComponent(query)}&per_page=1`,
@@ -81,32 +63,23 @@ async function downloadFromPexels(apiKey) {
   }
 }
 
-async function downloadFromPicsum() {
-  console.log('Using Picsum fallback (add PEXELS_API_KEY for better matches)\n');
-  for (const [filename, id] of Object.entries(PICSUM_FALLBACK)) {
-    try {
-      const url = `https://picsum.photos/id/${id}/800/400`;
-      const filepath = `${OUTPUT_DIR}/${filename}.jpg`;
-      await downloadImage(url, filepath);
-      console.log(`✓ ${filename}.jpg (picsum id ${id})`);
-    } catch (err) {
-      console.error(`✗ ${filename}: ${err.message}`);
-    }
-  }
-}
-
 async function main() {
+  const apiKey = process.env.PEXELS_API_KEY;
+  if (!apiKey) {
+    console.error('Missing PEXELS_API_KEY. Add it to .env');
+    console.error('Get a free key: https://www.pexels.com/api/documentation/');
+    process.exit(1);
+  }
+
   await mkdir(OUTPUT_DIR, { recursive: true });
 
-  const apiKey = process.env.PEXELS_API_KEY;
-  if (apiKey) {
-    console.log('Using Pexels API for content-matching images\n');
-    await downloadFromPexels(apiKey);
-  } else {
-    console.log('⚠️  Add PEXELS_API_KEY to .env for photos that match each product.');
-    console.log('   Get a free key: https://www.pexels.com/api/documentation/\n');
-    await downloadFromPicsum();
-  }
+  const only = process.argv[2]; // e.g. mp-transfer
+  const queries = only
+    ? Object.fromEntries(Object.entries(PEXELS_QUERIES).filter(([k]) => k === only))
+    : PEXELS_QUERIES;
+
+  console.log('Using Pexels API for content-matching images\n');
+  await downloadFromPexels(apiKey, queries);
 
   console.log('\nDone. Images saved to public/assets/portfolio/');
 }
