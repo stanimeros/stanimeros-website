@@ -8,11 +8,19 @@ const Footer = () => {
   return (
     <footer className="bg-card py-8 border-t">
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="text-muted-foreground">
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          <div className="text-muted-foreground text-center md:text-left">
             {`© ${currentYear} ${t('footer.copyright')}`}
           </div>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
+            <a
+              href="https://www.pexels.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-muted-foreground hover:text-primary transition-colors text-sm"
+            >
+              {t('footer.pexels')}
+            </a>
             <Link to="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">
               {t('footer.links.privacy')}
             </Link>

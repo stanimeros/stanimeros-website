@@ -16,41 +16,38 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUTPUT_DIR = `${__dirname}/../public/assets/portfolio`;
 
+// Semantic search queries - Pexels returns content-matching photos
 const PEXELS_QUERIES = {
-  'fire-message': 'fire alarm notification mobile app',
-  'tattoo-healer': 'tattoo care aftercare',
-  'trans-hellas': 'logistics truck delivery transport',
-  'ridefast': 'taxi car ride',
-  'mp-transfer': 'hotel airport transfer',
-  'tapfast': 'QR code smartphone scan',
-  'meal-ai': 'healthy food nutrition meal',
-  'near': 'map location GPS',
-  'reserwave': 'beach waves booking resort',
-  'hedeos': 'education books learning',
-  'ekarotsi': 'supermarket grocery shopping',
-  'veridictum': 'legal law courthouse',
-  'process': 'factory production manufacturing',
-  'ski-greece': 'ski mountain snow',
-  'niki-margariti': 'AI chatbot education',
+  'fire-message': 'smartphone app notification message social',
+  'tattoo-healer': 'tattoo artist studio',
+  'trans-hellas': 'freight truck cargo warehouse logistics',
+  'ridefast': 'yellow taxi car',
+  'mp-transfer': 'limousine private transfer luxury car chauffeur',
+  'meal-ai': 'healthy food salad nutrition',
+  'near': 'smartphone map GPS location',
+  'hedeos': 'books education learning',
+  'ekarotsi': 'supermarket grocery store',
+  'veridictum': 'law books courthouse legal',
+  'process': 'factory assembly line manufacturing',
+  'ski-greece': 'ski slope snow mountains',
+  'niki-margariti': 'student laptop AI chatbot',
 };
 
-// Curated Picsum IDs (from Lorem Picsum / Unsplash) - best thematic matches available
+// Picsum fallback - limited thematic matches (Pexels gives much better results)
 const PICSUM_FALLBACK = {
-  'fire-message': 40,    // red/orange tones
-  'tattoo-healer': 77,   // artistic
-  'trans-hellas': 197,   // truck/logistics
-  'ridefast': 370,       // car
-  'mp-transfer': 324,    // travel
-  'tapfast': 443,        // tech/digital
-  'meal-ai': 373,        // food (Jay Wennington)
-  'near': 434,           // map/landscape
-  'reserwave': 16,       // beach
-  'hedeos': 349,         // learning/books
-  'ekarotsi': 96,        // food/grocery (Pawel Kadysz)
-  'veridictum': 26,      // professional/serious
-  'process': 197,        // industrial
-  'ski-greece': 26,      // mountains
-  'niki-margariti': 349, // education
+  'fire-message': 40,
+  'tattoo-healer': 77,
+  'trans-hellas': 197,
+  'ridefast': 370,
+  'mp-transfer': 324,
+  'meal-ai': 373,
+  'near': 434,
+  'hedeos': 349,
+  'ekarotsi': 96,
+  'veridictum': 26,
+  'process': 197,
+  'ski-greece': 26,
+  'niki-margariti': 349,
 };
 
 async function downloadImage(url, filepath) {
@@ -103,8 +100,11 @@ async function main() {
 
   const apiKey = process.env.PEXELS_API_KEY;
   if (apiKey) {
+    console.log('Using Pexels API for content-matching images\n');
     await downloadFromPexels(apiKey);
   } else {
+    console.log('⚠️  Add PEXELS_API_KEY to .env for photos that match each product.');
+    console.log('   Get a free key: https://www.pexels.com/api/documentation/\n');
     await downloadFromPicsum();
   }
 
