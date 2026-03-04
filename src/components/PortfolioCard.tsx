@@ -15,6 +15,8 @@ export interface PortfolioCardProps {
   logo?: string
   /** Optional alt text for logo */
   logoAlt?: string
+  /** Optional background for logo circle (e.g. 'bg-white') - when logo has transparency */
+  logoBg?: string
   /** Optional link URL - when set, card becomes clickable */
   url?: string
   /** Translated title (passed from parent for display) */
@@ -31,6 +33,7 @@ export function PortfolioCard({
   textColor,
   logo,
   logoAlt,
+  logoBg,
   url,
   title,
   description,
@@ -67,8 +70,9 @@ export function PortfolioCard({
         <div
           className={cn(
             "relative z-10 w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold shrink-0",
-            "bg-white/95 dark:bg-white/10 backdrop-blur-sm border-2 border-white/30 shadow-lg",
-            !logo && textColor
+            "border-2 border-white/30 shadow-lg",
+            logoBg ? logoBg : "bg-white/95 dark:bg-white/10 backdrop-blur-sm",
+            !logo && !logoBg && textColor
           )}
         >
           {logo ? (

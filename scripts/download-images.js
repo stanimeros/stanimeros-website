@@ -20,6 +20,7 @@ const PEXELS_QUERIES = {
   'fire-message': 'smartphone app notification message social',
   'tattoo-healer': 'tattoo ink on skin arm',
   'trans-hellas': 'freight truck cargo warehouse logistics',
+  'etui': 'luxury jewelry packaging box velvet',
   'ridefast': 'yellow taxi car',
   'mp-transfer': 'black executive car chauffeur transfer',
   'meal-ai': 'healthy food salad nutrition',

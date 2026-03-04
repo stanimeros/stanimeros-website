@@ -50,7 +50,7 @@ const HomePage = () => {
   // Refs for card animations
   const serviceCardRefs = Array(5).fill(null).map(() => useRef<HTMLDivElement>(null))
   const packageCardRefs = Array(4).fill(null).map(() => useRef<HTMLDivElement>(null))
-  const portfolioCardRefs = Array(13).fill(null).map(() => useRef<HTMLDivElement>(null))
+  const portfolioCardRefs = Array(14).fill(null).map(() => useRef<HTMLDivElement>(null))
   
   // Get animation props for each section
   const aboutAnimation = useScrollAnimation(aboutRef)
@@ -154,7 +154,7 @@ const HomePage = () => {
     },
     {
       key: 'skiGreece',
-      technologies: ["Website", "Ski Centers", "Greece", "Winter Sports", "Resort Info", "Maps"],
+      technologies: ["Website", "Ski Centers", "Travel", "Winter Sports", "Resort Info", "Maps"],
       bgColor: "bg-slate-900/30",
       textColor: "text-slate-200",
       bgImage: "/assets/portfolio/ski-greece.jpg",
@@ -163,7 +163,7 @@ const HomePage = () => {
     },
     {
       key: 'nikiMargariti',
-      technologies: ["Website", "AI", "Chatbot", "Education", "Students", "Greece"],
+      technologies: ["Website", "AI", "Chatbot", "Education", "Students", "Academic"],
       bgColor: "bg-violet-900/30",
       textColor: "text-violet-200",
       bgImage: "/assets/portfolio/niki-margariti.jpg",
@@ -194,6 +194,16 @@ const HomePage = () => {
       bgImage: "/assets/portfolio/trans-hellas.jpg",
       logo: "/assets/logos/trans-hellas.jpg",
       url: "https://thr.topaketo.de"
+    },
+    {
+      key: 'etui',
+      technologies: ["Website", "E-commerce", "Luxury Packaging", "Jewelry", "Customization", "B2B"],
+      bgColor: "bg-amber-900/30",
+      textColor: "text-amber-200",
+      bgImage: "/assets/portfolio/etui.jpg",
+      logo: "/assets/logos/etui.png",
+      logoBg: "bg-[#faf9f7]",
+      url: "https://etuicreations.de/"
     },
     {
       key: 'ridefast',
@@ -584,6 +594,7 @@ const HomePage = () => {
                   textColor={item.textColor}
                   bgImage={item.bgImage}
                   logo={item.logo}
+                  logoBg={item.logoBg}
                   url={item.url}
                 />
               </motion.div>
