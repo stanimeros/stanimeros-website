@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
+import { useParams } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -20,12 +21,54 @@ import { sendEmail } from "@/lib/firebase"
 import Layout from "@/components/Layout"
 import { trackEvent } from "@/lib/events"
 
+/** Preset app/entity info for Google Play Data safety – URL must reference the entity. */
+const DATA_DELETION_PRESETS: Record<string, { appName: string; developer: string; company: string; contactEmail: string }> = {
+  "atpro-partner": {
+    appName: "ATPro Partner",
+    developer: "MP CARRIERS O.E.",
+    company: "MP CARRIERS O.E.",
+    contactEmail: "mp.transfer.app@gmail.com",
+  },
+  "e-karotsi": {
+    appName: "e-karotsi.gr",
+    developer: "STANIMEROS PANTELEIMON",
+    company: "STANIMEROS PANTELEIMON",
+    contactEmail: "hello@stanimeros.com",
+  },
+  "fire-message": {
+    appName: "Fire Message",
+    developer: "STANIMEROS PANTELEIMON",
+    company: "STANIMEROS PANTELEIMON",
+    contactEmail: "hello@stanimeros.com",
+  },
+  "ski-greece": {
+    appName: "Ski Greece",
+    developer: "STANIMEROS PANTELEIMON",
+    company: "STANIMEROS PANTELEIMON",
+    contactEmail: "hello@stanimeros.com",
+  },
+}
+
+const DEFAULT_PRESET = {
+  appName: "",
+  developer: "",
+  company: "",
+  contactEmail: "hello@stanimeros.com",
+}
+
 const DataDeletion = () => {
   const { t } = useTranslation()
+  const { appSlug } = useParams<{ appSlug?: string }>()
+  const preset = useMemo(
+    () => (appSlug && DATA_DELETION_PRESETS[appSlug]) ? DATA_DELETION_PRESETS[appSlug] : null,
+    [appSlug]
+  )
+  const entity = preset ?? DEFAULT_PRESET
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    appName: "",
+    appName: entity.appName,
     reason: "",
   })
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -33,13 +76,17 @@ const DataDeletion = () => {
   const [confirmChecked, setConfirmChecked] = useState(false)
   const [verifyChecked, setVerifyChecked] = useState(false)
   const [deleteAccount, setDeleteAccount] = useState(false)
-  
+
+  useEffect(() => {
+    if (preset) {
+      setFormData((prev) => ({ ...prev, appName: preset.appName }))
+    }
+  }, [preset])
+
   useEffect(() => {
     scrollTo(0, 0)
-    trackEvent('pageView', {
-      page: 'data-deletion'
-    });
-  }, [])
+    trackEvent("pageView", { page: "data-deletion", appSlug: appSlug ?? undefined })
+  }, [appSlug])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -112,8 +159,8 @@ const DataDeletion = () => {
               <div>
                 <p className="text-sm text-muted-foreground">
                   {t('dataDeletion.success.needHelp')}{" "}
-                  <a href="mailto:hello@stanimeros.com" className="text-primary hover:underline">
-                    hello@stanimeros.com
+                  <a href={`mailto:${entity.contactEmail}`} className="text-primary hover:underline">
+                    {entity.contactEmail}
                   </a>
                 </p>
               </div>
@@ -138,6 +185,45 @@ const DataDeletion = () => {
             <p className="text-muted-foreground">
               {t('dataDeletion.subtitle')}
             </p>
+            {preset && (
+              <Card className="mt-6 text-left border-primary/30 bg-primary/5">
+                <CardContent className="pt-6">
+                  <dl className="space-y-3">
+                    <div>
+                      <dt className="text-sm font-medium text-muted-foreground">
+                        {t('dataDeletion.entity.appName')}
+                      </dt>
+                      <dd className="mt-0.5 font-semibold text-lg">{preset.appName}</dd>
+                    </div>
+                    <div>
+                      <dt className="text-sm font-medium text-muted-foreground">
+                        {t('dataDeletion.entity.developer')}
+                      </dt>
+                      <dd className="mt-0.5">{preset.developer}</dd>
+                    </div>
+                    {preset.company !== preset.developer && (
+                      <div>
+                        <dt className="text-sm font-medium text-muted-foreground">
+                          {t('dataDeletion.entity.company')}
+                        </dt>
+                        <dd className="mt-0.5">{preset.company}</dd>
+                      </div>
+                    )}
+                    <div>
+                      <dt className="text-sm font-medium text-muted-foreground">
+                        {t('dataDeletion.entity.contact')}
+                      </dt>
+                      <dd className="mt-0.5">
+                        <a href={`mailto:${preset.contactEmail}`} className="inline-flex items-center gap-1.5 text-primary hover:underline">
+                          <Mail className="h-4 w-4 shrink-0" />
+                          {preset.contactEmail}
+                        </a>
+                      </dd>
+                    </div>
+                  </dl>
+                </CardContent>
+              </Card>
+            )}
           </div>
 
           {/* Important Notice */}
@@ -204,6 +290,8 @@ const DataDeletion = () => {
                     onChange={handleInputChange}
                     placeholder={t('dataDeletion.form.appNamePlaceholder')}
                     required
+                    readOnly={!!preset}
+                    className={preset ? "bg-muted" : undefined}
                   />
                 </div>
 
@@ -288,8 +376,8 @@ const DataDeletion = () => {
             </p>
             <div className="flex items-center justify-center space-x-2">
               <Mail className="h-4 w-4" />
-              <a href="mailto:hello@stanimeros.com" className="text-primary hover:underline">
-                hello@stanimeros.com
+              <a href={`mailto:${entity.contactEmail}`} className="text-primary hover:underline">
+                {entity.contactEmail}
               </a>
             </div>
           </div>

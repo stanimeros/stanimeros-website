@@ -424,15 +424,21 @@
         "We may need to verify your identity before processing"
       ]
     },
+    "entity": {
+      "appName": "Application",
+      "developer": "Developer",
+      "company": "Company",
+      "contact": "Contact"
+    },
     "form": {
       "title": "Data Deletion Request Form",
-      "fullName": "Full Name *",
+      "fullName": "Full Name",
       "fullNamePlaceholder": "Your full name",
-      "email": "Email Address *",
+      "email": "Email Address",
       "emailPlaceholder": "email@example.com",
-      "appName": "Application Name *",
+      "appName": "Application Name",
       "appNamePlaceholder": "Enter the name of the application",
-      "reason": "Reason for Deletion *",
+      "reason": "Reason for Deletion",
       "reasonPlaceholder": "Please explain why you want to delete your data...",
       "deleteAccount": "I also want to delete my account (authentication credentials) in addition to my data",
       "confirm": "I understand that this action is permanent and cannot be undone. I confirm that I want to delete all my personal data from the specified application.",
