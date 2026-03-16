@@ -214,12 +214,12 @@ const HomePage = () => {
       logo: "/assets/logos/ridefast.png"
     },
     {
-      key: 'mpTransfer',
+      key: 'atproPartner',
       technologies: ["iOS", "Android", "Web App", "Push Notifications", "Bookings", "Transport"],
       bgColor: "bg-sky-900/30",
       textColor: "text-sky-200",
-      bgImage: "/assets/portfolio/mp-transfer.jpg",
-      logo: "/assets/logos/mp-transfer.png"
+      bgImage: "/assets/portfolio/atpro-partner.jpg",
+      logo: "/assets/logos/atpro-partner.png"
     },
     {
       key: 'mealAi',

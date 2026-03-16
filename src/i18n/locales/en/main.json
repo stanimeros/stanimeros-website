@@ -147,8 +147,8 @@
         "title": "RideFast",
         "description": "Reservation system for transfers and taxis with real-time booking, payments, and mapping."
       },
-      "mpTransfer": {
-        "title": "MP-Transfer",
+      "atproPartner": {
+        "title": "ATPro Partner",
         "description": "Appointment and transfer management for hotels and transport companies."
       },
       "mealAi": {

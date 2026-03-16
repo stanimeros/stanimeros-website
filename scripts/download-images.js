@@ -2,7 +2,7 @@
 /**
  * Downloads product-matching portfolio images from Pexels.
  * Add PEXELS_API_KEY to .env (get a free key at https://www.pexels.com/api/documentation/)
- * Run: npm run download-portfolio-images [optional: single project key e.g. mp-transfer]
+ * Run: npm run download-portfolio-images [optional: single project key e.g. atpro-partner]
  */
 
 import dotenv from 'dotenv';
@@ -22,7 +22,7 @@ const PEXELS_QUERIES = {
   'trans-hellas': 'freight truck cargo warehouse logistics',
   'etui': 'luxury jewelry packaging box velvet',
   'ridefast': 'yellow taxi car',
-  'mp-transfer': 'black executive car chauffeur transfer',
+  'atpro-partner': 'black executive car chauffeur transfer',
   'meal-ai': 'healthy food salad nutrition',
   'near': 'smartphone map GPS location',
   'hedeos': 'books education learning',
@@ -74,7 +74,7 @@ async function main() {
 
   await mkdir(OUTPUT_DIR, { recursive: true });
 
-  const only = process.argv[2]; // e.g. mp-transfer
+  const only = process.argv[2]; // e.g. atpro-partner
   const queries = only
     ? Object.fromEntries(Object.entries(PEXELS_QUERIES).filter(([k]) => k === only))
     : PEXELS_QUERIES;

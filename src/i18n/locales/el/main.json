@@ -147,8 +147,8 @@
         "title": "RideFast",
         "description": "Σύστημα κρατήσεων για ταξί και μεταφορές με online πληρωμές και χάρτες."
       },
-      "mpTransfer": {
-        "title": "MP-Transfer",
+      "atproPartner": {
+        "title": "ATPro Partner",
         "description": "Διαχείριση ραντεβού και μεταφορών για ξενοδοχεία και τουριστικές εταιρείες."
       },
       "mealAi": {
