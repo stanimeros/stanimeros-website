@@ -177,7 +177,7 @@ const DataDeletion = () => {
       <main className="container mx-auto px-4 py-12 relative z-10">
         <div className="max-w-2xl mx-auto">
           {/* Title */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <div className="flex justify-center mb-4">
               <Trash2 className="h-12 w-12 text-primary" />
             </div>
@@ -226,6 +226,69 @@ const DataDeletion = () => {
             )}
           </div>
 
+          {/* Account Deletion Policy (app-specific, for store compliance) */}
+          {preset && (
+            <Card className="mb-8 text-left">
+              <CardHeader>
+                <CardTitle className="text-xl">
+                  {t('dataDeletion.accountDeletionPolicy.title', { appName: preset.appName })}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4 text-muted-foreground">
+                <p>{t('dataDeletion.accountDeletionPolicy.intro')}</p>
+                <p>
+                  {t('dataDeletion.accountDeletionPolicy.appIntro', { appName: preset.appName })}
+                </p>
+                <div>
+                  <h3 className="font-semibold text-foreground mb-2">
+                    {t('dataDeletion.accountDeletionPolicy.howToTitle')}:
+                  </h3>
+                  <p className="mb-2">{t('dataDeletion.accountDeletionPolicy.howToIntro')}</p>
+                  <ul className="list-disc list-inside space-y-2">
+                    <li>
+                      {(() => {
+                        const text = t('dataDeletion.accountDeletionPolicy.howToOptionEmail', {
+                          appName: preset.appName,
+                          email: preset.contactEmail,
+                        })
+                        const parts = text.split(preset.contactEmail)
+                        return (
+                          <>
+                            {parts[0]}
+                            <a href={`mailto:${preset.contactEmail}?subject=Account%20Deletion%20Request`} className="text-primary hover:underline font-medium">
+                              {preset.contactEmail}
+                            </a>
+                            {parts[1]}
+                          </>
+                        )
+                      })()}
+                    </li>
+                    <li>
+                      {t('dataDeletion.accountDeletionPolicy.howToOptionForm')}{' '}
+                      <a href="#deletion-form" className="text-primary hover:underline font-medium inline-flex items-center gap-1">
+                        {t('dataDeletion.accountDeletionPolicy.howToOptionFormLink')}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-semibold text-foreground mb-2">
+                    {t('dataDeletion.accountDeletionPolicy.whatDataTitle')}
+                  </h3>
+                  <p className="mb-2">{t('dataDeletion.accountDeletionPolicy.whatDataIntro')}</p>
+                  <ul className="list-disc list-inside space-y-1">
+                    {(t('dataDeletion.accountDeletionPolicy.dataItems', { returnObjects: true }) as string[]).map((item, index) => (
+                      <li key={index}>{item}</li>
+                    ))}
+                  </ul>
+                  <p className="mt-3 text-sm italic">
+                    {t('dataDeletion.accountDeletionPolicy.note')}
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
           {/* Important Notice */}
           <Card className="mb-8 border-red-200 bg-red-50/20 dark:border-red-800/50 dark:bg-red-950/30">
             <CardHeader>
@@ -246,7 +309,7 @@ const DataDeletion = () => {
 
 
           {/* Deletion Form */}
-          <Card>
+          <Card id="deletion-form">
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Shield className="h-5 w-5 mr-2" />

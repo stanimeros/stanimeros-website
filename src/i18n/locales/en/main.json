@@ -430,6 +430,24 @@
       "company": "Company",
       "contact": "Contact"
     },
+    "accountDeletionPolicy": {
+      "title": "Account Deletion Request - {{appName}}",
+      "intro": "We value your privacy and provide a simple way for you to manage your data.",
+      "appIntro": "If you are a user of the {{appName}} application and wish to delete your account and all associated data, please follow the instructions below:",
+      "howToTitle": "How to request account deletion",
+      "howToIntro": "You can request account deletion in either of the following ways:",
+      "howToOptionEmail": "Contact us by email at {{email}} with the subject line \"Account Deletion Request\" and include the email address or username associated with your {{appName}} account.",
+      "howToOptionForm": "Fill out the Data Deletion Request form at the end of this page.",
+      "howToOptionFormLink": "Go to form ↓",
+      "whatDataTitle": "What data will be deleted?",
+      "whatDataIntro": "Upon receiving your request, we will delete the following data from our servers within 30 days:",
+      "dataItems": [
+        "Personal identification (Name, Email, Phone number)",
+        "Account profile information",
+        "Any user-generated content associated with your account"
+      ],
+      "note": "Note: Some data may be retained for a limited period if required by law or for legitimate security purposes."
+    },
     "form": {
       "title": "Data Deletion Request Form",
       "fullName": "Full Name",
