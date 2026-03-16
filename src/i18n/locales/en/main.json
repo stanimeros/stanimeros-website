@@ -414,6 +414,7 @@
     }
   },
   "dataDeletion": {
+    "pageTitle": "Data Deletion Request | Stanimeros",
     "title": "Request Data Deletion",
     "subtitle": "Submit a request to delete your personal data from our applications",
     "importantInformation": {

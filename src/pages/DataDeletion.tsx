@@ -88,6 +88,17 @@ const DataDeletion = () => {
     trackEvent("pageView", { page: "data-deletion", appSlug: appSlug ?? undefined })
   }, [appSlug])
 
+  useEffect(() => {
+    const title = preset
+      ? t("dataDeletion.accountDeletionPolicy.title", { appName: preset.appName })
+      : t("dataDeletion.pageTitle")
+    const previousTitle = document.title
+    document.title = title
+    return () => {
+      document.title = previousTitle
+    }
+  }, [preset, t])
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData(prev => ({
