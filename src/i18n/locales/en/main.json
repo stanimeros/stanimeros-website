@@ -151,6 +151,10 @@
         "title": "ATPro Partner",
         "description": "Appointment and transfer management for hotels and transport companies."
       },
+      "athensMytransfer": {
+        "title": "Athens MyTransfer",
+        "description": "Landing page for transfers in Athens with booking-focused user flow."
+      },
       "mealAi": {
         "title": "Meal AI",
         "description": "AI-powered app that scans food items for nutrition tracking."

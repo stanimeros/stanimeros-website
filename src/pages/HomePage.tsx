@@ -50,7 +50,7 @@ const HomePage = () => {
   // Refs for card animations
   const serviceCardRefs = Array(5).fill(null).map(() => useRef<HTMLDivElement>(null))
   const packageCardRefs = Array(5).fill(null).map(() => useRef<HTMLDivElement>(null))
-  const portfolioCardRefs = Array(14).fill(null).map(() => useRef<HTMLDivElement>(null))
+  const portfolioCardRefs = Array(15).fill(null).map(() => useRef<HTMLDivElement>(null))
   
   // Get animation props for each section
   const aboutAnimation = useScrollAnimation(aboutRef)
@@ -136,6 +136,14 @@ const HomePage = () => {
   }
 
   const portfolioItems = [
+    {
+      key: 'athensMytransfer',
+      technologies: ["Landing Page", "Transfers", "Athens", "Tourism", "Bookings", "Transport"],
+      bgColor: "bg-sky-900/30",
+      textColor: "text-sky-200",
+      bgImage: "/assets/portfolio/athens-mytransfer.jpg",
+      logo: "/assets/logos/athens-mytransfer.png"
+    },
     {
       key: 'veridictum',
       technologies: ["Website", "AI", "LLM", "Legal Tech", "Document Analysis", "Automation"],
