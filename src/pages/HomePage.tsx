@@ -142,7 +142,8 @@ const HomePage = () => {
       bgColor: "bg-sky-900/30",
       textColor: "text-sky-200",
       bgImage: "/assets/portfolio/athens-mytransfer.jpg",
-      logo: "/assets/logos/athens-mytransfer.png"
+      logo: "/assets/logos/athens-mytransfer.png",
+      url: "https://athens-mytransfer.web.app"
     },
     {
       key: 'veridictum',
