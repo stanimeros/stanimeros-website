@@ -139,6 +139,10 @@
   "portfolio": {
     "title": "Έργα",
     "items": {
+      "irisdrop": {
+        "title": "irisdrop",
+        "description": "SaaS για τυπογραφεία: οι πελάτες ανεβάζουν αρχεία χωρίς USB ή email· οι διαχειριστές βλέπουν ζωντανή ουρά."
+      },
       "fireMessage": {
         "title": "Fire Message",
         "description": "Εφαρμογή για iOS και Android για αποστολή push notifications με Firebase Cloud Messaging."

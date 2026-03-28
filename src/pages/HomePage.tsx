@@ -50,7 +50,7 @@ const HomePage = () => {
   // Refs for card animations
   const serviceCardRefs = Array(5).fill(null).map(() => useRef<HTMLDivElement>(null))
   const packageCardRefs = Array(5).fill(null).map(() => useRef<HTMLDivElement>(null))
-  const portfolioCardRefs = Array(15).fill(null).map(() => useRef<HTMLDivElement>(null))
+  const portfolioCardRefs = Array(16).fill(null).map(() => useRef<HTMLDivElement>(null))
   
   // Get animation props for each section
   const aboutAnimation = useScrollAnimation(aboutRef)
@@ -136,6 +136,15 @@ const HomePage = () => {
   }
 
   const portfolioItems = [
+    {
+      key: 'irisdrop',
+      technologies: ["SaaS", "Web App", "Print Shops", "File Upload", "Queue", "Admin"],
+      bgColor: "bg-cyan-900/30",
+      textColor: "text-cyan-200",
+      bgImage: "/assets/portfolio/irisdrop.jpg",
+      logo: "/assets/logos/irisdrop.png",
+      url: "https://irisdrop.web.app"
+    },
     {
       key: 'athensMytransfer',
       technologies: ["Landing Page", "Transfers", "Athens", "Tourism", "Bookings", "Transport"],

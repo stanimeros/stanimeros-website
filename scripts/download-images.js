@@ -17,6 +17,7 @@ const OUTPUT_DIR = `${__dirname}/../public/assets/portfolio`;
 
 // Semantic search queries - Pexels returns content-matching photos
 const PEXELS_QUERIES = {
+  'irisdrop': 'commercial printer shop office printing documents',
   'athens-mytransfer': 'athens airport transfer luxury car chauffeur',
   'fire-message': 'smartphone app notification message social',
   'tattoo-healer': 'tattoo ink on skin arm',

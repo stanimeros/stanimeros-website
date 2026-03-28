@@ -139,6 +139,10 @@
   "portfolio": {
     "title": "Portfolio",
     "items": {
+      "irisdrop": {
+        "title": "irisdrop",
+        "description": "SaaS for print shops: customers upload files without USB or email; admins see a live queue feed."
+      },
       "fireMessage": {
         "title": "Fire Message",
         "description": "Mobile app for iOS and Android to send push notifications with Firebase Cloud Messaging."
