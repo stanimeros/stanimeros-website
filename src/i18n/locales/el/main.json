@@ -261,7 +261,7 @@
       "description": "Δημιούργησε QR codes από οποιοδήποτε URL. Ιδανικό για διαμοιρασμό συνδέσμων, ιστοσελίδων ή οποιουδήποτε online περιεχομένου σε σαρώσιμη μορφή.",
       "urlLabel": "Εισαγωγή URL",
       "urlPlaceholder": "https://example.com",
-      "sizeLabel": "Μέγεθος QR Code (pixels)",
+      "sizeLabel": "Μέγεθος λήψης",
       "downloadButton": "Λήψη QR Code"
     },
     "imageConverter": {

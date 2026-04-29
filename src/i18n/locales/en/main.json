@@ -261,7 +261,7 @@
       "description": "Generate QR codes from any URL. Perfect for sharing links, websites, or any online content in a scannable format.",
       "urlLabel": "Enter URL",
       "urlPlaceholder": "https://example.com",
-      "sizeLabel": "QR Code Size (pixels)",
+      "sizeLabel": "Download size",
       "downloadButton": "Download QR Code"
     },
     "imageConverter": {

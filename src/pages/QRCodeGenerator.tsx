@@ -10,10 +10,14 @@ import Layout from '@/components/Layout'
 import ContactSection from '@/components/ContactSection'
 import { trackEvent } from '@/lib/events'
 
+const DOWNLOAD_SIZES = [256, 512, 1024, 2048, 4096] as const
+
 export default function QRCodeGenerator() {
   const { t } = useTranslation()
   const [url, setUrl] = useState('')
-  const [qrSize, setQrSize] = useState(500)
+  const [downloadSizeIndex, setDownloadSizeIndex] = useState(1)
+  const downloadSize = DOWNLOAD_SIZES[downloadSizeIndex]
+  const PREVIEW_MAX_PX = 500
 
   useEffect(() => {
     scrollTo(0, 0)
@@ -32,8 +36,8 @@ export default function QRCodeGenerator() {
     const img = new Image()
 
     img.onload = () => {
-      canvas.width = qrSize
-      canvas.height = qrSize
+      canvas.width = downloadSize
+      canvas.height = downloadSize
       ctx?.drawImage(img, 0, 0)
       const pngFile = canvas.toDataURL('image/png')
       
@@ -69,28 +73,39 @@ export default function QRCodeGenerator() {
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <Label htmlFor="size">{t('tools.qrcode.sizeLabel')}</Label>
-                  <span className="text-sm text-muted-foreground">{qrSize}px</span>
+                  <span className="text-sm text-muted-foreground">{downloadSize}px</span>
                 </div>
                 <Slider
                   id="size"
-                  min={100}
-                  max={500}
-                  step={50}
-                  value={[qrSize]}
-                  onValueChange={([value]) => setQrSize(value)}
+                  min={0}
+                  max={DOWNLOAD_SIZES.length - 1}
+                  step={1}
+                  value={[downloadSizeIndex]}
+                  onValueChange={([i]) => setDownloadSizeIndex(i)}
                   className="w-full"
                 />
+                <div className="grid grid-cols-5 gap-0.5 text-center text-xs text-muted-foreground tabular-nums">
+                  {DOWNLOAD_SIZES.map((px) => (
+                    <span key={px}>{px}px</span>
+                  ))}
+                </div>
               </div>
 
             <div className="flex justify-center">
               <div className="p-4 bg-white rounded-lg">
+                <div
+                  className="flex items-center justify-center shrink-0"
+                  style={{ width: PREVIEW_MAX_PX, height: PREVIEW_MAX_PX }}
+                >
                 <QRCodeSVG
                   id="qr-code"
                   value={url}
-                  size={qrSize}
+                  size={downloadSize}
                   marginSize={1}
                   level="H"
+                  className="max-w-full max-h-full w-full h-full"
                 />
+                </div>
               </div>
             </div>
 
