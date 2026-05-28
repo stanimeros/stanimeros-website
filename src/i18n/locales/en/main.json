@@ -332,9 +332,16 @@
   "privacyPolicy": {
     "title": "Privacy Policy",
     "lastUpdated": "Last updated: 18/12/2025",
+    "entity": {
+      "appName": "Application",
+      "developer": "Developer",
+      "company": "Company",
+      "contact": "Contact"
+    },
     "introduction": {
       "title": "Introduction",
       "paragraph1": "This Privacy Policy describes how Stanimeros (\"we,\" \"us,\" or \"our\") collects, uses, and shares your personal information when you use our mobile applications and services.",
+      "paragraph1App": "This Privacy Policy describes how {{developer}} (\"we,\" \"us,\" or \"our\") collects, uses, and shares your personal information when you use {{appName}} and related services.",
       "paragraph2": "By using our apps, you agree to the collection and use of information in accordance with this policy."
     },
     "informationWeCollect": {

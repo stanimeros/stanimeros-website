@@ -41,6 +41,12 @@ const DATA_DELETION_PRESETS: Record<string, { appName: string; developer: string
     company: "STANIMEROS PANTELEIMON",
     contactEmail: "hello@stanimeros.com",
   },
+  "fire-message": {
+    appName: "Fire Message",
+    developer: "STANIMEROS PANTELEIMON",
+    company: "STANIMEROS PANTELEIMON",
+    contactEmail: "hello@stanimeros.com",
+  },
 }
 
 const DEFAULT_PRESET = {

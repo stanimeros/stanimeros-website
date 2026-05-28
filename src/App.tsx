@@ -22,6 +22,7 @@ function App() {
           {/* Routes without lang prefix (language from detector) */}
           <Route path="/" element={<HomePage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/privacy-policy/:appSlug" element={<PrivacyPolicy />} />
           <Route path="/data-deletion" element={<DataDeletion />} />
           <Route path="/data-deletion/:appSlug" element={<DataDeletion />} />
           <Route path="/get-started" element={<GetStarted />} />
@@ -32,6 +33,7 @@ function App() {
           <Route path="/:lang" element={<LangRoute />}>
             <Route index element={<HomePage />} />
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="privacy-policy/:appSlug" element={<PrivacyPolicy />} />
             <Route path="data-deletion" element={<DataDeletion />} />
             <Route path="data-deletion/:appSlug" element={<DataDeletion />} />
             <Route path="get-started" element={<GetStarted />} />

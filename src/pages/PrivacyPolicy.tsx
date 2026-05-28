@@ -1,4 +1,6 @@
 import { Link } from "react-router-dom"
+import { useParams } from "react-router-dom"
+import { useMemo, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
@@ -9,23 +11,62 @@ import {
   CircleStackIcon as Database,
   UsersIcon,
   DocumentTextIcon as FileText,
-  KeyIcon
+  KeyIcon,
+  EnvelopeIcon as Mail
 } from "@heroicons/react/24/outline"
-import { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import "../i18n"
 import Layout from "@/components/Layout"
 import { trackEvent } from "@/lib/events"
 
+const PRIVACY_POLICY_PRESETS: Record<string, { appName: string; developer: string; company: string; contactEmail: string }> = {
+  "atpro-partner": {
+    appName: "ATPro Partner",
+    developer: "MP CARRIERS O.E.",
+    company: "MP CARRIERS O.E.",
+    contactEmail: "mp.transfer.app@gmail.com",
+  },
+  "e-karotsi": {
+    appName: "e-karotsi.gr",
+    developer: "STANIMEROS PANTELEIMON",
+    company: "STANIMEROS PANTELEIMON",
+    contactEmail: "hello@stanimeros.com",
+  },
+  "ski-greece": {
+    appName: "Ski Greece",
+    developer: "STANIMEROS PANTELEIMON",
+    company: "STANIMEROS PANTELEIMON",
+    contactEmail: "hello@stanimeros.com",
+  },
+  "fire-message": {
+    appName: "Fire Message",
+    developer: "STANIMEROS PANTELEIMON",
+    company: "STANIMEROS PANTELEIMON",
+    contactEmail: "hello@stanimeros.com",
+  },
+}
+
 const PrivacyPolicy = () => {
   const { t } = useTranslation()
-  
+  const { appSlug } = useParams<{ appSlug?: string }>()
+  const preset = useMemo(
+    () => (appSlug && PRIVACY_POLICY_PRESETS[appSlug]) ? PRIVACY_POLICY_PRESETS[appSlug] : null,
+    [appSlug]
+  )
+
   useEffect(() => {
     scrollTo(0, 0)
     trackEvent('pageView', {
-      page: 'privacy-policy'
+      page: 'privacy-policy',
+      appSlug: appSlug ?? undefined,
     });
-  }, [])
+  }, [appSlug])
+
+  useEffect(() => {
+    if (preset) {
+      document.title = `Privacy Policy – ${preset.appName}`
+    }
+  }, [preset])
 
   return (
     <Layout>
@@ -42,6 +83,45 @@ const PrivacyPolicy = () => {
             <p className="text-muted-foreground">
               {t('privacyPolicy.lastUpdated')}
             </p>
+            {preset && (
+              <Card className="mt-6 text-left border-primary/30 bg-primary/5">
+                <CardContent className="pt-6">
+                  <dl className="space-y-3">
+                    <div>
+                      <dt className="text-sm font-medium text-muted-foreground">
+                        {t('privacyPolicy.entity.appName')}
+                      </dt>
+                      <dd className="mt-0.5 font-semibold text-lg">{preset.appName}</dd>
+                    </div>
+                    <div>
+                      <dt className="text-sm font-medium text-muted-foreground">
+                        {t('privacyPolicy.entity.developer')}
+                      </dt>
+                      <dd className="mt-0.5">{preset.developer}</dd>
+                    </div>
+                    {preset.company !== preset.developer && (
+                      <div>
+                        <dt className="text-sm font-medium text-muted-foreground">
+                          {t('privacyPolicy.entity.company')}
+                        </dt>
+                        <dd className="mt-0.5">{preset.company}</dd>
+                      </div>
+                    )}
+                    <div>
+                      <dt className="text-sm font-medium text-muted-foreground">
+                        {t('privacyPolicy.entity.contact')}
+                      </dt>
+                      <dd className="mt-0.5">
+                        <a href={`mailto:${preset.contactEmail}`} className="inline-flex items-center gap-1.5 text-primary hover:underline">
+                          <Mail className="h-4 w-4 shrink-0" />
+                          {preset.contactEmail}
+                        </a>
+                      </dd>
+                    </div>
+                  </dl>
+                </CardContent>
+              </Card>
+            )}
           </div>
 
           {/* Introduction */}
@@ -54,7 +134,9 @@ const PrivacyPolicy = () => {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
-                {t('privacyPolicy.introduction.paragraph1')}
+                {preset
+                  ? t('privacyPolicy.introduction.paragraph1App', { appName: preset.appName, developer: preset.developer })
+                  : t('privacyPolicy.introduction.paragraph1')}
               </p>
               <p className="text-muted-foreground">
                 {t('privacyPolicy.introduction.paragraph2')}
