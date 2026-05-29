@@ -79,7 +79,9 @@ const PrivacyPolicy = () => {
             <div className="flex justify-center mb-4">
               <Shield className="h-12 w-12 text-primary" />
             </div>
-            <h1 className="text-4xl font-bold mb-4">{t('privacyPolicy.title')}</h1>
+            <h1 className="text-4xl font-bold mb-4">
+              {preset ? t('privacyPolicy.titleApp', { appName: preset.appName }) : t('privacyPolicy.title')}
+            </h1>
             <p className="text-muted-foreground">
               {t('privacyPolicy.lastUpdated')}
             </p>
@@ -339,7 +341,7 @@ const PrivacyPolicy = () => {
             <p className="text-muted-foreground mb-4">
               {t('privacyPolicy.dataDeletionLink.description')}
             </p>
-            <Link to="/data-deletion">
+            <Link to={appSlug ? `/data-deletion/${appSlug}` : "/data-deletion"}>
               <Button>
                 {t('privacyPolicy.dataDeletionLink.button')}
               </Button>

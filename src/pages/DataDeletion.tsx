@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -192,7 +192,9 @@ const DataDeletion = () => {
             <div className="flex justify-center mb-4">
               <Trash2 className="h-12 w-12 text-primary" />
             </div>
-            <h1 className="text-4xl font-bold mb-4">{t('dataDeletion.title')}</h1>
+            <h1 className="text-4xl font-bold mb-4">
+              {preset ? t('dataDeletion.titleApp', { appName: preset.appName }) : t('dataDeletion.title')}
+            </h1>
             <p className="text-muted-foreground">
               {t('dataDeletion.subtitle')}
             </p>
@@ -251,9 +253,9 @@ const DataDeletion = () => {
                   {t('dataDeletion.accountDeletionPolicy.appIntro', { appName: preset.appName })}
                 </p>
                 <div>
-                  <h3 className="font-semibold text-foreground mb-2">
+                  <p className="font-semibold text-foreground mb-2">
                     {t('dataDeletion.accountDeletionPolicy.howToTitle')}:
-                  </h3>
+                  </p>
                   <p className="mb-2">{t('dataDeletion.accountDeletionPolicy.howToIntro')}</p>
                   <ul className="list-disc list-inside space-y-2">
                     <li>
@@ -283,9 +285,9 @@ const DataDeletion = () => {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground mb-2">
+                  <p className="font-semibold text-foreground mb-2">
                     {t('dataDeletion.accountDeletionPolicy.whatDataTitle')}
-                  </h3>
+                  </p>
                   <p className="mb-2">{t('dataDeletion.accountDeletionPolicy.whatDataIntro')}</p>
                   <ul className="list-disc list-inside space-y-1">
                     {(t('dataDeletion.accountDeletionPolicy.dataItems', { returnObjects: true }) as string[]).map((item, index) => (
@@ -454,6 +456,19 @@ const DataDeletion = () => {
                 {entity.contactEmail}
               </a>
             </div>
+          </div>
+
+          {/* Privacy Policy Link */}
+          <div className="text-center">
+            <Separator className="my-8" />
+            <p className="text-muted-foreground mb-4">
+              {t('dataDeletion.privacyPolicyLink.description')}
+            </p>
+            <Link to={appSlug ? `/privacy-policy/${appSlug}` : "/privacy-policy"}>
+              <Button variant="outline">
+                {t('dataDeletion.privacyPolicyLink.button')}
+              </Button>
+            </Link>
           </div>
         </div>
       </main>

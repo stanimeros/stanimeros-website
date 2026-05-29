@@ -328,6 +328,7 @@
   },
   "privacyPolicy": {
     "title": "Privacy Policy",
+    "titleApp": "Privacy Policy of {{appName}}",
     "lastUpdated": "Last updated: 29/05/2026",
     "entity": {
       "appName": "Application",
@@ -339,17 +340,17 @@
       "title": "Introduction",
       "paragraph1": "This Privacy Policy describes how Stanimeros (\"we,\" \"us,\" or \"our\") collects, uses, and shares your personal information when you use our mobile applications and services.",
       "paragraph1App": "This Privacy Policy describes how {{developer}} (\"we,\" \"us,\" or \"our\") collects, uses, and shares your personal information when you use {{appName}} and related services.",
-      "paragraph2": "By using our apps, you agree to the collection and use of information in accordance with this policy."
+      "paragraph2": "By using the app, you agree to the collection and use of information in accordance with this policy."
     },
     "informationWeCollect": {
       "title": "Information We Collect",
       "personalInformation": {
         "title": "Personal Information",
-        "description": "We may collect personal information such as your name, email address, and device information when you use our apps."
+        "description": "We may collect personal information such as your name, email address, and device information when you use the app."
       },
       "locationData": {
         "title": "Location Data",
-        "description": "Some of our apps may access your device's location data to provide location-based services and features. Specifically:",
+        "description": "The app may access your device's location data to provide location-based services and features. Specifically:",
         "items": [
           {
             "title": "Background Location",
@@ -375,7 +376,7 @@
       },
       "usageData": {
         "title": "Usage Data",
-        "description": "We collect information about how you use our apps, including features accessed, time spent, and performance data."
+        "description": "We collect information about how you use the app, including features accessed, time spent, and performance data."
       },
       "deviceInformation": {
         "title": "Device Information",
@@ -385,7 +386,7 @@
     "howWeUseInformation": {
       "title": "How We Use Your Information",
       "items": [
-        "To provide and maintain our apps and services",
+        "To provide and maintain the app and services",
         "To improve and personalize your experience",
         "To communicate with you about updates and features",
         "To analyze usage patterns and optimize performance",
@@ -430,7 +431,7 @@
     },
     "childrensPrivacy": {
       "title": "Children's Privacy",
-      "description": "Our apps are not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us."
+      "description": "This app is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us."
     },
     "changesToPolicy": {
       "title": "Changes to This Privacy Policy",
@@ -450,7 +451,8 @@
   "dataDeletion": {
     "pageTitle": "Data Deletion Request | Stanimeros",
     "title": "Request Data Deletion",
-    "subtitle": "Submit a request to delete your personal data from our applications",
+    "titleApp": "Data Deletion of {{appName}}",
+    "subtitle": "Submit a request to delete your personal data from the app",
     "importantInformation": {
       "title": "Important Information",
       "items": [
@@ -501,6 +503,10 @@
     },
     "contact": {
       "description": "Need help or have questions about data deletion?"
+    },
+    "privacyPolicyLink": {
+      "description": "To learn how we handle your data, please read our privacy policy.",
+      "button": "View Privacy Policy"
     },
     "success": {
       "title": "Request Submitted Successfully",
