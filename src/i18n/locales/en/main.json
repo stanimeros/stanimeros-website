@@ -24,7 +24,7 @@
   "about": {
     "title": "About Me",
     "name": "Pantelis Stanimeros",
-    "description1": "Based in Thessaloniki, I hold a Bachelor's in Computer Science and an MSc in AI & Data Analytics. I build AI agents, automations, mobile apps, and custom dashboards — tools that save time, cut costs, and help businesses make better decisions every day.",
+    "description1": "Based in Thessaloniki, I hold a Bachelor's in Computer Science and an MSc in AI & Data Analytics. I build AI agents, automations, mobile apps, and custom dashboards, tools that save time, cut costs, and help businesses make better decisions every day.",
     "description2": "I also tackle harder business problems: finding the best schedule when there are hundreds of constraints, training AI on your own data, or building a system that picks the optimal route, allocation, or plan automatically. If it's a problem that costs your business time or money, there's likely a smart solution for it.",
     "githubDescription": "Committed to consistent, high-quality updates."
   },
@@ -72,19 +72,19 @@
       "items": {
         "hosting": {
           "question": "How does an AI agent actually work for my business?",
-          "answer": "An AI agent is a program that handles tasks automatically on your behalf — answering customer questions, processing requests, sending follow-ups, or running internal workflows. You define what it should do, and it runs 24/7 without needing someone to manage it manually. Think of it as a team member that never sleeps and never makes the same mistake twice."
+          "answer": "An AI agent is a program that handles tasks automatically on your behalf, answering customer questions, processing requests, sending follow-ups, or running internal workflows. You define what it should do, and it runs 24/7 without needing someone to manage it manually. Think of it as a team member that never sleeps and never makes the same mistake twice."
         },
         "googleBusiness": {
           "question": "Do I need technical knowledge to use what you build?",
-          "answer": "Not at all. Everything is built with the end user in mind — whether that's you, your team, or your customers. You get a simple interface to manage things, and I handle all the technical complexity behind the scenes. If something needs explaining, I'll walk you through it in plain language."
+          "answer": "Not at all. Everything is built with the end user in mind, whether that's you, your team, or your customers. You get a simple interface to manage things, and I handle all the technical complexity behind the scenes. If something needs explaining, I'll walk you through it in plain language."
         },
         "eshopPlatforms": {
           "question": "What kind of data do I need to train an AI on my business?",
-          "answer": "It depends on what you want the AI to do. For a customer support agent, your existing documents, FAQs, or product descriptions are enough. For predictions or recommendations, historical records like past orders, schedules, or outcomes work well. You don't need a huge dataset — even a few hundred records can be a good starting point. We'll assess what you have and what's possible."
+          "answer": "It depends on what you want the AI to do. For a customer support agent, your existing documents, FAQs, or product descriptions are enough. For predictions or recommendations, historical records like past orders, schedules, or outcomes work well. You don't need a huge dataset, even a few hundred records can be a good starting point. We'll assess what you have and what's possible."
         },
         "customization": {
           "question": "What kind of problems can you solve with optimization?",
-          "answer": "Any problem where you're trying to find the best arrangement, schedule, or allocation — and doing it manually takes too long or gives poor results. Common examples: employee scheduling with shift constraints, delivery route planning, matching resources to tasks, or deciding the optimal mix of products or services. If it feels like a puzzle your business solves repeatedly, it can likely be automated and optimized."
+          "answer": "Any problem where you're trying to find the best arrangement, schedule, or allocation, and doing it manually takes too long or gives poor results. Common examples: employee scheduling with shift constraints, delivery route planning, matching resources to tasks, or deciding the optimal mix of products or services. If it feels like a puzzle your business solves repeatedly, it can likely be automated and optimized."
         },
         "hiddenFees": {
           "question": "Are there any hidden fees?",
@@ -107,11 +107,11 @@
       },
       "decisions": {
         "title": "Decisions are made on gut feeling, not data",
-        "description": "You have data sitting in spreadsheets, systems, or nowhere at all — and no easy way to turn it into something actionable. So decisions rely on instinct instead."
+        "description": "You have data sitting in spreadsheets, systems, or nowhere at all, and no easy way to turn it into something actionable. So decisions rely on instinct instead."
       },
       "scheduling": {
         "title": "Scheduling and planning is a constant headache",
-        "description": "Fitting people, resources, or deliveries into the right slots — with all the constraints involved — takes hours and still ends up suboptimal."
+        "description": "Fitting people, resources, or deliveries into the right slots, with all the constraints involved, takes hours and still ends up suboptimal."
       },
       "visibility": {
         "title": "You have no clear picture of what's happening",
@@ -126,7 +126,7 @@
     "title": "Services",
     "consulting": {
       "title": "AI Agents & Automation",
-      "description": "AI agents that handle tasks automatically — answering customers, processing requests, or running workflows 24/7 without human input."
+      "description": "AI agents that handle tasks automatically, answering customers, processing requests, or running workflows 24/7 without human input."
     },
     "websites": {
       "title": "Mobile Apps & Dashboards",
@@ -138,7 +138,7 @@
     },
     "aiAgent": {
       "title": "AI Trained on Your Data",
-      "description": "Train AI models on your own business data — for predictions, classification, recommendations, or automating decisions specific to your industry."
+      "description": "Train AI models on your own business data, for predictions, classification, recommendations, or automating decisions specific to your industry."
     }
   },
   "portfolio": {
@@ -298,10 +298,10 @@
   "contact": {
     "title": "Get Free Strategy Call",
     "subtitle": "Let's talk about your business",
-    "description": "Fill in your details below to get a free 10-minute strategy call where we'll discuss your needs and find the best solution for you. No strings attached!",
+    "description": "Fill in your details below to get a free strategy call where we'll discuss your needs and find the best solution for you. No strings attached!",
     "features": {
       "consultation": {
-        "title": "10-Minute Call",
+        "title": "Free Call",
         "description": "A quick chat to understand your needs and suggest the right solutions"
       },
       "solutions": {

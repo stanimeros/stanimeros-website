@@ -17,7 +17,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-background text-foreground">
+      <div className="min-h-svh bg-background text-foreground">
         <Routes>
           {/* Routes without lang prefix (language from detector) */}
           <Route path="/" element={<HomePage />} />
