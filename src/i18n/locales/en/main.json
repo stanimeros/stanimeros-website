@@ -15,7 +15,9 @@
   },
   "hero": {
     "title": "Pantelis Stanimeros",
-    "subtitle": "AI agents, smart apps, and real solutions for real business problems",
+    "subtitleBefore": "AI agents, smart apps, and ",
+    "subtitleHighlight": "real solutions",
+    "subtitleAfter": " for real business problems",
     "viewPackages": "View Packages",
     "getInTouch": "Get In Touch"
   },
@@ -115,7 +117,10 @@
         "title": "You have no clear picture of what's happening",
         "description": "Numbers are scattered, reports are manual, and by the time you see a problem it's already cost you. You need one place that shows what matters, in real time."
       }
-    }
+    },
+    "ctaBefore": "There's a",
+    "ctaHighlight": "solution",
+    "ctaAfter": "for all of this. See how."
   },
   "services": {
     "title": "Services",
@@ -295,6 +300,10 @@
     "subtitle": "Let's talk about your business",
     "description": "Fill in your details below to get a free 10-minute strategy call where we'll discuss your needs and find the best solution for you. No strings attached!",
     "features": {
+      "consultation": {
+        "title": "10-Minute Call",
+        "description": "A quick chat to understand your needs and suggest the right solutions"
+      },
       "solutions": {
         "title": "Tailored Solutions",
         "description": "Get expert advice specific to your project or challenge"
@@ -319,7 +328,7 @@
   },
   "privacyPolicy": {
     "title": "Privacy Policy",
-    "lastUpdated": "Last updated: 18/12/2025",
+    "lastUpdated": "Last updated: 29/05/2026",
     "entity": {
       "appName": "Application",
       "developer": "Developer",
@@ -340,7 +349,29 @@
       },
       "locationData": {
         "title": "Location Data",
-        "description": "Some of our apps may access your device's location data to provide location-based services and features. This location data is used solely for app functionality and is never shared with third parties or disclosed to external entities. Your location information remains private and is only processed locally on your device or within our secure systems."
+        "description": "Some of our apps may access your device's location data to provide location-based services and features. Specifically:",
+        "items": [
+          {
+            "title": "Background Location",
+            "description": "When you have granted the \"Allow all the time\" location permission, the app may collect your GPS coordinates continuously in the background. This is required to enable location-based features of the service."
+          },
+          {
+            "title": "Who can see your location",
+            "description": "Your location data is visible only to authorized users within your account or organization. It is never shared with or sold to any third parties."
+          },
+          {
+            "title": "Storage",
+            "description": "Location data is transmitted securely and stored within our cloud infrastructure, using industry-standard security practices."
+          },
+          {
+            "title": "Retention",
+            "description": "Location data is retained for as long as your account is active or as needed to provide the service. You may request deletion by contacting us."
+          },
+          {
+            "title": "Opting out",
+            "description": "You can revoke background location access at any time through your device settings. Go to Settings → Apps, select the app, then Permissions → Location. Revoking access will disable location-dependent features."
+          }
+        ]
       },
       "usageData": {
         "title": "Usage Data",

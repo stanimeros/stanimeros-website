@@ -3,6 +3,7 @@ import { motion, type HTMLMotionProps } from "framer-motion"
 import { useTranslation } from "react-i18next"
 import { Separator } from "@/components/ui/separator"
 import { useScrollAnimation } from "@/lib/hooks"
+import UnderlineHighlight from "@/components/UnderlineHighlight"
 import {
   ArrowPathIcon,
   CircleStackIcon,
@@ -36,7 +37,10 @@ export default function WhySection() {
 
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4">{t('why.title')}</h2>
+          <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
+            <ExclamationTriangleIcon className="h-8 w-8 text-primary shrink-0" />
+            {t('why.title')}
+          </h2>
           <Separator className="w-24 mx-auto mb-4" />
           <p className="text-muted-foreground max-w-2xl mx-auto">{t('why.subtitle')}</p>
         </div>
@@ -65,8 +69,8 @@ export default function WhySection() {
         </div>
 
         <div className="text-center mt-16">
-          <p className="text-lg font-semibold">
-            Υπάρχει <span className="text-blue-400">λύση</span> για όλα αυτά. Δες πώς.
+          <p className="text-xl font-semibold tracking-wide leading-loose">
+            {t('why.ctaBefore')} <UnderlineHighlight type="circle">{t('why.ctaHighlight')}</UnderlineHighlight> {t('why.ctaAfter')}
           </p>
         </div>
       </div>

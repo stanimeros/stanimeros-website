@@ -22,11 +22,17 @@ import {
   LightBulbIcon,
   BuildingStorefrontIcon,
   CursorArrowRaysIcon,
-  ChatBubbleLeftRightIcon
+  ChatBubbleLeftRightIcon,
+  UserIcon,
+  WrenchScrewdriverIcon,
+  CubeTransparentIcon,
+  QuestionMarkCircleIcon,
+  PhoneIcon,
 } from "@heroicons/react/24/outline"
 import { sendEmail } from "@/lib/firebase"
 import GitHubCalendarComponent from "@/components/GitHubCalendar"
 import WhySection from "@/components/WhySection"
+import UnderlineHighlight from "@/components/UnderlineHighlight"
 import { trackEvent } from "@/lib/events"
 import { useScrollAnimation, useMobileCardAnimation } from "@/lib/hooks"
 import { FacebookIcon, InstagramIcon, LinkedinIcon, GithubIcon } from "lucide-react"
@@ -285,7 +291,9 @@ const HomePage = () => {
             {t('hero.title')}
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto relative z-20">
-            {t('hero.subtitle')}
+            {t('hero.subtitleBefore')}
+            <UnderlineHighlight>{t('hero.subtitleHighlight')}</UnderlineHighlight>
+            {t('hero.subtitleAfter')}
           </p>
           <div className="flex flex-row gap-4 justify-center relative z-20">
             <Button size="lg" onClick={() => scrollToSection('packages')}>
@@ -333,7 +341,10 @@ const HomePage = () => {
         {...(aboutAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">{t('about.title')}</h2>
+            <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
+              <UserIcon className="h-8 w-8 text-primary shrink-0" />
+              {t('about.title')}
+            </h2>
             <Separator className="w-24 mx-auto" />
           </div>
           <div className="grid md:grid-cols-2 gap-12 items-start">
@@ -395,7 +406,10 @@ const HomePage = () => {
         {...(servicesAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">{t('services.title')}</h2>
+            <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
+              <WrenchScrewdriverIcon className="h-8 w-8 text-primary shrink-0" />
+              {t('services.title')}
+            </h2>
             <Separator className="w-24 mx-auto" />
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
@@ -432,7 +446,9 @@ const HomePage = () => {
                     <div className="mx-auto mb-4 text-primary">
                       {service.icon}
                     </div>
-                    <CardTitle>{t(service.title)}</CardTitle>
+                    <CardTitle>
+                      {t(service.title)}
+                    </CardTitle>
                   </CardHeader>
                   <CardContent className="flex-grow">
                     <CardDescription className="text-center">
@@ -454,7 +470,10 @@ const HomePage = () => {
         {...(packagesAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">{t('packages.title')}</h2>
+            <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
+              <CubeTransparentIcon className="h-8 w-8 text-primary shrink-0" />
+              {t('packages.title')}
+            </h2>
             <Separator className="w-24 mx-auto" />
             <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">
               {t('packages.subtitle')}
@@ -532,45 +551,48 @@ const HomePage = () => {
 
           {/* FAQ Section */}
           <div className="mt-20">
-            <h3 className="text-2xl font-semibold text-center mb-8">{t('packages.faq.title')}</h3>
+            <h3 className="text-2xl font-semibold text-center mb-8 flex items-center justify-center gap-2">
+              <QuestionMarkCircleIcon className="h-6 w-6 text-primary shrink-0" />
+              {t('packages.faq.title')}
+            </h3>
             <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto">
               <AccordionItem value="hosting">
-                <AccordionTrigger>{t('packages.faq.items.hosting.question')}</AccordionTrigger>
+                <AccordionTrigger className="text-lg">{t('packages.faq.items.hosting.question')}</AccordionTrigger>
                 <AccordionContent>
                   {t('packages.faq.items.hosting.answer')}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="googleBusiness">
-                <AccordionTrigger>{t('packages.faq.items.googleBusiness.question')}</AccordionTrigger>
+                <AccordionTrigger className="text-lg">{t('packages.faq.items.googleBusiness.question')}</AccordionTrigger>
                 <AccordionContent>
                   {t('packages.faq.items.googleBusiness.answer')}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="eshopPlatforms">
-                <AccordionTrigger>{t('packages.faq.items.eshopPlatforms.question')}</AccordionTrigger>
+                <AccordionTrigger className="text-lg">{t('packages.faq.items.eshopPlatforms.question')}</AccordionTrigger>
                 <AccordionContent>
                   {t('packages.faq.items.eshopPlatforms.answer')}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="customization">
-                <AccordionTrigger>{t('packages.faq.items.customization.question')}</AccordionTrigger>
+                <AccordionTrigger className="text-lg">{t('packages.faq.items.customization.question')}</AccordionTrigger>
                 <AccordionContent>
                   {t('packages.faq.items.customization.answer')}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="hiddenFees">
-                <AccordionTrigger>{t('packages.faq.items.hiddenFees.question')}</AccordionTrigger>
+                <AccordionTrigger className="text-lg">{t('packages.faq.items.hiddenFees.question')}</AccordionTrigger>
                 <AccordionContent>
                   {t('packages.faq.items.hiddenFees.answer')}
                 </AccordionContent>
               </AccordionItem>
 
               <AccordionItem value="timeToLaunch">
-                <AccordionTrigger>{t('packages.faq.items.timeToLaunch.question')}</AccordionTrigger>
+                <AccordionTrigger className="text-lg">{t('packages.faq.items.timeToLaunch.question')}</AccordionTrigger>
                 <AccordionContent>
                   {t('packages.faq.items.timeToLaunch.answer')}
                 </AccordionContent>
@@ -624,7 +646,10 @@ const HomePage = () => {
         {...(contactAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">✨ {t('contact.title')}</h2>
+            <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
+              <PhoneIcon className="h-8 w-8 text-primary shrink-0" />
+              {t('contact.title')}
+            </h2>
             <Separator className="w-24 mx-auto mb-4" />
             <p className="text-muted-foreground max-w-2xl mx-auto">
               {t('contact.description')}

@@ -154,25 +154,39 @@ const PrivacyPolicy = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
-                <h3 className="font-semibold mb-2">{t('privacyPolicy.informationWeCollect.personalInformation.title')}</h3>
+                <p className="font-semibold mb-2">{t('privacyPolicy.informationWeCollect.personalInformation.title')}</p>
                 <p className="text-muted-foreground">
                   {t('privacyPolicy.informationWeCollect.personalInformation.description')}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">{t('privacyPolicy.informationWeCollect.locationData.title')}</h3>
-                <p className="text-muted-foreground">
+                <p className="font-semibold mb-2">{t('privacyPolicy.informationWeCollect.locationData.title')}</p>
+                <p className="text-muted-foreground mb-3">
                   {t('privacyPolicy.informationWeCollect.locationData.description')}
                 </p>
+                {(() => {
+                  const items = t('privacyPolicy.informationWeCollect.locationData.items', { returnObjects: true });
+                  if (!Array.isArray(items)) return null;
+                  return (
+                    <ul className="space-y-2 text-muted-foreground">
+                      {(items as Array<{ title: string; description: string }>).map((item, index) => (
+                        <li key={index}>
+                          <span className="font-medium text-foreground">{item.title}:</span>{' '}
+                          {item.description}
+                        </li>
+                      ))}
+                    </ul>
+                  );
+                })()}
               </div>
               <div>
-                <h3 className="font-semibold mb-2">{t('privacyPolicy.informationWeCollect.usageData.title')}</h3>
+                <p className="font-semibold mb-2">{t('privacyPolicy.informationWeCollect.usageData.title')}</p>
                 <p className="text-muted-foreground">
                   {t('privacyPolicy.informationWeCollect.usageData.description')}
                 </p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">{t('privacyPolicy.informationWeCollect.deviceInformation.title')}</h3>
+                <p className="font-semibold mb-2">{t('privacyPolicy.informationWeCollect.deviceInformation.title')}</p>
                 <p className="text-muted-foreground">
                   {t('privacyPolicy.informationWeCollect.deviceInformation.description')}
                 </p>
