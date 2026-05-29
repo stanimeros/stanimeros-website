@@ -35,7 +35,7 @@ import WhySection from "@/components/WhySection"
 import UnderlineHighlight from "@/components/UnderlineHighlight"
 import { trackEvent } from "@/lib/events"
 import { useScrollAnimation, useMobileCardAnimation } from "@/lib/hooks"
-import { FacebookIcon, InstagramIcon, LinkedinIcon, GithubIcon } from "lucide-react"
+import { FacebookIcon, InstagramIcon, LinkedinIcon, GithubIcon, BriefcaseIcon } from "lucide-react"
 import Layout from "@/components/Layout"
 
 const HomePage = () => {
@@ -285,7 +285,7 @@ const HomePage = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden">
+      <section id="home" className="min-h-dvh flex items-center justify-center relative overflow-hidden">
         <div className="container mx-auto px-4 text-center relative z-10">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent relative z-20">
             {t('hero.title')}
@@ -610,7 +610,10 @@ const HomePage = () => {
         {...(portfolioAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">{t('portfolio.title')}</h2>
+            <h2 className="text-4xl font-bold mb-4 text-center">
+              <BriefcaseIcon className="inline h-8 w-8 text-primary mr-3 align-text-bottom" />
+              {t('portfolio.title')}
+            </h2>
             <Separator className="w-24 mx-auto" />
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
