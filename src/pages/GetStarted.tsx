@@ -10,29 +10,21 @@ import { sendEmail } from "@/lib/firebase"
 import { trackEvent } from "@/lib/events"
 import Layout from "@/components/Layout"
 
-type PackageKey = "online-presence" | "e-shop" | "custom-app" | "ai-agent" | "optimization"
+type PackageKey = "online-presence" | "e-shop" | "custom-app"
 
 const PACKAGE_META: Record<PackageKey, { label: string; tagline: string; highlight?: boolean }> = {
   "online-presence": {
-    label: "Online Presence",
-    tagline: "Everything you need to look professional online",
+    label: "AI Agents & Automation",
+    tagline: "AI agents and automated workflows that run 24/7 without human input.",
   },
   "e-shop": {
-    label: "E-shop",
-    tagline: "A complete online store built with WordPress or Shopify",
+    label: "Apps & Dashboards",
+    tagline: "Custom web, iOS and Android apps with real-time dashboards.",
     highlight: true,
   },
   "custom-app": {
-    label: "Custom App",
-    tagline: "Custom web, iOS, and Android apps",
-  },
-  "ai-agent": {
-    label: "Chats with AI",
-    tagline: "AI chat trained on your documents and integrated into your website",
-  },
-  "optimization": {
-    label: "Optimization & Problem Solving",
-    tagline: "Optimize schedules, logistics, or resources. Find the best solution for complex decisions.",
+    label: "Optimization & AI",
+    tagline: "Smart scheduling, routing, and AI trained on your own business data.",
   },
 }
 
@@ -60,7 +52,7 @@ function GetStarted() {
   }, [])
 
   useEffect(() => {
-    if (initialPackage && ["online-presence", "e-shop", "custom-app", "ai-agent", "optimization"].includes(initialPackage)) {
+    if (initialPackage && ["online-presence", "e-shop", "custom-app"].includes(initialPackage)) {
       setSelectedPackage(initialPackage as PackageKey)
     }
   }, [initialPackage])
@@ -173,29 +165,6 @@ function GetStarted() {
                       </div>
                     </div>
 
-                    <div className="space-y-1">
-                      <div className="flex items-center space-x-4">
-                        <RadioGroupItem value="ai-agent" id="ai-agent" />
-                        <Label htmlFor="ai-agent" className="cursor-pointer font-medium py-0 my-0">
-                          {t('getStarted.serviceSelection.aiAgent.title')}
-                        </Label>
-                      </div>
-                      <div className="pl-8 text-sm text-muted-foreground">
-                        {t('getStarted.serviceSelection.aiAgent.description')}
-                      </div>
-                    </div>
-
-                    <div className="space-y-1">
-                      <div className="flex items-center space-x-4">
-                        <RadioGroupItem value="optimization" id="optimization" />
-                        <Label htmlFor="optimization" className="cursor-pointer font-medium py-0 my-0">
-                          {t('getStarted.serviceSelection.optimization.title')}
-                        </Label>
-                      </div>
-                      <div className="pl-8 text-sm text-muted-foreground">
-                        {t('getStarted.serviceSelection.optimization.description')}
-                      </div>
-                    </div>
                   </div>
                 </RadioGroup>
               </CardContent>

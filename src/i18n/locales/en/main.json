@@ -15,74 +15,52 @@
   },
   "hero": {
     "title": "Pantelis Stanimeros",
-    "subtitle": "Let's create modern digital solutions",
+    "subtitle": "AI agents, smart apps, and real solutions for real business problems",
     "viewPackages": "View Packages",
     "getInTouch": "Get In Touch"
   },
   "about": {
     "title": "About Me",
     "name": "Pantelis Stanimeros",
-    "description1": "Based in Thessaloniki and holding a Bachelor's degree in Computer Science, I help businesses find innovative solutions to grow their digital presence and streamline their operations. As your technology partner, I focus on creating practical solutions that drive real business results.",
-    "description2": "Whether you need a professional website, an online store, or a custom app, I'll guide you through the entire process — from concept to successful launch. I speak your language and translate complex tech into simple, effective solutions.",
+    "description1": "Based in Thessaloniki, I hold a Bachelor's in Computer Science and an MSc in AI & Data Analytics. I build AI agents, automations, mobile apps, and custom dashboards — tools that save time, cut costs, and help businesses make better decisions every day.",
+    "description2": "I also tackle harder business problems: finding the best schedule when there are hundreds of constraints, training AI on your own data, or building a system that picks the optimal route, allocation, or plan automatically. If it's a problem that costs your business time or money, there's likely a smart solution for it.",
     "githubDescription": "Committed to consistent, high-quality updates."
   },
   "packages": {
     "title": "Packages",
-    "subtitle": "Simple, transparent packages for real business needs",
+    "subtitle": "Three clear paths to solving real business problems with technology",
     "getQuote": "Get a custom quote",
     "onlinePresence": {
-      "title": "Online Presence",
-      "description": "Everything you need to look professional online",
+      "title": "AI Agents & Automation",
+      "description": "Replace repetitive work with AI that runs 24/7",
       "features": [
-        "One-page website",
-        "Custom contact form",
-        "Hosting, domain, and email setup",
-        "Google Business & Search Console",
-        "Advertising campaign on Meta (Facebook & Instagram)"
+        "AI agent for customer support or internal workflows",
+        "Automated task handling without human input",
+        "Integration with your existing tools and platforms",
+        "Custom triggers, actions, and responses",
+        "Analytics and performance monitoring"
       ]
     },
     "eShop": {
-      "title": "E-commerce Store",
-      "description": "A complete online store built with WordPress or Shopify",
+      "title": "Apps & Dashboards",
+      "description": "Custom apps and dashboards built around your business",
       "features": [
-        "Brand-focused design",
-        "Professional e-commerce website",
-        "Product setup & customization",
-        "Hosting, domain, and email setup",
-        "Google Business & Search Console"
+        "Web app, iOS app, and Android app",
+        "Real-time dashboard with your key metrics",
+        "Custom functionality & APIs",
+        "Database & cloud hosting",
+        "Publishing to App Store and Google Play"
       ]
     },
     "customApp": {
-      "title": "Custom Apps",
-      "description": "Custom web, iOS, and Android apps",
+      "title": "Optimization & AI",
+      "description": "Smart systems that find the best solution automatically",
       "features": [
-        "Web app, iOS app, and Android app",
-        "Admin dashboard",
-        "Custom functionality & APIs",
-        "Database & cloud hosting",
-        "Posting to App Store and Google Play"
-      ]
-    },
-    "aiAgent": {
-      "title": "Chats with AI",
-      "description": "AI chat trained on your documents and integrated into your website.",
-      "features": [
-        "AI chatbot trained with your PDF/DOCX documents",
-        "Website integration (any platform)",
-        "Customizable appearance to match your brand",
-        "24/7 automated customer support",
-        "Analytics and conversation insights"
-      ]
-    },
-    "optimization": {
-      "title": "Optimization & Problem Solving",
-      "description": "Optimize schedules, logistics, or resources. Find the best solution for complex decisions.",
-      "features": [
-        "Schedule and workforce optimization",
-        "Logistics, routing, and delivery",
-        "Resource allocation and cost reduction",
-        "Data-driven decision support",
-        "Custom algorithms for your business"
+        "Scheduling and workforce optimization",
+        "Routing, logistics, and resource allocation",
+        "AI trained on your own business data",
+        "Predictions, classifications, and recommendations",
+        "Custom algorithms tailored to your problem"
       ]
     },
     "getStarted": "Get Started",
@@ -91,49 +69,71 @@
       "title": "Frequently Asked Questions",
       "items": {
         "hosting": {
-          "question": "What are hosting, domain, and email setup?",
-          "answer": "Think of hosting as your digital shop space on the internet, domain as your online address (like www.yourbusiness.com), and professional email as your business mailbox (like contact@yourbusiness.com). We handle all the technical setup, so you don't have to worry about anything!"
+          "question": "How does an AI agent actually work for my business?",
+          "answer": "An AI agent is a program that handles tasks automatically on your behalf — answering customer questions, processing requests, sending follow-ups, or running internal workflows. You define what it should do, and it runs 24/7 without needing someone to manage it manually. Think of it as a team member that never sleeps and never makes the same mistake twice."
         },
         "googleBusiness": {
-          "question": "What are Google Business and Search Console?",
-          "answer": "These are tools that help a website appear higher on Google and attract free visitors. Google Business Profile allows customers to find the business on Google Maps and search results, with details like opening hours, photos, and reviews. Search Console takes care of indexing the website so it appears in Google searches, and provides checks and optimizations for better visibility."
+          "question": "Do I need technical knowledge to use what you build?",
+          "answer": "Not at all. Everything is built with the end user in mind — whether that's you, your team, or your customers. You get a simple interface to manage things, and I handle all the technical complexity behind the scenes. If something needs explaining, I'll walk you through it in plain language."
         },
         "eshopPlatforms": {
-          "question": "WordPress or Shopify - which should I choose?",
-          "answer": "Both are excellent choices! WordPress gives you more flexibility and lower monthly costs but requires more maintenance. Shopify is simpler to use and includes hosting but has higher monthly fees. We'll help you choose the best option based on your needs and budget."
+          "question": "What kind of data do I need to train an AI on my business?",
+          "answer": "It depends on what you want the AI to do. For a customer support agent, your existing documents, FAQs, or product descriptions are enough. For predictions or recommendations, historical records like past orders, schedules, or outcomes work well. You don't need a huge dataset — even a few hundred records can be a good starting point. We'll assess what you have and what's possible."
         },
         "customization": {
-          "question": "How do you customize my website to match my brand?",
-          "answer": "We tailor everything to your brand identity — from colors and fonts to layouts and features. We can create custom product displays, unique checkout experiences, and add any specific functionality your business needs."
+          "question": "What kind of problems can you solve with optimization?",
+          "answer": "Any problem where you're trying to find the best arrangement, schedule, or allocation — and doing it manually takes too long or gives poor results. Common examples: employee scheduling with shift constraints, delivery route planning, matching resources to tasks, or deciding the optimal mix of products or services. If it feels like a puzzle your business solves repeatedly, it can likely be automated and optimized."
         },
         "hiddenFees": {
           "question": "Are there any hidden fees?",
-          "answer": "No hidden fees! We believe in complete transparency. All costs are clearly outlined upfront in our packages. The only additional costs would be for custom requirements beyond the package scope, which we'll discuss and agree upon before proceeding with any work."
+          "answer": "No hidden fees. All costs are discussed and agreed upfront before any work begins. If your project requires third-party services like cloud hosting or AI API usage, those are explained clearly so you know exactly what you're paying for."
         },
         "timeToLaunch": {
-          "question": "How long does it take to launch my website?",
-          "answer": "Basic websites usually launch within 2–3 weeks, while e-commerce stores take around 3–4 weeks. Custom projects' timelines vary based on complexity. We'll provide you with a detailed timeline during our initial consultation. Throughout the process, you'll have access to a development preview to watch your site come to life!"
+          "question": "How long does it take to build and deploy?",
+          "answer": "A focused AI agent or automation can be up and running in 1–2 weeks. Custom apps and dashboards typically take 3–6 weeks depending on complexity. Optimization systems vary based on the problem. After the free strategy call, you'll get a clear timeline before committing to anything."
         }
+      }
+    }
+  },
+  "why": {
+    "title": "Sound familiar?",
+    "subtitle": "These are the problems businesses come to me with. If any of them resonate, there's a smarter way to handle them.",
+    "items": {
+      "repetitive": {
+        "title": "Your team is doing the same tasks every day",
+        "description": "Answering the same customer questions, copying data between systems, chasing follow-ups manually. These tasks eat hours that could go somewhere useful."
+      },
+      "decisions": {
+        "title": "Decisions are made on gut feeling, not data",
+        "description": "You have data sitting in spreadsheets, systems, or nowhere at all — and no easy way to turn it into something actionable. So decisions rely on instinct instead."
+      },
+      "scheduling": {
+        "title": "Scheduling and planning is a constant headache",
+        "description": "Fitting people, resources, or deliveries into the right slots — with all the constraints involved — takes hours and still ends up suboptimal."
+      },
+      "visibility": {
+        "title": "You have no clear picture of what's happening",
+        "description": "Numbers are scattered, reports are manual, and by the time you see a problem it's already cost you. You need one place that shows what matters, in real time."
       }
     }
   },
   "services": {
     "title": "Services",
     "consulting": {
-      "title": "Tech Consulting",
-      "description": "Expert guidance to choose the right digital solutions for your business."
+      "title": "AI Agents & Automation",
+      "description": "AI agents that handle tasks automatically — answering customers, processing requests, or running workflows 24/7 without human input."
     },
     "websites": {
-      "title": "Websites & Online Stores",
-      "description": "Professional websites, online stores, and portfolios designed to convert visitors into customers."
+      "title": "Mobile Apps & Dashboards",
+      "description": "Custom iOS, Android, and web apps with dashboards that give you full visibility and control over your business in real time."
     },
     "mobile": {
-      "title": "Mobile Apps",
-      "description": "Custom iOS and Android apps to reach your customers on their phones."
+      "title": "Smart Problem Solving",
+      "description": "Got a scheduling nightmare, a routing problem, or a decision that's too complex to do manually? I build systems that find the optimal solution fast."
     },
     "aiAgent": {
-      "title": "Chats with AI",
-      "description": "AI chat trained on your documents and integrated into your website."
+      "title": "AI Trained on Your Data",
+      "description": "Train AI models on your own business data — for predictions, classification, recommendations, or automating decisions specific to your industry."
     }
   },
   "portfolio": {
@@ -228,24 +228,16 @@
       "title": "Service Selection",
       "subtitle": "Pick the service that best fits your needs",
       "onlinePresence": {
-        "title": "Online Presence",
-        "description": "For businesses that need a professional website with all essentials."
+        "title": "AI Agents & Automation",
+        "description": "AI agents and automated workflows that run 24/7 without human input."
       },
       "eShop": {
-        "title": "E-shop",
-        "description": "Start selling online with a professional e-shop."
+        "title": "Apps & Dashboards",
+        "description": "Custom web, iOS and Android apps with real-time dashboards."
       },
       "customApp": {
-        "title": "Custom App",
-        "description": "Web, iOS and Android apps with custom features."
-      },
-      "aiAgent": {
-        "title": "Chats with AI",
-        "description": "AI chat trained on your documents and integrated into your website."
-      },
-      "optimization": {
-        "title": "Optimization & Problem Solving",
-        "description": "Optimize schedules, logistics, or resources. Find the best solution for complex decisions."
+        "title": "Optimization & AI",
+        "description": "Smart scheduling, routing, and AI trained on your own business data."
       }
     },
     "buttons": {
@@ -299,21 +291,17 @@
     }
   },
   "contact": {
-    "title": "Get Free Consultation",
+    "title": "Get Free Strategy Call",
     "subtitle": "Let's talk about your business",
-    "description": "Fill in your details below to get a free 10-minute consultation where we'll discuss your needs and find the best solution for you. No strings attached!",
+    "description": "Fill in your details below to get a free 10-minute strategy call where we'll discuss your needs and find the best solution for you. No strings attached!",
     "features": {
-      "consultation": {
-        "title": "10-Minute Consultation",
-        "description": "Quick, focused discussion to understand your needs and suggest solutions"
-      },
       "solutions": {
         "title": "Tailored Solutions",
         "description": "Get expert advice specific to your project or challenge"
       },
       "noObligations": {
         "title": "No Obligations",
-        "description": "Free consultation with no strings attached"
+        "description": "Free strategy call with no strings attached"
       }
     },
     "form": {
@@ -324,8 +312,8 @@
       "namePlaceholder": "Your name",
       "emailPlaceholder": "email@example.com",
       "sending": "Sending...",
-      "send": "Get Your Free Consultation",
-      "success": "Request sent! I'll contact you within 24 hours to schedule your free consultation.",
+      "send": "Get Your Free Strategy Call",
+      "success": "Request sent! I'll contact you within 24 hours to schedule your free strategy call.",
       "error": "Failed to send request. Please try again."
     }
   },

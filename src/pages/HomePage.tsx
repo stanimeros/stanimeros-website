@@ -26,6 +26,7 @@ import {
 } from "@heroicons/react/24/outline"
 import { sendEmail } from "@/lib/firebase"
 import GitHubCalendarComponent from "@/components/GitHubCalendar"
+import WhySection from "@/components/WhySection"
 import { trackEvent } from "@/lib/events"
 import { useScrollAnimation, useMobileCardAnimation } from "@/lib/hooks"
 import { FacebookIcon, InstagramIcon, LinkedinIcon, GithubIcon } from "lucide-react"
@@ -49,7 +50,7 @@ const HomePage = () => {
   
   // Refs for card animations
   const serviceCardRefs = Array(5).fill(null).map(() => useRef<HTMLDivElement>(null))
-  const packageCardRefs = Array(5).fill(null).map(() => useRef<HTMLDivElement>(null))
+  const packageCardRefs = Array(3).fill(null).map(() => useRef<HTMLDivElement>(null))
   const portfolioCardRefs = Array(16).fill(null).map(() => useRef<HTMLDivElement>(null))
   
   // Get animation props for each section
@@ -384,8 +385,10 @@ const HomePage = () => {
         </div>
       </motion.section>
 
+      <WhySection />
+
       {/* Services Section */}
-      <motion.section 
+      <motion.section
         ref={servicesRef}
         id="services" 
         className="p-10 pb-20 scroll-mt-10 overflow-hidden"
@@ -458,14 +461,12 @@ const HomePage = () => {
             </p>
           </div>
 
-          <div className="space-y-6 w-full">
-            {/* Row 1: 3 packages */}
-            <div className="grid md:grid-cols-3 gap-6 w-full">
+          <div className="grid md:grid-cols-3 gap-6 w-full">
             {[
               {
                 title: 'packages.onlinePresence.title',
                 description: 'packages.onlinePresence.description',
-                badge: 'Essential',
+                badge: 'Automation',
                 features: 'packages.onlinePresence.features',
                 package: 'online-presence',
                 className: 'border-border/60'
@@ -473,7 +474,7 @@ const HomePage = () => {
               {
                 title: 'packages.eShop.title',
                 description: 'packages.eShop.description',
-                badge: 'Business',
+                badge: 'Development',
                 features: 'packages.eShop.features',
                 package: 'e-shop',
                 className: 'border-primary/30 ring-1 ring-primary/30 bg-primary/5'
@@ -481,7 +482,7 @@ const HomePage = () => {
               {
                 title: 'packages.customApp.title',
                 description: 'packages.customApp.description',
-                badge: 'Premium',
+                badge: 'AI',
                 features: 'packages.customApp.features',
                 package: 'custom-app',
                 className: 'border-border/60',
@@ -523,64 +524,6 @@ const HomePage = () => {
                 </Card>
               </motion.div>
             ))}
-            </div>
-            {/* Row 2: 2 packages (AI + Optimization) - full width */}
-            <div className="grid md:grid-cols-2 gap-6 w-full">
-            {[
-              {
-                title: 'packages.aiAgent.title',
-                description: 'packages.aiAgent.description',
-                badge: 'AI',
-                features: 'packages.aiAgent.features',
-                package: 'ai-agent',
-                className: 'border-border/60',
-              },
-              {
-                title: 'packages.optimization.title',
-                description: 'packages.optimization.description',
-                badge: 'Optimization',
-                features: 'packages.optimization.features',
-                package: 'optimization',
-                className: 'border-border/60',
-              }
-            ].map((pkg, index) => (
-              <motion.div
-                key={index + 3}
-                ref={packageCardRefs[index + 3]}
-                {...useMobileCardAnimation(packageCardRefs[index + 3], index + 3)}
-                className="md:transform-none w-full"
-              >
-                <Card className={`relative flex flex-col hover:shadow-lg transition-all duration-300 h-full bg-card/70 hover:bg-card/70 ${pkg.className}`}>
-                  <CardHeader className="flex-none">
-                    <div className="flex items-center justify-between">
-                      <CardTitle>{t(pkg.title)}</CardTitle>
-                      <Badge variant="secondary" className="rounded-full">{pkg.badge}</Badge>
-                    </div>
-                    <CardDescription>{t(pkg.description)}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="flex-grow space-y-4">
-                    <div className="text-lg font-semibold"> {t('packages.getQuote')}</div>
-                    <div className="space-y-2 text-sm text-muted-foreground">
-                      {(t(pkg.features, { returnObjects: true }) as string[]).map((feature, featureIndex) => (
-                        <div key={featureIndex} className="flex items-start gap-2">
-                          <CheckIcon className="h-4 w-4 text-primary mt-0.5" />
-                          <span>{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                  <div className="px-6 pb-6 mt-auto">
-                    <Button className="w-full" onClick={() => {
-                      trackEvent('packageSelected', {
-                        package: pkg.package
-                      });
-                      navigate(`/get-started?package=${pkg.package}`);
-                    }}>{t('packages.getStarted')}</Button>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-            </div>
           </div>
 
           <p className="text-center text-sm text-muted-foreground mt-8">
