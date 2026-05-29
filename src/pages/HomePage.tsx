@@ -341,8 +341,8 @@ const HomePage = () => {
         {...(aboutAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
-              <UserIcon className="h-8 w-8 text-primary shrink-0" />
+            <h2 className="text-4xl font-bold mb-4 text-center">
+              <UserIcon className="inline h-8 w-8 text-primary mr-3 align-text-bottom" />
               {t('about.title')}
             </h2>
             <Separator className="w-24 mx-auto" />
@@ -406,8 +406,8 @@ const HomePage = () => {
         {...(servicesAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
-              <WrenchScrewdriverIcon className="h-8 w-8 text-primary shrink-0" />
+            <h2 className="text-4xl font-bold mb-4 text-center">
+              <WrenchScrewdriverIcon className="inline h-8 w-8 text-primary mr-3 align-text-bottom" />
               {t('services.title')}
             </h2>
             <Separator className="w-24 mx-auto" />
@@ -470,8 +470,8 @@ const HomePage = () => {
         {...(packagesAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
-              <CubeTransparentIcon className="h-8 w-8 text-primary shrink-0" />
+            <h2 className="text-4xl font-bold mb-4 text-center">
+              <CubeTransparentIcon className="inline h-8 w-8 text-primary mr-3 align-text-bottom" />
               {t('packages.title')}
             </h2>
             <Separator className="w-24 mx-auto" />
@@ -646,8 +646,8 @@ const HomePage = () => {
         {...(contactAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
-              <PhoneIcon className="h-8 w-8 text-primary shrink-0" />
+            <h2 className="text-4xl font-bold mb-4 text-center">
+              <PhoneIcon className="inline h-8 w-8 text-primary mr-3 align-text-bottom" />
               {t('contact.title')}
             </h2>
             <Separator className="w-24 mx-auto mb-4" />

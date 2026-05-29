@@ -9,7 +9,7 @@ import {
   CircleStackIcon,
   CalendarDaysIcon,
   PresentationChartLineIcon,
-  ExclamationTriangleIcon,
+  HandRaisedIcon,
   BoltIcon,
 } from "@heroicons/react/24/outline"
 
@@ -32,13 +32,13 @@ export default function WhySection() {
       className="py-20 scroll-mt-10 overflow-hidden relative"
       {...(animation as HTMLMotionProps<"section">)}>
 
-      <ExclamationTriangleIcon className="absolute left-8 top-1/2 -translate-y-1/2 w-40 h-40 text-red-400/5 pointer-events-none hidden xl:block" />
+      <HandRaisedIcon className="absolute left-8 top-1/2 -translate-y-1/2 w-40 h-40 text-red-400/5 pointer-events-none hidden xl:block" />
       <BoltIcon className="absolute right-8 top-1/2 -translate-y-1/2 w-40 h-40 text-primary/5 pointer-events-none hidden xl:block" />
 
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold mb-4 flex items-center justify-center gap-3">
-            <ExclamationTriangleIcon className="h-8 w-8 text-primary shrink-0" />
+          <h2 className="text-4xl font-bold mb-4 text-center">
+            <HandRaisedIcon className="inline h-8 w-8 text-primary mr-3 align-text-bottom" />
             {t('why.title')}
           </h2>
           <Separator className="w-24 mx-auto mb-4" />

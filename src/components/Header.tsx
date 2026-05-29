@@ -50,7 +50,7 @@ const Header = () => {
           </Link>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center">
+          <div className="hidden lg:flex items-center">
             <div className="flex items-center space-x-6 mr-6">
               <Button variant="ghost" onClick={() => handleScrollToSection('home')} className="cursor-pointer">
                 {t('nav.home')}
@@ -105,7 +105,7 @@ const Header = () => {
           </div>
 
           {/* Mobile Navigation */}
-          <div className="flex items-center space-x-2 md:hidden">
+          <div className="flex items-center space-x-2 lg:hidden">
             <LanguageSwitcher variant="compact" />
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
