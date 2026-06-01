@@ -2,7 +2,6 @@
   "beginCheckout": "",
   "pageView": "",
   "package": "",
-  "packageSelected": "",
   "canvas": "",
   "2d": "",
   "nav": {
@@ -219,38 +218,22 @@
     }
   },
   "getStarted": {
-    "title": "Get Started",
-    "subtitle": "Choose a package and tell me about your needs. I'll reply within 1–2 business days.",
     "contactDetails": {
-      "title": "Contact Details",
-      "subtitle": "How can I reach you?",
       "name": "Name",
       "email": "Email",
-      "company": "Company (optional)",
       "phone": "Phone (optional)"
     },
     "serviceSelection": {
-      "title": "Service Selection",
-      "subtitle": "Pick the service that best fits your needs",
       "onlinePresence": {
-        "title": "AI Agents & Automation",
-        "description": "AI agents and automated workflows that run 24/7 without human input."
+        "title": "AI Agents & Automation"
       },
       "eShop": {
-        "title": "Apps & Dashboards",
-        "description": "Custom web, iOS and Android apps with real-time dashboards."
+        "title": "Apps & Dashboards"
       },
       "customApp": {
-        "title": "Optimization & AI",
-        "description": "Smart scheduling, routing, and AI trained on your own business data."
+        "title": "Optimization & AI"
       }
-    },
-    "buttons": {
-      "submit": "Submit Request",
-      "processing": "Processing..."
-    },
-    "success": "Thanks for your inquiry! I'll review your requirements and reply within 1–2 business days with a proposal.",
-    "error": "Something went wrong. Please try again."
+    }
   },
   "tools": {
     "qrcode": {

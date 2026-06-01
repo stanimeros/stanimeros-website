@@ -2,7 +2,6 @@
   "beginCheckout": "",
   "pageView": "",
   "package": "",
-  "packageSelected": "",
   "canvas": "",
   "2d": "",
   "nav": {
@@ -219,38 +218,22 @@
     }
   },
   "getStarted": {
-    "title": "Ξεκίνα σήμερα",
-    "subtitle": "Συμπληρώστε τα στοιχεία σας και επιλέξτε την υπηρεσία που σας ταιριάζει. Θα λάβετε απάντηση μέσα σε 1–2 εργάσιες ημέρες.",
     "contactDetails": {
-      "title": "Στοιχεία Επικοινωνίας",
-      "subtitle": "Πώς να επικοινωνήσω μαζί σας;",
       "name": "Όνομα",
       "email": "Email",
-      "company": "Εταιρεία (προαιρετικό)",
       "phone": "Τηλέφωνο (προαιρετικό)"
     },
     "serviceSelection": {
-      "title": "Επιλογή Υπηρεσίας",
-      "subtitle": "Επιλέξτε την υπηρεσία που σας ταιριάζει",
       "onlinePresence": {
-        "title": "AI Agents & Αυτοματισμοί",
-        "description": "AI agents και αυτοματισμοί που τρέχουν 24/7 χωρίς ανθρώπινη παρέμβαση."
+        "title": "AI Agents & Αυτοματισμοί"
       },
       "eShop": {
-        "title": "Apps & Dashboards",
-        "description": "Custom web, iOS και Android εφαρμογές με real-time dashboards."
+        "title": "Apps & Dashboards"
       },
       "customApp": {
-        "title": "Βελτιστοποίηση & AI",
-        "description": "Έξυπνος προγραμματισμός, δρομολόγηση και AI εκπαιδευμένο στα δικά σας δεδομένα."
+        "title": "Βελτιστοποίηση & AI"
       }
-    },
-    "buttons": {
-      "submit": "Ολοκλήρωση",
-      "processing": "Σε εξέλιξη..."
-    },
-    "success": "Ευχαριστούμε για το ενδιαφέρον σας! Θα λάβετε απάντηση μέσα σε 1–2 εργάσιες ημέρες.",
-    "error": "Κάτι πήγε στραβά. Δοκιμάστε ξανά."
+    }
   },
   "tools": {
     "qrcode": {

@@ -70,10 +70,10 @@ function extractAllKeysFromCodebase(sourceFiles) {
   const keyLocations = new Map(); // Map of key -> [{file, line}, ...]
   const dynamicPrefixes = new Set(); // Prefixes for dynamic keys like `t(\`key.${var}\`)`
   
-  // Patterns to match t('key') or t("key")
+  // Patterns to match t('key') or t("key") — negative lookbehind prevents matching inside trackEvent etc.
   const patterns = [
-    /t\(['"]([^'"]+)['"]/g,
-    /t\(`([^`]+)`/g,
+    /(?<!\w)t\(['"]([^'"]+)['"]/g,
+    /(?<!\w)t\(`([^`]+)`/g,
   ];
   
   for (const filePath of sourceFiles) {
