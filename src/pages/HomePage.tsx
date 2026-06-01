@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
 import "../i18n"
-import { Link, useLocation, useNavigate } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
+import ContactModal from "@/components/ContactModal"
 import { motion, useScroll, useTransform, useSpring, type HTMLMotionProps } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -9,12 +10,9 @@ import { PortfolioCard } from "@/components/PortfolioCard"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 import {
   EnvelopeIcon,
   MapPinIcon,
-  PaperAirplaneIcon,
   DevicePhoneMobileIcon,
   CheckIcon,
   ClockIcon,
@@ -28,8 +26,9 @@ import {
   CubeTransparentIcon,
   QuestionMarkCircleIcon,
   PhoneIcon,
+  BoltIcon,
+  CalendarDaysIcon,
 } from "@heroicons/react/24/outline"
-import { sendEmail } from "@/lib/firebase"
 import GitHubCalendarComponent from "@/components/GitHubCalendar"
 import WhySection from "@/components/WhySection"
 import UnderlineHighlight from "@/components/UnderlineHighlight"
@@ -41,7 +40,6 @@ import Layout from "@/components/Layout"
 const HomePage = () => {
   const { t } = useTranslation()
   const location = useLocation()
-  const navigate = useNavigate()
   const { scrollY } = useScroll()
   const logoY = useTransform(scrollY, [0, 500], [0, 100])
   const logoOpacity = useTransform(scrollY, [0, 500], [0.1, 0])
@@ -66,12 +64,16 @@ const HomePage = () => {
   const portfolioAnimation = useScrollAnimation(portfolioRef)
   const contactAnimation = useScrollAnimation(contactRef)
   
-  const [contactForm, setContactForm] = useState({
-    name: "",
-    email: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+  const [modalOpen, setModalOpen] = useState(false)
+  const [modalSource, setModalSource] = useState("")
+  const [modalPackage, setModalPackage] = useState<string | undefined>(undefined)
+
+  const openModal = (source: string, pkg?: string) => {
+    trackEvent('ctaClick', { source, package: pkg ?? null })
+    setModalSource(source)
+    setModalPackage(pkg)
+    setModalOpen(true)
+  }
 
   useEffect(() => {
     trackEvent('pageView', {
@@ -95,52 +97,6 @@ const HomePage = () => {
     }
   }
 
-  const handleContactSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setSubmitStatus("idle")
-
-    try {
-      const result = await sendEmail({
-        subject: "Free Consultation Request",
-        name: contactForm.name,
-        email: contactForm.email,
-        message: 'Client filled the free consultation form'
-      })
-      
-      console.log("Email sent successfully:", result)
-      
-      // Track contact form submission
-      trackEvent('beginCheckout', {
-        value: 0,
-        currency: 'EUR',
-        package: 'free-consultation'
-      });
-      
-      setSubmitStatus("success")
-      setContactForm({ name: "", email: "" })
-      
-      // Reset status after 5 seconds
-      setTimeout(() => setSubmitStatus("idle"), 5000)
-      
-    } catch (error: any) {
-      console.error("Error sending email:", error)
-      setSubmitStatus("error")
-      
-      // Reset status after 5 seconds
-      setTimeout(() => setSubmitStatus("idle"), 5000)
-    } finally {
-      setIsSubmitting(false)
-    }
-  }
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setContactForm(prev => ({
-      ...prev,
-      [name]: value
-    }))
-  }
 
   const portfolioItems = [
     {
@@ -488,7 +444,8 @@ const HomePage = () => {
                 badge: 'Automation',
                 features: 'packages.onlinePresence.features',
                 package: 'online-presence',
-                className: 'border-border/60'
+                className: 'border-border/60',
+                ctaIcon: <BoltIcon className="h-6 w-6 mr-2 stroke-[1.5]" />,
               },
               {
                 title: 'packages.eShop.title',
@@ -496,7 +453,8 @@ const HomePage = () => {
                 badge: 'Development',
                 features: 'packages.eShop.features',
                 package: 'e-shop',
-                className: 'border-primary/30 ring-1 ring-primary/30 bg-primary/5'
+                className: 'border-primary/30 ring-1 ring-primary/30 bg-primary/5',
+                ctaIcon: <BuildingStorefrontIcon className="h-6 w-6 mr-2 stroke-[1.5]" />,
               },
               {
                 title: 'packages.customApp.title',
@@ -505,6 +463,7 @@ const HomePage = () => {
                 features: 'packages.customApp.features',
                 package: 'custom-app',
                 className: 'border-border/60',
+                ctaIcon: <SparklesIcon className="h-6 w-6 mr-2 stroke-[1.5]" />,
               }
             ].map((pkg, index) => (
               <motion.div
@@ -533,12 +492,13 @@ const HomePage = () => {
                     </div>
                   </CardContent>
                   <div className="px-6 pb-6 mt-auto">
-                    <Button className="w-full" onClick={() => {
-                      trackEvent('packageSelected', {
-                        package: pkg.package
-                      });
-                      navigate(`/get-started?package=${pkg.package}`);
-                    }}>{t('packages.getStarted')}</Button>
+                    <Button
+                      className="w-full h-13 px-8 text-base bg-green-500 hover:bg-green-400 text-white shadow-[0_0_20px_rgba(74,222,128,0.35)] hover:shadow-[0_0_30px_rgba(74,222,128,0.3)] transition-all duration-300"
+                      onClick={() => openModal('package-button', pkg.package)}
+                    >
+                      {pkg.ctaIcon}
+                      {t('packages.getStarted')}
+                    </Button>
                   </div>
                 </Card>
               </motion.div>
@@ -658,119 +618,59 @@ const HomePage = () => {
               {t('contact.description')}
             </p>
           </div>
-          <div className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-semibold mb-6">{t('contact.subtitle')}</h3>
-              <div className="space-y-6 mb-8">
-                <div className="flex items-start space-x-3 p-4 rounded-lg bg-card/70 border border-border/60">
-                  <div className="mt-1">
-                    <ClockIcon className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium">{t('contact.features.consultation.title')}</h4>
-                    <p className="text-sm text-muted-foreground">{t('contact.features.consultation.description')}</p>
-                  </div>
+          <div className="flex flex-col items-center gap-12 max-w-3xl mx-auto">
+            <div className="grid md:grid-cols-3 gap-4 w-full">
+              <div className="flex items-start space-x-3 p-4 rounded-lg bg-card/70 border border-border/60">
+                <div className="mt-1 shrink-0">
+                  <ClockIcon className="h-5 w-5 text-primary" />
                 </div>
-                <div className="flex items-start space-x-3 p-4 rounded-lg bg-card/70 border border-border/60">
-                  <div className="mt-1">
-                    <CursorArrowRaysIcon className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium">{t('contact.features.solutions.title')}</h4>
-                    <p className="text-sm text-muted-foreground">{t('contact.features.solutions.description')}</p>
-                  </div>
+                <div>
+                  <h4 className="font-medium">{t('contact.features.consultation.title')}</h4>
+                  <p className="text-sm text-muted-foreground">{t('contact.features.consultation.description')}</p>
                 </div>
-                <div className="flex items-start space-x-3 p-4 rounded-lg bg-card/70 border border-border/60">
-                  <div className="mt-1">
-                    <SparklesIcon className="h-5 w-5 text-primary" />
-                  </div>
-                  <div>
-                    <h4 className="font-medium">{t('contact.features.noObligations.title')}</h4>
-                    <p className="text-sm text-muted-foreground">{t('contact.features.noObligations.description')}</p>
-                  </div>
+              </div>
+              <div className="flex items-start space-x-3 p-4 rounded-lg bg-card/70 border border-border/60">
+                <div className="mt-1 shrink-0">
+                  <CursorArrowRaysIcon className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h4 className="font-medium">{t('contact.features.solutions.title')}</h4>
+                  <p className="text-sm text-muted-foreground">{t('contact.features.solutions.description')}</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-3 p-4 rounded-lg bg-card/70 border border-border/60">
+                <div className="mt-1 shrink-0">
+                  <SparklesIcon className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h4 className="font-medium">{t('contact.features.noObligations.title')}</h4>
+                  <p className="text-sm text-muted-foreground">{t('contact.features.noObligations.description')}</p>
                 </div>
               </div>
             </div>
-            <div>
-              <Card>
-                <CardHeader>
-                  <CardTitle>{t('contact.form.message')}</CardTitle>
-                  <CardDescription>{t('contact.form.description')}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleContactSubmit} className="space-y-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="name">{t('contact.form.name')}</Label>
-                      <Input 
-                        id="name" 
-                        name="name"
-                        value={contactForm.name}
-                        onChange={handleInputChange}
-                        placeholder={t('contact.form.namePlaceholder')}
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="email">{t('contact.form.email')}</Label>
-                      <Input 
-                        id="email" 
-                        name="email"
-                        type="email" 
-                        value={contactForm.email}
-                        onChange={handleInputChange}
-                        placeholder={t('contact.form.emailPlaceholder')}
-                        required
-                      />
-                    </div>
-                    
-                    {/* Status Messages */}
-                    {submitStatus === "success" && (
-                      <div className="p-3 bg-green-50/20 dark:bg-green-950/30 border border-green-200 dark:border-green-800/50 text-green-700 dark:text-green-300 rounded">
-                        {t('contact.form.success')}
-                      </div>
-                    )}
-                    
-                    {submitStatus === "error" && (
-                      <div className="p-3 bg-red-50/20 dark:bg-red-950/30 border border-red-200 dark:border-red-800/50 text-red-700 dark:text-red-300 rounded">
-                        {t('contact.form.error')}
-                      </div>
-                    )}
-                    
-                    <Button 
-                      type="submit" 
-                      className="w-full mt-6" 
-                      disabled={isSubmitting}
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                          {t('contact.form.sending')}
-                        </>
-                      ) : (
-                        <>
-                          <PaperAirplaneIcon className="h-4 w-4 mr-2" />
-                          {t('contact.form.send')}
-                        </>
-                      )}
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
-            </div>
-            <div className="flex flex-col">
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <EnvelopeIcon className="h-5 w-5 text-primary" />
+
+            <Button
+              className="!px-[100px] h-14 text-base bg-green-500 hover:bg-green-400 text-white shadow-[0_0_24px_rgba(74,222,128,0.4)] hover:shadow-[0_0_40px_rgba(74,222,128,0.33)] transition-all duration-300"
+              onClick={() => openModal('contact-section')}
+            >
+              <CalendarDaysIcon className="h-6 w-6 mr-2 stroke-[1.5]" />
+              {t('contact.form.send')}
+            </Button>
+
+            <div className="flex flex-col items-center gap-4">
+              <div className="flex flex-wrap justify-center gap-x-8 gap-y-3 text-sm">
+                <div className="flex items-center space-x-2">
+                  <EnvelopeIcon className="h-4 w-4 text-primary" />
                   <a href="mailto:hello@stanimeros.com" className="hover:text-primary transition-colors">
                     hello@stanimeros.com
                   </a>
                 </div>
-                <div className="flex items-center space-x-3">
-                  <MapPinIcon className="h-5 w-5 text-primary" />
+                <div className="flex items-center space-x-2">
+                  <MapPinIcon className="h-4 w-4 text-primary" />
                   <span>Thessaloniki, Greece</span>
                 </div>
               </div>
-              <div className="flex space-x-4 mt-8">
+              <div className="flex space-x-3">
                 <Link to="https://linkedin.com/in/stanimeros" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon">
                     <LinkedinIcon className="h-5 w-5" />
@@ -796,8 +696,14 @@ const HomePage = () => {
           </div>
         </div>
       </motion.section>
+      <ContactModal
+        open={modalOpen}
+        onOpenChange={setModalOpen}
+        source={modalSource}
+        packageContext={modalPackage}
+      />
     </Layout>
   )
 }
 
-export default HomePage 
+export default HomePage

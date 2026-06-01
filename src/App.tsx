@@ -3,7 +3,6 @@ import { useEffect } from "react"
 import HomePage from "@/pages/HomePage"
 import PrivacyPolicy from "@/pages/PrivacyPolicy"
 import DataDeletion from "@/pages/DataDeletion"
-import GetStarted from "@/pages/GetStarted"
 import QRCodeGenerator from "@/pages/QRCodeGenerator"
 import ImageConverter from "@/pages/ImageConverter"
 import VideoCompressor from "@/pages/VideoCompressor"
@@ -25,7 +24,6 @@ function App() {
           <Route path="/privacy-policy/:appSlug" element={<PrivacyPolicy />} />
           <Route path="/data-deletion" element={<DataDeletion />} />
           <Route path="/data-deletion/:appSlug" element={<DataDeletion />} />
-          <Route path="/get-started" element={<GetStarted />} />
           <Route path="/tools/qr-code" element={<QRCodeGenerator />} />
           <Route path="/tools/image-converter" element={<ImageConverter />} />
           <Route path="/tools/video-compressor" element={<VideoCompressor />} />
@@ -36,7 +34,6 @@ function App() {
             <Route path="privacy-policy/:appSlug" element={<PrivacyPolicy />} />
             <Route path="data-deletion" element={<DataDeletion />} />
             <Route path="data-deletion/:appSlug" element={<DataDeletion />} />
-            <Route path="get-started" element={<GetStarted />} />
             <Route path="tools/qr-code" element={<QRCodeGenerator />} />
             <Route path="tools/image-converter" element={<ImageConverter />} />
             <Route path="tools/video-compressor" element={<VideoCompressor />} />

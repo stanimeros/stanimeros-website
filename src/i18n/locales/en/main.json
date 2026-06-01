@@ -314,17 +314,18 @@
       }
     },
     "form": {
-      "description": "Fill in your details and I'll get back to you within 24 hours",
+      "description": "Leave your details and I'll get back to you within 24 hours",
       "name": "Name",
       "email": "Email",
       "message": "Details",
       "namePlaceholder": "Your name",
       "emailPlaceholder": "email@example.com",
       "sending": "Sending...",
-      "send": "Get Your Free Strategy Call",
+      "send": "Send Message",
       "success": "Request sent! I'll contact you within 24 hours to schedule your free strategy call.",
       "error": "Failed to send request. Please try again."
-    }
+    },
+    "modalTitle": "Let's Talk"
   },
   "privacyPolicy": {
     "title": "Privacy Policy",

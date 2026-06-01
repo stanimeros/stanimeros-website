@@ -14,6 +14,10 @@ const eventMap = {
     fbq: "ViewContent",
     firebase: "view_item",
   },
+  ctaClick: {
+    fbq: "ViewContent",
+    firebase: "select_content",
+  },
 };
 
 declare global { interface Window { fbq: any; } }
