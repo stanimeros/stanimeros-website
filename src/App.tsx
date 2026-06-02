@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { useEffect } from "react"
 import HomePage from "@/pages/HomePage"
+import Contact from "@/pages/Contact"
 import PrivacyPolicy from "@/pages/PrivacyPolicy"
 import DataDeletion from "@/pages/DataDeletion"
 import QRCodeGenerator from "@/pages/QRCodeGenerator"
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           {/* Routes without lang prefix (language from detector) */}
           <Route path="/" element={<HomePage />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/privacy-policy/:appSlug" element={<PrivacyPolicy />} />
           <Route path="/data-deletion" element={<DataDeletion />} />
@@ -30,6 +32,7 @@ function App() {
           {/* /en and /el force language via URL */}
           <Route path="/:lang" element={<LangRoute />}>
             <Route index element={<HomePage />} />
+            <Route path="contact" element={<Contact />} />
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
             <Route path="privacy-policy/:appSlug" element={<PrivacyPolicy />} />
             <Route path="data-deletion" element={<DataDeletion />} />

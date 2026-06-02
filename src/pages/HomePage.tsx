@@ -1,9 +1,8 @@
-import { useState, useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 import { Helmet } from "react-helmet-async"
 import { useTranslation } from "react-i18next"
 import "../i18n"
-import { Link, useLocation } from "react-router-dom"
-import ContactModal from "@/components/ContactModal"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { motion, useScroll, useTransform, useSpring, type HTMLMotionProps } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -65,15 +64,13 @@ const HomePage = () => {
   const portfolioAnimation = useScrollAnimation(portfolioRef)
   const contactAnimation = useScrollAnimation(contactRef)
   
-  const [modalOpen, setModalOpen] = useState(false)
-  const [modalSource, setModalSource] = useState("")
-  const [modalPackage, setModalPackage] = useState<string | undefined>(undefined)
+  const navigate = useNavigate()
 
-  const openModal = (source: string, pkg?: string) => {
+  const goToContact = (source: string, pkg?: string) => {
     trackEvent('ctaClick', { source, package: pkg ?? null })
-    setModalSource(source)
-    setModalPackage(pkg)
-    setModalOpen(true)
+    const params = new URLSearchParams({ source })
+    if (pkg) params.set("package", pkg)
+    navigate(`/contact?${params.toString()}`)
   }
 
   useEffect(() => {
@@ -452,7 +449,6 @@ const HomePage = () => {
                 description: 'packages.onlinePresence.description',
                 badge: 'Automation',
                 features: 'packages.onlinePresence.features',
-                package: 'online-presence',
                 className: 'border-border/60',
                 ctaIcon: <BoltIcon className="h-6 w-6 mr-2 stroke-[1.5]" />,
               },
@@ -461,7 +457,6 @@ const HomePage = () => {
                 description: 'packages.eShop.description',
                 badge: 'Development',
                 features: 'packages.eShop.features',
-                package: 'e-shop',
                 className: 'border-primary/30 ring-1 ring-primary/30 bg-primary/5',
                 ctaIcon: <BuildingStorefrontIcon className="h-6 w-6 mr-2 stroke-[1.5]" />,
               },
@@ -470,7 +465,6 @@ const HomePage = () => {
                 description: 'packages.customApp.description',
                 badge: 'AI',
                 features: 'packages.customApp.features',
-                package: 'custom-app',
                 className: 'border-border/60',
                 ctaIcon: <SparklesIcon className="h-6 w-6 mr-2 stroke-[1.5]" />,
               }
@@ -503,7 +497,7 @@ const HomePage = () => {
                   <div className="px-6 pb-6 mt-auto">
                     <Button
                       className="w-full h-13 px-8 text-base bg-green-500 hover:bg-green-400 text-white shadow-[0_0_20px_rgba(74,222,128,0.35)] hover:shadow-[0_0_30px_rgba(74,222,128,0.3)] transition-all duration-300"
-                      onClick={() => openModal('package-button', pkg.package)}
+                      onClick={() => goToContact('package-button', t(pkg.title))}
                     >
                       {pkg.ctaIcon}
                       {t('packages.getStarted')}
@@ -660,7 +654,7 @@ const HomePage = () => {
 
             <Button
               className="!px-[100px] h-14 text-base bg-green-500 hover:bg-green-400 text-white shadow-[0_0_24px_rgba(74,222,128,0.4)] hover:shadow-[0_0_40px_rgba(74,222,128,0.33)] transition-all duration-300"
-              onClick={() => openModal('contact-section')}
+              onClick={() => goToContact('contact-section')}
             >
               <CalendarDaysIcon className="h-6 w-6 mr-2 stroke-[1.5]" />
               {t('contact.form.send')}
@@ -705,12 +699,6 @@ const HomePage = () => {
           </div>
         </div>
       </motion.section>
-      <ContactModal
-        open={modalOpen}
-        onOpenChange={setModalOpen}
-        source={modalSource}
-        packageContext={modalPackage}
-      />
     </Layout>
   )
 }

@@ -30,6 +30,12 @@
   </url>
 
   <url>
+    <loc>https://stanimeros.com/contact</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://stanimeros.com/tools/qr-code</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
