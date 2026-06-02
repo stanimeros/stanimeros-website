@@ -42,3 +42,5 @@ Allow: /tools/
 
 # Note: Crawl-delay removed for better SEO indexing speed
 # Search engines will use their own crawl rate limits
+
+Sitemap: https://stanimeros.com/sitemap.xml

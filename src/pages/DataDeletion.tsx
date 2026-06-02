@@ -1,4 +1,5 @@
 import { useEffect, useState, useMemo } from "react"
+import { Helmet } from "react-helmet-async"
 import { useParams, Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -184,6 +185,12 @@ const DataDeletion = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Data Deletion | Pantelis Stanimeros</title>
+        <meta name="description" content="Request deletion of your data from apps and services by Pantelis Stanimeros." />
+        <link rel="canonical" href="https://stanimeros.com/data-deletion" />
+        <meta name="robots" content="noindex, follow" />
+      </Helmet>
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12 relative z-10">
         <div className="max-w-2xl mx-auto">

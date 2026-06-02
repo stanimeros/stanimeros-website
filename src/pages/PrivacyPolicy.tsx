@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async"
 import { Link } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import { useMemo, useEffect } from "react"
@@ -70,6 +71,12 @@ const PrivacyPolicy = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Privacy Policy | Pantelis Stanimeros</title>
+        <meta name="description" content="Privacy policy for apps and services by Pantelis Stanimeros." />
+        <link rel="canonical" href="https://stanimeros.com/privacy-policy" />
+        <meta name="robots" content="noindex, follow" />
+      </Helmet>
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12 relative z-10">

@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import type { ChangeEvent } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { useTranslation } from 'react-i18next'
 import imageCompression from 'browser-image-compression'
 import { Button } from '@/components/ui/button'
@@ -172,6 +173,14 @@ export default function ImageConverter() {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Free Image Converter | Pantelis Stanimeros</title>
+        <meta name="description" content="Convert images between JPG, PNG, WebP and more for free. Compress and resize with no quality loss. No signup required." />
+        <link rel="canonical" href="https://stanimeros.com/tools/image-converter" />
+        <meta property="og:title" content="Free Image Converter | Pantelis Stanimeros" />
+        <meta property="og:description" content="Convert images between JPG, PNG, WebP and more for free. Compress and resize with no quality loss. No signup required." />
+        <meta property="og:url" content="https://stanimeros.com/tools/image-converter" />
+      </Helmet>
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8 text-center">{t('tools.imageConverter.title')}</h1>
         <p className="text-lg text-center mb-8">{t('tools.imageConverter.description')}</p>

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useDropzone } from 'react-dropzone';
 import { createFFmpeg, fetchFile } from '@ffmpeg/ffmpeg';
 import { Button } from '@/components/ui/button';
@@ -173,6 +174,14 @@ export default function VideoCompressor() {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Free Video Compressor | Pantelis Stanimeros</title>
+        <meta name="description" content="Compress videos online for free — reduce file size without losing quality. Works in your browser, no upload needed." />
+        <link rel="canonical" href="https://stanimeros.com/tools/video-compressor" />
+        <meta property="og:title" content="Free Video Compressor | Pantelis Stanimeros" />
+        <meta property="og:description" content="Compress videos online for free — reduce file size without losing quality. Works in your browser, no upload needed." />
+        <meta property="og:url" content="https://stanimeros.com/tools/video-compressor" />
+      </Helmet>
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8 text-center">{t('tools.videoCompressor.title')}</h1>
         <p className="text-lg text-center mb-4">{t('tools.videoCompressor.description')}</p>

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react"
+import { Helmet } from "react-helmet-async"
 import { useTranslation } from "react-i18next"
 import "../i18n"
 import { Link, useLocation } from "react-router-dom"
@@ -240,6 +241,14 @@ const HomePage = () => {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Pantelis Stanimeros | Software Engineer</title>
+        <meta name="description" content="Pantelis Stanimeros — software engineer from Greece. Custom websites, e-commerce stores, mobile apps, and business automation. Free consultation." />
+        <link rel="canonical" href="https://stanimeros.com/" />
+        <meta property="og:title" content="Pantelis Stanimeros | Software Engineer" />
+        <meta property="og:description" content="Pantelis Stanimeros — software engineer from Greece. Custom websites, e-commerce stores, mobile apps, and business automation. Free consultation." />
+        <meta property="og:url" content="https://stanimeros.com/" />
+      </Helmet>
       {/* Hero Section */}
       <section id="home" className="min-h-svh flex items-center justify-center relative overflow-hidden">
         <div className="container mx-auto px-4 text-center relative z-10">

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Helmet } from 'react-helmet-async'
 import { QRCodeSVG } from 'qrcode.react'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@/components/ui/button'
@@ -52,6 +53,14 @@ export default function QRCodeGenerator() {
 
   return (
     <Layout>
+      <Helmet>
+        <title>Free QR Code Generator | Pantelis Stanimeros</title>
+        <meta name="description" content="Generate custom QR codes for free — URLs, text, contact info and more. Download in high resolution. No signup required." />
+        <link rel="canonical" href="https://stanimeros.com/tools/qr-code" />
+        <meta property="og:title" content="Free QR Code Generator | Pantelis Stanimeros" />
+        <meta property="og:description" content="Generate custom QR codes for free — URLs, text, contact info and more. Download in high resolution. No signup required." />
+        <meta property="og:url" content="https://stanimeros.com/tools/qr-code" />
+      </Helmet>
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-8 text-center">{t('tools.qrcode.title')}</h1>
         <p className="text-lg text-center mb-8">{t('tools.qrcode.description')}</p>
