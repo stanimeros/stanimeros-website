@@ -222,17 +222,6 @@
       "name": "Name",
       "email": "Email",
       "phone": "Phone (optional)"
-    },
-    "serviceSelection": {
-      "onlinePresence": {
-        "title": "AI Agents & Automation"
-      },
-      "eShop": {
-        "title": "Apps & Dashboards"
-      },
-      "customApp": {
-        "title": "Optimization & AI"
-      }
     }
   },
   "tools": {
@@ -307,8 +296,7 @@
       "send": "Send Message",
       "success": "Request sent! I'll contact you within 24 hours to schedule your free strategy call.",
       "error": "Failed to send request. Please try again."
-    },
-    "modalTitle": "Let's Talk"
+    }
   },
   "privacyPolicy": {
     "title": "Privacy Policy",
