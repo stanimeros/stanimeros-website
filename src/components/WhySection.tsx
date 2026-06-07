@@ -21,7 +21,7 @@ const painPoints = [
 ] as const
 
 export default function WhySection() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const sectionRef = useRef<HTMLElement>(null)
   const animation = useScrollAnimation(sectionRef)
 
@@ -70,7 +70,7 @@ export default function WhySection() {
 
         <div className="text-center mt-16">
           <p className="text-xl font-semibold tracking-wide leading-loose">
-            {t('why.ctaBefore')} <UnderlineHighlight type="circle">{t('why.ctaHighlight')}</UnderlineHighlight> {t('why.ctaAfter')}
+            {t('why.ctaBefore')} <UnderlineHighlight key={i18n.language} type="circle">{t('why.ctaHighlight')}</UnderlineHighlight> {t('why.ctaAfter')}
           </p>
         </div>
       </div>

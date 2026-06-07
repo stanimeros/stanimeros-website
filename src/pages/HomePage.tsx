@@ -277,7 +277,7 @@ const HomePage = () => {
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto relative z-20">
             {t('hero.subtitleBefore')}
-            <UnderlineHighlight>{t('hero.subtitleHighlight')}</UnderlineHighlight>
+            <UnderlineHighlight key={i18n.language}>{t('hero.subtitleHighlight')}</UnderlineHighlight>
             {t('hero.subtitleAfter')}
           </p>
           <div className="flex flex-row gap-4 justify-center relative z-20">
