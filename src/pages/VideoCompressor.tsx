@@ -175,15 +175,17 @@ export default function VideoCompressor() {
   return (
     <Layout>
       <Helmet>
-        <title>Free Video Compressor | Pantelis Stanimeros</title>
-        <meta name="description" content="Compress videos online for free — reduce file size without losing quality. Works in your browser, no upload needed." />
+        <title>Free Online Video Compressor — Reduce File Size in Browser</title>
+        <meta name="description" content="Compress MP4 and other video files for free. Reduce file size without losing quality. Runs entirely in your browser — nothing is uploaded to any server." />
+        <meta name="keywords" content="free video compressor online, compress mp4 no upload, reduce video file size browser, online video reducer no signup" />
         <link rel="canonical" href="https://stanimeros.com/tools/video-compressor" />
-        <meta property="og:title" content="Free Video Compressor | Pantelis Stanimeros" />
-        <meta property="og:description" content="Compress videos online for free — reduce file size without losing quality. Works in your browser, no upload needed." />
+        <meta property="og:title" content="Free Online Video Compressor — Reduce File Size in Browser" />
+        <meta property="og:description" content="Compress MP4 and other video files for free. Reduce file size without losing quality. Nothing uploaded to any server." />
         <meta property="og:url" content="https://stanimeros.com/tools/video-compressor" />
       </Helmet>
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-8 text-center">{t('tools.videoCompressor.title')}</h1>
+        <h1 className="text-4xl font-bold mb-3 text-center">{t('tools.videoCompressor.title')}</h1>
+        <p className="text-sm text-center text-muted-foreground mb-4">Free online video compressor — reduce MP4 file size in your browser, no upload needed</p>
         <p className="text-lg text-center mb-4">{t('tools.videoCompressor.description')}</p>
         <p className="text-sm text-center text-muted-foreground mb-8">
           {t('tools.videoCompressor.handbrakeNote')} <a href="https://handbrake.fr" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">HandBrake</a>

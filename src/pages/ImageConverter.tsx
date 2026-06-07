@@ -174,15 +174,17 @@ export default function ImageConverter() {
   return (
     <Layout>
       <Helmet>
-        <title>Free Image Converter | Pantelis Stanimeros</title>
-        <meta name="description" content="Convert images between JPG, PNG, WebP and more for free. Compress and resize with no quality loss. No signup required." />
+        <title>Free Image Converter & Compressor Online — JPG, PNG, WebP</title>
+        <meta name="description" content="Convert images between JPG, PNG, and WebP for free. Compress and resize with no quality loss. Runs in your browser — no upload to any server, no signup." />
+        <meta name="keywords" content="free image converter online, convert jpg to webp, png to jpg converter, image compressor no signup, browser image converter" />
         <link rel="canonical" href="https://stanimeros.com/tools/image-converter" />
-        <meta property="og:title" content="Free Image Converter | Pantelis Stanimeros" />
-        <meta property="og:description" content="Convert images between JPG, PNG, WebP and more for free. Compress and resize with no quality loss. No signup required." />
+        <meta property="og:title" content="Free Image Converter & Compressor Online — JPG, PNG, WebP" />
+        <meta property="og:description" content="Convert and compress images between JPG, PNG, and WebP for free. Runs entirely in your browser." />
         <meta property="og:url" content="https://stanimeros.com/tools/image-converter" />
       </Helmet>
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-8 text-center">{t('tools.imageConverter.title')}</h1>
+        <h1 className="text-4xl font-bold mb-3 text-center">{t('tools.imageConverter.title')}</h1>
+        <p className="text-sm text-center text-muted-foreground mb-4">Free online converter — JPG, PNG, WebP — no upload to any server, no signup required</p>
         <p className="text-lg text-center mb-8">{t('tools.imageConverter.description')}</p>
 
         <div className="max-w-4xl mx-auto">

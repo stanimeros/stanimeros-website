@@ -54,15 +54,17 @@ export default function QRCodeGenerator() {
   return (
     <Layout>
       <Helmet>
-        <title>Free QR Code Generator | Pantelis Stanimeros</title>
-        <meta name="description" content="Generate custom QR codes for free — URLs, text, contact info and more. Download in high resolution. No signup required." />
+        <title>Free QR Code Generator Online — No Signup Required</title>
+        <meta name="description" content="Generate QR codes instantly from any URL or text. Download high-resolution PNG for free. No account or email needed — works entirely in your browser." />
+        <meta name="keywords" content="free qr code generator, qr code from url, online qr code maker, generate qr code no signup" />
         <link rel="canonical" href="https://stanimeros.com/tools/qr-code" />
-        <meta property="og:title" content="Free QR Code Generator | Pantelis Stanimeros" />
-        <meta property="og:description" content="Generate custom QR codes for free — URLs, text, contact info and more. Download in high resolution. No signup required." />
+        <meta property="og:title" content="Free QR Code Generator Online — No Signup Required" />
+        <meta property="og:description" content="Generate QR codes instantly from any URL or text. Download high-resolution PNG for free. No account or email needed." />
         <meta property="og:url" content="https://stanimeros.com/tools/qr-code" />
       </Helmet>
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-8 text-center">{t('tools.qrcode.title')}</h1>
+        <h1 className="text-4xl font-bold mb-3 text-center">{t('tools.qrcode.title')}</h1>
+        <p className="text-sm text-center text-muted-foreground mb-4">Free online QR code generator — no signup, no upload, works in your browser</p>
         <p className="text-lg text-center mb-8">{t('tools.qrcode.description')}</p>
 
         <div className="max-w-xl mx-auto">

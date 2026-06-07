@@ -38,7 +38,8 @@ import { FacebookIcon, InstagramIcon, LinkedinIcon, GithubIcon, BriefcaseIcon } 
 import Layout from "@/components/Layout"
 
 const HomePage = () => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const isGreek = i18n.language === 'el'
   const location = useLocation()
   const { scrollY } = useScroll()
   const logoY = useTransform(scrollY, [0, 500], [0, 100])
@@ -239,12 +240,34 @@ const HomePage = () => {
   return (
     <Layout>
       <Helmet>
-        <title>Pantelis Stanimeros | Software Engineer</title>
-        <meta name="description" content="Pantelis Stanimeros — software engineer from Greece. Custom websites, e-commerce stores, mobile apps, and business automation. Free consultation." />
-        <link rel="canonical" href="https://stanimeros.com/" />
-        <meta property="og:title" content="Pantelis Stanimeros | Software Engineer" />
-        <meta property="og:description" content="Pantelis Stanimeros — software engineer from Greece. Custom websites, e-commerce stores, mobile apps, and business automation. Free consultation." />
-        <meta property="og:url" content="https://stanimeros.com/" />
+        <html lang={isGreek ? 'el' : 'en'} />
+        <title>{isGreek
+          ? 'Κατασκευή Εφαρμογών & AI Αυτοματισμοί | Pantelis Stanimeros'
+          : 'AI Automation & App Development | Pantelis Stanimeros'}
+        </title>
+        <meta name="description" content={isGreek
+          ? 'Ανάπτυξη AI agents, mobile εφαρμογών και αυτοματισμών για επιχειρήσεις στη Θεσσαλονίκη και σε όλη την Ελλάδα. Δωρεάν αρχική συνάντηση.'
+          : 'Freelance software engineer in Thessaloniki, Greece. I build AI agents, mobile apps, and custom automations that save businesses time and money. Free strategy call.'}
+        />
+        <meta name="keywords" content={isGreek
+          ? 'κατασκευή εφαρμογών Θεσσαλονίκη, AI αυτοματισμοί επιχειρήσεων, ανάπτυξη mobile εφαρμογών Ελλάδα, κατασκευή eshop, AI agents, freelance developer Ελλάδα'
+          : 'AI automation Greece, freelance software engineer Thessaloniki, mobile app development Greece, custom web app developer, AI agents for business, Pantelis Stanimeros'}
+        />
+        <link rel="canonical" href={isGreek ? 'https://stanimeros.com/el' : 'https://stanimeros.com/en'} />
+        <link rel="alternate" hrefLang="en" href="https://stanimeros.com/en" />
+        <link rel="alternate" hrefLang="el" href="https://stanimeros.com/el" />
+        <link rel="alternate" hrefLang="x-default" href="https://stanimeros.com/" />
+        <meta property="og:title" content={isGreek
+          ? 'Κατασκευή Εφαρμογών & AI Αυτοματισμοί | Pantelis Stanimeros'
+          : 'AI Automation & App Development | Pantelis Stanimeros'}
+        />
+        <meta property="og:description" content={isGreek
+          ? 'Ανάπτυξη AI agents, mobile εφαρμογών και αυτοματισμών για επιχειρήσεις στη Θεσσαλονίκη και σε όλη την Ελλάδα.'
+          : 'Freelance software engineer in Thessaloniki, Greece. AI agents, mobile apps, and custom automations for businesses.'}
+        />
+        <meta property="og:url" content={isGreek ? 'https://stanimeros.com/el' : 'https://stanimeros.com/en'} />
+        <meta property="og:locale" content={isGreek ? 'el_GR' : 'en_US'} />
+        <meta property="og:locale:alternate" content={isGreek ? 'en_US' : 'el_GR'} />
       </Helmet>
       {/* Hero Section */}
       <section id="home" className="min-h-svh flex items-center justify-center relative overflow-hidden">

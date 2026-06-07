@@ -12,7 +12,8 @@ import { trackEvent } from "@/lib/events"
 import Layout from "@/components/Layout"
 
 export default function Contact() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
+  const isGreek = i18n.language === 'el'
   const [searchParams] = useSearchParams()
   const packageContext = searchParams.get("package") ?? undefined
   const source = searchParams.get("source") ?? "contact-page"
@@ -66,12 +67,28 @@ export default function Contact() {
   return (
     <Layout>
       <Helmet>
-        <title>Contact | Pantelis Stanimeros</title>
-        <meta name="description" content="Get a free strategy call with Pantelis Stanimeros. Discuss your project and find the best solution for your business." />
-        <link rel="canonical" href="https://stanimeros.com/contact" />
-        <meta property="og:title" content="Contact | Pantelis Stanimeros" />
-        <meta property="og:description" content="Get a free strategy call with Pantelis Stanimeros. Discuss your project and find the best solution for your business." />
-        <meta property="og:url" content="https://stanimeros.com/contact" />
+        <html lang={isGreek ? 'el' : 'en'} />
+        <title>{isGreek
+          ? 'Επικοινωνία | Δωρεάν Συνάντηση | Pantelis Stanimeros'
+          : 'Contact | Free Strategy Call | Pantelis Stanimeros'}
+        </title>
+        <meta name="description" content={isGreek
+          ? 'Κλείστε μια δωρεάν αρχική συνάντηση για να συζητήσουμε την εφαρμογή ή τον αυτοματισμό που χρειάζεστε. Απαντώ εντός 24 ωρών.'
+          : 'Book a free strategy call to discuss your app, AI automation, or business problem. Based in Thessaloniki, Greece. Response within 24 hours.'}
+        />
+        <link rel="canonical" href={isGreek ? 'https://stanimeros.com/el/contact' : 'https://stanimeros.com/en/contact'} />
+        <link rel="alternate" hrefLang="en" href="https://stanimeros.com/en/contact" />
+        <link rel="alternate" hrefLang="el" href="https://stanimeros.com/el/contact" />
+        <meta property="og:title" content={isGreek
+          ? 'Επικοινωνία | Δωρεάν Συνάντηση | Pantelis Stanimeros'
+          : 'Contact | Free Strategy Call | Pantelis Stanimeros'}
+        />
+        <meta property="og:description" content={isGreek
+          ? 'Κλείστε μια δωρεάν αρχική συνάντηση. Απαντώ εντός 24 ωρών.'
+          : 'Book a free strategy call. Response within 24 hours.'}
+        />
+        <meta property="og:url" content={isGreek ? 'https://stanimeros.com/el/contact' : 'https://stanimeros.com/en/contact'} />
+        <meta property="og:locale" content={isGreek ? 'el_GR' : 'en_US'} />
       </Helmet>
 
       <main className="container mx-auto px-4 py-20 max-w-lg">
