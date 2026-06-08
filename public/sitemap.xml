@@ -40,7 +40,7 @@
     <loc>https://stanimeros.com/en/contact</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/en/contact"/>
     <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/contact"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/en/contact"/>
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -51,21 +51,10 @@
     <loc>https://stanimeros.com/el/contact</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/en/contact"/>
     <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/contact"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/en/contact"/>
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-
-  <!-- Contact (no lang prefix, fallback) -->
-  <url>
-    <loc>https://stanimeros.com/contact</loc>
-    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/en/contact"/>
-    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/contact"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/contact"/>
-    <lastmod>2026-06-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 
   <!-- Tools -->
@@ -88,13 +77,6 @@
     <lastmod>2026-06-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-  </url>
-
-  <url>
-    <loc>https://stanimeros.com/privacy-policy</loc>
-    <lastmod>2026-06-07</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
   </url>
 
   <url>
