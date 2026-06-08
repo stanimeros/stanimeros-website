@@ -33,7 +33,8 @@ Allow: /assets/
 Allow: /$
 
 # Main pages
-Allow: /get-started
+Allow: /en/contact
+Allow: /el/contact
 Allow: /privacy-policy
 Allow: /data-deletion
 

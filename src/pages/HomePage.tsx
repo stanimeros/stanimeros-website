@@ -247,7 +247,7 @@ const HomePage = () => {
         </title>
         <meta name="description" content={isGreek
           ? 'Ανάπτυξη AI agents, mobile εφαρμογών και αυτοματισμών για επιχειρήσεις στη Θεσσαλονίκη και σε όλη την Ελλάδα. Δωρεάν αρχική συνάντηση.'
-          : 'Freelance software engineer in Thessaloniki, Greece. I build AI agents, mobile apps, and custom automations that save businesses time and money. Free strategy call.'}
+          : 'Freelance software engineer in Thessaloniki, Greece. I build AI agents, mobile apps, and custom automations for businesses. Free strategy call.'}
         />
         <meta name="keywords" content={isGreek
           ? 'κατασκευή εφαρμογών Θεσσαλονίκη, AI αυτοματισμοί επιχειρήσεων, ανάπτυξη mobile εφαρμογών Ελλάδα, κατασκευή eshop, AI agents, freelance developer Ελλάδα'
