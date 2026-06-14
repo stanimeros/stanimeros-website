@@ -520,6 +520,7 @@
     }
   },
   "cookieBanner": {
+    "title": "Χρησιμοποιούμε cookies",
     "message": "Χρησιμοποιούμε cookies για analytics ώστε να βελτιώσουμε την εμπειρία σας.",
     "learnMore": "Μάθετε περισσότερα",
     "accept": "Αποδοχή",

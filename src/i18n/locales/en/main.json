@@ -520,6 +520,7 @@
     }
   },
   "cookieBanner": {
+    "title": "We use cookies",
     "message": "We use cookies for analytics to improve your experience.",
     "learnMore": "Learn more",
     "accept": "Accept",
