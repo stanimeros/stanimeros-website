@@ -9,8 +9,9 @@ const Footer = () => {
     <footer className="bg-card py-8 border-t text-sm">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-          <div className="text-muted-foreground text-center md:text-left">
-            {`© ${currentYear} ${t('footer.copyright')}`}
+          <div className="text-muted-foreground text-center md:text-left space-y-1">
+            <div>{`© ${currentYear} ${t('footer.copyright')}`}</div>
+            <div className="text-xs">ELGEMI.183133106000</div>
           </div>
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
             <Link to="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">

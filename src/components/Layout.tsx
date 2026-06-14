@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import ParticlesBackground from '@/components/ParticlesBackground'
+import CookieBanner from '@/components/CookieBanner'
 
 interface LayoutProps {
   children: ReactNode
@@ -22,6 +23,7 @@ export default function Layout({ children }: LayoutProps) {
         </div>
         <Footer />
       </div>
+      <CookieBanner />
     </div>
   )
 }

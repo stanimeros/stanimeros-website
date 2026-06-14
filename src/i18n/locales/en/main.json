@@ -301,7 +301,7 @@
   "privacyPolicy": {
     "title": "Privacy Policy",
     "titleApp": "Privacy Policy of {{appName}}",
-    "lastUpdated": "Last updated: 29/05/2026",
+    "lastUpdated": "Last updated: 14/06/2026",
     "entity": {
       "appName": "Application",
       "developer": "Developer",
@@ -415,6 +415,32 @@
       "email": "Email:",
       "address": "Address: Thessaloniki, Greece"
     },
+    "legalBasis": {
+      "title": "Legal Basis for Processing (GDPR Art. 6)",
+      "description": "We process your personal data on the following legal bases:",
+      "items": [
+        "Consent (Art. 6(1)(a)): analytics cookies and tracking — only after you accept via the cookie banner.",
+        "Legitimate interests (Art. 6(1)(f)): security, fraud prevention, and basic site functionality.",
+        "Legal obligation (Art. 6(1)(c)): where required by applicable law."
+      ]
+    },
+    "internationalTransfers": {
+      "title": "International Data Transfers",
+      "description": "We use third-party service providers based in the USA for analytics and infrastructure. These providers participate in the EU–US Data Privacy Framework and process data under Standard Contractual Clauses, providing adequate protection under GDPR Art. 46."
+    },
+    "cookies": {
+      "title": "Cookies",
+      "description": "We use the following cookies:",
+      "items": [
+        "Analytics cookies: used to understand how visitors interact with the site. Only set after you give consent. Retained for up to 14 months.",
+        "Preference cookies: store your cookie consent choice (cookie_consent). Retained for 1 year.",
+        "No advertising or third-party tracking cookies are used."
+      ],
+      "note": "You can withdraw your consent at any time by clearing your browser's local storage or cookies."
+    },
+    "supervisoryAuthority": {
+      "text": "You have the right to lodge a complaint with the Hellenic Data Protection Authority (ΑΠΔΠΧ) at"
+    },
     "dataDeletionLink": {
       "description": "To request deletion of your data, please visit our data deletion page.",
       "button": "Request Data Deletion"
@@ -492,5 +518,11 @@
       ],
       "needHelp": "Need help? Contact us at"
     }
+  },
+  "cookieBanner": {
+    "message": "We use cookies for analytics to improve your experience.",
+    "learnMore": "Learn more",
+    "accept": "Accept",
+    "decline": "Decline"
   }
 }

@@ -13,7 +13,14 @@ import {
   UsersIcon,
   DocumentTextIcon as FileText,
   KeyIcon,
-  EnvelopeIcon as Mail
+  EnvelopeIcon as Mail,
+  ScaleIcon,
+  GlobeAltIcon,
+  CakeIcon,
+  FingerPrintIcon,
+  ClockIcon,
+  UserGroupIcon,
+  ArrowPathIcon
 } from "@heroicons/react/24/outline"
 import { useTranslation } from "react-i18next"
 import "../i18n"
@@ -276,7 +283,10 @@ const PrivacyPolicy = () => {
           {/* Your Rights */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>{t('privacyPolicy.yourRights.title')}</CardTitle>
+              <CardTitle className="flex items-center">
+                <FingerPrintIcon className="h-5 w-5 mr-2" />
+                {t('privacyPolicy.yourRights.title')}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-4">
@@ -293,7 +303,10 @@ const PrivacyPolicy = () => {
           {/* Data Retention */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>{t('privacyPolicy.dataRetention.title')}</CardTitle>
+              <CardTitle className="flex items-center">
+                <ClockIcon className="h-5 w-5 mr-2" />
+                {t('privacyPolicy.dataRetention.title')}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
@@ -305,7 +318,10 @@ const PrivacyPolicy = () => {
           {/* Children's Privacy */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>{t('privacyPolicy.childrensPrivacy.title')}</CardTitle>
+              <CardTitle className="flex items-center">
+                <UserGroupIcon className="h-5 w-5 mr-2" />
+                {t('privacyPolicy.childrensPrivacy.title')}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
@@ -317,7 +333,10 @@ const PrivacyPolicy = () => {
           {/* Changes to Policy */}
           <Card className="mb-8">
             <CardHeader>
-              <CardTitle>{t('privacyPolicy.changesToPolicy.title')}</CardTitle>
+              <CardTitle className="flex items-center">
+                <ArrowPathIcon className="h-5 w-5 mr-2" />
+                {t('privacyPolicy.changesToPolicy.title')}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground">
@@ -325,6 +344,65 @@ const PrivacyPolicy = () => {
               </p>
             </CardContent>
           </Card>
+
+          {/* Legal Basis */}
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <ScaleIcon className="h-5 w-5 mr-2" />
+                {t('privacyPolicy.legalBasis.title')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground mb-4">
+                {t('privacyPolicy.legalBasis.description')}
+              </p>
+              <ul className="space-y-2 text-muted-foreground">
+                {(t('privacyPolicy.legalBasis.items', { returnObjects: true }) as string[]).map((item, index) => (
+                  <li key={index}>• {item}</li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+
+          {/* International Transfers */}
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <GlobeAltIcon className="h-5 w-5 mr-2" />
+                {t('privacyPolicy.internationalTransfers.title')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground">
+                {t('privacyPolicy.internationalTransfers.description')}
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Cookies */}
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <CakeIcon className="h-5 w-5 mr-2" />
+                {t('privacyPolicy.cookies.title')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground mb-4">
+                {t('privacyPolicy.cookies.description')}
+              </p>
+              <ul className="space-y-2 text-muted-foreground mb-4">
+                {(t('privacyPolicy.cookies.items', { returnObjects: true }) as string[]).map((item, index) => (
+                  <li key={index}>• {item}</li>
+                ))}
+              </ul>
+              <p className="text-sm text-muted-foreground italic">
+                {t('privacyPolicy.cookies.note')}
+              </p>
+            </CardContent>
+          </Card>
+
 
           {/* Contact Information */}
           <Card className="mb-8">

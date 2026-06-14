@@ -1,5 +1,5 @@
-import { logEvent } from "firebase/analytics";
-import { analytics } from "./firebase";
+import { logEvent, getAnalytics } from "firebase/analytics";
+import { app } from "./firebase";
 
 const eventMap = {
   pageView: {
@@ -33,6 +33,10 @@ export const trackEvent = (
   }
 
   if (mapping.firebase) {
-    logEvent(analytics, mapping.firebase, data);
-  } 
+    try {
+      logEvent(getAnalytics(app), mapping.firebase, data);
+    } catch {
+      // analytics not initialized (no consent)
+    }
+  }
 };
