@@ -233,7 +233,6 @@ const HomePage = () => {
       textColor: "text-green-200",
       bgImage: "/assets/portfolio/ekarotsi.jpg",
       logo: "/assets/logos/e-karotsi.png",
-      url: "https://e-karotsi.gr"
     }
   ]
 
@@ -519,7 +518,8 @@ const HomePage = () => {
                   </CardContent>
                   <div className="px-6 pb-6 mt-auto">
                     <Button
-                      className="w-full h-13 px-8 text-base bg-green-500 hover:bg-green-400 text-white shadow-[0_0_20px_rgba(74,222,128,0.35)] hover:shadow-[0_0_30px_rgba(74,222,128,0.3)] transition-all duration-300"
+                      variant="green"
+                      className="w-full h-13 px-8 text-base"
                       onClick={() => goToContact('package-button', t(pkg.title))}
                     >
                       {pkg.ctaIcon}
@@ -676,7 +676,8 @@ const HomePage = () => {
             </div>
 
             <Button
-              className="!px-[100px] h-14 text-base bg-green-500 hover:bg-green-400 text-white shadow-[0_0_24px_rgba(74,222,128,0.4)] hover:shadow-[0_0_40px_rgba(74,222,128,0.33)] transition-all duration-300"
+              variant="green"
+              className="!px-[100px] h-14 text-base"
               onClick={() => goToContact('contact-section')}
             >
               <CalendarDaysIcon className="h-6 w-6 mr-2 stroke-[1.5]" />

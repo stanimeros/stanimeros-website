@@ -438,9 +438,6 @@
       ],
       "note": "You can withdraw your consent at any time by clearing your browser's local storage or cookies."
     },
-    "supervisoryAuthority": {
-      "text": "You have the right to lodge a complaint with the Hellenic Data Protection Authority (ΑΠΔΠΧ) at"
-    },
     "dataDeletionLink": {
       "description": "To request deletion of your data, please visit our data deletion page.",
       "button": "Request Data Deletion"

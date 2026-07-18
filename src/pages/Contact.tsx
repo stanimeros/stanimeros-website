@@ -150,9 +150,10 @@ export default function Contact() {
 
               <Button
                 type="submit"
+                variant="green"
                 size="lg"
                 disabled={isSubmitting}
-                className="w-full bg-green-500 hover:bg-green-400 text-white"
+                className="w-full"
               >
                 {isSubmitting ? (
                   <>
