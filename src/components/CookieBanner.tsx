@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
 import { CakeIcon } from "@heroicons/react/24/outline"
 import { initAnalytics } from "@/lib/firebase"
+import { initPixel } from "@/lib/pixel"
 
 const CONSENT_KEY = "cookie_consent"
 
@@ -17,12 +18,14 @@ export default function CookieBanner() {
       setVisible(true)
     } else if (consent === "accepted") {
       initAnalytics()
+      initPixel()
     }
   }, [])
 
   const accept = () => {
     localStorage.setItem(CONSENT_KEY, "accepted")
     initAnalytics()
+    initPixel()
     setVisible(false)
   }
 

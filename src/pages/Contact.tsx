@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Helmet } from "react-helmet-async"
 import { useTranslation } from "react-i18next"
 import { useSearchParams } from "react-router-dom"
@@ -25,6 +25,15 @@ export default function Contact() {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
 
   const packageLabel = packageContext ?? undefined
+
+  useEffect(() => {
+    trackEvent('pageView', {
+      page: 'contact',
+      source,
+      package: packageLabel ?? null,
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
