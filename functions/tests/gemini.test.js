@@ -9,12 +9,13 @@ test("tool declarations expose exactly checkAvailability and createBooking", () 
   assert.deepEqual(names, ["checkAvailability", "createBooking"]);
 });
 
-test("createBooking requires name, email, purpose, startTime, endTime", () => {
+test("createBooking requires name, email, purpose, startTime but not endTime (duration is fixed and computed by the tool)", () => {
   const decl = tools[0].functionDeclarations.find((f) => f.name === "createBooking");
   assert.deepEqual(
     [...decl.parameters.required].sort(),
-    ["email", "endTime", "name", "purpose", "startTime"].sort()
+    ["email", "name", "purpose", "startTime"].sort()
   );
+  assert.equal("endTime" in decl.parameters.properties, false);
 });
 
 test("buildSystemInstruction embeds the given date so relative times ('tomorrow'/'αύριο') anchor to it", () => {

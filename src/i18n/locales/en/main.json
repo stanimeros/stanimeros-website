@@ -558,8 +558,8 @@
   },
   "chat": {
     "title": "Chat with the assistant",
-    "subtitle": "Ask about services, or book a free strategy call",
-    "greeting": "Hi! I'm here to help with questions about AI agents, apps, or automation — and I can book a free strategy call for you. What's on your mind?",
+    "subtitle": "Ask about services, or book a call with Pantelis",
+    "greeting": "Hi! I'm here to help with questions about AI agents, apps, or automation — and I can help you book a call with Pantelis if it's a good fit. What's on your mind?",
     "placeholder": "Type a message...",
     "send": "Send",
     "openLabel": "Open chat",

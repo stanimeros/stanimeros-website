@@ -42,20 +42,12 @@ function localPartsInZone(date, timeZone) {
   return { weekday: byType.weekday, hour: Number(byType.hour), minute: Number(byType.minute) };
 }
 
-// Throws (never silently clamps) so the caller sees exactly what was wrong —
-// callers feed the message back to the model as a tool error so it can
-// propose a valid slot instead.
-function assertBookableWindow(startTime, endTime) {
-  const start = new Date(ensureOffset(startTime));
-  const end = new Date(ensureOffset(endTime));
-  const durationMinutes = Math.round((end - start) / 60000);
-
-  if (durationMinutes !== BOOKING_DURATION_MINUTES) {
-    throw new Error(
-      `Strategy calls are exactly ${BOOKING_DURATION_MINUTES} minutes long — the requested window was ${durationMinutes} minutes.`
-    );
-  }
-
+// Shared by both tools: does `start` fall on a bookable day, within business
+// hours, with enough room before closing for a full BOOKING_DURATION_MINUTES
+// slot? Throws (never silently clamps) so the caller sees exactly what was
+// wrong — callers feed the message back to the model as a tool error so it
+// can propose a valid slot instead.
+function assertBookableStart(start) {
   const { weekday, hour, minute } = localPartsInZone(start, TIME_ZONE);
   if (!BOOKING_DAYS.has(weekday)) {
     throw new Error(`Bookings are only available Monday–Friday (requested day was ${weekday}).`);
@@ -69,6 +61,23 @@ function assertBookableWindow(startTime, endTime) {
       `Bookings are only available between ${BOOKING_START_HOUR}:00 and ${BOOKING_END_HOUR}:00 (${TIME_ZONE}); requested start was ${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}.`
     );
   }
+}
+
+// checkAvailability still takes an explicit window from the model (it may
+// want to probe a range wider than one slot), so this additionally checks
+// the window is exactly BOOKING_DURATION_MINUTES long.
+function assertBookableWindow(startTime, endTime) {
+  const start = new Date(ensureOffset(startTime));
+  const end = new Date(ensureOffset(endTime));
+  const durationMinutes = Math.round((end - start) / 60000);
+
+  if (durationMinutes !== BOOKING_DURATION_MINUTES) {
+    throw new Error(
+      `Calls are exactly ${BOOKING_DURATION_MINUTES} minutes long — the requested window was ${durationMinutes} minutes.`
+    );
+  }
+
+  assertBookableStart(start);
 }
 
 function getCalendarClient() {
@@ -111,8 +120,11 @@ async function checkAvailability(startTime, endTime) {
 // to events — Google rejects it. So the visitor's name/email/purpose go in the
 // event description instead of as a calendar invite; the visitor is notified via
 // our own confirmation email (see functions/index.js), not a Calendar invite.
-async function createBooking({ name, email, purpose, startTime, endTime }) {
-  assertBookableWindow(startTime, endTime);
+async function createBooking({ name, email, purpose, startTime, chatSummary }) {
+  const start = new Date(ensureOffset(startTime));
+  assertBookableStart(start);
+  const endTime = new Date(start.getTime() + BOOKING_DURATION_MINUTES * 60000).toISOString();
+
   const calendar = getCalendarClient();
 
   // Never trust the model's earlier checkAvailability call alone — it may have
@@ -134,8 +146,8 @@ async function createBooking({ name, email, purpose, startTime, endTime }) {
   const res = await calendar.events.insert({
     calendarId: CALENDAR_ID,
     requestBody: {
-      summary: `Strategy call: ${name}`,
-      description: `Visitor: ${name} <${email}>\n\n${purpose}`,
+      summary: `Call: ${name}`,
+      description: `Visitor: ${name} <${email}>\n\n${purpose}${chatSummary ? `\n\n--- Chat transcript ---\n${chatSummary}` : ""}`,
       start: { dateTime: ensureOffset(startTime) },
       end: { dateTime: ensureOffset(endTime) },
     },
@@ -143,4 +155,4 @@ async function createBooking({ name, email, purpose, startTime, endTime }) {
   return { eventId: res.data.id, htmlLink: res.data.htmlLink };
 }
 
-module.exports = { checkAvailability, createBooking, ensureOffset, assertBookableWindow };
+module.exports = { checkAvailability, createBooking, ensureOffset, assertBookableWindow, assertBookableStart };

@@ -103,13 +103,13 @@ function toGeminiContents(messages) {
 // call — e.g. a malformed date the model produced — becomes something the
 // model can recover from ("that time didn't work, try another") instead of
 // aborting the whole turn with a generic failure.
-async function runTool(call, deps = { checkAvailability, createBooking }) {
+async function runTool(call, deps = { checkAvailability, createBooking }, chatSummary) {
   try {
     if (call.name === "checkAvailability") {
       return await deps.checkAvailability(call.args.startTime, call.args.endTime);
     }
     if (call.name === "createBooking") {
-      return await deps.createBooking(call.args);
+      return await deps.createBooking({ ...call.args, chatSummary });
     }
     return { error: `Unknown tool: ${call.name}` };
   } catch (error) {
@@ -136,7 +136,8 @@ exports.geminiChat = onCall({ enforceAppCheck: true }, async (request) => {
   try {
     await appendMessage(sessionId, { role: "user", text: message });
 
-    const contents = toGeminiContents(await getHistory(sessionId));
+    const history = await getHistory(sessionId);
+    const contents = toGeminiContents(history);
 
     const systemInstruction = buildSystemInstruction();
 
@@ -152,7 +153,7 @@ exports.geminiChat = onCall({ enforceAppCheck: true }, async (request) => {
       const call = response.functionCalls?.[0];
       if (!call) break;
 
-      const result = await runTool(call);
+      const result = await runTool(call, undefined, formatTranscript(history));
       if (call.name === "createBooking" && !result.error) bookingConfirmed = true;
 
       // Push the model's actual returned content, not a hand-built
