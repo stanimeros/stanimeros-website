@@ -1,0 +1,90 @@
+---
+import '@/index.css'
+import LocalizedHeader from '@/components/Header.localized'
+import LocalizedFooter from '@/components/Footer.localized'
+import LocalizedCookieBanner from '@/components/CookieBanner.localized'
+import ParticlesBackground from '@/components/ParticlesBackground'
+import type { SupportedLang } from '@/i18n'
+
+interface HreflangAlternate {
+  hreflang: string
+  href: string
+}
+
+interface Props {
+  lang: SupportedLang
+  title: string
+  description: string
+  canonical: string
+  keywords?: string
+  hreflangAlternates?: HreflangAlternate[]
+  ogImage?: string
+  noindex?: boolean
+  jsonLd?: Record<string, unknown>[]
+}
+
+const {
+  lang,
+  title,
+  description,
+  canonical,
+  keywords,
+  hreflangAlternates = [],
+  ogImage = 'https://stanimeros.com/images/logo-glass-black.png',
+  noindex = false,
+  jsonLd = [],
+} = Astro.props
+---
+
+<!doctype html>
+<html lang={lang} class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
+    <meta name="author" content="Pantelis Stanimeros" />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow'} />
+    <link rel="canonical" href={canonical} />
+    {hreflangAlternates.map(({ hreflang, href }) => (
+      <link rel="alternate" hreflang={hreflang} href={href} />
+    ))}
+    <link rel="icon" type="image/png" href="/images/logo-glass-black.png" />
+    <link rel="apple-touch-icon" href="/images/logo-glass-black.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap&subset=greek,latin" rel="stylesheet" />
+    <meta name="facebook-domain-verification" content="cw8ry7o5exyarhtockdmar0c37eynf" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content={lang === 'el' ? 'el_GR' : 'en_US'} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    {jsonLd.map((data) => (
+      <script type="application/ld+json" set:html={JSON.stringify(data)} />
+    ))}
+  </head>
+  <body>
+    <div class="min-h-svh bg-background text-foreground">
+      <div class="min-h-svh bg-background">
+        <ParticlesBackground client:idle />
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10" />
+        <div class="relative z-10 min-h-svh flex flex-col">
+          <LocalizedHeader lang={lang} client:load />
+          <div class="pt-24 flex-1">
+            <slot />
+          </div>
+          <LocalizedFooter lang={lang} />
+        </div>
+        <LocalizedCookieBanner lang={lang} client:idle />
+      </div>
+    </div>
+  </body>
+</html>

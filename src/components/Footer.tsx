@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 
 const Footer = () => {
@@ -14,12 +13,12 @@ const Footer = () => {
             <div className="text-xs">ELGEMI.183133106000</div>
           </div>
           <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
-            <Link to="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">
+            <a href="/privacy-policy" className="text-muted-foreground hover:text-primary transition-colors">
               {t('footer.links.privacy')}
-            </Link>
-            <Link to="/data-deletion" className="text-muted-foreground hover:text-primary transition-colors">
+            </a>
+            <a href="/data-deletion" className="text-muted-foreground hover:text-primary transition-colors">
               {t('footer.links.dataDeletion')}
-            </Link>
+            </a>
             <a
               href="https://www.pexels.com"
               target="_blank"

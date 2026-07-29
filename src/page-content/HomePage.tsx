@@ -1,8 +1,5 @@
-import { useEffect, useRef } from "react"
-import { Helmet } from "react-helmet-async"
+import { useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import "../i18n"
-import { Link, useLocation, useNavigate } from "react-router-dom"
 import { motion, useScroll, useTransform, useSpring, type HTMLMotionProps } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -35,12 +32,13 @@ import UnderlineHighlight from "@/components/UnderlineHighlight"
 import { trackEvent } from "@/lib/events"
 import { useScrollAnimation, useMobileCardAnimation } from "@/lib/hooks"
 import { FacebookIcon, InstagramIcon, LinkedinIcon, GithubIcon, BriefcaseIcon } from "lucide-react"
-import Layout from "@/components/Layout"
 
 const HomePage = () => {
   const { t, i18n } = useTranslation()
-  const isGreek = i18n.language === 'el'
-  const location = useLocation()
+  // react-github-calendar breaks Node SSR during Astro's static build, so it's
+  // only ever rendered client-side after mount.
+  const [isMounted, setIsMounted] = useState(false)
+  useEffect(() => setIsMounted(true), [])
   const { scrollY } = useScroll()
   const logoY = useTransform(scrollY, [0, 500], [0, 100])
   const logoOpacity = useTransform(scrollY, [0, 500], [0.1, 0])
@@ -65,13 +63,12 @@ const HomePage = () => {
   const portfolioAnimation = useScrollAnimation(portfolioRef)
   const contactAnimation = useScrollAnimation(contactRef)
   
-  const navigate = useNavigate()
-
   const goToContact = (source: string, pkg?: string) => {
     trackEvent('ctaClick', { source, package: pkg ?? null })
     const params = new URLSearchParams({ source })
     if (pkg) params.set("package", pkg)
-    navigate(`/contact?${params.toString()}`)
+    const contactPath = window.location.pathname.startsWith('/el') ? '/el/contact' : '/contact'
+    window.location.href = `${contactPath}?${params.toString()}`
   }
 
   useEffect(() => {
@@ -81,13 +78,13 @@ const HomePage = () => {
   }, []);
 
   useEffect(() => {
-    if (location.hash) {
-      const element = document.querySelector(location.hash)
+    if (window.location.hash) {
+      const element = document.querySelector(window.location.hash)
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' })
       }
     }
-  }, [location])
+  }, [])
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -237,37 +234,7 @@ const HomePage = () => {
   ]
 
   return (
-    <Layout>
-      <Helmet>
-        <html lang={isGreek ? 'el' : 'en'} />
-        <title>{isGreek
-          ? 'Κατασκευή Εφαρμογών & AI Αυτοματισμοί | Pantelis Stanimeros'
-          : 'AI Automation & App Development | Pantelis Stanimeros'}
-        </title>
-        <meta name="description" content={isGreek
-          ? 'Ανάπτυξη AI agents, mobile εφαρμογών και αυτοματισμών για επιχειρήσεις στη Θεσσαλονίκη και σε όλη την Ελλάδα. Δωρεάν αρχική συνάντηση.'
-          : 'Freelance software engineer in Thessaloniki, Greece. I build AI agents, mobile apps, and custom automations for businesses. Free strategy call.'}
-        />
-        <meta name="keywords" content={isGreek
-          ? 'κατασκευή εφαρμογών Θεσσαλονίκη, AI αυτοματισμοί επιχειρήσεων, ανάπτυξη mobile εφαρμογών Ελλάδα, κατασκευή eshop, AI agents, freelance developer Ελλάδα'
-          : 'AI automation Greece, freelance software engineer Thessaloniki, mobile app development Greece, custom web app developer, AI agents for business, Pantelis Stanimeros'}
-        />
-        <link rel="canonical" href={isGreek ? 'https://stanimeros.com/el' : 'https://stanimeros.com/en'} />
-        <link rel="alternate" hrefLang="en" href="https://stanimeros.com/en" />
-        <link rel="alternate" hrefLang="el" href="https://stanimeros.com/el" />
-        <link rel="alternate" hrefLang="x-default" href="https://stanimeros.com/" />
-        <meta property="og:title" content={isGreek
-          ? 'Κατασκευή Εφαρμογών & AI Αυτοματισμοί | Pantelis Stanimeros'
-          : 'AI Automation & App Development | Pantelis Stanimeros'}
-        />
-        <meta property="og:description" content={isGreek
-          ? 'Ανάπτυξη AI agents, mobile εφαρμογών και αυτοματισμών για επιχειρήσεις στη Θεσσαλονίκη και σε όλη την Ελλάδα.'
-          : 'Freelance software engineer in Thessaloniki, Greece. AI agents, mobile apps, and custom automations for businesses.'}
-        />
-        <meta property="og:url" content={isGreek ? 'https://stanimeros.com/el' : 'https://stanimeros.com/en'} />
-        <meta property="og:locale" content={isGreek ? 'el_GR' : 'en_US'} />
-        <meta property="og:locale:alternate" content={isGreek ? 'en_US' : 'el_GR'} />
-      </Helmet>
+    <>
       {/* Hero Section */}
       <section id="home" className="min-h-svh flex items-center justify-center relative overflow-hidden">
         <div className="container mx-auto px-4 text-center relative z-10">
@@ -370,7 +337,7 @@ const HomePage = () => {
             </div>
           </div>
           <div className="overflow-hidden pt-16 w-full flex justify-center">
-            <GitHubCalendarComponent username="stanimeros" />
+            {isMounted && <GitHubCalendarComponent username="stanimeros" />}
           </div>
           <div className="overflow-hidden w-full flex justify-center">
             <p className="text-muted-foreground text-sm">
@@ -519,7 +486,8 @@ const HomePage = () => {
                   <div className="px-6 pb-6 mt-auto">
                     <Button
                       variant="green"
-                      className="w-full h-13 px-8 text-base"
+                      size="lg"
+                      className="w-full px-8 text-base"
                       onClick={() => goToContact('package-button', t(pkg.title))}
                     >
                       {pkg.ctaIcon}
@@ -698,32 +666,32 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="flex space-x-3">
-                <Link to="https://linkedin.com/in/stanimeros" target="_blank" rel="noopener noreferrer">
+                <a href="https://linkedin.com/in/stanimeros" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon">
                     <LinkedinIcon className="h-5 w-5" />
                   </Button>
-                </Link>
-                <Link to="https://www.facebook.com/stanimeros.dev" target="_blank" rel="noopener noreferrer">
+                </a>
+                <a href="https://www.facebook.com/stanimeros.dev" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon">
                     <FacebookIcon className="h-5 w-5" />
                   </Button>
-                </Link>
-                <Link to="https://www.instagram.com/stanimeros_dev" target="_blank" rel="noopener noreferrer">
+                </a>
+                <a href="https://www.instagram.com/stanimeros_dev" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon">
                     <InstagramIcon className="h-5 w-5" />
                   </Button>
-                </Link>
-                <Link to="https://github.com/stanimeros" target="_blank" rel="noopener noreferrer">
+                </a>
+                <a href="https://github.com/stanimeros" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon">
                     <GithubIcon className="h-5 w-5" />
                   </Button>
-                </Link>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </motion.section>
-    </Layout>
+    </>
   )
 }
 

@@ -1,0 +1,21 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import LocalizedPrivacyPolicy from '@/page-content/PrivacyPolicy.localized'
+
+export function getStaticPaths() {
+  const appSlugs = ['atpro-partner', 'e-karotsi', 'ski-greece', 'fire-message']
+  return appSlugs.map((appSlug) => ({ params: { appSlug } }))
+}
+
+const { appSlug } = Astro.params
+---
+
+<BaseLayout
+  lang="el"
+  title={`Πολιτική Απορρήτου – ${appSlug} | Pantelis Stanimeros`}
+  description="Πολιτική απορρήτου για εφαρμογές και υπηρεσίες του Pantelis Stanimeros."
+  canonical={`https://stanimeros.com/el/privacy-policy/${appSlug}`}
+  noindex
+>
+  <LocalizedPrivacyPolicy lang="el" appSlug={appSlug} client:load />
+</BaseLayout>

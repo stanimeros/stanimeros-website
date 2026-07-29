@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
 import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
 import { CakeIcon } from "@heroicons/react/24/outline"
@@ -51,9 +50,9 @@ export default function CookieBanner() {
         </div>
         <p className="text-base text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
           {t("cookieBanner.message")}{" "}
-          <Link to="/privacy-policy" className="text-primary hover:underline font-medium">
+          <a href="/privacy-policy" className="text-primary hover:underline font-medium">
             {t("cookieBanner.learnMore")}
-          </Link>
+          </a>
         </p>
         <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4">
           <Button variant="outline" size="lg" className="flex-1 h-12 text-base" onClick={decline}>

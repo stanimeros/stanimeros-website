@@ -11,7 +11,10 @@ const LanguageSwitcher = ({ variant = 'default' }: LanguageSwitcherProps) => {
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'el' : 'en'
-    i18n.changeLanguage(newLang)
+    const { pathname, search, hash } = window.location
+    const basePath = pathname.startsWith('/el') ? pathname.slice(3) || '/' : pathname
+    const target = newLang === 'el' ? `/el${basePath === '/' ? '' : basePath}` : basePath
+    window.location.href = `${target || '/'}${search}${hash}`
   }
 
   return (

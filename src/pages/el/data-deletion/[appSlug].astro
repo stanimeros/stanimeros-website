@@ -1,0 +1,21 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import LocalizedDataDeletion from '@/page-content/DataDeletion.localized'
+
+export function getStaticPaths() {
+  const appSlugs = ['atpro-partner', 'e-karotsi', 'ski-greece', 'fire-message']
+  return appSlugs.map((appSlug) => ({ params: { appSlug } }))
+}
+
+const { appSlug } = Astro.params
+---
+
+<BaseLayout
+  lang="el"
+  title={`Διαγραφή Δεδομένων – ${appSlug} | Pantelis Stanimeros`}
+  description="Ζητήστε διαγραφή των δεδομένων σας από εφαρμογές και υπηρεσίες του Pantelis Stanimeros."
+  canonical={`https://stanimeros.com/el/data-deletion/${appSlug}`}
+  noindex
+>
+  <LocalizedDataDeletion lang="el" appSlug={appSlug} client:load />
+</BaseLayout>

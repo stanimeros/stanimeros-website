@@ -1,0 +1,14 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import LocalizedHomePage from '@/page-content/HomePage.localized'
+---
+
+<BaseLayout
+  lang="en"
+  title="AI Automation & App Development | Pantelis Stanimeros"
+  description="Freelance software engineer in Thessaloniki, Greece. I build AI agents, mobile apps, and custom automations for businesses. Free strategy call."
+  canonical="https://stanimeros.com/"
+  noindex
+>
+  <LocalizedHomePage lang="en" client:load />
+</BaseLayout>

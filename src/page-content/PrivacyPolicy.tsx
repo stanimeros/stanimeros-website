@@ -1,6 +1,3 @@
-import { Helmet } from "react-helmet-async"
-import { Link } from "react-router-dom"
-import { useParams } from "react-router-dom"
 import { useMemo, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -23,8 +20,6 @@ import {
   ArrowPathIcon
 } from "@heroicons/react/24/outline"
 import { useTranslation } from "react-i18next"
-import "../i18n"
-import Layout from "@/components/Layout"
 import { trackEvent } from "@/lib/events"
 
 const PRIVACY_POLICY_PRESETS: Record<string, { appName: string; developer: string; company: string; contactEmail: string }> = {
@@ -54,9 +49,12 @@ const PRIVACY_POLICY_PRESETS: Record<string, { appName: string; developer: strin
   },
 }
 
-const PrivacyPolicy = () => {
+interface PrivacyPolicyProps {
+  appSlug?: string
+}
+
+const PrivacyPolicy = ({ appSlug }: PrivacyPolicyProps) => {
   const { t } = useTranslation()
-  const { appSlug } = useParams<{ appSlug?: string }>()
   const preset = useMemo(
     () => (appSlug && PRIVACY_POLICY_PRESETS[appSlug]) ? PRIVACY_POLICY_PRESETS[appSlug] : null,
     [appSlug]
@@ -70,21 +68,8 @@ const PrivacyPolicy = () => {
     });
   }, [appSlug])
 
-  useEffect(() => {
-    if (preset) {
-      document.title = `Privacy Policy – ${preset.appName}`
-    }
-  }, [preset])
-
   return (
-    <Layout>
-      <Helmet>
-        <title>Privacy Policy | Pantelis Stanimeros</title>
-        <meta name="description" content="Privacy policy for apps and services by Pantelis Stanimeros." />
-        <link rel="canonical" href="https://stanimeros.com/privacy-policy" />
-        <meta name="robots" content="noindex, follow" />
-      </Helmet>
-
+    <>
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12 relative z-10">
         <div className="max-w-4xl mx-auto">
@@ -426,15 +411,15 @@ const PrivacyPolicy = () => {
             <p className="text-muted-foreground mb-4">
               {t('privacyPolicy.dataDeletionLink.description')}
             </p>
-            <Link to={appSlug ? `/data-deletion/${appSlug}` : "/data-deletion"}>
+            <a href={appSlug ? `/data-deletion/${appSlug}` : "/data-deletion"}>
               <Button>
                 {t('privacyPolicy.dataDeletionLink.button')}
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </main>
-    </Layout>
+    </>
   )
 }
 

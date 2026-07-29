@@ -1,0 +1,21 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import LocalizedPrivacyPolicy from '@/page-content/PrivacyPolicy.localized'
+
+export function getStaticPaths() {
+  const appSlugs = ['atpro-partner', 'e-karotsi', 'ski-greece', 'fire-message']
+  return appSlugs.map((appSlug) => ({ params: { appSlug } }))
+}
+
+const { appSlug } = Astro.params
+---
+
+<BaseLayout
+  lang="en"
+  title={`Privacy Policy – ${appSlug} | Pantelis Stanimeros`}
+  description="Privacy policy for apps and services by Pantelis Stanimeros."
+  canonical={`https://stanimeros.com/privacy-policy/${appSlug}`}
+  noindex
+>
+  <LocalizedPrivacyPolicy lang="en" appSlug={appSlug} client:load />
+</BaseLayout>

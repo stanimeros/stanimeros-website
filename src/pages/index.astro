@@ -1,0 +1,21 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import LocalizedHomePage from '@/page-content/HomePage.localized'
+import { professionalServiceJsonLd, homeFaqJsonLd } from '@/lib/jsonld'
+---
+
+<BaseLayout
+  lang="en"
+  title="AI Automation & App Development | Pantelis Stanimeros"
+  description="Freelance software engineer in Thessaloniki, Greece. I build AI agents, mobile apps, and custom automations for businesses. Free strategy call."
+  keywords="AI automation Greece, freelance software engineer Thessaloniki, mobile app development Greece, custom web app developer, AI agents for business, Pantelis Stanimeros"
+  canonical="https://stanimeros.com/"
+  hreflangAlternates={[
+    { hreflang: 'en', href: 'https://stanimeros.com/' },
+    { hreflang: 'el', href: 'https://stanimeros.com/el' },
+    { hreflang: 'x-default', href: 'https://stanimeros.com/' },
+  ]}
+  jsonLd={[professionalServiceJsonLd, homeFaqJsonLd]}
+>
+  <LocalizedHomePage lang="en" client:load />
+</BaseLayout>

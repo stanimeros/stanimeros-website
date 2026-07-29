@@ -1,0 +1,14 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import LocalizedPrivacyPolicy from '@/page-content/PrivacyPolicy.localized'
+---
+
+<BaseLayout
+  lang="en"
+  title="Privacy Policy | Pantelis Stanimeros"
+  description="Privacy policy for apps and services by Pantelis Stanimeros."
+  canonical="https://stanimeros.com/privacy-policy"
+  noindex
+>
+  <LocalizedPrivacyPolicy lang="en" client:load />
+</BaseLayout>

@@ -1,0 +1,18 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import LocalizedContact from '@/page-content/Contact.localized'
+---
+
+<BaseLayout
+  lang="en"
+  title="Contact | Pantelis Stanimeros"
+  description="Book a free strategy call to discuss your app, AI automation, or business problem. Based in Thessaloniki, Greece. Response within 24 hours."
+  canonical="https://stanimeros.com/contact"
+  hreflangAlternates={[
+    { hreflang: 'en', href: 'https://stanimeros.com/contact' },
+    { hreflang: 'el', href: 'https://stanimeros.com/el/contact' },
+    { hreflang: 'x-default', href: 'https://stanimeros.com/contact' },
+  ]}
+>
+  <LocalizedContact lang="en" client:load />
+</BaseLayout>

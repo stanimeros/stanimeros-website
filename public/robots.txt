@@ -33,13 +33,10 @@ Allow: /assets/
 Allow: /$
 
 # Main pages
-Allow: /en/contact
+Allow: /contact
 Allow: /el/contact
 Allow: /privacy-policy
 Allow: /data-deletion
-
-# Tools section
-Allow: /tools/
 
 # Note: Crawl-delay removed for better SEO indexing speed
 # Search engines will use their own crawl rate limits

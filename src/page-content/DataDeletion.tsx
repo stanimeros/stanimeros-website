@@ -1,6 +1,4 @@
 import { useEffect, useState, useMemo } from "react"
-import { Helmet } from "react-helmet-async"
-import { useParams, Link } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -17,9 +15,7 @@ import {
   ClockIcon as Clock
 } from "@heroicons/react/24/outline"
 import { useTranslation } from "react-i18next"
-import "../i18n"
 import { sendEmail } from "@/lib/firebase"
-import Layout from "@/components/Layout"
 import { trackEvent } from "@/lib/events"
 
 /** Preset app/entity info for Google Play Data safety – URL must reference the entity. */
@@ -57,9 +53,12 @@ const DEFAULT_PRESET = {
   contactEmail: "hello@stanimeros.com",
 }
 
-const DataDeletion = () => {
+interface DataDeletionProps {
+  appSlug?: string
+}
+
+const DataDeletion = ({ appSlug }: DataDeletionProps) => {
   const { t } = useTranslation()
-  const { appSlug } = useParams<{ appSlug?: string }>()
   const preset = useMemo(
     () => (appSlug && DATA_DELETION_PRESETS[appSlug]) ? DATA_DELETION_PRESETS[appSlug] : null,
     [appSlug]
@@ -88,17 +87,6 @@ const DataDeletion = () => {
     scrollTo(0, 0)
     trackEvent("pageView", { page: "data-deletion", appSlug: appSlug ?? undefined })
   }, [appSlug])
-
-  useEffect(() => {
-    const title = preset
-      ? t("dataDeletion.accountDeletionPolicy.title", { appName: preset.appName })
-      : t("dataDeletion.pageTitle")
-    const previousTitle = document.title
-    document.title = title
-    return () => {
-      document.title = previousTitle
-    }
-  }, [preset, t])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -136,7 +124,7 @@ const DataDeletion = () => {
 
   if (isSubmitted) {
     return (
-      <Layout>
+      <>
         {/* Success Content */}
         <main className="container mx-auto px-4 py-12 relative z-10">
           <div className="max-w-2xl mx-auto text-center">
@@ -179,18 +167,12 @@ const DataDeletion = () => {
             </div>
           </div>
         </main>
-      </Layout>
+      </>
     )
   }
 
   return (
-    <Layout>
-      <Helmet>
-        <title>Data Deletion | Pantelis Stanimeros</title>
-        <meta name="description" content="Request deletion of your data from apps and services by Pantelis Stanimeros." />
-        <link rel="canonical" href="https://stanimeros.com/data-deletion" />
-        <meta name="robots" content="noindex, follow" />
-      </Helmet>
+    <>
       {/* Main Content */}
       <main className="container mx-auto px-4 py-12 relative z-10">
         <div className="max-w-2xl mx-auto">
@@ -430,9 +412,10 @@ const DataDeletion = () => {
                   </div>
                 </div>
 
-                <Button 
-                  type="submit" 
-                  className="w-full bg-red-600 hover:bg-red-700 text-white" 
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full bg-red-600 hover:bg-red-700 text-white"
                   disabled={isLoading || !confirmChecked || !verifyChecked || !formData.appName.trim()}
                 >
                   {isLoading ? (
@@ -471,15 +454,15 @@ const DataDeletion = () => {
             <p className="text-muted-foreground mb-4">
               {t('dataDeletion.privacyPolicyLink.description')}
             </p>
-            <Link to={appSlug ? `/privacy-policy/${appSlug}` : "/privacy-policy"}>
+            <a href={appSlug ? `/privacy-policy/${appSlug}` : "/privacy-policy"}>
               <Button variant="outline">
                 {t('dataDeletion.privacyPolicyLink.button')}
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </main>
-    </Layout>
+    </>
   )
 }
 

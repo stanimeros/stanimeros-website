@@ -1,0 +1,21 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import LocalizedHomePage from '@/page-content/HomePage.localized'
+import { professionalServiceJsonLd, homeFaqJsonLd } from '@/lib/jsonld'
+---
+
+<BaseLayout
+  lang="el"
+  title="Κατασκευή Εφαρμογών & AI Αυτοματισμοί | Pantelis Stanimeros"
+  description="Ανάπτυξη AI agents, mobile εφαρμογών και αυτοματισμών για επιχειρήσεις στη Θεσσαλονίκη και σε όλη την Ελλάδα. Δωρεάν αρχική συνάντηση."
+  keywords="κατασκευή εφαρμογών Θεσσαλονίκη, AI αυτοματισμοί επιχειρήσεων, ανάπτυξη mobile εφαρμογών Ελλάδα, κατασκευή eshop, AI agents, freelance developer Ελλάδα"
+  canonical="https://stanimeros.com/el"
+  hreflangAlternates={[
+    { hreflang: 'en', href: 'https://stanimeros.com/' },
+    { hreflang: 'el', href: 'https://stanimeros.com/el' },
+    { hreflang: 'x-default', href: 'https://stanimeros.com/' },
+  ]}
+  jsonLd={[professionalServiceJsonLd, homeFaqJsonLd]}
+>
+  <LocalizedHomePage lang="el" client:load />
+</BaseLayout>

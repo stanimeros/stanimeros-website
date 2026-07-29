@@ -21,12 +21,16 @@
         "source": "/portfolio",
         "destination": "/",
         "type": 301
-      }
-    ],
-    "rewrites": [
+      },
       {
-        "source": "**",
-        "destination": "/index.html"
+        "source": "/en",
+        "destination": "/",
+        "type": 301
+      },
+      {
+        "source": "/en/:rest*",
+        "destination": "/:rest*",
+        "type": 301
       }
     ],
     "headers": [
@@ -67,14 +71,6 @@
           {
             "key": "Cache-Control",
             "value": "public, max-age=0, must-revalidate"
-          },
-          {
-            "key": "Cross-Origin-Embedder-Policy",
-            "value": "require-corp"
-          },
-          {
-            "key": "Cross-Origin-Opener-Policy",
-            "value": "same-origin"
           }
         ]
       }
