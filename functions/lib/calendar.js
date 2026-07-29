@@ -24,6 +24,55 @@ function ensureOffset(dateTimeString) {
   return `${dateTimeString}${offsetForZone(approx, TIME_ZONE)}`;
 }
 
+// Business hours, enforced server-side rather than trusted to the model —
+// this is the hard guarantee, the system instruction is just what steers the
+// model toward proposing valid slots in the first place.
+const BOOKING_DAYS = new Set(["Mon", "Tue", "Wed", "Thu", "Fri"]);
+const BOOKING_START_HOUR = 10;
+const BOOKING_END_HOUR = 20;
+const BOOKING_DURATION_MINUTES = 30;
+
+function localPartsInZone(date, timeZone) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone,
+    weekday: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(date);
+  const byType = Object.fromEntries(parts.map((p) => [p.type, p.value]));
+  return { weekday: byType.weekday, hour: Number(byType.hour), minute: Number(byType.minute) };
+}
+
+// Throws (never silently clamps) so the caller sees exactly what was wrong —
+// callers feed the message back to the model as a tool error so it can
+// propose a valid slot instead.
+function assertBookableWindow(startTime, endTime) {
+  const start = new Date(ensureOffset(startTime));
+  const end = new Date(ensureOffset(endTime));
+  const durationMinutes = Math.round((end - start) / 60000);
+
+  if (durationMinutes !== BOOKING_DURATION_MINUTES) {
+    throw new Error(
+      `Strategy calls are exactly ${BOOKING_DURATION_MINUTES} minutes long — the requested window was ${durationMinutes} minutes.`
+    );
+  }
+
+  const { weekday, hour, minute } = localPartsInZone(start, TIME_ZONE);
+  if (!BOOKING_DAYS.has(weekday)) {
+    throw new Error(`Bookings are only available Monday–Friday (requested day was ${weekday}).`);
+  }
+
+  const startMinutes = hour * 60 + minute;
+  const windowStartMinutes = BOOKING_START_HOUR * 60;
+  const windowLastStartMinutes = BOOKING_END_HOUR * 60 - BOOKING_DURATION_MINUTES;
+  if (startMinutes < windowStartMinutes || startMinutes > windowLastStartMinutes) {
+    throw new Error(
+      `Bookings are only available between ${BOOKING_START_HOUR}:00 and ${BOOKING_END_HOUR}:00 (${TIME_ZONE}); requested start was ${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}.`
+    );
+  }
+}
+
 function getCalendarClient() {
   const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY);
   const auth = new google.auth.JWT({
