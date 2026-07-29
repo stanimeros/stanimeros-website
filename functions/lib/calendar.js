@@ -1,6 +1,28 @@
 const { google } = require("googleapis");
+const { TIME_ZONE } = require("./gemini");
 
 const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || "primary";
+
+function offsetForZone(date, timeZone) {
+  const parts = new Intl.DateTimeFormat("en-US", { timeZone, timeZoneName: "longOffset" }).formatToParts(
+    date
+  );
+  const tzName = parts.find((p) => p.type === "timeZoneName")?.value ?? "GMT+00:00";
+  return tzName.replace("GMT", "") || "+00:00";
+}
+
+// The model is instructed to always include a UTC offset, but if it slips and
+// sends a bare local datetime (e.g. "2026-07-30T15:00:00"), Google's calendar
+// API rejects it outright — RFC3339 requires an offset, and there's no
+// well-defined default. A bare datetime from the visitor's chat means
+// wall-clock time in TIME_ZONE, so resolve it that way instead of failing the
+// whole tool call. Greece observes DST, so the offset isn't fixed — it's
+// computed per-date rather than hardcoded.
+function ensureOffset(dateTimeString) {
+  if (/(Z|[+-]\d{2}:\d{2})$/.test(dateTimeString)) return dateTimeString;
+  const approx = new Date(`${dateTimeString}Z`);
+  return `${dateTimeString}${offsetForZone(approx, TIME_ZONE)}`;
+}
 
 function getCalendarClient() {
   const credentials = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY);
@@ -24,8 +46,8 @@ async function checkAvailability(startTime, endTime) {
   const calendar = getCalendarClient();
   const res = await calendar.freebusy.query({
     requestBody: {
-      timeMin: startTime,
-      timeMax: endTime,
+      timeMin: ensureOffset(startTime),
+      timeMax: ensureOffset(endTime),
       items: [{ id: CALENDAR_ID }],
     },
   });
@@ -48,11 +70,11 @@ async function createBooking({ name, email, purpose, startTime, endTime }) {
     requestBody: {
       summary: `Strategy call: ${name}`,
       description: `Visitor: ${name} <${email}>\n\n${purpose}`,
-      start: { dateTime: startTime },
-      end: { dateTime: endTime },
+      start: { dateTime: ensureOffset(startTime) },
+      end: { dateTime: ensureOffset(endTime) },
     },
   });
   return { eventId: res.data.id, htmlLink: res.data.htmlLink };
 }
 
-module.exports = { checkAvailability, createBooking };
+module.exports = { checkAvailability, createBooking, ensureOffset };

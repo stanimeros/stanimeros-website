@@ -7,7 +7,7 @@ const { checkAvailability, createBooking } = require("../lib/calendar");
 async function testGemini() {
   console.log("Testing Gemini API key...");
   const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
+    model: "gemini-3.5-flash-lite",
     contents: [{ role: "user", parts: [{ text: "Reply with exactly the word: pong" }] }],
   });
   console.log("Gemini OK, reply:", response.text?.trim());
