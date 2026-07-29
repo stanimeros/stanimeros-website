@@ -1,6 +1,3 @@
-import { logEvent, getAnalytics } from "firebase/analytics";
-import { app } from "./firebase";
-
 const eventMap = {
   pageView: {
     fbq: "PageView",
@@ -33,10 +30,12 @@ export const trackEvent = (
   }
 
   if (mapping.firebase) {
-    try {
-      logEvent(getAnalytics(app), mapping.firebase, data);
-    } catch {
-      // analytics not initialized (no consent)
-    }
+    // Loaded lazily: firebase/analytics shouldn't be part of the initial
+    // hydration bundle just for an event tracker most events skip anyway.
+    Promise.all([import("firebase/analytics"), import("./firebase")])
+      .then(([{ logEvent }, { initAnalytics }]) => initAnalytics().then(analytics => logEvent(analytics, mapping.firebase as string, data)))
+      .catch(() => {
+        // analytics not initialized (no consent)
+      });
   }
 };

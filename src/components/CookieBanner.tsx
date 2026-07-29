@@ -53,8 +53,8 @@ export default function CookieBanner() {
         </div>
         <p className="text-base text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
           {t("cookieBanner.message")}{" "}
-          <a href={`${prefix}/privacy-policy`} className="text-primary hover:underline font-medium" aria-label={t("cookieBanner.learnMoreLabel")}>
-            {t("cookieBanner.learnMore")}
+          <a href={`${prefix}/privacy-policy`} className="text-primary hover:underline font-medium">
+            {t("cookieBanner.learnMoreLabel")}
           </a>
         </p>
         <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4">
