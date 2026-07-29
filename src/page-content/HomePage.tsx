@@ -134,7 +134,7 @@ const HomePage = () => {
             }}
           >
             <img
-              src="/images/logo-glass.png"
+              src="/images/logo-glass.webp"
               alt="Stanimeros Logo"
               width="400"
               height="400"

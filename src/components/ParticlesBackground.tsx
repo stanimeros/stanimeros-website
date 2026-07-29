@@ -19,7 +19,7 @@ const ParticlesBackground = () => {
       loaded={particlesLoaded}
       className="absolute inset-0"
       options={{
-        fpsLimit: 120,
+        fpsLimit: 30,
         interactivity: {
           events: {
             onHover: {

@@ -46,7 +46,7 @@ const Header = () => {
           <a href={`${prefix}/#home`}>
             <div className="flex items-center space-x-2">
               <img
-                src="/images/logo-glass.png"
+                src="/images/logo-glass.webp"
                 alt="Stanimeros Logo"
                 className="h-12 w-12"
               />
