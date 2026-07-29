@@ -9,7 +9,8 @@
     "lint": "eslint .",
     "preview": "astro preview",
     "translate": "node scripts/translate.js",
-    "download-portfolio-images": "node scripts/download-images.js"
+    "download-portfolio-images": "node scripts/download-images.js",
+    "deploy": "npm run translate && npm run build && firebase deploy --only hosting"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.2",

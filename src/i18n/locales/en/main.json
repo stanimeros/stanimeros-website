@@ -2,8 +2,6 @@
   "beginCheckout": "",
   "pageView": "",
   "package": "",
-  "canvas": "",
-  "2d": "",
   "nav": {
     "home": "Home",
     "about": "About",
@@ -225,7 +223,6 @@
   },
   "contact": {
     "title": "Get In Touch",
-    "subtitle": "Let's talk about your business",
     "description": "Fill in your details below to get a free strategy call where we'll discuss your needs and find the best solution for you. No strings attached!",
     "features": {
       "consultation": {
@@ -245,7 +242,6 @@
       "description": "Leave your details and I'll get back to you within 24 hours",
       "name": "Name",
       "email": "Email",
-      "message": "Details",
       "namePlaceholder": "Your name",
       "emailPlaceholder": "email@example.com",
       "sending": "Sending...",
@@ -400,7 +396,6 @@
     }
   },
   "dataDeletion": {
-    "pageTitle": "Data Deletion Request | Stanimeros",
     "title": "Request Data Deletion",
     "titleApp": "Data Deletion of {{appName}}",
     "subtitle": "Submit a request to delete your personal data from the app",
