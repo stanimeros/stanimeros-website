@@ -18,6 +18,7 @@ import {
   BriefcaseIcon,
   BoltIcon,
   BuildingStorefrontIcon,
+  PhoneIcon,
 } from "@heroicons/react/24/outline"
 import { trackEvent } from "@/lib/events"
 import { useScrollAnimation } from "@/lib/hooks"
@@ -37,7 +38,7 @@ const packages = [
     badge: 'Automation',
     features: 'packages.onlinePresence.features',
     className: 'border-border/60',
-    ctaIcon: <BoltIcon className="h-6 w-6 mr-2 stroke-[1.5]" />,
+    ctaIcon: <BoltIcon className="size-5 mr-2 stroke-[1.5]" />,
   },
   {
     title: 'packages.eShop.title',
@@ -45,7 +46,7 @@ const packages = [
     badge: 'Development',
     features: 'packages.eShop.features',
     className: 'border-primary/30 ring-1 ring-primary/30 bg-primary/5',
-    ctaIcon: <BuildingStorefrontIcon className="h-6 w-6 mr-2 stroke-[1.5]" />,
+    ctaIcon: <BuildingStorefrontIcon className="size-5 mr-2 stroke-[1.5]" />,
   },
   {
     title: 'packages.customApp.title',
@@ -53,7 +54,7 @@ const packages = [
     badge: 'AI',
     features: 'packages.customApp.features',
     className: 'border-border/60',
-    ctaIcon: <SparklesIcon className="h-6 w-6 mr-2 stroke-[1.5]" />,
+    ctaIcon: <SparklesIcon className="size-5 mr-2 stroke-[1.5]" />,
   },
 ] as const
 
@@ -172,7 +173,7 @@ export default function Services({ lang }: ServicesProps) {
                   </div>
                 </CardContent>
                 <div className="px-6 pb-6 mt-auto">
-                  <Button variant="green" size="lg" className="w-full h-14 sm:h-12 px-8 text-base" asChild>
+                  <Button variant="green" size="lg" className="w-full px-8" asChild>
                     <a href={`${prefix}/contact?source=services-package`}>
                       {pkg.ctaIcon}
                       {t('packages.getStarted')}
@@ -235,7 +236,10 @@ export default function Services({ lang }: ServicesProps) {
             <h2 className="text-3xl font-bold mb-3">{t("servicesPage.cta.title")}</h2>
             <p className="text-muted-foreground mb-8">{t("servicesPage.cta.description")}</p>
             <Button variant="green" size="lg" asChild className="mb-10">
-              <a href={`${prefix}/contact`}>{t("servicesPage.cta.button")}</a>
+              <a href={`${prefix}/contact`}>
+                <PhoneIcon className="size-5 mr-2 stroke-[1.5]" />
+                {t("servicesPage.cta.button")}
+              </a>
             </Button>
 
             <div className="flex justify-center gap-6 text-sm">

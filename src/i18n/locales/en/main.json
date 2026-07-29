@@ -551,7 +551,6 @@
   "cookieBanner": {
     "title": "We use cookies",
     "message": "We use cookies for analytics to improve your experience.",
-    "learnMore": "Learn more",
     "learnMoreLabel": "Learn more about our privacy policy",
     "accept": "Accept",
     "decline": "Decline"

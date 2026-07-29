@@ -21,12 +21,12 @@ const buttonVariants = cva(
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
         green:
-          "bg-green-500 hover:bg-green-400 text-black shadow-[0_0_22px_rgba(74,222,128,0.38)] hover:shadow-[0_0_35px_rgba(74,222,128,0.32)] transition-all duration-300",
+          "bg-emerald-700 hover:bg-emerald-800 text-white shadow-sm transition-colors duration-200",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
         sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-12 rounded-md px-6 has-[>svg]:px-4",
+        lg: "h-14 sm:h-12 rounded-md px-6 has-[>svg]:px-4 text-base",
         icon: "size-9",
       },
     },

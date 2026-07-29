@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
-import { CakeIcon } from "@heroicons/react/24/outline"
+import { CakeIcon, CheckIcon, XMarkIcon } from "@heroicons/react/24/outline"
 import { initAnalytics } from "@/lib/firebase"
 import { initPixel } from "@/lib/pixel"
 
@@ -58,10 +58,12 @@ export default function CookieBanner() {
           </a>
         </p>
         <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4">
-          <Button variant="outline" size="lg" className="w-full sm:flex-1 h-14 sm:h-12 text-base" onClick={decline}>
+          <Button variant="outline" size="lg" className="w-full sm:flex-1" onClick={decline}>
+            <XMarkIcon className="size-5 mr-2 stroke-[1.5]" />
             {t("cookieBanner.decline")}
           </Button>
-          <Button size="lg" className="w-full sm:flex-1 h-14 sm:h-12 text-base" onClick={accept}>
+          <Button size="lg" className="w-full sm:flex-1" onClick={accept}>
+            <CheckIcon className="size-5 mr-2 stroke-[1.5]" />
             {t("cookieBanner.accept")}
           </Button>
         </div>

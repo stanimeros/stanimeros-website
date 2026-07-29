@@ -13,6 +13,7 @@ import {
   LightBulbIcon,
   HandRaisedIcon,
   BriefcaseIcon,
+  PhoneIcon,
 } from "@heroicons/react/24/outline"
 import { trackEvent } from "@/lib/events"
 import { useScrollAnimation } from "@/lib/hooks"
@@ -196,7 +197,10 @@ export default function About({ lang }: AboutProps) {
             <h2 className="text-3xl font-bold mb-3">{t("aboutPage.cta.title")}</h2>
             <p className="text-muted-foreground mb-8">{t("aboutPage.cta.description")}</p>
             <Button variant="green" size="lg" asChild className="mb-10">
-              <a href={`${prefix}/contact`}>{t("aboutPage.cta.button")}</a>
+              <a href={`${prefix}/contact`}>
+                <PhoneIcon className="size-5 mr-2 stroke-[1.5]" />
+                {t("aboutPage.cta.button")}
+              </a>
             </Button>
 
             <div className="flex justify-center gap-6 text-sm">

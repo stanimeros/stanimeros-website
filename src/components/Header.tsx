@@ -58,19 +58,32 @@ const Header = () => {
           <div className="hidden lg:flex items-center">
             <div className="flex items-center space-x-6 mr-6">
               <Button variant="ghost" asChild className="cursor-pointer">
-                <a href={prefix || '/'}>{t('nav.home')}</a>
+                <a href={prefix || '/'}>
+                  <HomeIcon className="size-4 mr-1.5" />
+                  {t('nav.home')}
+                </a>
               </Button>
               <Button variant="ghost" asChild className="cursor-pointer">
-                <a href={`${prefix}/about`}>{t('nav.about')}</a>
+                <a href={`${prefix}/about`}>
+                  <UserIcon className="size-4 mr-1.5" />
+                  {t('nav.about')}
+                </a>
               </Button>
               <Button variant="ghost" asChild className="cursor-pointer">
-                <a href={`${prefix}/services`}>{t('nav.services')}</a>
+                <a href={`${prefix}/services`}>
+                  <Settings className="size-4 mr-1.5" />
+                  {t('nav.services')}
+                </a>
               </Button>
               <Button variant="ghost" onClick={() => handleScrollToSection('portfolio')} className="cursor-pointer">
+                <BriefcaseIcon className="size-4 mr-1.5" />
                 {t('nav.portfolio')}
               </Button>
               <Button variant="ghost" asChild className="cursor-pointer">
-                <a href={`${prefix}/contact`}>{t('nav.contact')}</a>
+                <a href={`${prefix}/contact`}>
+                  <Mail className="size-4 mr-1.5" />
+                  {t('nav.contact')}
+                </a>
               </Button>
             </div>
             <div className="border-l border-border/60 pl-6">

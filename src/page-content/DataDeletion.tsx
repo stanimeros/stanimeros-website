@@ -417,17 +417,17 @@ const DataDeletion = ({ appSlug, lang }: DataDeletionProps) => {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full h-14 sm:h-12 bg-red-600 hover:bg-red-700 text-white"
+                  className="w-full bg-red-600 hover:bg-red-700 text-white"
                   disabled={isLoading || !confirmChecked || !verifyChecked || !formData.appName.trim()}
                 >
                   {isLoading ? (
                     <>
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                      <div className="animate-spin rounded-full size-5 border-b-2 border-white mr-2"></div>
                       {t('dataDeletion.form.processing')}
                     </>
                   ) : (
                     <>
-                      <Trash2 className="h-4 w-4 mr-2" />
+                      <Trash2 className="size-5 mr-2" />
                       {t('dataDeletion.form.submit')}
                     </>
                   )}
@@ -458,6 +458,7 @@ const DataDeletion = ({ appSlug, lang }: DataDeletionProps) => {
             </p>
             <a href={appSlug ? `${prefix}/privacy-policy/${appSlug}` : `${prefix}/privacy-policy`}>
               <Button variant="outline">
+                <Shield className="size-4 mr-2 stroke-[1.5]" />
                 {t('dataDeletion.privacyPolicyLink.button')}
               </Button>
             </a>

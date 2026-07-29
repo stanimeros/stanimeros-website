@@ -153,7 +153,7 @@ export default function ChatWidget() {
                 key={i}
                 className={`max-w-[85%] rounded-2xl px-4 py-2 text-sm leading-relaxed ${
                   m.role === "user"
-                    ? "ml-auto bg-green-500 text-white whitespace-pre-wrap"
+                    ? "ml-auto bg-emerald-700 text-white whitespace-pre-wrap"
                     : "mr-auto bg-muted text-foreground"
                 }`}
               >

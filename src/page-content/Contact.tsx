@@ -189,16 +189,16 @@ export default function Contact() {
                   variant="green"
                   size="lg"
                   disabled={isSubmitting}
-                  className="w-full h-14 sm:h-12 text-base"
+                  className="w-full"
                 >
                   {isSubmitting ? (
                     <>
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-black mr-2" />
+                      <div className="animate-spin rounded-full size-5 border-b-2 border-white mr-2" />
                       {t('contact.form.sending')}
                     </>
                   ) : (
                     <>
-                      <PaperAirplaneIcon className="h-4 w-4 mr-2" />
+                      <PaperAirplaneIcon className="size-5 mr-2" />
                       {t('contact.form.send')}
                     </>
                   )}

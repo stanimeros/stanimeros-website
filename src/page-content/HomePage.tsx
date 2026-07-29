@@ -124,10 +124,12 @@ const HomePage = () => {
             {t('hero.subtitleAfter')}
           </p>
           <div className="flex flex-row gap-4 justify-center relative z-20">
-            <Button size="lg" className="h-14 sm:h-12" onClick={() => scrollToSection('packages')}>
+            <Button size="lg" onClick={() => scrollToSection('packages')}>
+              <CubeTransparentIcon className="size-5 mr-2 stroke-[1.5]" />
               {t('hero.viewPackages')}
             </Button>
-            <Button size="lg" variant="outline" className="h-14 sm:h-12" onClick={() => scrollToSection('contact')}>
+            <Button size="lg" variant="outline" onClick={() => scrollToSection('contact')}>
+              <PhoneIcon className="size-5 mr-2 stroke-[1.5]" />
               {t('hero.getInTouch')}
             </Button>
           </div>
@@ -321,7 +323,7 @@ const HomePage = () => {
                 badge: 'Automation',
                 features: 'packages.onlinePresence.features',
                 className: 'border-border/60',
-                ctaIcon: <BoltIcon className="h-6 w-6 mr-2 stroke-[1.5]" />,
+                ctaIcon: <BoltIcon className="size-5 mr-2 stroke-[1.5]" />,
               },
               {
                 title: 'packages.eShop.title',
@@ -329,7 +331,7 @@ const HomePage = () => {
                 badge: 'Development',
                 features: 'packages.eShop.features',
                 className: 'border-primary/30 ring-1 ring-primary/30 bg-primary/5',
-                ctaIcon: <BuildingStorefrontIcon className="h-6 w-6 mr-2 stroke-[1.5]" />,
+                ctaIcon: <BuildingStorefrontIcon className="size-5 mr-2 stroke-[1.5]" />,
               },
               {
                 title: 'packages.customApp.title',
@@ -337,7 +339,7 @@ const HomePage = () => {
                 badge: 'AI',
                 features: 'packages.customApp.features',
                 className: 'border-border/60',
-                ctaIcon: <SparklesIcon className="h-6 w-6 mr-2 stroke-[1.5]" />,
+                ctaIcon: <SparklesIcon className="size-5 mr-2 stroke-[1.5]" />,
               }
             ].map((pkg, index) => (
               <motion.div
@@ -369,7 +371,7 @@ const HomePage = () => {
                     <Button
                       variant="green"
                       size="lg"
-                      className="w-full h-14 sm:h-12 px-8 text-base"
+                      className="w-full px-8"
                       onClick={() => goToContact('package-button', t(pkg.title))}
                     >
                       {pkg.ctaIcon}
@@ -527,10 +529,11 @@ const HomePage = () => {
 
             <Button
               variant="green"
-              className="!px-[100px] h-14 text-base"
+              size="lg"
+              className="!px-[100px]"
               onClick={() => goToContact('contact-section')}
             >
-              <CalendarDaysIcon className="h-6 w-6 mr-2 stroke-[1.5]" />
+              <CalendarDaysIcon className="size-5 mr-2 stroke-[1.5]" />
               {t('contact.form.send')}
             </Button>
 
