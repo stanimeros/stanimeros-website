@@ -1,5 +1,6 @@
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
+import { motion, type HTMLMotionProps } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -7,6 +8,7 @@ import { Separator } from "@/components/ui/separator"
 import { PortfolioCard } from "@/components/PortfolioCard"
 import ProcessSection from "@/components/ProcessSection"
 import {
+  WrenchScrewdriverIcon,
   SparklesIcon,
   DevicePhoneMobileIcon,
   PuzzlePieceIcon,
@@ -18,6 +20,7 @@ import {
   BuildingStorefrontIcon,
 } from "@heroicons/react/24/outline"
 import { trackEvent } from "@/lib/events"
+import { useScrollAnimation } from "@/lib/hooks"
 import { portfolioItems } from "@/lib/portfolio-data"
 
 const items = [
@@ -65,52 +68,91 @@ export default function Services({ lang }: ServicesProps) {
   const { t } = useTranslation()
   const prefix = lang === "el" ? "/el" : ""
 
+  const heroRef = useRef<HTMLElement>(null)
+  const itemsRef = useRef<HTMLElement>(null)
+  const packagesRef = useRef<HTMLElement>(null)
+  const portfolioRef = useRef<HTMLElement>(null)
+  const ctaRef = useRef<HTMLElement>(null)
+
+  const heroAnimation = useScrollAnimation(heroRef)
+  const itemsAnimation = useScrollAnimation(itemsRef)
+  const packagesAnimation = useScrollAnimation(packagesRef)
+  const portfolioAnimation = useScrollAnimation(portfolioRef)
+  const ctaAnimation = useScrollAnimation(ctaRef)
+
   useEffect(() => {
     trackEvent("pageView", { page: "services" })
   }, [])
 
   return (
     <>
-      <main className="container mx-auto px-4 py-16">
-        <div className="max-w-3xl mx-auto text-center mb-14">
-          <h1 className="text-4xl font-bold mb-4">{t("servicesPage.title")}</h1>
-          <Separator className="w-24 mx-auto mb-4" />
-          <p className="text-xl text-muted-foreground mb-4">{t("servicesPage.subtitle")}</p>
-          <p className="text-muted-foreground">{t("servicesPage.intro")}</p>
+      {/* Hero */}
+      <motion.section
+        ref={heroRef}
+        className="py-20 scroll-mt-10 overflow-hidden"
+        {...(heroAnimation as HTMLMotionProps<"section">)}>
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <WrenchScrewdriverIcon className="inline h-8 w-8 text-primary mr-3 align-text-bottom" />
+              {t("servicesPage.title")}
+            </h1>
+            <Separator className="w-24 mx-auto mb-4" />
+            <p className="text-xl text-muted-foreground mb-4">{t("servicesPage.subtitle")}</p>
+            <p className="text-muted-foreground">{t("servicesPage.intro")}</p>
+          </div>
         </div>
+      </motion.section>
 
-        <div className="max-w-4xl mx-auto grid gap-6 sm:grid-cols-2 mb-16">
-          {items.map(({ key, icon: Icon }) => (
-            <Card key={key}>
-              <CardHeader>
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-primary/10">
-                    <Icon className="h-6 w-6 text-primary" />
+      {/* What I do */}
+      <motion.section
+        ref={itemsRef}
+        className="py-20 bg-card/70 scroll-mt-10 overflow-hidden"
+        {...(itemsAnimation as HTMLMotionProps<"section">)}>
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
+            {items.map(({ key, icon: Icon }) => (
+              <Card
+                key={key}
+                className="hover:shadow-lg transition-all duration-300 hover:-translate-y-2 h-full flex flex-col bg-card/70 hover:bg-card/70"
+              >
+                <CardHeader className="text-center flex-none">
+                  <div className="mx-auto mb-4 text-primary">
+                    <Icon className="h-8 w-8" />
                   </div>
-                  <CardTitle className="text-xl">{t(`servicesPage.items.${key}.title`)}</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground leading-relaxed">
-                  {t(`servicesPage.items.${key}.description`)}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
+                  <CardTitle>{t(`servicesPage.items.${key}.title`)}</CardTitle>
+                </CardHeader>
+                <CardContent className="flex-grow">
+                  <CardDescription className="text-center leading-relaxed">
+                    {t(`servicesPage.items.${key}.description`)}
+                  </CardDescription>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
+      </motion.section>
 
-        {/* Packages */}
-        <div className="max-w-5xl mx-auto mb-16">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl font-bold mb-3 flex items-center justify-center gap-2">
-              <CubeTransparentIcon className="h-6 w-6 text-primary" />
+      {/* Packages */}
+      <motion.section
+        ref={packagesRef}
+        className="py-20 scroll-mt-10 overflow-hidden"
+        {...(packagesAnimation as HTMLMotionProps<"section">)}>
+        <div className="mx-auto px-4 max-w-[1600px]">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 text-center">
+              <CubeTransparentIcon className="inline h-8 w-8 text-primary mr-3 align-text-bottom" />
               {t('packages.title')}
             </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">{t('packages.subtitle')}</p>
+            <Separator className="w-24 mx-auto" />
+            <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">{t('packages.subtitle')}</p>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-8 w-full">
             {packages.map((pkg) => (
-              <Card key={pkg.title} className={`relative flex flex-col h-full bg-card/70 ${pkg.className}`}>
+              <Card
+                key={pkg.title}
+                className={`relative flex flex-col hover:shadow-lg transition-all duration-300 h-full bg-card/70 hover:bg-card/70 ${pkg.className}`}
+              >
                 <CardHeader className="flex-none">
                   <div className="flex items-center justify-between">
                     <CardTitle>{t(pkg.title)}</CardTitle>
@@ -142,16 +184,24 @@ export default function Services({ lang }: ServicesProps) {
           </div>
           <p className="text-center text-sm text-muted-foreground mt-8">{t('packages.footer')}</p>
         </div>
+      </motion.section>
 
-        {/* Example projects */}
-        <div className="max-w-5xl mx-auto mb-16">
-          <div className="text-center mb-10">
-            <h2 className="text-2xl font-bold mb-3 flex items-center justify-center gap-2">
-              <BriefcaseIcon className="h-6 w-6 text-primary" />
+      <ProcessSection />
+
+      {/* Example projects */}
+      <motion.section
+        ref={portfolioRef}
+        className="py-20 bg-card/70 scroll-mt-10 overflow-hidden"
+        {...(portfolioAnimation as HTMLMotionProps<"section">)}>
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4 text-center">
+              <BriefcaseIcon className="inline h-8 w-8 text-primary mr-3 align-text-bottom" />
               {t('portfolio.title')}
             </h2>
+            <Separator className="w-24 mx-auto" />
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
             {examples.map((item) => (
               <PortfolioCard
                 key={item.key}
@@ -173,26 +223,32 @@ export default function Services({ lang }: ServicesProps) {
             </a>
           </p>
         </div>
+      </motion.section>
 
-        <div className="max-w-2xl mx-auto text-center">
-          <h2 className="text-2xl font-bold mb-3">{t("servicesPage.cta.title")}</h2>
-          <p className="text-muted-foreground mb-8">{t("servicesPage.cta.description")}</p>
-          <Button variant="green" size="lg" asChild className="mb-10">
-            <a href={`${prefix}/contact`}>{t("servicesPage.cta.button")}</a>
-          </Button>
+      {/* CTA */}
+      <motion.section
+        ref={ctaRef}
+        className="py-20 scroll-mt-10 overflow-hidden"
+        {...(ctaAnimation as HTMLMotionProps<"section">)}>
+        <div className="container mx-auto px-4">
+          <div className="max-w-2xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-3">{t("servicesPage.cta.title")}</h2>
+            <p className="text-muted-foreground mb-8">{t("servicesPage.cta.description")}</p>
+            <Button variant="green" size="lg" asChild className="mb-10">
+              <a href={`${prefix}/contact`}>{t("servicesPage.cta.button")}</a>
+            </Button>
 
-          <div className="flex justify-center gap-6 text-sm">
-            <a href={`${prefix}/about`} className="text-muted-foreground hover:text-primary transition-colors">
-              {t("servicesPage.links.about")}
-            </a>
-            <a href={`${prefix}/contact`} className="text-muted-foreground hover:text-primary transition-colors">
-              {t("servicesPage.links.contact")}
-            </a>
+            <div className="flex justify-center gap-6 text-sm">
+              <a href={`${prefix}/about`} className="text-muted-foreground hover:text-primary transition-colors">
+                {t("servicesPage.links.about")}
+              </a>
+              <a href={`${prefix}/contact`} className="text-muted-foreground hover:text-primary transition-colors">
+                {t("servicesPage.links.contact")}
+              </a>
+            </div>
           </div>
         </div>
-      </main>
-
-      <ProcessSection />
+      </motion.section>
     </>
   )
 }

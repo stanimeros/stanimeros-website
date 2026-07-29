@@ -4,7 +4,7 @@ const { onSchedule } = require("firebase-functions/v2/scheduler");
 const logger = require("firebase-functions/logger");
 
 const { sendOwnerEmail, escapeHtml } = require("./lib/mailer");
-const { ai, tools, SYSTEM_INSTRUCTION, MODEL } = require("./lib/gemini");
+const { ai, tools, buildSystemInstruction, MODEL } = require("./lib/gemini");
 const { checkAvailability, createBooking } = require("./lib/calendar");
 const {
   appendMessage,
@@ -76,14 +76,23 @@ function toGeminiContents(messages) {
   }));
 }
 
-async function runTool(call) {
-  if (call.name === "checkAvailability") {
-    return checkAvailability(call.args.startTime, call.args.endTime);
+// Errors are caught and returned as a tool result (never thrown) so a bad
+// call — e.g. a malformed date the model produced — becomes something the
+// model can recover from ("that time didn't work, try another") instead of
+// aborting the whole turn with a generic failure.
+async function runTool(call, deps = { checkAvailability, createBooking }) {
+  try {
+    if (call.name === "checkAvailability") {
+      return await deps.checkAvailability(call.args.startTime, call.args.endTime);
+    }
+    if (call.name === "createBooking") {
+      return await deps.createBooking(call.args);
+    }
+    return { error: `Unknown tool: ${call.name}` };
+  } catch (error) {
+    logger.error(`Tool ${call.name} failed`, error);
+    return { error: `Tool ${call.name} failed: ${error.message}` };
   }
-  if (call.name === "createBooking") {
-    return createBooking(call.args);
-  }
-  return { error: `Unknown tool: ${call.name}` };
 }
 
 // Chat agent. One call = one visitor message in, one agent reply out;
@@ -106,10 +115,12 @@ exports.geminiChat = onCall({ enforceAppCheck: true }, async (request) => {
 
     const contents = toGeminiContents(await getHistory(sessionId));
 
+    const systemInstruction = buildSystemInstruction();
+
     let response = await ai.models.generateContent({
       model: MODEL,
       contents,
-      config: { systemInstruction: SYSTEM_INSTRUCTION, tools },
+      config: { systemInstruction, tools },
     });
 
     let bookingConfirmed = false;
@@ -119,7 +130,7 @@ exports.geminiChat = onCall({ enforceAppCheck: true }, async (request) => {
       if (!call) break;
 
       const result = await runTool(call);
-      if (call.name === "createBooking") bookingConfirmed = true;
+      if (call.name === "createBooking" && !result.error) bookingConfirmed = true;
 
       contents.push({ role: "model", parts: [{ functionCall: call }] });
       contents.push({
@@ -130,7 +141,7 @@ exports.geminiChat = onCall({ enforceAppCheck: true }, async (request) => {
       response = await ai.models.generateContent({
         model: MODEL,
         contents,
-        config: { systemInstruction: SYSTEM_INSTRUCTION, tools },
+        config: { systemInstruction, tools },
       });
     }
 
@@ -167,3 +178,8 @@ exports.chatTimeoutSweep = onSchedule("every 5 minutes", async () => {
 
   logger.info(`Chat timeout sweep closed ${staleSessions.length} session(s)`);
 });
+
+// Pure helpers, exported for unit testing only — not part of the deployed
+// function surface (Firebase only deploys the `exports.<name>` onCall/onSchedule
+// entries above).
+exports._internal = { formatTranscript, toGeminiContents, runTool };

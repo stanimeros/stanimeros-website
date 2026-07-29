@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
+import { motion, type HTMLMotionProps } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import {
+  PhoneIcon,
   PaperAirplaneIcon,
   CheckCircleIcon,
   ClockIcon,
@@ -15,6 +17,7 @@ import {
 } from "@heroicons/react/24/outline"
 import { sendEmail } from "@/lib/firebase"
 import { trackEvent } from "@/lib/events"
+import { useScrollAnimation } from "@/lib/hooks"
 
 const trustFeatures = [
   { key: "consultation", icon: ClockIcon },
@@ -36,6 +39,14 @@ export default function Contact() {
   const [phone, setPhone] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle")
+
+  const heroRef = useRef<HTMLElement>(null)
+  const formRef = useRef<HTMLElement>(null)
+  const faqRef = useRef<HTMLElement>(null)
+
+  const heroAnimation = useScrollAnimation(heroRef)
+  const formAnimation = useScrollAnimation(formRef)
+  const faqAnimation = useScrollAnimation(faqRef)
 
   useEffect(() => {
     trackEvent('pageView', {
@@ -84,33 +95,54 @@ export default function Contact() {
 
   return (
     <>
-      <main className="container mx-auto px-4 py-20 max-w-2xl">
-        <div className="grid gap-3 mb-14 sm:grid-cols-3">
-          {trustFeatures.map(({ key, icon: Icon }) => (
-            <div key={key} className="flex flex-col items-center text-center gap-2 p-4 rounded-lg bg-card/70 border border-border/60">
-              <Icon className="h-5 w-5 text-primary" />
-              <div className="font-medium text-sm">{t(`contact.features.${key}.title`)}</div>
-              <p className="text-xs text-muted-foreground">{t(`contact.features.${key}.description`)}</p>
-            </div>
-          ))}
-        </div>
-
-        {status === "success" ? (
-          <div className="text-center space-y-4">
-            <CheckCircleIcon className="h-16 w-16 text-green-400 mx-auto" />
-            <h1 className="text-3xl font-bold">{t('contact.title')}</h1>
-            <p className="text-muted-foreground">{t('contact.form.success')}</p>
+      {/* Hero + trust features */}
+      <motion.section
+        ref={heroRef}
+        className="py-20 scroll-mt-10 overflow-hidden"
+        {...(heroAnimation as HTMLMotionProps<"section">)}>
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <PhoneIcon className="inline h-8 w-8 text-primary mr-3 align-text-bottom" />
+              {t('contact.title')}
+            </h1>
+            <Separator className="w-24 mx-auto mb-4" />
+            <p className="text-muted-foreground max-w-2xl mx-auto">{t('contact.form.description')}</p>
           </div>
-        ) : (
-          <>
-            <div className="max-w-lg mx-auto">
-              <div className="mb-10 text-center">
-                <h1 className="text-4xl font-bold mb-3">
-                  {t('contact.title')}
-                </h1>
-                <p className="text-muted-foreground">{t('contact.form.description')}</p>
-              </div>
 
+          <div className="grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
+            {trustFeatures.map(({ key, icon: Icon }) => (
+              <div
+                key={key}
+                className="flex items-start space-x-3 p-4 rounded-lg bg-card/70 border border-border/60"
+              >
+                <div className="mt-1 shrink-0">
+                  <Icon className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-medium">{t(`contact.features.${key}.title`)}</h3>
+                  <p className="text-sm text-muted-foreground">{t(`contact.features.${key}.description`)}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Form */}
+      <motion.section
+        ref={formRef}
+        className="pb-20 scroll-mt-10 overflow-hidden"
+        {...(formAnimation as HTMLMotionProps<"section">)}>
+        <div className="container mx-auto px-4">
+          {status === "success" ? (
+            <div className="text-center space-y-4 max-w-lg mx-auto">
+              <CheckCircleIcon className="h-16 w-16 text-green-400 mx-auto" />
+              <h2 className="text-3xl font-bold">{t('contact.title')}</h2>
+              <p className="text-muted-foreground">{t('contact.form.success')}</p>
+            </div>
+          ) : (
+            <div className="max-w-lg mx-auto rounded-xl border border-border/60 bg-card/70 p-8">
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="space-y-2">
                   <Label htmlFor="name">{t('contact.form.name')}</Label>
@@ -173,25 +205,30 @@ export default function Contact() {
                 </Button>
               </form>
             </div>
+          )}
+        </div>
+      </motion.section>
 
-            <div className="mt-20">
-              <Separator className="w-24 mx-auto mb-8" />
-              <h2 className="text-xl font-semibold text-center mb-6 flex items-center justify-center gap-2">
-                <QuestionMarkCircleIcon className="h-5 w-5 text-primary shrink-0" />
-                {t('packages.faq.title')}
-              </h2>
-              <Accordion type="single" collapsible className="w-full">
-                {faqItems.map((key) => (
-                  <AccordionItem key={key} value={key}>
-                    <AccordionTrigger>{t(`packages.faq.items.${key}.question`)}</AccordionTrigger>
-                    <AccordionContent>{t(`packages.faq.items.${key}.answer`)}</AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
-          </>
-        )}
-      </main>
+      {/* FAQ */}
+      <motion.section
+        ref={faqRef}
+        className="pb-20 scroll-mt-10 overflow-hidden"
+        {...(faqAnimation as HTMLMotionProps<"section">)}>
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl font-semibold text-center mb-8 flex items-center justify-center gap-2">
+            <QuestionMarkCircleIcon className="h-6 w-6 text-primary shrink-0" />
+            {t('packages.faq.title')}
+          </h2>
+          <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto">
+            {faqItems.map((key) => (
+              <AccordionItem key={key} value={key}>
+                <AccordionTrigger className="text-lg">{t(`packages.faq.items.${key}.question`)}</AccordionTrigger>
+                <AccordionContent>{t(`packages.faq.items.${key}.answer`)}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </motion.section>
     </>
   )
 }

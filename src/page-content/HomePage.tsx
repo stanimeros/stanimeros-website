@@ -282,7 +282,7 @@ const HomePage = () => {
         id="packages" 
         className="py-10 pb-20 scroll-mt-10 overflow-hidden"
         {...(packagesAnimation as HTMLMotionProps<"section">)}>
-        <div className="container mx-auto px-4">
+        <div className="mx-auto px-4 max-w-[1600px]">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4 text-center">
               <CubeTransparentIcon className="inline h-8 w-8 text-primary mr-3 align-text-bottom" />
@@ -294,7 +294,7 @@ const HomePage = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 w-full">
+          <div className="grid md:grid-cols-3 gap-8 w-full">
             {[
               {
                 title: 'packages.onlinePresence.title',

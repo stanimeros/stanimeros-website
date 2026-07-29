@@ -1,2 +1,4 @@
-
-Error: Request to https://firestore.googleapis.com/v1/projects/stanimeros-dev/databases/(default)/collectionGroups/-/indexes had HTTP Error: 404, Project 'stanimeros-dev' or database '(default)' does not exist.
+{
+  "indexes": [],
+  "fieldOverrides": []
+}

@@ -79,7 +79,8 @@
     "trailingSlash": false
   },
   "firestore": {
-    "rules": "firestore.rules"
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
   },
   "functions": [
     {
@@ -91,7 +92,8 @@
         "firebase-debug.log",
         "firebase-debug.*.log",
         "*.local",
-        "scripts"
+        "scripts",
+        "tests"
       ]
     }
   ]
