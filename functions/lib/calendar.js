@@ -114,6 +114,23 @@ async function checkAvailability(startTime, endTime) {
 async function createBooking({ name, email, purpose, startTime, endTime }) {
   assertBookableWindow(startTime, endTime);
   const calendar = getCalendarClient();
+
+  // Never trust the model's earlier checkAvailability call alone — it may have
+  // misread the response, skipped the check, or the slot may have been taken
+  // by a concurrent booking since. Re-verify free/busy right here, server-side,
+  // as the last word before writing to the calendar.
+  const freebusy = await calendar.freebusy.query({
+    requestBody: {
+      timeMin: ensureOffset(startTime),
+      timeMax: ensureOffset(endTime),
+      items: [{ id: CALENDAR_ID }],
+    },
+  });
+  const busy = freebusy.data.calendars?.[CALENDAR_ID]?.busy ?? [];
+  if (busy.length > 0) {
+    throw new Error("That time is no longer available — please propose a different slot.");
+  }
+
   const res = await calendar.events.insert({
     calendarId: CALENDAR_ID,
     requestBody: {

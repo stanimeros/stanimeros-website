@@ -17,6 +17,55 @@ interface ChatMessage {
   text: string
 }
 
+// Minimal markdown rendering for chat replies: **bold** and "- " bullet
+// lists only. A full markdown library is overkill for a few inline spans in a
+// chat bubble, so this just covers what the assistant is instructed to use.
+function renderInline(text: string, keyPrefix: string) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g)
+  return parts.map((part, i) =>
+    part.startsWith("**") && part.endsWith("**") ? (
+      <strong key={`${keyPrefix}-${i}`}>{part.slice(2, -2)}</strong>
+    ) : (
+      <span key={`${keyPrefix}-${i}`}>{part}</span>
+    )
+  )
+}
+
+function ChatMessageText({ text }: { text: string }) {
+  const lines = text.split("\n")
+  const elements: React.ReactNode[] = []
+  let listItems: string[] = []
+
+  const flushList = (key: string) => {
+    if (listItems.length === 0) return
+    elements.push(
+      <ul key={key} className="list-disc pl-4">
+        {listItems.map((item, i) => (
+          <li key={i}>{renderInline(item, `${key}-li-${i}`)}</li>
+        ))}
+      </ul>
+    )
+    listItems = []
+  }
+
+  lines.forEach((line, i) => {
+    const bulletMatch = /^[-*]\s+(.*)/.exec(line)
+    if (bulletMatch) {
+      listItems.push(bulletMatch[1])
+      return
+    }
+    flushList(`list-${i}`)
+    if (line.length > 0) {
+      elements.push(<div key={`line-${i}`}>{renderInline(line, `line-${i}`)}</div>)
+    } else {
+      elements.push(<br key={`br-${i}`} />)
+    }
+  })
+  flushList("list-end")
+
+  return <>{elements}</>
+}
+
 function getSessionId() {
   let id = localStorage.getItem(SESSION_KEY)
   if (!id) {
@@ -102,13 +151,13 @@ export default function ChatWidget() {
             {messages.map((m, i) => (
               <div
                 key={i}
-                className={`max-w-[85%] rounded-2xl px-4 py-2 text-sm leading-relaxed whitespace-pre-wrap ${
+                className={`max-w-[85%] rounded-2xl px-4 py-2 text-sm leading-relaxed ${
                   m.role === "user"
-                    ? "ml-auto bg-green-500 text-white"
+                    ? "ml-auto bg-green-500 text-white whitespace-pre-wrap"
                     : "mr-auto bg-muted text-foreground"
                 }`}
               >
-                {m.text}
+                {m.role === "model" ? <ChatMessageText text={m.text} /> : m.text}
               </div>
             ))}
             {isSending && (
