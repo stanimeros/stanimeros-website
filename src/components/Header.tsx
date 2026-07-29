@@ -13,9 +13,10 @@ import { useTranslation } from "react-i18next"
 import LanguageSwitcher from "./LanguageSwitcher"
 
 const Header = () => {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const prefix = i18n.language === 'el' ? '/el' : ''
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,7 +43,7 @@ const Header = () => {
     }`}>
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
-          <a href="/#home">
+          <a href={`${prefix}/#home`}>
             <div className="flex items-center space-x-2">
               <img
                 src="/images/logo-glass.png"
@@ -56,20 +57,20 @@ const Header = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center">
             <div className="flex items-center space-x-6 mr-6">
-              <Button variant="ghost" onClick={() => handleScrollToSection('home')} className="cursor-pointer">
-                {t('nav.home')}
+              <Button variant="ghost" asChild className="cursor-pointer">
+                <a href={prefix || '/'}>{t('nav.home')}</a>
               </Button>
-              <Button variant="ghost" onClick={() => handleScrollToSection('about')} className="cursor-pointer">
-                {t('nav.about')}
+              <Button variant="ghost" asChild className="cursor-pointer">
+                <a href={`${prefix}/about`}>{t('nav.about')}</a>
               </Button>
-              <Button variant="ghost" onClick={() => handleScrollToSection('services')} className="cursor-pointer">
-                {t('nav.services')}
+              <Button variant="ghost" asChild className="cursor-pointer">
+                <a href={`${prefix}/services`}>{t('nav.services')}</a>
               </Button>
               <Button variant="ghost" onClick={() => handleScrollToSection('portfolio')} className="cursor-pointer">
                 {t('nav.portfolio')}
               </Button>
-              <Button variant="ghost" onClick={() => handleScrollToSection('contact')} className="cursor-pointer">
-                {t('nav.contact')}
+              <Button variant="ghost" asChild className="cursor-pointer">
+                <a href={`${prefix}/contact`}>{t('nav.contact')}</a>
               </Button>
             </div>
             <div className="border-l border-border/60 pl-6">
@@ -88,25 +89,33 @@ const Header = () => {
               </SheetTrigger>
             <SheetContent side="right" className="w-[300px]">
               <div className="flex flex-col space-y-2 mt-2">
-                <Button variant="ghost" onClick={() => handleScrollToSection('home')} className="justify-start cursor-pointer">
-                  <HomeIcon className="h-4 w-4 mr-3" />
-                  {t('nav.home')}
+                <Button variant="ghost" asChild className="justify-start cursor-pointer">
+                  <a href={prefix || '/'}>
+                    <HomeIcon className="h-4 w-4 mr-3" />
+                    {t('nav.home')}
+                  </a>
                 </Button>
-                <Button variant="ghost" onClick={() => handleScrollToSection('about')} className="justify-start cursor-pointer">
-                  <UserIcon className="h-4 w-4 mr-3" />
-                  {t('nav.about')}
+                <Button variant="ghost" asChild className="justify-start cursor-pointer">
+                  <a href={`${prefix}/about`}>
+                    <UserIcon className="h-4 w-4 mr-3" />
+                    {t('nav.about')}
+                  </a>
                 </Button>
-                <Button variant="ghost" onClick={() => handleScrollToSection('services')} className="justify-start cursor-pointer">
-                  <Settings className="h-4 w-4 mr-3" />
-                  {t('nav.services')}
+                <Button variant="ghost" asChild className="justify-start cursor-pointer">
+                  <a href={`${prefix}/services`}>
+                    <Settings className="h-4 w-4 mr-3" />
+                    {t('nav.services')}
+                  </a>
                 </Button>
                 <Button variant="ghost" onClick={() => handleScrollToSection('portfolio')} className="justify-start cursor-pointer">
                   <BriefcaseIcon className="h-4 w-4 mr-3" />
                   {t('nav.portfolio')}
                 </Button>
-                <Button variant="ghost" onClick={() => handleScrollToSection('contact')} className="justify-start cursor-pointer">
-                  <Mail className="h-4 w-4 mr-3" />
-                  {t('nav.contact')}
+                <Button variant="ghost" asChild className="justify-start cursor-pointer">
+                  <a href={`${prefix}/contact`}>
+                    <Mail className="h-4 w-4 mr-3" />
+                    {t('nav.contact')}
+                  </a>
                 </Button>
               </div>
             </SheetContent>

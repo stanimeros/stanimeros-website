@@ -1,52 +1,169 @@
-const {setGlobalOptions} = require("firebase-functions");
-const {onCall} = require("firebase-functions/v2/https");
+const { setGlobalOptions } = require("firebase-functions");
+const { onCall } = require("firebase-functions/v2/https");
+const { onSchedule } = require("firebase-functions/v2/scheduler");
 const logger = require("firebase-functions/logger");
-const nodemailer = require("nodemailer");
+
+const { sendOwnerEmail, escapeHtml } = require("./lib/mailer");
+const { ai, tools, SYSTEM_INSTRUCTION, MODEL } = require("./lib/gemini");
+const { checkAvailability, createBooking } = require("./lib/calendar");
+const {
+  appendMessage,
+  getHistory,
+  markClosed,
+  getStaleOpenSessions,
+} = require("./lib/firestoreChat");
 
 setGlobalOptions({ maxInstances: 10 });
 
-// Gmail transporter configuration
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASSWORD
-  }
-});
+const CHAT_TIMEOUT_MINUTES = 15;
+const MAX_TOOL_ROUNDS = 3;
+const MAX_MESSAGE_LENGTH = 2000;
 
-exports.sendEmail = onCall(async (request) => {
+// Form submission (contact form / package inquiries).
+exports.sendEmail = onCall({ enforceAppCheck: true }, async (request) => {
   try {
     const { name, email, message, subject } = request.data;
 
-    // Validate required fields
     if (!name || !email || !message || !subject) {
       throw new Error("Missing required fields");
     }
 
-    // Email content
-    const mailOptions = {
-      from: process.env.EMAIL_USER,
-      to: process.env.EMAIL_USER,
-      subject: subject,
+    await sendOwnerEmail({
+      subject,
       html: `
-        <h2>${subject}</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
+        <h2>${escapeHtml(subject)}</h2>
+        <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+        <p><strong>Email:</strong> ${escapeHtml(email)}</p>
         <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        <p>${escapeHtml(message).replace(/\n/g, "<br>")}</p>
         <hr>
         <p><em>Sent from your website contact form</em></p>
-      `
-    };
+      `,
+    });
 
-    // Send email
-    await transporter.sendMail(mailOptions);
-    
-    logger.info("Email sent successfully", { name, email });
+    logger.info("Form submission email sent", { name, email });
     return { success: true, message: "Email sent successfully" };
-    
   } catch (error) {
-    logger.error("Error sending email", error);
+    logger.error("Error sending form submission email", error);
     throw new Error("Failed to send email");
   }
+});
+
+function formatTranscript(messages) {
+  return messages
+    .map((m) => `${m.role === "user" ? "Visitor" : "Agent"}: ${escapeHtml(m.text)}`)
+    .join("\n");
+}
+
+async function sendChatSummaryEmail(sessionId, messages, reason) {
+  const subject =
+    reason === "booking" ? "Website chat: booking confirmed" : "Website chat ended";
+  await sendOwnerEmail({
+    subject,
+    html: `
+      <h2>${escapeHtml(subject)}</h2>
+      <p><strong>Session:</strong> ${escapeHtml(sessionId)}</p>
+      <p><strong>Reason:</strong> ${escapeHtml(reason)}</p>
+      <pre style="white-space: pre-wrap; font-family: inherit;">${formatTranscript(messages)}</pre>
+    `,
+  });
+}
+
+function toGeminiContents(messages) {
+  return messages.map((m) => ({
+    role: m.role === "user" ? "user" : "model",
+    parts: [{ text: m.text }],
+  }));
+}
+
+async function runTool(call) {
+  if (call.name === "checkAvailability") {
+    return checkAvailability(call.args.startTime, call.args.endTime);
+  }
+  if (call.name === "createBooking") {
+    return createBooking(call.args);
+  }
+  return { error: `Unknown tool: ${call.name}` };
+}
+
+// Chat agent. One call = one visitor message in, one agent reply out;
+// full history lives in Firestore, keyed by the session id the client generated.
+exports.geminiChat = onCall({ enforceAppCheck: true }, async (request) => {
+  const { sessionId, message } = request.data;
+
+  if (!sessionId || typeof sessionId !== "string") {
+    throw new Error("Missing sessionId");
+  }
+  if (!message || typeof message !== "string" || !message.trim()) {
+    throw new Error("Missing message");
+  }
+  if (message.length > MAX_MESSAGE_LENGTH) {
+    throw new Error("Message too long");
+  }
+
+  try {
+    await appendMessage(sessionId, { role: "user", text: message });
+
+    const contents = toGeminiContents(await getHistory(sessionId));
+
+    let response = await ai.models.generateContent({
+      model: MODEL,
+      contents,
+      config: { systemInstruction: SYSTEM_INSTRUCTION, tools },
+    });
+
+    let bookingConfirmed = false;
+
+    for (let round = 0; round < MAX_TOOL_ROUNDS; round += 1) {
+      const call = response.functionCalls?.[0];
+      if (!call) break;
+
+      const result = await runTool(call);
+      if (call.name === "createBooking") bookingConfirmed = true;
+
+      contents.push({ role: "model", parts: [{ functionCall: call }] });
+      contents.push({
+        role: "user",
+        parts: [{ functionResponse: { name: call.name, response: result } }],
+      });
+
+      response = await ai.models.generateContent({
+        model: MODEL,
+        contents,
+        config: { systemInstruction: SYSTEM_INSTRUCTION, tools },
+      });
+    }
+
+    const reply = response.text ?? "";
+    await appendMessage(sessionId, { role: "model", text: reply });
+
+    if (bookingConfirmed) {
+      const history = await getHistory(sessionId);
+      await sendChatSummaryEmail(sessionId, history, "booking");
+      await markClosed(sessionId);
+    }
+
+    return { reply };
+  } catch (error) {
+    logger.error("Error in geminiChat", error);
+    throw new Error("Failed to get a response from the chat agent");
+  }
+});
+
+// Sweeps for chats the visitor abandoned without an explicit booking or goodbye.
+exports.chatTimeoutSweep = onSchedule("every 5 minutes", async () => {
+  const staleBefore = new Date(Date.now() - CHAT_TIMEOUT_MINUTES * 60 * 1000);
+  const staleSessions = await getStaleOpenSessions(staleBefore);
+
+  for (const session of staleSessions) {
+    const history = await getHistory(session.id);
+    if (history.length === 0) {
+      await markClosed(session.id);
+      continue;
+    }
+    await sendChatSummaryEmail(session.id, history, "timeout");
+    await markClosed(session.id);
+  }
+
+  logger.info(`Chat timeout sweep closed ${staleSessions.length} session(s)`);
 });

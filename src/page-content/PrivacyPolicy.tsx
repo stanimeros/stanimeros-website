@@ -51,10 +51,12 @@ const PRIVACY_POLICY_PRESETS: Record<string, { appName: string; developer: strin
 
 interface PrivacyPolicyProps {
   appSlug?: string
+  lang?: "en" | "el"
 }
 
-const PrivacyPolicy = ({ appSlug }: PrivacyPolicyProps) => {
+const PrivacyPolicy = ({ appSlug, lang }: PrivacyPolicyProps) => {
   const { t } = useTranslation()
+  const prefix = lang === "el" ? "/el" : ""
   const preset = useMemo(
     () => (appSlug && PRIVACY_POLICY_PRESETS[appSlug]) ? PRIVACY_POLICY_PRESETS[appSlug] : null,
     [appSlug]
@@ -411,7 +413,7 @@ const PrivacyPolicy = ({ appSlug }: PrivacyPolicyProps) => {
             <p className="text-muted-foreground mb-4">
               {t('privacyPolicy.dataDeletionLink.description')}
             </p>
-            <a href={appSlug ? `/data-deletion/${appSlug}` : "/data-deletion"}>
+            <a href={appSlug ? `${prefix}/data-deletion/${appSlug}` : `${prefix}/data-deletion`}>
               <Button>
                 {t('privacyPolicy.dataDeletionLink.button')}
               </Button>

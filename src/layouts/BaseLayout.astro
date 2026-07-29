@@ -3,6 +3,7 @@ import '@/index.css'
 import LocalizedHeader from '@/components/Header.localized'
 import LocalizedFooter from '@/components/Footer.localized'
 import LocalizedCookieBanner from '@/components/CookieBanner.localized'
+import LocalizedChatWidget from '@/components/ChatWidget.localized'
 import ParticlesBackground from '@/components/ParticlesBackground'
 import type { SupportedLang } from '@/i18n'
 
@@ -85,6 +86,7 @@ const {
           <LocalizedFooter lang={lang} />
         </div>
         <LocalizedCookieBanner lang={lang} client:idle />
+        <LocalizedChatWidget lang={lang} client:idle />
       </div>
     </div>
   </body>

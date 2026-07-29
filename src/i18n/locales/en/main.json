@@ -144,6 +144,28 @@
     "ctaHighlight": "solution",
     "ctaAfter": "for all of this. See how."
   },
+  "process": {
+    "title": "How It Works",
+    "subtitle": "A simple, transparent process from first call to launch",
+    "steps": {
+      "call": {
+        "title": "Free Call",
+        "description": "We talk through your problem, what you need, and whether it's a good fit. No pressure, no obligation."
+      },
+      "quote": {
+        "title": "Get a Quote",
+        "description": "You get a clear scope and price within 24 hours, so you know exactly what you're paying for before anything starts."
+      },
+      "build": {
+        "title": "Build & Develop",
+        "description": "I build your solution with regular updates along the way, so you always know where things stand."
+      },
+      "launch": {
+        "title": "Launch & Support",
+        "description": "Your project goes live, and I stay available for support, fixes, and improvements after launch."
+      }
+    }
+  },
   "services": {
     "title": "Services",
     "consulting": {
@@ -192,7 +214,8 @@
     },
     "links": {
       "about": "Learn more about me",
-      "contact": "Get in touch"
+      "contact": "Get in touch",
+      "portfolio": "See the full portfolio"
     }
   },
   "portfolio": {
@@ -532,5 +555,15 @@
     "learnMoreLabel": "Learn more about our privacy policy",
     "accept": "Accept",
     "decline": "Decline"
+  },
+  "chat": {
+    "title": "Chat with the assistant",
+    "subtitle": "Ask about services, or book a free strategy call",
+    "greeting": "Hi! I'm here to help with questions about AI agents, apps, or automation — and I can book a free strategy call for you. What's on your mind?",
+    "placeholder": "Type a message...",
+    "send": "Send",
+    "openLabel": "Open chat",
+    "closeLabel": "Close chat",
+    "error": "Something went wrong. Please try again in a moment."
   }
 }

@@ -8,8 +8,9 @@ import { initPixel } from "@/lib/pixel"
 const CONSENT_KEY = "cookie_consent"
 
 export default function CookieBanner() {
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const [visible, setVisible] = useState(false)
+  const prefix = i18n.language === 'el' ? '/el' : ''
 
   useEffect(() => {
     const consent = localStorage.getItem(CONSENT_KEY)
@@ -26,11 +27,13 @@ export default function CookieBanner() {
     initAnalytics()
     initPixel()
     setVisible(false)
+    window.dispatchEvent(new Event("cookie-consent-updated"))
   }
 
   const decline = () => {
     localStorage.setItem(CONSENT_KEY, "declined")
     setVisible(false)
+    window.dispatchEvent(new Event("cookie-consent-updated"))
   }
 
   if (!visible) return null
@@ -50,7 +53,7 @@ export default function CookieBanner() {
         </div>
         <p className="text-base text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
           {t("cookieBanner.message")}{" "}
-          <a href="/privacy-policy" className="text-primary hover:underline font-medium" aria-label={t("cookieBanner.learnMoreLabel")}>
+          <a href={`${prefix}/privacy-policy`} className="text-primary hover:underline font-medium" aria-label={t("cookieBanner.learnMoreLabel")}>
             {t("cookieBanner.learnMore")}
           </a>
         </p>

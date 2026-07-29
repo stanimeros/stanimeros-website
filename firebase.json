@@ -78,6 +78,9 @@
     "cleanUrls": true,
     "trailingSlash": false
   },
+  "firestore": {
+    "rules": "firestore.rules"
+  },
   "functions": [
     {
       "source": "functions",
@@ -87,7 +90,8 @@
         ".git",
         "firebase-debug.log",
         "firebase-debug.*.log",
-        "*.local"
+        "*.local",
+        "scripts"
       ]
     }
   ]

@@ -832,7 +832,7 @@ async function main() {
   const missingInEnglish = checkMissingKeysInEnglish(allKeys, dynamicPrefixes, keyLocations);
   if (missingInEnglish.length > 0) {
     console.log('Please add missing keys to English files before continuing.');
-    return;
+    process.exit(1);
   }
   
   // Step 5: Sync English changes to other languages

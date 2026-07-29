@@ -55,10 +55,12 @@ const DEFAULT_PRESET = {
 
 interface DataDeletionProps {
   appSlug?: string
+  lang?: "en" | "el"
 }
 
-const DataDeletion = ({ appSlug }: DataDeletionProps) => {
+const DataDeletion = ({ appSlug, lang }: DataDeletionProps) => {
   const { t } = useTranslation()
+  const prefix = lang === "el" ? "/el" : ""
   const preset = useMemo(
     () => (appSlug && DATA_DELETION_PRESETS[appSlug]) ? DATA_DELETION_PRESETS[appSlug] : null,
     [appSlug]
@@ -454,7 +456,7 @@ const DataDeletion = ({ appSlug }: DataDeletionProps) => {
             <p className="text-muted-foreground mb-4">
               {t('dataDeletion.privacyPolicyLink.description')}
             </p>
-            <a href={appSlug ? `/privacy-policy/${appSlug}` : "/privacy-policy"}>
+            <a href={appSlug ? `${prefix}/privacy-policy/${appSlug}` : `${prefix}/privacy-policy`}>
               <Button variant="outline">
                 {t('dataDeletion.privacyPolicyLink.button')}
               </Button>
