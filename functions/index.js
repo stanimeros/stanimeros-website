@@ -9,8 +9,9 @@ const { checkAvailability, createBooking } = require("./lib/calendar");
 const {
   appendMessage,
   getHistory,
-  markClosed,
-  getStaleOpenSessions,
+  markBooked,
+  markReported,
+  getSessionsToReport,
 } = require("./lib/firestoreChat");
 
 setGlobalOptions({ maxInstances: 10 });
@@ -55,16 +56,38 @@ function formatTranscript(messages) {
     .join("\n");
 }
 
-async function sendChatSummaryEmail(sessionId, messages, reason) {
-  const subject =
-    reason === "booking" ? "Website chat: booking confirmed" : "Website chat ended";
+function formatDuration(ms) {
+  const minutes = Math.round(ms / 60000);
+  if (minutes < 1) return "<1 min";
+  if (minutes < 60) return `${minutes} min`;
+  return `${Math.floor(minutes / 60)}h ${minutes % 60}m`;
+}
+
+// One email per day covering every conversation that ended since the last
+// report, with conversion stats up top and each transcript below.
+async function sendAgentReport(sessions) {
+  const converted = sessions.filter((s) => s.booked).length;
+  const notConverted = sessions.length - converted;
+
+  const subject = `Agent report: ${sessions.length} conversation${sessions.length === 1 ? "" : "s"}, ${converted} booked`;
+
+  const sections = sessions
+    .map(({ id, history, booked, durationMs }) => `
+        <h3>${booked ? "✅ Booked" : "— Not booked"} — Session: ${escapeHtml(id)}</h3>
+        <p><strong>Duration:</strong> ${escapeHtml(formatDuration(durationMs))} · <strong>Messages:</strong> ${history.length}</p>
+        <pre style="white-space: pre-wrap; font-family: inherit;">${formatTranscript(history)}</pre>
+      `)
+    .join("<hr>");
+
   await sendOwnerEmail({
     subject,
     html: `
       <h2>${escapeHtml(subject)}</h2>
-      <p><strong>Session:</strong> ${escapeHtml(sessionId)}</p>
-      <p><strong>Reason:</strong> ${escapeHtml(reason)}</p>
-      <pre style="white-space: pre-wrap; font-family: inherit;">${formatTranscript(messages)}</pre>
+      <p><strong>Total conversations:</strong> ${sessions.length}</p>
+      <p><strong>Booked:</strong> ${converted}</p>
+      <p><strong>Talked but didn't book:</strong> ${notConverted}</p>
+      <hr>
+      ${sections}
     `,
   });
 }
@@ -153,9 +176,7 @@ exports.geminiChat = onCall({ enforceAppCheck: true }, async (request) => {
     await appendMessage(sessionId, { role: "model", text: reply });
 
     if (bookingConfirmed) {
-      const history = await getHistory(sessionId);
-      await sendChatSummaryEmail(sessionId, history, "booking");
-      await markClosed(sessionId);
+      await markBooked(sessionId);
     }
 
     return { reply };
@@ -165,23 +186,39 @@ exports.geminiChat = onCall({ enforceAppCheck: true }, async (request) => {
   }
 });
 
-// Sweeps for chats the visitor abandoned without an explicit booking or goodbye.
-exports.chatTimeoutSweep = onSchedule("every 5 minutes", async () => {
-  const staleBefore = new Date(Date.now() - CHAT_TIMEOUT_MINUTES * 60 * 1000);
-  const staleSessions = await getStaleOpenSessions(staleBefore);
+// Once a day, reports on every conversation that went quiet since the last
+// report (whether it converted to a booking or not) in a single digest email
+// with conversion stats. Sessions are marked reported so nothing appears
+// twice; no email at all if there's nothing new.
+exports.agentReport = onSchedule(
+  { schedule: "0 9 * * *", timeZone: "Europe/Athens" },
+  async () => {
+    const staleBefore = new Date(Date.now() - CHAT_TIMEOUT_MINUTES * 60 * 1000);
+    const staleSessions = await getSessionsToReport(staleBefore);
 
-  for (const session of staleSessions) {
-    const history = await getHistory(session.id);
-    if (history.length === 0) {
-      await markClosed(session.id);
-      continue;
+    const reportedSessions = [];
+    for (const session of staleSessions) {
+      const history = await getHistory(session.id);
+      if (history.length > 0) {
+        const first = history[0].createdAt?.toMillis?.() ?? Date.now();
+        const last = history[history.length - 1].createdAt?.toMillis?.() ?? first;
+        reportedSessions.push({
+          id: session.id,
+          history,
+          booked: !!session.booked,
+          durationMs: last - first,
+        });
+      }
+      await markReported(session.id);
     }
-    await sendChatSummaryEmail(session.id, history, "timeout");
-    await markClosed(session.id);
-  }
 
-  logger.info(`Chat timeout sweep closed ${staleSessions.length} session(s)`);
-});
+    if (reportedSessions.length > 0) {
+      await sendAgentReport(reportedSessions);
+    }
+
+    logger.info(`Agent report covered ${reportedSessions.length} conversation(s)`);
+  }
+);
 
 // Pure helpers, exported for unit testing only — not part of the deployed
 // function surface (Firebase only deploys the `exports.<name>` onCall/onSchedule

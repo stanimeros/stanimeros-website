@@ -16,9 +16,11 @@ async function appendMessage(sessionId, { role, text }) {
     text,
     createdAt: admin.firestore.FieldValue.serverTimestamp(),
   });
+  // merge:true leaves `booked`/`reported` alone if already set — only the
+  // activity timestamp needs to move on every message.
   await sessionDoc(sessionId).set(
     {
-      closed: false,
+      reported: false,
       lastMessageAt: admin.firestore.FieldValue.serverTimestamp(),
     },
     { merge: true }
@@ -33,18 +35,24 @@ async function getHistory(sessionId) {
   return snap.docs.map((doc) => doc.data());
 }
 
-async function markClosed(sessionId) {
+// Flags a session as converted. Doesn't close/report it — the session still
+// naturally goes stale and gets picked up (with this flag) by the next report.
+async function markBooked(sessionId) {
+  await sessionDoc(sessionId).set({ booked: true }, { merge: true });
+}
+
+async function markReported(sessionId) {
   await sessionDoc(sessionId).set(
-    { closed: true, closedAt: admin.firestore.FieldValue.serverTimestamp() },
+    { reported: true, reportedAt: admin.firestore.FieldValue.serverTimestamp() },
     { merge: true }
   );
 }
 
-// Sessions with activity, not yet closed, whose last message is older than `staleBefore`.
-async function getStaleOpenSessions(staleBefore) {
+// Sessions with activity, not yet reported, whose last message is older than `staleBefore`.
+async function getSessionsToReport(staleBefore) {
   const snap = await db
     .collection("chatSessions")
-    .where("closed", "==", false)
+    .where("reported", "==", false)
     .where("lastMessageAt", "<=", staleBefore)
     .get();
   return snap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
@@ -53,6 +61,7 @@ async function getStaleOpenSessions(staleBefore) {
 module.exports = {
   appendMessage,
   getHistory,
-  markClosed,
-  getStaleOpenSessions,
+  markBooked,
+  markReported,
+  getSessionsToReport,
 };
