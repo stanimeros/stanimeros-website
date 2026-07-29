@@ -10,7 +10,8 @@
     "preview": "astro preview",
     "translate": "node scripts/translate.js",
     "download-portfolio-images": "node scripts/download-images.js",
-    "deploy": "npm run translate && npm run build && firebase deploy --only hosting && firebase firestore:indexes > firestore.indexes.json && firebase deploy --only firestore && firebase deploy --only functions"
+    "smoke-test": "node scripts/smoke-test.js",
+    "deploy": "npm run translate && npm run build && firebase deploy --only hosting && firebase firestore:indexes > firestore.indexes.json && firebase deploy --only firestore && firebase deploy --only functions && npm run smoke-test"
   },
   "dependencies": {
     "@astrojs/react": "^6.0.2",
