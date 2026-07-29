@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { lazy, Suspense, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
 import { motion, useScroll, useTransform, useSpring, type HTMLMotionProps } from "framer-motion"
 import { Button } from "@/components/ui/button"
@@ -26,7 +26,7 @@ import {
   BoltIcon,
   CalendarDaysIcon,
 } from "@heroicons/react/24/outline"
-import GitHubCalendarComponent from "@/components/GitHubCalendar"
+const GitHubCalendarComponent = lazy(() => import("@/components/GitHubCalendar"))
 import WhySection from "@/components/WhySection"
 import ProcessSection from "@/components/ProcessSection"
 import UnderlineHighlight from "@/components/UnderlineHighlight"
@@ -38,9 +38,9 @@ import { FacebookIcon, InstagramIcon, LinkedinIcon, GithubIcon, BriefcaseIcon } 
 const HomePage = () => {
   const { t, i18n } = useTranslation()
   // react-github-calendar breaks Node SSR during Astro's static build, so it's
-  // only ever rendered client-side after mount.
-  const [isMounted, setIsMounted] = useState(false)
-  useEffect(() => setIsMounted(true), [])
+  // only ever rendered client-side, and only once the About section scrolls
+  // into view (it pulls in a separate JS chunk + external API fetch).
+  const [showCalendar, setShowCalendar] = useState(false)
   const { scrollY } = useScroll()
   const logoY = useTransform(scrollY, [0, 500], [0, 100])
   const logoOpacity = useTransform(scrollY, [0, 500], [0.1, 0])
@@ -60,6 +60,21 @@ const HomePage = () => {
   
   // Get animation props for each section
   const aboutAnimation = useScrollAnimation(aboutRef)
+  useEffect(() => {
+    const el = aboutRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShowCalendar(true)
+          observer.disconnect()
+        }
+      },
+      { rootMargin: "200px" }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
   const servicesAnimation = useScrollAnimation(servicesRef)
   const packagesAnimation = useScrollAnimation(packagesRef)
   const portfolioAnimation = useScrollAnimation(portfolioRef)
@@ -198,7 +213,11 @@ const HomePage = () => {
             </div>
           </div>
           <div className="overflow-hidden pt-16 w-full flex justify-center">
-            {isMounted && <GitHubCalendarComponent username="stanimeros" />}
+            {showCalendar && (
+              <Suspense fallback={null}>
+                <GitHubCalendarComponent username="stanimeros" />
+              </Suspense>
+            )}
           </div>
           <div className="overflow-hidden w-full flex justify-center">
             <p className="text-muted-foreground text-sm">
