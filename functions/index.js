@@ -132,7 +132,11 @@ exports.geminiChat = onCall({ enforceAppCheck: true }, async (request) => {
       const result = await runTool(call);
       if (call.name === "createBooking" && !result.error) bookingConfirmed = true;
 
-      contents.push({ role: "model", parts: [{ functionCall: call }] });
+      // Push the model's actual returned content, not a hand-built
+      // { functionCall } part — the real part also carries a thoughtSignature
+      // (gemini-3.x requires it echoed back on the next turn) and any other
+      // fields the model attached, which a reconstructed part would drop.
+      contents.push(response.candidates[0].content);
       contents.push({
         role: "user",
         parts: [{ functionResponse: { name: call.name, response: result } }],
