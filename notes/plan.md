@@ -43,6 +43,17 @@ Status: blocked on manual setup by user (see below) before implementation can st
 - **Booking guardrail** (per user decision): agent collects the visitor's name/email/purpose, shows a summary, and only creates the Google Calendar event after the visitor explicitly confirms. The visitor's email is attached to the event as a guest, so fake/spam bookings are traceable.
 - **Calendar integration**: Google Cloud service account (not OAuth) — simplest for a personal Gmail calendar. The service account's email is shared on your Google Calendar with "Make changes to events" permission; the Cloud Function authenticates as that service account to create events.
 
+### Tool scoping — safety design (per user requirement: see calendar + create bookings, never modify/delete or leak data)
+Gemini function-calling only ever gets two tools, both narrow:
+- **`checkAvailability(startTime, endTime)`** — calls Google Calendar's **freebusy API**, not `events.list`. Freebusy returns only busy/free time ranges — no event titles, descriptions, or attendee data, yours or anyone else's. This is the only "read" the model has, and it structurally cannot leak calendar content because the API it calls never returns content.
+- **`createBooking(name, email, purpose, startTime, endTime)`** — calls `events.insert` only. No `updateEvent`, `deleteEvent`, or `listEvents` tool exists, so even though the service account has write permission on the calendar (required to create anything), the model has no path to modify or remove existing events.
+- Chat history isolation: each Firestore session doc is keyed by a per-browser random session id generated client-side; the chat function only ever reads/writes the session id passed in for that session, so one visitor's conversation can't surface another's.
+
+### Post-chat email notification (new requirement)
+Notify the site owner by email (reusing the existing `nodemailer` setup from `functions/index.js`'s `sendEmail`) when a session ends:
+- **Completed**: fires immediately when a booking is confirmed, or when the visitor signals the conversation is done — sends a transcript/summary email right away.
+- **Timeout**: a scheduled Cloud Function (Firebase Scheduled Function, e.g. every 5 min) sweeps Firestore for sessions with no new message in the last N minutes (e.g. 15) that aren't already marked closed, sends the summary email, and marks them closed — so a session is never emailed twice.
+
 ### Manual steps only the user can do (blocking item 3)
 1. In Google Cloud Console: enable the Calendar API, create a service account, download its JSON key.
 2. In Google Calendar settings: share your calendar with the service account's email, "Make changes to events" permission.

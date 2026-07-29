@@ -28,6 +28,7 @@ import {
 } from "@heroicons/react/24/outline"
 import GitHubCalendarComponent from "@/components/GitHubCalendar"
 import WhySection from "@/components/WhySection"
+import ProcessSection from "@/components/ProcessSection"
 import UnderlineHighlight from "@/components/UnderlineHighlight"
 import { trackEvent } from "@/lib/events"
 import { useScrollAnimation, useMobileCardAnimation } from "@/lib/hooks"
@@ -271,14 +272,14 @@ const HomePage = () => {
               times: [0, 0.5, 1]
             }}
           >
-            <img 
-              src="/images/logo-glass.png" 
-              alt="Stanimeros Logo" 
+            <img
+              src="/images/logo-glass.png"
+              alt="Stanimeros Logo"
               width="400"
               height="400"
-              loading="lazy"
+              loading="eager"
               className="h-[400%] w-auto object-contain"
-              fetchPriority="low"
+              fetchPriority="high"
             />
           </motion.div>
         </div>
@@ -324,13 +325,12 @@ const HomePage = () => {
               <div className="relative">
                 <div className="w-full h-84 rounded-lg overflow-hidden">
                   <img 
-                    src="/images/pantelis.webp" 
+                    src="/images/pantelis.webp"
                     alt={t('about.name')}
                     width="600"
                     height="600"
                     loading="lazy"
                     className="w-full h-full object-cover object-center"
-                    fetchPriority="high"
                   />
                 </div>
               </div>
@@ -412,6 +412,8 @@ const HomePage = () => {
           </div>
         </div>
       </motion.section>
+
+      <ProcessSection />
 
       {/* Packages Section */}
       <motion.section 
@@ -619,7 +621,7 @@ const HomePage = () => {
                   <ClockIcon className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-medium">{t('contact.features.consultation.title')}</h4>
+                  <h3 className="font-medium">{t('contact.features.consultation.title')}</h3>
                   <p className="text-sm text-muted-foreground">{t('contact.features.consultation.description')}</p>
                 </div>
               </div>
@@ -628,7 +630,7 @@ const HomePage = () => {
                   <CursorArrowRaysIcon className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-medium">{t('contact.features.solutions.title')}</h4>
+                  <h3 className="font-medium">{t('contact.features.solutions.title')}</h3>
                   <p className="text-sm text-muted-foreground">{t('contact.features.solutions.description')}</p>
                 </div>
               </div>
@@ -637,7 +639,7 @@ const HomePage = () => {
                   <SparklesIcon className="h-5 w-5 text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-medium">{t('contact.features.noObligations.title')}</h4>
+                  <h3 className="font-medium">{t('contact.features.noObligations.title')}</h3>
                   <p className="text-sm text-muted-foreground">{t('contact.features.noObligations.description')}</p>
                 </div>
               </div>
@@ -666,23 +668,23 @@ const HomePage = () => {
                 </div>
               </div>
               <div className="flex space-x-3">
-                <a href="https://linkedin.com/in/stanimeros" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="icon">
+                <a href="https://linkedin.com/in/stanimeros" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                  <Button variant="outline" size="icon" aria-hidden="true" tabIndex={-1}>
                     <LinkedinIcon className="h-5 w-5" />
                   </Button>
                 </a>
-                <a href="https://www.facebook.com/stanimeros.dev" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="icon">
+                <a href="https://www.facebook.com/stanimeros.dev" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                  <Button variant="outline" size="icon" aria-hidden="true" tabIndex={-1}>
                     <FacebookIcon className="h-5 w-5" />
                   </Button>
                 </a>
-                <a href="https://www.instagram.com/stanimeros_dev" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="icon">
+                <a href="https://www.instagram.com/stanimeros_dev" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <Button variant="outline" size="icon" aria-hidden="true" tabIndex={-1}>
                     <InstagramIcon className="h-5 w-5" />
                   </Button>
                 </a>
-                <a href="https://github.com/stanimeros" target="_blank" rel="noopener noreferrer">
-                  <Button variant="outline" size="icon">
+                <a href="https://github.com/stanimeros" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                  <Button variant="outline" size="icon" aria-hidden="true" tabIndex={-1}>
                     <GithubIcon className="h-5 w-5" />
                   </Button>
                 </a>

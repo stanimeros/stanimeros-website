@@ -1,0 +1,18 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import LocalizedServices from '@/page-content/Services.localized'
+---
+
+<BaseLayout
+  lang="en"
+  title="Services | AI Agents, Apps & Optimization | Pantelis Stanimeros"
+  description="AI agents & automation, mobile apps & dashboards, and smart optimization systems for scheduling, routing, and allocation. Based in Thessaloniki, Greece."
+  canonical="https://stanimeros.com/services"
+  hreflangAlternates={[
+    { hreflang: 'en', href: 'https://stanimeros.com/services' },
+    { hreflang: 'el', href: 'https://stanimeros.com/el/services' },
+    { hreflang: 'x-default', href: 'https://stanimeros.com/services' },
+  ]}
+>
+  <LocalizedServices lang="en" client:load />
+</BaseLayout>

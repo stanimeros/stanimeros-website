@@ -1,0 +1,18 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import LocalizedServices from '@/page-content/Services.localized'
+---
+
+<BaseLayout
+  lang="el"
+  title="Υπηρεσίες | AI Agents, Εφαρμογές & Βελτιστοποίηση | Pantelis Stanimeros"
+  description="AI agents & αυτοματισμοί, εφαρμογές για κινητά & dashboards, και έξυπνα συστήματα βελτιστοποίησης για προγραμματισμό, δρομολόγηση και κατανομή. Έδρα η Θεσσαλονίκη."
+  canonical="https://stanimeros.com/el/services"
+  hreflangAlternates={[
+    { hreflang: 'en', href: 'https://stanimeros.com/services' },
+    { hreflang: 'el', href: 'https://stanimeros.com/el/services' },
+    { hreflang: 'x-default', href: 'https://stanimeros.com/services' },
+  ]}
+>
+  <LocalizedServices lang="el" client:load />
+</BaseLayout>

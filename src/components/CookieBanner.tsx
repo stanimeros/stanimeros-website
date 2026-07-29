@@ -50,15 +50,15 @@ export default function CookieBanner() {
         </div>
         <p className="text-base text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
           {t("cookieBanner.message")}{" "}
-          <a href="/privacy-policy" className="text-primary hover:underline font-medium">
+          <a href="/privacy-policy" className="text-primary hover:underline font-medium" aria-label={t("cookieBanner.learnMoreLabel")}>
             {t("cookieBanner.learnMore")}
           </a>
         </p>
         <div className="flex flex-col-reverse sm:flex-row gap-3 sm:gap-4">
-          <Button variant="outline" size="lg" className="flex-1 h-14 sm:h-12 text-base" onClick={decline}>
+          <Button variant="outline" size="lg" className="w-full sm:flex-1 h-14 sm:h-12 text-base" onClick={decline}>
             {t("cookieBanner.decline")}
           </Button>
-          <Button size="lg" className="flex-1 h-14 sm:h-12 text-base" onClick={accept}>
+          <Button size="lg" className="w-full sm:flex-1 h-14 sm:h-12 text-base" onClick={accept}>
             {t("cookieBanner.accept")}
           </Button>
         </div>

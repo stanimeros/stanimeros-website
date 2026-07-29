@@ -7,7 +7,8 @@
     "about": "About",
     "services": "Services",
     "portfolio": "Portfolio",
-    "contact": "Contact"
+    "contact": "Contact",
+    "menu": "Menu"
   },
   "hero": {
     "title": "Pantelis Stanimeros",
@@ -23,6 +24,31 @@
     "description1": "Based in Thessaloniki, I hold a Bachelor's in Computer Science and an MSc in AI & Data Analytics. I build AI agents, automations, mobile apps, and custom dashboards, tools that save time, cut costs, and help businesses make better decisions every day.",
     "description2": "I also tackle harder business problems: finding the best schedule when there are hundreds of constraints, training AI on your own data, or building a system that picks the optimal route, allocation, or plan automatically. If it's a problem that costs your business time or money, there's likely a smart solution for it.",
     "githubDescription": "Committed to consistent, high-quality updates."
+  },
+  "aboutPage": {
+    "title": "About Pantelis Stanimeros",
+    "intro": "I'm Pantelis Stanimeros, a freelance developer based in Thessaloniki, Greece.",
+    "background": {
+      "title": "Background",
+      "paragraph": "I hold a Bachelor's degree in Computer Science and an MSc in AI & Data Analytics. That combination shapes how I work: I build software with solid engineering foundations, and I bring machine learning and data-driven thinking into it wherever it adds real value, not just as a buzzword."
+    },
+    "problems": {
+      "title": "The kind of problems I like solving",
+      "paragraph": "I build AI agents, automations, mobile apps, and custom dashboards, the kind of tools that save time, cut costs, and help a business make better decisions every day. I'm especially drawn to the harder problems behind the scenes: finding the best schedule when there are dozens of constraints to satisfy, training AI on a business's own data instead of a generic model, or building a system that automatically works out the optimal route, allocation, or plan. If a problem feels like a puzzle that costs time or money every time it's solved by hand, there's usually a smarter way to handle it."
+    },
+    "whyWorkWithMe": {
+      "title": "Why businesses work with me",
+      "paragraph": "Many of the businesses I work with come to me because their team is stuck doing the same repetitive tasks every day, making decisions on gut feeling instead of data, wrestling with scheduling and planning, or lacking a clear real-time picture of what's happening. I work end-to-end, from the first strategy call through building, launching, and supporting the result, so you get a working solution rather than a stack of undocumented code handed off and forgotten."
+    },
+    "cta": {
+      "title": "Have a problem in mind?",
+      "description": "Let's talk about it. The first strategy call is free, with no obligations.",
+      "button": "Get in Touch"
+    },
+    "links": {
+      "services": "See my services",
+      "contact": "Book a free call"
+    }
   },
   "packages": {
     "title": "Packages",
@@ -135,6 +161,38 @@
     "aiAgent": {
       "title": "AI Trained on Your Data",
       "description": "Train AI models on your own business data, for predictions, classification, recommendations, or automating decisions specific to your industry."
+    }
+  },
+  "servicesPage": {
+    "title": "Services",
+    "subtitle": "Practical technology built around your business, not the other way around.",
+    "intro": "Below is a fuller look at what I build. Every service can stand on its own or combine with the others into a single system tailored to your business.",
+    "items": {
+      "automation": {
+        "title": "AI Agents & Automation",
+        "description": "I build AI agents that handle work automatically, 24 hours a day. That can mean a customer support agent that answers questions and processes requests without a human in the loop, an internal workflow bot that moves data between the tools you already use, or a system with custom triggers and actions that reacts the moment something happens in your business. Every agent comes with analytics and performance monitoring, so you always know what it's doing and how well it's doing it."
+      },
+      "apps": {
+        "title": "Mobile Apps & Dashboards",
+        "description": "I design and build custom web apps, iOS apps, and Android apps around the way your business actually works, plus real-time dashboards that give you full visibility into the metrics that matter. This includes custom functionality and APIs, a properly set up database and cloud hosting, and publishing to the App Store and Google Play, so your app reaches customers or your team wherever they are."
+      },
+      "optimization": {
+        "title": "Smart Problem Solving",
+        "description": "Some problems are too complex to solve by hand: employee scheduling with dozens of constraints, delivery and logistics routing, matching resources to tasks, or deciding the best mix of products or services to offer. I build systems, and custom algorithms tailored to your exact constraints, that find the optimal schedule, route, or allocation automatically, saving hours of manual planning every week."
+      },
+      "aiData": {
+        "title": "AI Trained on Your Data",
+        "description": "I train AI models on your own business data, whether that's documents and FAQs for a customer-facing agent, or historical records like past orders, schedules, and outcomes for predictions, classification, and recommendations. You don't need a huge dataset to start; even a few hundred records is often enough to build something useful and specific to your industry."
+      }
+    },
+    "cta": {
+      "title": "Not sure which service fits?",
+      "description": "Every project starts with a free strategy call. Tell me about the problem, and I'll suggest the right solution, no strings attached.",
+      "button": "Book a Free Strategy Call"
+    },
+    "links": {
+      "about": "Learn more about me",
+      "contact": "Get in touch"
     }
   },
   "portfolio": {
@@ -471,6 +529,7 @@
     "title": "We use cookies",
     "message": "We use cookies for analytics to improve your experience.",
     "learnMore": "Learn more",
+    "learnMoreLabel": "Learn more about our privacy policy",
     "accept": "Accept",
     "decline": "Decline"
   }

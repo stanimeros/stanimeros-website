@@ -82,7 +82,7 @@ const Header = () => {
             <LanguageSwitcher variant="compact" />
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
+                <Button variant="ghost" size="icon" aria-label={t('nav.menu')}>
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>

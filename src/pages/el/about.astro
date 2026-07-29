@@ -1,0 +1,18 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import LocalizedAbout from '@/page-content/About.localized'
+---
+
+<BaseLayout
+  lang="el"
+  title="Σχετικά με εμένα | Pantelis Stanimeros"
+  description="Freelance developer στη Θεσσαλονίκη, με πτυχίο Επιστήμης Υπολογιστών και MSc στην Τεχνητή Νοημοσύνη & Ανάλυση Δεδομένων. AI agents, εφαρμογές και συστήματα βελτιστοποίησης."
+  canonical="https://stanimeros.com/el/about"
+  hreflangAlternates={[
+    { hreflang: 'en', href: 'https://stanimeros.com/about' },
+    { hreflang: 'el', href: 'https://stanimeros.com/el/about' },
+    { hreflang: 'x-default', href: 'https://stanimeros.com/about' },
+  ]}
+>
+  <LocalizedAbout lang="el" client:load />
+</BaseLayout>

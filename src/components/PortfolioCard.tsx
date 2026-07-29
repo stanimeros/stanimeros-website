@@ -67,6 +67,15 @@ export function PortfolioCard({
         {bgImage && (
           <div className="absolute inset-0 bg-black/40" aria-hidden />
         )}
+        {url && (
+          <Badge
+            variant="outline"
+            className="absolute top-3 right-3 z-10 gap-1.5 bg-black/40 backdrop-blur-sm border-white/30 text-white"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+            Live
+          </Badge>
+        )}
         <div
           className={cn(
             "relative z-10 w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold shrink-0",
