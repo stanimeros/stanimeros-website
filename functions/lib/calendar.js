@@ -1,5 +1,5 @@
 const { google } = require("googleapis");
-const { TIME_ZONE } = require("./gemini");
+const { TIME_ZONE, BOOKING_START_HOUR, BOOKING_END_HOUR, BOOKING_DURATION_MINUTES } = require("./gemini");
 
 const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || "primary";
 
@@ -25,12 +25,10 @@ function ensureOffset(dateTimeString) {
 }
 
 // Business hours, enforced server-side rather than trusted to the model —
-// this is the hard guarantee, the system instruction is just what steers the
-// model toward proposing valid slots in the first place.
+// this is the hard guarantee, the system instruction (see lib/gemini.js,
+// which owns these constants) is just what steers the model toward
+// proposing valid slots in the first place.
 const BOOKING_DAYS = new Set(["Mon", "Tue", "Wed", "Thu", "Fri"]);
-const BOOKING_START_HOUR = 10;
-const BOOKING_END_HOUR = 20;
-const BOOKING_DURATION_MINUTES = 30;
 
 function localPartsInZone(date, timeZone) {
   const parts = new Intl.DateTimeFormat("en-US", {
@@ -92,6 +90,7 @@ function getCalendarClient() {
 // Only ever returns busy time ranges — the freebusy API has no concept of
 // event titles/descriptions/attendees, so this cannot leak calendar content.
 async function checkAvailability(startTime, endTime) {
+  assertBookableWindow(startTime, endTime);
   const calendar = getCalendarClient();
   const res = await calendar.freebusy.query({
     requestBody: {
@@ -113,6 +112,7 @@ async function checkAvailability(startTime, endTime) {
 // event description instead of as a calendar invite; the visitor is notified via
 // our own confirmation email (see functions/index.js), not a Calendar invite.
 async function createBooking({ name, email, purpose, startTime, endTime }) {
+  assertBookableWindow(startTime, endTime);
   const calendar = getCalendarClient();
   const res = await calendar.events.insert({
     calendarId: CALENDAR_ID,
@@ -126,4 +126,4 @@ async function createBooking({ name, email, purpose, startTime, endTime }) {
   return { eventId: res.data.id, htmlLink: res.data.htmlLink };
 }
 
-module.exports = { checkAvailability, createBooking, ensureOffset };
+module.exports = { checkAvailability, createBooking, ensureOffset, assertBookableWindow };

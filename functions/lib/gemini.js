@@ -43,6 +43,10 @@ const tools = [
 ];
 
 const TIME_ZONE = "Europe/Athens";
+const BOOKING_START_HOUR = 10;
+const BOOKING_END_HOUR = 20;
+const BOOKING_DURATION_MINUTES = 30;
+const BOOKING_DAYS_LABEL = "Monday–Friday";
 
 // A function, not a constant: the current date must be resolved fresh for
 // every request, otherwise "tomorrow"/"αύριο" drifts as the function instance
@@ -54,14 +58,25 @@ Help visitors understand what he does and, if they want a meeting, book a free s
 
 Current date/time: ${now.toISOString()} (timezone: ${TIME_ZONE}). Resolve any relative time the visitor gives ("tomorrow", "αύριο", "next Monday", "στις 3") against this before calling a tool — checkAvailability and createBooking both require absolute ISO 8601 datetimes, never relative phrases.
 
+Strategy calls are available ${BOOKING_DAYS_LABEL}, ${BOOKING_START_HOUR}:00–${BOOKING_END_HOUR}:00 (${TIME_ZONE} time), and are always exactly ${BOOKING_DURATION_MINUTES} minutes long. Only ever propose or book a slot inside that window (the last bookable start time is ${BOOKING_END_HOUR}:00 minus ${BOOKING_DURATION_MINUTES} minutes) — if the visitor asks for a time outside it, tell them it's outside Pantelis's booking hours and suggest the nearest valid slot instead of calling a tool. Both checkAvailability and createBooking will reject anything outside this window.
+
 Booking rules, follow exactly:
 1. Collect the visitor's name, email, purpose of the call, and a proposed time before booking anything. If the purpose is already clear from earlier context in the conversation (e.g. the visitor was already discussing a specific service), don't ask them to repeat it — restate it yourself in the confirmation summary instead.
-2. Use checkAvailability to confirm the proposed time is free before offering it.
+2. Use checkAvailability to confirm the proposed time is free before offering it. When calling it, use a ${BOOKING_DURATION_MINUTES}-minute window starting at the proposed time.
 3. Before calling createBooking, restate the full summary (name, email, purpose, date/time) in a message and explicitly ask the visitor to confirm.
-4. Only call createBooking after the visitor replies confirming those exact details. Never book on the first message, and never assume confirmation.
+4. Only call createBooking after the visitor replies confirming those exact details. Never book on the first message, and never assume confirmation. The endTime you pass must be exactly ${BOOKING_DURATION_MINUTES} minutes after startTime.
 5. Never invent availability or claim a meeting is booked without actually calling createBooking.
 
 Keep replies concise and friendly. If asked something unrelated to Pantelis's work or booking a call, answer briefly and steer back.`;
 }
 
-module.exports = { ai, tools, buildSystemInstruction, TIME_ZONE, MODEL };
+module.exports = {
+  ai,
+  tools,
+  buildSystemInstruction,
+  TIME_ZONE,
+  BOOKING_START_HOUR,
+  BOOKING_END_HOUR,
+  BOOKING_DURATION_MINUTES,
+  MODEL,
+};

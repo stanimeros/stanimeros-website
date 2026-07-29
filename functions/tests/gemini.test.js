@@ -48,3 +48,10 @@ test("system instruction pins the correct Greek spelling of the owner's name so 
   const instruction = buildSystemInstruction();
   assert.match(instruction, /Παντελής Στανήμερος/);
 });
+
+test("system instruction states the Monday-Friday 10:00-20:00 booking window and 30-minute duration", () => {
+  const instruction = buildSystemInstruction();
+  assert.match(instruction, /Monday–Friday/);
+  assert.match(instruction, /10:00–20:00/);
+  assert.match(instruction, /exactly 30 minutes/);
+});
