@@ -415,7 +415,7 @@ const DataDeletion = ({ appSlug }: DataDeletionProps) => {
                 <Button
                   type="submit"
                   size="lg"
-                  className="w-full bg-red-600 hover:bg-red-700 text-white"
+                  className="w-full h-14 sm:h-12 bg-red-600 hover:bg-red-700 text-white"
                   disabled={isLoading || !confirmChecked || !verifyChecked || !formData.appName.trim()}
                 >
                   {isLoading ? (

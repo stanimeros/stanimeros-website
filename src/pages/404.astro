@@ -1,14 +1,23 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import LocalizedHomePage from '@/page-content/HomePage.localized'
 ---
 
 <BaseLayout
   lang="en"
-  title="AI Automation & App Development | Pantelis Stanimeros"
-  description="Freelance software engineer in Thessaloniki, Greece. I build AI agents, mobile apps, and custom automations for businesses. Free strategy call."
+  title="Page Not Found | Pantelis Stanimeros"
+  description="The page you're looking for doesn't exist."
   canonical="https://stanimeros.com/"
   noindex
 >
-  <LocalizedHomePage lang="en" client:load />
+  <main class="container mx-auto px-4 py-32 text-center">
+    <h1 class="text-6xl font-bold mb-4">404</h1>
+    <p class="text-xl text-muted-foreground mb-2">Page not found.</p>
+    <p class="text-base text-muted-foreground mb-8">Η σελίδα δεν βρέθηκε.</p>
+    <a
+      href="/"
+      class="inline-flex items-center justify-center rounded-md h-12 px-6 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+    >
+      Back to home
+    </a>
+  </main>
 </BaseLayout>

@@ -247,10 +247,10 @@ const HomePage = () => {
             {t('hero.subtitleAfter')}
           </p>
           <div className="flex flex-row gap-4 justify-center relative z-20">
-            <Button size="lg" onClick={() => scrollToSection('packages')}>
+            <Button size="lg" className="h-14 sm:h-12" onClick={() => scrollToSection('packages')}>
               {t('hero.viewPackages')}
             </Button>
-            <Button size="lg" variant="outline" onClick={() => scrollToSection('contact')}>
+            <Button size="lg" variant="outline" className="h-14 sm:h-12" onClick={() => scrollToSection('contact')}>
               {t('hero.getInTouch')}
             </Button>
           </div>
@@ -487,7 +487,7 @@ const HomePage = () => {
                     <Button
                       variant="green"
                       size="lg"
-                      className="w-full px-8 text-base"
+                      className="w-full h-14 sm:h-12 px-8 text-base"
                       onClick={() => goToContact('package-button', t(pkg.title))}
                     >
                       {pkg.ctaIcon}

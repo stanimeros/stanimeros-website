@@ -134,7 +134,7 @@ export default function Contact() {
                 variant="green"
                 size="lg"
                 disabled={isSubmitting}
-                className="w-full text-base"
+                className="w-full h-14 sm:h-12 text-base"
               >
                 {isSubmitting ? (
                   <>
