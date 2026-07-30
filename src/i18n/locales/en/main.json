@@ -19,10 +19,6 @@
       "development": "Development"
     }
   },
-  "languageBanner": {
-    "toGreek": "🇬🇧 View this page in Greek? · 🇬🇷 Δες τη σελίδα στα Ελληνικά;",
-    "toEnglish": "🇬🇧 View this page in English? · 🇬🇷 Δες τη σελίδα στα Αγγλικά;"
-  },
   "nav": {
     "home": "Home",
     "about": "About",

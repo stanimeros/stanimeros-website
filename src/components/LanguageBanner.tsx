@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react"
-import { useTranslation } from "react-i18next"
 import { Button } from "@/components/ui/button"
 import { XMarkIcon } from "@heroicons/react/24/outline"
 
 const DISMISS_KEY = "langBannerDismissed"
 const PREFERRED_KEY = "preferredLang"
 
+// Bilingual by design (not run through the i18n translation pipeline): the
+// visitor's browser language and the page's language disagree here, so we
+// can't assume which one they read.
+const MESSAGES: Record<"en" | "el", string> = {
+  en: "View this page in English? · Δες τη σελίδα στα Αγγλικά;",
+  el: "View this page in Greek? · Δες τη σελίδα στα Ελληνικά;",
+}
+
 interface LanguageBannerProps {
   lang: "en" | "el"
 }
 
 export default function LanguageBanner({ lang }: LanguageBannerProps) {
-  const { t } = useTranslation()
   const [target, setTarget] = useState<"en" | "el" | null>(null)
 
   useEffect(() => {
@@ -50,7 +56,7 @@ export default function LanguageBanner({ lang }: LanguageBannerProps) {
     setTarget(null)
   }
 
-  const message = target === "el" ? t("languageBanner.toGreek") : t("languageBanner.toEnglish")
+  const message = MESSAGES[target]
   const switchLabel = target === "el" ? "🇬🇷 Ελληνικά" : "🇬🇧 English"
 
   return (

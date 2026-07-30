@@ -11,12 +11,25 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 >
   <main class="container mx-auto px-4 py-32 text-center">
     <h1 class="text-6xl font-bold mb-4">404</h1>
-    <p class="text-xl text-muted-foreground mb-8">Page not found.</p>
+    <p id="notfound-text" class="text-xl text-muted-foreground mb-8">Page not found.</p>
     <a
+      id="notfound-link"
       href="/"
       class="inline-flex items-center justify-center rounded-md h-12 px-6 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
     >
       Back to home
     </a>
   </main>
+  <script>
+    if (window.location.pathname.startsWith('/el')) {
+      document.documentElement.lang = 'el'
+      const text = document.getElementById('notfound-text')
+      const link = document.getElementById('notfound-link') as HTMLAnchorElement | null
+      if (text) text.textContent = 'Η σελίδα δεν βρέθηκε.'
+      if (link) {
+        link.href = '/el'
+        link.textContent = 'Πίσω στην αρχική'
+      }
+    }
+  </script>
 </BaseLayout>
