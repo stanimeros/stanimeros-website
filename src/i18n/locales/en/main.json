@@ -2,6 +2,28 @@
   "beginCheckout": "",
   "pageView": "",
   "package": "",
+  "common": {
+    "location": "Thessaloniki, Greece",
+    "badges": {
+      "webApp": "Web App",
+      "mobileApp": "Mobile App",
+      "website": "Website",
+      "ecommerce": "E-commerce",
+      "ai": "AI",
+      "maps": "Maps",
+      "cloud": "Cloud",
+      "crossPlatform": "Cross-platform",
+      "payments": "Payments",
+      "education": "Education",
+      "automation": "Automation",
+      "development": "Development"
+    }
+  },
+  "notFound": {
+    "title": "Page not found.",
+    "message": "The page you're looking for doesn't exist.",
+    "backHome": "Back to home"
+  },
   "nav": {
     "home": "Home",
     "about": "About",
@@ -217,6 +239,9 @@
       "contact": "Get in touch",
       "portfolio": "See the full portfolio"
     }
+  },
+  "portfolioCard": {
+    "live": "Live"
   },
   "portfolio": {
     "title": "Portfolio",

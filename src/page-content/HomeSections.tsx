@@ -108,16 +108,16 @@ const HomeSections = () => {
                 {t('about.description2')}
               </p>
               <div className="flex flex-wrap gap-2 mb-8">
-                <Badge variant="secondary">Web App</Badge>
-                <Badge variant="secondary">Mobile App</Badge>
-                <Badge variant="secondary">Website</Badge>
-                <Badge variant="secondary">E-commerce</Badge>
-                <Badge variant="secondary">AI</Badge>
-                <Badge variant="secondary">Maps</Badge>
-                <Badge variant="secondary">Cloud</Badge>
-                <Badge variant="secondary">Cross-platform</Badge>
-                <Badge variant="secondary">Payments</Badge>
-                <Badge variant="secondary">Education</Badge>
+                <Badge variant="secondary">{t('common.badges.webApp')}</Badge>
+                <Badge variant="secondary">{t('common.badges.mobileApp')}</Badge>
+                <Badge variant="secondary">{t('common.badges.website')}</Badge>
+                <Badge variant="secondary">{t('common.badges.ecommerce')}</Badge>
+                <Badge variant="secondary">{t('common.badges.ai')}</Badge>
+                <Badge variant="secondary">{t('common.badges.maps')}</Badge>
+                <Badge variant="secondary">{t('common.badges.cloud')}</Badge>
+                <Badge variant="secondary">{t('common.badges.crossPlatform')}</Badge>
+                <Badge variant="secondary">{t('common.badges.payments')}</Badge>
+                <Badge variant="secondary">{t('common.badges.education')}</Badge>
               </div>
             </div>
             <div className="space-y-8">
@@ -241,7 +241,7 @@ const HomeSections = () => {
               {
                 title: 'packages.onlinePresence.title',
                 description: 'packages.onlinePresence.description',
-                badge: 'Automation',
+                badge: 'common.badges.automation',
                 features: 'packages.onlinePresence.features',
                 className: 'border-border/60',
                 ctaIcon: <BoltIcon className="size-5 mr-2 stroke-[1.5]" />,
@@ -249,7 +249,7 @@ const HomeSections = () => {
               {
                 title: 'packages.eShop.title',
                 description: 'packages.eShop.description',
-                badge: 'Development',
+                badge: 'common.badges.development',
                 features: 'packages.eShop.features',
                 className: 'border-primary/30 ring-1 ring-primary/30 bg-primary/5',
                 ctaIcon: <BuildingStorefrontIcon className="size-5 mr-2 stroke-[1.5]" />,
@@ -257,7 +257,7 @@ const HomeSections = () => {
               {
                 title: 'packages.customApp.title',
                 description: 'packages.customApp.description',
-                badge: 'AI',
+                badge: 'common.badges.ai',
                 features: 'packages.customApp.features',
                 className: 'border-border/60',
                 ctaIcon: <SparklesIcon className="size-5 mr-2 stroke-[1.5]" />,
@@ -273,7 +273,7 @@ const HomeSections = () => {
                   <CardHeader className="flex-none">
                     <div className="flex items-center justify-between">
                       <CardTitle>{t(pkg.title)}</CardTitle>
-                      <Badge variant="secondary" className="rounded-full">{pkg.badge}</Badge>
+                      <Badge variant="secondary" className="rounded-full">{t(pkg.badge)}</Badge>
                     </div>
                     <CardDescription>{t(pkg.description)}</CardDescription>
                   </CardHeader>
@@ -468,7 +468,7 @@ const HomeSections = () => {
                 </div>
                 <div className="flex items-center space-x-2">
                   <MapPinIcon className="h-4 w-4 text-primary" />
-                  <span>Thessaloniki, Greece</span>
+                  <span>{t('common.location')}</span>
                 </div>
               </div>
               <div className="flex space-x-3">

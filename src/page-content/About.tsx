@@ -27,8 +27,8 @@ const sections = [
 ] as const
 
 const skillBadges = [
-  "Web App", "Mobile App", "Website", "E-commerce", "AI",
-  "Maps", "Cloud", "Cross-platform", "Payments", "Education",
+  "webApp", "mobileApp", "website", "ecommerce", "ai",
+  "maps", "cloud", "crossPlatform", "payments", "education",
 ]
 
 const exampleKeys = ['fireMessage', 'hedeos', 'transHellas', 'atproPartner']
@@ -98,7 +98,7 @@ export default function About({ lang }: AboutProps) {
               <p className="text-muted-foreground mb-6 leading-relaxed">{t("about.description2")}</p>
               <div className="flex flex-wrap gap-2">
                 {skillBadges.map((badge) => (
-                  <Badge key={badge} variant="secondary">{badge}</Badge>
+                  <Badge key={badge} variant="secondary">{t(`common.badges.${badge}`)}</Badge>
                 ))}
               </div>
             </div>

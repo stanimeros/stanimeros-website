@@ -35,7 +35,7 @@ const packages = [
   {
     title: 'packages.onlinePresence.title',
     description: 'packages.onlinePresence.description',
-    badge: 'Automation',
+    badge: 'common.badges.automation',
     features: 'packages.onlinePresence.features',
     className: 'border-border/60',
     ctaIcon: <BoltIcon className="size-5 mr-2 stroke-[1.5]" />,
@@ -43,7 +43,7 @@ const packages = [
   {
     title: 'packages.eShop.title',
     description: 'packages.eShop.description',
-    badge: 'Development',
+    badge: 'common.badges.development',
     features: 'packages.eShop.features',
     className: 'border-primary/30 ring-1 ring-primary/30 bg-primary/5',
     ctaIcon: <BuildingStorefrontIcon className="size-5 mr-2 stroke-[1.5]" />,
@@ -51,7 +51,7 @@ const packages = [
   {
     title: 'packages.customApp.title',
     description: 'packages.customApp.description',
-    badge: 'AI',
+    badge: 'common.badges.ai',
     features: 'packages.customApp.features',
     className: 'border-border/60',
     ctaIcon: <SparklesIcon className="size-5 mr-2 stroke-[1.5]" />,
@@ -157,7 +157,7 @@ export default function Services({ lang }: ServicesProps) {
                 <CardHeader className="flex-none">
                   <div className="flex items-center justify-between">
                     <CardTitle>{t(pkg.title)}</CardTitle>
-                    <Badge variant="secondary" className="rounded-full">{pkg.badge}</Badge>
+                    <Badge variant="secondary" className="rounded-full">{t(pkg.badge)}</Badge>
                   </div>
                   <CardDescription>{t(pkg.description)}</CardDescription>
                 </CardHeader>

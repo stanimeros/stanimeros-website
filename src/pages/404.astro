@@ -14,10 +14,17 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
     <p class="text-xl text-muted-foreground mb-2">Page not found.</p>
     <p class="text-base text-muted-foreground mb-8">Η σελίδα δεν βρέθηκε.</p>
     <a
+      id="back-home"
       href="/"
       class="inline-flex items-center justify-center rounded-md h-12 px-6 bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
     >
-      Back to home
+      Back to home / Πίσω στην αρχική
     </a>
   </main>
+  <script>
+    const link = document.getElementById('back-home') as HTMLAnchorElement | null
+    if (link && window.location.pathname.startsWith('/el')) {
+      link.href = '/el'
+    }
+  </script>
 </BaseLayout>

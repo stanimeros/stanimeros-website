@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
@@ -39,6 +40,7 @@ export function PortfolioCard({
   description,
   className,
 }: PortfolioCardProps) {
+  const { t } = useTranslation()
   const fromWords = title
     .split(/\s+/)
     .map((word) => word[0])
@@ -73,7 +75,7 @@ export function PortfolioCard({
             className="absolute top-3 right-3 z-10 gap-1.5 bg-black/40 backdrop-blur-sm border-white/30 text-white"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-            Live
+            {t("portfolioCard.live")}
           </Badge>
         )}
         <div
