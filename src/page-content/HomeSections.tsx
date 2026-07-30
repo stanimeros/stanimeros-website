@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from "react"
 import { useTranslation } from "react-i18next"
-import { motion, useScroll, useTransform, useSpring, type HTMLMotionProps } from "framer-motion"
+import { motion, type HTMLMotionProps } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { PortfolioCard } from "@/components/PortfolioCard"
@@ -29,23 +29,18 @@ import {
 const GitHubCalendarComponent = lazy(() => import("@/components/GitHubCalendar"))
 import WhySection from "@/components/WhySection"
 import ProcessSection from "@/components/ProcessSection"
-import UnderlineHighlight from "@/components/UnderlineHighlight"
 import { trackEvent } from "@/lib/events"
 import { useScrollAnimation, useMobileCardAnimation } from "@/lib/hooks"
 import { portfolioItems } from "@/lib/portfolio-data"
 import { FacebookIcon, InstagramIcon, LinkedinIcon, GithubIcon, BriefcaseIcon } from "lucide-react"
 
-const HomePage = () => {
-  const { t, i18n } = useTranslation()
+const HomeSections = () => {
+  const { t } = useTranslation()
   // react-github-calendar breaks Node SSR during Astro's static build, so it's
   // only ever rendered client-side, and only once the About section scrolls
   // into view (it pulls in a separate JS chunk + external API fetch).
   const [showCalendar, setShowCalendar] = useState(false)
-  const { scrollY } = useScroll()
-  const logoY = useTransform(scrollY, [0, 500], [0, 100])
-  const logoOpacity = useTransform(scrollY, [0, 500], [0.1, 0])
-  const smoothLogoY = useSpring(logoY, { stiffness: 100, damping: 30 })
-  
+
   // Refs for scroll animations
   const aboutRef = useRef<HTMLElement>(null)
   const servicesRef = useRef<HTMLElement>(null)
@@ -87,82 +82,8 @@ const HomePage = () => {
     window.location.href = `${contactPath}?${params.toString()}`
   }
 
-  useEffect(() => {
-    trackEvent('pageView', {
-      page: 'home'
-    });
-  }, []);
-
-  useEffect(() => {
-    if (window.location.hash) {
-      const element = document.querySelector(window.location.hash)
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-      }
-    }
-  }, [])
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
-
-
   return (
     <>
-      {/* Hero Section */}
-      <section id="home" className="min-h-svh flex items-center justify-center relative overflow-hidden">
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent relative z-20">
-            {t('hero.title')}
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto relative z-20">
-            {t('hero.subtitleBefore')}
-            <UnderlineHighlight key={i18n.language}>{t('hero.subtitleHighlight')}</UnderlineHighlight>
-            {t('hero.subtitleAfter')}
-          </p>
-          <div className="flex flex-row gap-4 justify-center relative z-20">
-            <Button size="lg" onClick={() => scrollToSection('packages')}>
-              <CubeTransparentIcon className="size-5 mr-2 stroke-[1.5]" />
-              {t('hero.viewPackages')}
-            </Button>
-            <Button size="lg" variant="outline" onClick={() => scrollToSection('contact')}>
-              <PhoneIcon className="size-5 mr-2 stroke-[1.5]" />
-              {t('hero.getInTouch')}
-            </Button>
-          </div>
-          {/* Logo positioned behind everything */}
-          <motion.div 
-            className="absolute inset-0 flex items-center justify-center z-0 pointer-events-none"
-            style={{ 
-              y: smoothLogoY,
-              opacity: logoOpacity
-            }}
-            animate={{ 
-              scale: [1, 1.05, 1],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 4,
-              ease: "easeInOut",
-              times: [0, 0.5, 1]
-            }}
-          >
-            <img
-              src="/images/logo-glass.webp"
-              alt="Stanimeros Logo"
-              width="400"
-              height="400"
-              loading="eager"
-              className="h-[400%] w-auto object-contain"
-              fetchPriority="high"
-            />
-          </motion.div>
-        </div>
-      </section>
-
       {/* About Section */}
       <motion.section 
         ref={aboutRef}
@@ -580,4 +501,4 @@ const HomePage = () => {
   )
 }
 
-export default HomePage
+export default HomeSections

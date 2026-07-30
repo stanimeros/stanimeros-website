@@ -17,5 +17,21 @@ export default defineConfig({
         '@': path.resolve(__dirname, './src'),
       },
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('@heroicons/react') || id.includes('lucide-react')) {
+              // Hero hydrates eagerly (client:load) and only needs these two
+              // icons — keep them out of the shared chunk so Hero's critical
+              // path doesn't wait on icons used only by deferred islands/pages.
+              const heroIcons = ['CubeTransparentIcon', 'PhoneIcon']
+              if (heroIcons.some((name) => id.includes(name))) return
+              return 'icons'
+            }
+          },
+        },
+      },
+    },
   },
 })

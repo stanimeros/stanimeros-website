@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import LocalizedHomePage from '@/page-content/HomePage.localized'
+import LocalizedHero from '@/page-content/Hero.localized'
+import LocalizedHomeSections from '@/page-content/HomeSections.localized'
 import { professionalServiceJsonLd, homeFaqJsonLd } from '@/lib/jsonld'
 ---
 
@@ -10,6 +11,7 @@ import { professionalServiceJsonLd, homeFaqJsonLd } from '@/lib/jsonld'
   description="Ανάπτυξη AI agents, mobile εφαρμογών και αυτοματισμών για επιχειρήσεις στη Θεσσαλονίκη και σε όλη την Ελλάδα. Δωρεάν αρχική συνάντηση."
   keywords="κατασκευή εφαρμογών Θεσσαλονίκη, AI αυτοματισμοί επιχειρήσεων, ανάπτυξη mobile εφαρμογών Ελλάδα, κατασκευή eshop, AI agents, freelance developer Ελλάδα"
   canonical="https://stanimeros.com/el"
+  preloadImage="/images/logo-glass.webp"
   hreflangAlternates={[
     { hreflang: 'en', href: 'https://stanimeros.com/' },
     { hreflang: 'el', href: 'https://stanimeros.com/el' },
@@ -17,5 +19,6 @@ import { professionalServiceJsonLd, homeFaqJsonLd } from '@/lib/jsonld'
   ]}
   jsonLd={[professionalServiceJsonLd, homeFaqJsonLd]}
 >
-  <LocalizedHomePage lang="el" client:load />
+  <LocalizedHero lang="el" client:load />
+  <LocalizedHomeSections lang="el" client:visible />
 </BaseLayout>

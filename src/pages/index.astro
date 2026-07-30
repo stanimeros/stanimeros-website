@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import LocalizedHomePage from '@/page-content/HomePage.localized'
+import LocalizedHero from '@/page-content/Hero.localized'
+import LocalizedHomeSections from '@/page-content/HomeSections.localized'
 import { professionalServiceJsonLd, homeFaqJsonLd } from '@/lib/jsonld'
 ---
 
@@ -10,6 +11,7 @@ import { professionalServiceJsonLd, homeFaqJsonLd } from '@/lib/jsonld'
   description="Freelance software engineer in Thessaloniki, Greece. I build AI agents, mobile apps, and custom automations for businesses. Free strategy call."
   keywords="AI automation Greece, freelance software engineer Thessaloniki, mobile app development Greece, custom web app developer, AI agents for business, Pantelis Stanimeros"
   canonical="https://stanimeros.com/"
+  preloadImage="/images/logo-glass.webp"
   hreflangAlternates={[
     { hreflang: 'en', href: 'https://stanimeros.com/' },
     { hreflang: 'el', href: 'https://stanimeros.com/el' },
@@ -17,5 +19,6 @@ import { professionalServiceJsonLd, homeFaqJsonLd } from '@/lib/jsonld'
   ]}
   jsonLd={[professionalServiceJsonLd, homeFaqJsonLd]}
 >
-  <LocalizedHomePage lang="en" client:load />
+  <LocalizedHero lang="en" client:load />
+  <LocalizedHomeSections lang="en" client:visible />
 </BaseLayout>

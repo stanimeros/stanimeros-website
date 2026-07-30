@@ -6,7 +6,6 @@ import {
   HomeIcon,
   UserIcon,
   Cog6ToothIcon as Settings,
-  BriefcaseIcon,
   EnvelopeIcon as Mail,
 } from "@heroicons/react/24/outline"
 import { useTranslation } from "react-i18next"
@@ -25,17 +24,6 @@ const Header = () => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-
-  const handleScrollToSection = (sectionId: string) => {
-    const onHomePage = window.location.pathname === '/' || window.location.pathname === '/el'
-    if (onHomePage) {
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
-      window.history.replaceState(null, '', '#' + sectionId)
-    } else {
-      window.location.href = (window.location.pathname.startsWith('/el') ? '/el' : '/') + '#' + sectionId
-    }
-    setIsMobileMenuOpen(false)
-  }
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
@@ -74,10 +62,6 @@ const Header = () => {
                   <Settings className="size-4 mr-1.5" />
                   {t('nav.services')}
                 </a>
-              </Button>
-              <Button variant="ghost" onClick={() => handleScrollToSection('portfolio')} className="cursor-pointer">
-                <BriefcaseIcon className="size-4 mr-1.5" />
-                {t('nav.portfolio')}
               </Button>
               <Button variant="ghost" asChild className="cursor-pointer">
                 <a href={`${prefix}/contact`}>
@@ -119,10 +103,6 @@ const Header = () => {
                     <Settings className="h-4 w-4 mr-3" />
                     {t('nav.services')}
                   </a>
-                </Button>
-                <Button variant="ghost" onClick={() => handleScrollToSection('portfolio')} className="justify-start cursor-pointer">
-                  <BriefcaseIcon className="h-4 w-4 mr-3" />
-                  {t('nav.portfolio')}
                 </Button>
                 <Button variant="ghost" asChild className="justify-start cursor-pointer">
                   <a href={`${prefix}/contact`}>

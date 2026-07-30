@@ -22,6 +22,7 @@ interface Props {
   ogImage?: string
   noindex?: boolean
   jsonLd?: Record<string, unknown>[]
+  preloadImage?: string
 }
 
 const {
@@ -34,6 +35,7 @@ const {
   ogImage = 'https://stanimeros.com/images/logo-glass-black.png',
   noindex = false,
   jsonLd = [],
+  preloadImage,
 } = Astro.props
 ---
 
@@ -51,6 +53,7 @@ const {
     {hreflangAlternates.map(({ hreflang, href }) => (
       <link rel="alternate" hreflang={hreflang} href={href} />
     ))}
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
     <link rel="icon" type="image/png" href="/images/logo-glass-black.png" />
     <link rel="apple-touch-icon" href="/images/logo-glass-black.png" />
     <link rel="manifest" href="/site.webmanifest" />
@@ -87,7 +90,7 @@ const {
         <ParticlesBackground client:idle />
         <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10" />
         <div class="relative z-10 min-h-svh flex flex-col">
-          <LocalizedHeader lang={lang} client:load />
+          <LocalizedHeader lang={lang} client:idle={{ timeout: 300 }} />
           <div class="pt-24 flex-1">
             <slot />
           </div>
