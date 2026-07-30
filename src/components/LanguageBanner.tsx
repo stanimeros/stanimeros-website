@@ -51,17 +51,18 @@ export default function LanguageBanner({ lang }: LanguageBannerProps) {
   }
 
   const message = target === "el" ? t("languageBanner.toGreek") : t("languageBanner.toEnglish")
+  const switchLabel = target === "el" ? "🇬🇷 Ελληνικά" : "🇬🇧 English"
 
   return (
     <div className="fixed top-24 inset-x-0 z-40 flex justify-center px-4 pointer-events-none">
       <div className="pointer-events-auto bg-card border border-border/80 rounded-xl shadow-lg px-4 py-3 flex items-center gap-3 max-w-md w-full sm:w-auto">
         <span className="text-sm text-muted-foreground flex-1">{message}</span>
         <Button size="sm" onClick={switchLang} className="shrink-0">
-          {t("languageBanner.switch")}
+          {switchLabel}
         </Button>
         <button
           type="button"
-          aria-label={t("languageBanner.dismiss")}
+          aria-label="Dismiss · Απόρριψη"
           onClick={dismiss}
           className="text-muted-foreground hover:text-foreground shrink-0"
         >

@@ -20,10 +20,8 @@
     }
   },
   "languageBanner": {
-    "toGreek": "Looks like you're browsing from Greece. View this site in Greek?",
-    "toEnglish": "Looks like you'd prefer English. Switch to English?",
-    "switch": "Switch",
-    "dismiss": "No thanks"
+    "toGreek": "🇬🇧 View this page in Greek? · 🇬🇷 Δες τη σελίδα στα Ελληνικά;",
+    "toEnglish": "🇬🇧 View this page in English? · 🇬🇷 Δες τη σελίδα στα Αγγλικά;"
   },
   "nav": {
     "home": "Home",
