@@ -11,6 +11,9 @@ const LanguageSwitcher = ({ variant = 'default' }: LanguageSwitcherProps) => {
 
   const toggleLanguage = () => {
     const newLang = i18n.language === 'en' ? 'el' : 'en'
+    try {
+      localStorage.setItem('preferredLang', newLang)
+    } catch (e) {}
     const { pathname, search, hash } = window.location
     const basePath = pathname.startsWith('/el') ? pathname.slice(3) || '/' : pathname
     const target = newLang === 'el' ? `/el${basePath === '/' ? '' : basePath}` : basePath

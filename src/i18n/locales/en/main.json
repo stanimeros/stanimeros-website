@@ -19,6 +19,12 @@
       "development": "Development"
     }
   },
+  "languageBanner": {
+    "toGreek": "Looks like you're browsing from Greece. View this site in Greek?",
+    "toEnglish": "Looks like you'd prefer English. Switch to English?",
+    "switch": "Switch",
+    "dismiss": "No thanks"
+  },
   "nav": {
     "home": "Home",
     "about": "About",
