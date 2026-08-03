@@ -3,7 +3,7 @@ import BaseLayout from '@/layouts/BaseLayout.astro'
 import LocalizedPrivacyPolicy from '@/page-content/PrivacyPolicy.localized'
 
 export function getStaticPaths() {
-  const appSlugs = ['atpro-partner', 'e-karotsi', 'ski-greece', 'fire-message']
+  const appSlugs = ['atpro-partner', 'e-karotsi', 'ski-greece', 'fire-message', 'chronal']
   return appSlugs.map((appSlug) => ({ params: { appSlug } }))
 }
 

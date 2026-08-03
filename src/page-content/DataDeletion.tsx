@@ -44,6 +44,12 @@ const DATA_DELETION_PRESETS: Record<string, { appName: string; developer: string
     company: "STANIMEROS PANTELEIMON",
     contactEmail: "hello@stanimeros.com",
   },
+  "chronal": {
+    appName: "Chronal",
+    developer: "STANIMEROS PANTELEIMON",
+    company: "STANIMEROS PANTELEIMON",
+    contactEmail: "hello@stanimeros.com",
+  },
 }
 
 const DEFAULT_PRESET = {

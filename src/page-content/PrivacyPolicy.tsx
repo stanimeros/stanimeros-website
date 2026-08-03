@@ -48,6 +48,12 @@ const PRIVACY_POLICY_PRESETS: Record<string, { appName: string; developer: strin
     company: "STANIMEROS PANTELEIMON",
     contactEmail: "hello@stanimeros.com",
   },
+  "chronal": {
+    appName: "Chronal",
+    developer: "STANIMEROS PANTELEIMON",
+    company: "STANIMEROS PANTELEIMON",
+    contactEmail: "hello@stanimeros.com",
+  },
 }
 
 interface PrivacyPolicyProps {
