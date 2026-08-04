@@ -51,7 +51,7 @@ const HomeSections = () => {
   // Refs for card animations
   const serviceCardRefs = Array(5).fill(null).map(() => useRef<HTMLDivElement>(null))
   const packageCardRefs = Array(3).fill(null).map(() => useRef<HTMLDivElement>(null))
-  const portfolioCardRefs = Array(16).fill(null).map(() => useRef<HTMLDivElement>(null))
+  const portfolioCardRefs = Array(portfolioItems.length).fill(null).map(() => useRef<HTMLDivElement>(null))
   
   // Get animation props for each section
   const aboutAnimation = useScrollAnimation(aboutRef)
