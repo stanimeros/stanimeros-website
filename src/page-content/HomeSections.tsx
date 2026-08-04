@@ -393,6 +393,7 @@ const HomeSections = () => {
                   logo={item.logo}
                   logoBg={item.logoBg}
                   url={item.url}
+                  betaLinks={item.betaLinks}
                 />
               </motion.div>
             ))}

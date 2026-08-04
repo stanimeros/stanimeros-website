@@ -236,11 +236,17 @@
     }
   },
   "portfolioCard": {
-    "live": "Live"
+    "live": "Live",
+    "betaApple": "Beta TestFlight",
+    "betaGoogle": "Beta Play Store"
   },
   "portfolio": {
     "title": "Έργα",
     "items": {
+      "chronal": {
+        "title": "Chronal",
+        "description": "Εφαρμογή κινητού για σχεδιασμό και διαχείριση ταξιδιών, με συγχρονισμό μέσω Firebase και αναζήτηση τοποθεσιών με AI."
+      },
       "irisdrop": {
         "title": "Irisdrop",
         "description": "SaaS για τυπογραφεία: οι πελάτες ανεβάζουν αρχεία χωρίς USB ή email· οι διαχειριστές βλέπουν ζωντανή ουρά."

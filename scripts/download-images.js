@@ -33,6 +33,7 @@ const PEXELS_QUERIES = {
   'process': 'wood workshop carpentry manufacturing timber',
   'ski-greece': 'ski slope snow mountains',
   'niki-margariti': 'student laptop AI chatbot',
+  'chronal': 'travel planning trip suitcase map',
 };
 
 async function downloadImage(url, filepath) {

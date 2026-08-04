@@ -236,11 +236,17 @@
     }
   },
   "portfolioCard": {
-    "live": "Live"
+    "live": "Live",
+    "betaApple": "TestFlight Beta",
+    "betaGoogle": "Play Beta"
   },
   "portfolio": {
     "title": "Portfolio",
     "items": {
+      "chronal": {
+        "title": "Chronal",
+        "description": "Mobile app for planning and managing trips, with Firebase-backed sync and AI-assisted place lookups."
+      },
       "irisdrop": {
         "title": "irisdrop",
         "description": "SaaS for print shops: customers upload files without USB or email; admins see a live queue feed."

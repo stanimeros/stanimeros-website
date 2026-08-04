@@ -1,3 +1,12 @@
+export interface BetaLinks {
+  /** Apple TestFlight join link */
+  apple?: string
+  /** Google Play link - used on Android devices */
+  android?: string
+  /** Google Play testing opt-in link - used on desktop/web (non-Android) */
+  androidWeb?: string
+}
+
 export interface PortfolioItem {
   key: string
   technologies: string[]
@@ -7,9 +16,24 @@ export interface PortfolioItem {
   logo?: string
   logoBg?: string
   url?: string
+  betaLinks?: BetaLinks
 }
 
 export const portfolioItems: PortfolioItem[] = [
+  {
+    key: 'chronal',
+    technologies: ["iOS", "Android", "Travel", "Trip Planning", "Firebase", "AI"],
+    bgColor: "bg-teal-900/30",
+    textColor: "text-teal-200",
+    bgImage: "/assets/portfolio/chronal.jpg",
+    logo: "/assets/logos/chronal.png",
+    logoBg: "bg-[#FAFAF8]",
+    betaLinks: {
+      apple: "https://testflight.apple.com/join/DcKuS3dm",
+      android: "https://play.google.com/store/apps/details?id=com.stanimeros.chronal",
+      androidWeb: "https://play.google.com/apps/testing/com.stanimeros.chronal"
+    }
+  },
   {
     key: 'irisdrop',
     technologies: ["SaaS", "Web App", "Print Shops", "File Upload", "Queue", "Admin"],

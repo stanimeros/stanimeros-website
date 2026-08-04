@@ -1,7 +1,20 @@
 import { useTranslation } from "react-i18next"
+import { Apple } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
+import type { BetaLinks } from "@/lib/portfolio-data"
+
+function GooglePlayIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden>
+      <path fill="#00D8FF" d="M3.6 2.2c-.4.3-.6.8-.6 1.4v17c0 .6.2 1 .6 1.4l.1.1 9.4-9.4v-.2L3.7 2.1z" />
+      <path fill="#00F076" d="M16.3 12.9l-3.2-3.2 3.2-3.2 3.8 2.1c.9.5.9 1.6 0 2.1z" />
+      <path fill="#FFCF00" d="M13.1 9.7 3.6 19.2c.3.3.8.4 1.3.1l8.9-5z" />
+      <path fill="#FF3A44" d="M13.1 6.3 5 1.2c-.5-.3-1-.2-1.3.1z" />
+    </svg>
+  )
+}
 
 export interface PortfolioCardProps {
   /** Technology badges to display */
@@ -20,6 +33,8 @@ export interface PortfolioCardProps {
   logoBg?: string
   /** Optional link URL - when set, card becomes clickable */
   url?: string
+  /** Optional beta program links (TestFlight / Google Play) shown as chips */
+  betaLinks?: BetaLinks
   /** Translated title (passed from parent for display) */
   title: string
   /** Translated description (passed from parent for display) */
@@ -36,11 +51,21 @@ export function PortfolioCard({
   logoAlt,
   logoBg,
   url,
+  betaLinks,
   title,
   description,
   className,
 }: PortfolioCardProps) {
   const { t } = useTranslation()
+
+  const handleGooglePlayClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    const isAndroid = /android/i.test(navigator.userAgent)
+    const href = isAndroid ? betaLinks?.android : betaLinks?.androidWeb ?? betaLinks?.android
+    if (href) window.open(href, "_blank", "noopener,noreferrer")
+  }
+
   const fromWords = title
     .split(/\s+/)
     .map((word) => word[0])
@@ -108,6 +133,34 @@ export function PortfolioCard({
           ))}
         </div>
         <CardDescription className="mt-3">{description}</CardDescription>
+        {betaLinks && (betaLinks.apple || betaLinks.android) && (
+          <div className="flex flex-wrap gap-2 mt-3">
+            {betaLinks.apple && (
+              <a
+                href={betaLinks.apple}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium bg-background hover:bg-accent transition-colors"
+              >
+                <Apple className="h-3.5 w-3.5" />
+                {t("portfolioCard.betaApple")}
+              </a>
+            )}
+            {betaLinks.android && (
+              <a
+                href={betaLinks.android}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleGooglePlayClick}
+                className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium bg-background hover:bg-accent transition-colors"
+              >
+                <GooglePlayIcon className="h-3.5 w-3.5" />
+                {t("portfolioCard.betaGoogle")}
+              </a>
+            )}
+          </div>
+        )}
       </CardHeader>
 
       <CardContent className="flex-grow" />
