@@ -20,14 +20,6 @@ const Footer = () => {
             <a href={`${prefix}/data-deletion`} className="text-muted-foreground hover:text-primary transition-colors">
               {t('footer.links.dataDeletion')}
             </a>
-            <a
-              href="https://www.pexels.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              {t('footer.pexels')}
-            </a>
           </div>
         </div>
       </div>
