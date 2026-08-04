@@ -245,7 +245,7 @@
     "items": {
       "chronal": {
         "title": "Chronal",
-        "description": "Mobile app for planning and managing trips, with Firebase-backed sync and AI-assisted place lookups."
+        "description": "Mobile app for planning and managing trips, with synced itineraries and live currency exchange rates."
       },
       "irisdrop": {
         "title": "irisdrop",

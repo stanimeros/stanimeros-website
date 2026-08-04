@@ -22,7 +22,7 @@ export interface PortfolioItem {
 export const portfolioItems: PortfolioItem[] = [
   {
     key: 'chronal',
-    technologies: ["iOS", "Android", "Travel", "Trip Planning", "Firebase", "AI"],
+    technologies: ["iOS", "Android", "Travel", "Trip Planning", "Currency Rates", "Bookings"],
     bgColor: "bg-teal-900/30",
     textColor: "text-teal-200",
     bgImage: "/assets/portfolio/chronal.jpg",
