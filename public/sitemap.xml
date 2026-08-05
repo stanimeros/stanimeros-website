@@ -90,8 +90,38 @@
     <priority>0.7</priority>
   </url>
 
+  <!-- English privacy policy -->
+  <url>
+    <loc>https://stanimeros.com/privacy-policy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/privacy-policy"/>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Greek privacy policy -->
+  <url>
+    <loc>https://stanimeros.com/el/privacy-policy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/privacy-policy"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/privacy-policy"/>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
   <url>
     <loc>https://stanimeros.com/data-deletion</loc>
+    <lastmod>2026-07-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Greek data deletion -->
+  <url>
+    <loc>https://stanimeros.com/el/data-deletion</loc>
     <lastmod>2026-07-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>

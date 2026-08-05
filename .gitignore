@@ -28,3 +28,8 @@ dist-ssr
 src/lib/firebase.ts
 
 .env
+
+# Google Search Console credentials
+scripts/gsc-oauth-client.json
+scripts/gsc-token.json
+scripts/gsc-service-account.json
