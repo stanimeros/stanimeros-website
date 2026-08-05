@@ -14,7 +14,7 @@ const {
   getSessionsToReport,
 } = require("./lib/firestoreChat");
 
-setGlobalOptions({ maxInstances: 10 });
+setGlobalOptions({ maxInstances: 10, region: "europe-west1" });
 
 const CHAT_TIMEOUT_MINUTES = 15;
 const MAX_TOOL_ROUNDS = 3;
