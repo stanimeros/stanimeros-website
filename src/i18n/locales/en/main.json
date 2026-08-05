@@ -243,6 +243,10 @@
   "portfolio": {
     "title": "Portfolio",
     "items": {
+      "nourea": {
+        "title": "Nourea",
+        "description": "Mobile app that generates personalized 4-week nutrition plans from a health and lifestyle questionnaire."
+      },
       "chronal": {
         "title": "Chronal",
         "description": "Mobile app for planning and managing trips, with synced itineraries and live currency exchange rates."

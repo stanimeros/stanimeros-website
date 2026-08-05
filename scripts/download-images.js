@@ -34,6 +34,7 @@ const PEXELS_QUERIES = {
   'ski-greece': 'ski slope snow mountains',
   'niki-margariti': 'student laptop AI chatbot',
   'chronal': 'travel planning trip suitcase map',
+  'nourea': 'healthy meal planning fresh fruits vegetables nutrition',
 };
 
 async function downloadImage(url, filepath) {

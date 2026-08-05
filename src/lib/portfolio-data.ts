@@ -12,7 +12,7 @@ export interface PortfolioItem {
   technologies: string[]
   bgColor: string
   textColor: string
-  bgImage: string
+  bgImage?: string
   logo?: string
   logoBg?: string
   url?: string
@@ -20,6 +20,14 @@ export interface PortfolioItem {
 }
 
 export const portfolioItems: PortfolioItem[] = [
+  {
+    key: 'nourea',
+    technologies: ["iOS", "Android", "Nutrition", "AI", "Meal Planning", "Health"],
+    bgColor: "bg-rose-900/30",
+    textColor: "text-rose-200",
+    bgImage: "/assets/portfolio/nourea.jpg",
+    logo: "/assets/logos/nourea.png"
+  },
   {
     key: 'chronal',
     technologies: ["iOS", "Android", "Travel", "Trip Planning", "Currency Rates", "Bookings"],
