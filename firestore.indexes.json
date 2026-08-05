@@ -4,9 +4,20 @@
       "collectionGroup": "chatSessions",
       "queryScope": "COLLECTION_GROUP",
       "fields": [
-        { "fieldPath": "reported", "order": "ASCENDING" },
-        { "fieldPath": "lastMessageAt", "order": "ASCENDING" }
-      ]
+        {
+          "fieldPath": "reported",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "lastMessageAt",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "ASCENDING"
+        }
+      ],
+      "density": "SPARSE_ALL"
     }
   ],
   "fieldOverrides": []
