@@ -238,7 +238,9 @@
   "portfolioCard": {
     "live": "Live",
     "betaApple": "TestFlight Beta",
-    "betaGoogle": "Play Beta"
+    "betaGoogle": "Play Beta",
+    "appStore": "App Store",
+    "playStore": "Play Store"
   },
   "portfolio": {
     "title": "Portfolio",

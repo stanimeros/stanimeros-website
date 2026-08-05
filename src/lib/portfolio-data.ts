@@ -1,9 +1,9 @@
-export interface BetaLinks {
-  /** Apple TestFlight join link */
+export interface StoreLinks {
+  /** App Store link, or TestFlight join link while still in beta */
   apple?: string
   /** Google Play link - used on Android devices */
   android?: string
-  /** Google Play testing opt-in link - used on desktop/web (non-Android) */
+  /** Google Play testing opt-in link - used on desktop/web (non-Android) while still in open testing */
   androidWeb?: string
 }
 
@@ -16,7 +16,7 @@ export interface PortfolioItem {
   logo?: string
   logoBg?: string
   url?: string
-  betaLinks?: BetaLinks
+  storeLinks?: StoreLinks
 }
 
 export const portfolioItems: PortfolioItem[] = [
@@ -36,10 +36,9 @@ export const portfolioItems: PortfolioItem[] = [
     bgImage: "/assets/portfolio/chronal.jpg",
     logo: "/assets/logos/chronal.png",
     logoBg: "bg-[#FAFAF8]",
-    betaLinks: {
+    storeLinks: {
       apple: "https://testflight.apple.com/join/DcKuS3dm",
-      android: "https://play.google.com/store/apps/details?id=com.stanimeros.chronal",
-      androidWeb: "https://play.google.com/apps/testing/com.stanimeros.chronal"
+      android: "https://play.google.com/store/apps/details?id=com.stanimeros.chronal"
     }
   },
   {
@@ -83,7 +82,11 @@ export const portfolioItems: PortfolioItem[] = [
     textColor: "text-slate-200",
     bgImage: "/assets/portfolio/ski-greece.jpg",
     logo: "/assets/logos/ski-greece.png",
-    url: "https://ski-greece.gr/"
+    url: "https://ski-greece.gr/",
+    storeLinks: {
+      apple: "https://apps.apple.com/us/app/ski-greece/id6759574238",
+      android: "https://play.google.com/store/apps/details?id=com.stanimeros.poudra"
+    }
   },
   {
     key: 'nikiMargariti',
@@ -99,7 +102,11 @@ export const portfolioItems: PortfolioItem[] = [
     bgColor: "bg-red-900/30",
     textColor: "text-red-200",
     bgImage: "/assets/portfolio/fire-message.jpg",
-    logo: "/assets/logos/fire-message.png"
+    logo: "/assets/logos/fire-message.png",
+    storeLinks: {
+      apple: "https://apps.apple.com/us/app/fire-message/id6756577964",
+      android: "https://play.google.com/store/apps/details?id=com.stanimeros.firemessage"
+    }
   },
   {
     key: 'tattooHealer',
@@ -108,7 +115,11 @@ export const portfolioItems: PortfolioItem[] = [
     textColor: "text-purple-200",
     bgImage: "/assets/portfolio/tattoo-healer.jpg",
     logo: "/assets/logos/tattoo-healer.png",
-    url: "https://tattoo-healer.com"
+    url: "https://tattoo-healer.com",
+    storeLinks: {
+      apple: "https://apps.apple.com/us/app/tattoo-healer/id6749210555",
+      android: "https://play.google.com/store/apps/details?id=com.tattoohealer.app"
+    }
   },
   {
     key: 'transHellas',
@@ -143,7 +154,11 @@ export const portfolioItems: PortfolioItem[] = [
     bgColor: "bg-sky-900/30",
     textColor: "text-sky-200",
     bgImage: "/assets/portfolio/atpro-partner.jpg",
-    logo: "/assets/logos/atpro-partner.png"
+    logo: "/assets/logos/atpro-partner.png",
+    storeLinks: {
+      apple: "https://apps.apple.com/us/app/atpro-partner/id6743795030",
+      android: "https://play.google.com/store/apps/details?id=com.stanimeros.transfer"
+    }
   },
   {
     key: 'mealAi',
@@ -168,7 +183,11 @@ export const portfolioItems: PortfolioItem[] = [
     textColor: "text-yellow-200",
     bgImage: "/assets/portfolio/hedeos.jpg",
     logo: "/assets/logos/hedeos.png",
-    url: "https://hedeos.gr"
+    url: "https://hedeos.gr",
+    storeLinks: {
+      apple: "https://apps.apple.com/us/app/%CE%B7%CE%B4%CE%AD%CF%89%CF%82/id6503709023",
+      android: "https://play.google.com/store/apps/details?id=com.stanimeros.hedeos"
+    }
   },
   {
     key: 'ekarotsi',

@@ -2,7 +2,7 @@ import { useTranslation } from "react-i18next"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { cn } from "@/lib/utils"
-import type { BetaLinks } from "@/lib/portfolio-data"
+import type { StoreLinks } from "@/lib/portfolio-data"
 
 function AppleIcon({ className }: { className?: string }) {
   return (
@@ -37,8 +37,8 @@ export interface PortfolioCardProps {
   logoBg?: string
   /** Optional link URL - when set, card becomes clickable */
   url?: string
-  /** Optional beta program links (TestFlight / Google Play) shown as chips */
-  betaLinks?: BetaLinks
+  /** Optional App Store / Play Store links shown as chips */
+  storeLinks?: StoreLinks
   /** Translated title (passed from parent for display) */
   title: string
   /** Translated description (passed from parent for display) */
@@ -55,7 +55,7 @@ export function PortfolioCard({
   logoAlt,
   logoBg,
   url,
-  betaLinks,
+  storeLinks,
   title,
   description,
   className,
@@ -66,9 +66,14 @@ export function PortfolioCard({
     e.preventDefault()
     e.stopPropagation()
     const isAndroid = /android/i.test(navigator.userAgent)
-    const href = isAndroid ? betaLinks?.android : betaLinks?.androidWeb ?? betaLinks?.android
+    const href = isAndroid ? storeLinks?.android : storeLinks?.androidWeb ?? storeLinks?.android
     if (href) window.open(href, "_blank", "noopener,noreferrer")
   }
+
+  const isAppleBeta = storeLinks?.apple?.includes("testflight.apple.com") ?? false
+  const isAndroidBeta = storeLinks?.android?.includes("/apps/testing/") ?? false
+  const appleLabel = t(isAppleBeta ? "portfolioCard.betaApple" : "portfolioCard.appStore")
+  const androidLabel = t(isAndroidBeta ? "portfolioCard.betaGoogle" : "portfolioCard.playStore")
 
   const fromWords = title
     .split(/\s+/)
@@ -137,30 +142,30 @@ export function PortfolioCard({
           ))}
         </div>
         <CardDescription className="mt-3">{description}</CardDescription>
-        {betaLinks && (betaLinks.apple || betaLinks.android) && (
+        {storeLinks && (storeLinks.apple || storeLinks.android) && (
           <div className="flex flex-wrap gap-2 mt-3">
-            {betaLinks.apple && (
+            {storeLinks.apple && (
               <a
-                href={betaLinks.apple}
+                href={storeLinks.apple}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
                 className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium bg-background hover:bg-accent transition-colors"
               >
                 <AppleIcon className="h-3.5 w-3.5" />
-                {t("portfolioCard.betaApple")}
+                {appleLabel}
               </a>
             )}
-            {betaLinks.android && (
+            {storeLinks.android && (
               <a
-                href={betaLinks.android}
+                href={storeLinks.android}
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={handleGooglePlayClick}
                 className="inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-medium bg-background hover:bg-accent transition-colors"
               >
                 <GooglePlayIcon className="h-3.5 w-3.5" />
-                {t("portfolioCard.betaGoogle")}
+                {androidLabel}
               </a>
             )}
           </div>
