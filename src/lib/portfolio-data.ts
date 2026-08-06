@@ -57,7 +57,7 @@ export const portfolioItems: PortfolioItem[] = [
     textColor: "text-sky-200",
     bgImage: "/assets/portfolio/athens-mytransfer.jpg",
     logo: "/assets/logos/athens-mytransfer.png",
-    url: "https://athens-mytransfer.web.app"
+    url: "https://athens-mytransfer.com"
   },
   {
     key: 'veridictum',
