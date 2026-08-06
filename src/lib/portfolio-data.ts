@@ -37,7 +37,7 @@ export const portfolioItems: PortfolioItem[] = [
     logo: "/assets/logos/chronal.png",
     logoBg: "bg-[#FAFAF8]",
     storeLinks: {
-      apple: "https://testflight.apple.com/join/DcKuS3dm",
+      apple: "https://apps.apple.com/app/chronal/id6797291496",
       android: "https://play.google.com/store/apps/details?id=com.stanimeros.chronal"
     }
   },
@@ -84,7 +84,7 @@ export const portfolioItems: PortfolioItem[] = [
     logo: "/assets/logos/ski-greece.png",
     url: "https://ski-greece.gr/",
     storeLinks: {
-      apple: "https://apps.apple.com/us/app/ski-greece/id6759574238",
+      apple: "https://apps.apple.com/app/ski-greece/id6759574238",
       android: "https://play.google.com/store/apps/details?id=com.stanimeros.poudra"
     }
   },
@@ -104,7 +104,7 @@ export const portfolioItems: PortfolioItem[] = [
     bgImage: "/assets/portfolio/fire-message.jpg",
     logo: "/assets/logos/fire-message.png",
     storeLinks: {
-      apple: "https://apps.apple.com/us/app/fire-message/id6756577964",
+      apple: "https://apps.apple.com/app/fire-message/id6756577964",
       android: "https://play.google.com/store/apps/details?id=com.stanimeros.firemessage"
     }
   },
@@ -117,7 +117,7 @@ export const portfolioItems: PortfolioItem[] = [
     logo: "/assets/logos/tattoo-healer.png",
     url: "https://tattoo-healer.com",
     storeLinks: {
-      apple: "https://apps.apple.com/us/app/tattoo-healer/id6749210555",
+      apple: "https://apps.apple.com/app/tattoo-healer/id6749210555",
       android: "https://play.google.com/store/apps/details?id=com.tattoohealer.app"
     }
   },
@@ -156,7 +156,7 @@ export const portfolioItems: PortfolioItem[] = [
     bgImage: "/assets/portfolio/atpro-partner.jpg",
     logo: "/assets/logos/atpro-partner.png",
     storeLinks: {
-      apple: "https://apps.apple.com/us/app/atpro-partner/id6743795030",
+      apple: "https://apps.apple.com/app/atpro-partner/id6743795030",
       android: "https://play.google.com/store/apps/details?id=com.stanimeros.transfer"
     }
   },
@@ -185,7 +185,7 @@ export const portfolioItems: PortfolioItem[] = [
     logo: "/assets/logos/hedeos.png",
     url: "https://hedeos.gr",
     storeLinks: {
-      apple: "https://apps.apple.com/us/app/%CE%B7%CE%B4%CE%AD%CF%89%CF%82/id6503709023",
+      apple: "https://apps.apple.com/app/%CE%B7%CE%B4%CE%AD%CF%89%CF%82/id6503709023",
       android: "https://play.google.com/store/apps/details?id=com.stanimeros.hedeos"
     }
   },
