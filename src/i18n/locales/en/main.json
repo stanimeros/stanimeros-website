@@ -240,7 +240,8 @@
     "betaApple": "TestFlight Beta",
     "betaGoogle": "Play Beta",
     "appStore": "App Store",
-    "playStore": "Play Store"
+    "playStore": "Play Store",
+    "inAppBrowserHint": "Instagram blocks this link. Tap ⋯ (top right) and choose \"Open in Browser\" to open the App Store."
   },
   "portfolio": {
     "title": "Portfolio",

@@ -240,7 +240,8 @@
     "betaApple": "Beta TestFlight",
     "betaGoogle": "Beta Play Store",
     "appStore": "App Store",
-    "playStore": "Play Store"
+    "playStore": "Play Store",
+    "inAppBrowserHint": "Το Instagram μπλοκάρει αυτό το link. Πάτα ⋯ (πάνω δεξιά) και επίλεξε \"Open in Browser\" για να ανοίξεις το App Store."
   },
   "portfolio": {
     "title": "Έργα",
