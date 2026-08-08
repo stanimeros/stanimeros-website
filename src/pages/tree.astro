@@ -29,14 +29,31 @@ const appNames: Record<string, string> = {
   hedeos: 'Hedeos',
 }
 
+function getInitials(title: string) {
+  const fromWords = title
+    .split(/\s+/)
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase()
+  return fromWords.length >= 2
+    ? fromWords.slice(0, 2)
+    : (title.replace(/\s/g, "").slice(0, 2).toUpperCase() || "??").padEnd(2, "?")
+}
+
 const appLinks = portfolioItems
   .filter((item) => item.storeLinks?.apple || item.storeLinks?.android)
-  .map((item) => ({
-    label: appNames[item.key] ?? item.key,
-    logo: item.logo,
-    apple: item.storeLinks?.apple,
-    android: item.storeLinks?.android,
-  }))
+  .map((item) => {
+    const label = appNames[item.key] ?? item.key
+    return {
+      label,
+      logo: item.logo,
+      initials: getInitials(label),
+      bgColor: item.bgColor,
+      textColor: item.textColor,
+      apple: item.storeLinks?.apple,
+      android: item.storeLinks?.android,
+    }
+  })
 
 const websiteNames: Record<string, string> = {
   irisdrop: 'IrisDrop',
@@ -54,11 +71,17 @@ const websiteNames: Record<string, string> = {
 
 const websiteLinks = portfolioItems
   .filter((item) => item.url)
-  .map((item) => ({
-    label: websiteNames[item.key] ?? item.key,
-    href: item.url as string,
-    logo: item.logo,
-  }))
+  .map((item) => {
+    const label = websiteNames[item.key] ?? item.key
+    return {
+      label,
+      href: item.url as string,
+      logo: item.logo,
+      initials: getInitials(label),
+      bgColor: item.bgColor,
+      textColor: item.textColor,
+    }
+  })
 
 const icons: Record<TreeLink['icon'], string> = {
   globe: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="size-5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0 0c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3 7.5 7.03 7.5 12s2.015 9 4.5 9ZM3.6 9h16.8M3.6 15h16.8"/></svg>',
@@ -168,8 +191,12 @@ const profilePageJsonLd = {
           <div class="flex flex-col gap-2">
             {appLinks.map((app) => (
               <div class="flex items-center gap-3 w-full rounded-xl border border-border/60 bg-card/70 px-4 py-2.5">
-                {app.logo && (
+                {app.logo ? (
                   <img src={app.logo} alt={app.label} class="size-6 rounded-full object-cover shrink-0" />
+                ) : (
+                  <span class={`size-6 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 ${app.bgColor} ${app.textColor}`}>
+                    {app.initials}
+                  </span>
                 )}
                 <span class="text-sm font-medium flex-1">{app.label}</span>
                 <div class="flex items-center gap-2 shrink-0">
@@ -212,9 +239,11 @@ const profilePageJsonLd = {
                 class="flex items-center gap-3 w-full rounded-xl border border-border/60 bg-card/70 px-4 py-2.5 text-sm font-medium hover:bg-accent hover:border-border transition-colors"
               >
                 {site.logo ? (
-                  <img src={site.logo} alt={site.label} class="size-5 rounded-full object-cover shrink-0" />
+                  <img src={site.logo} alt={site.label} class="size-6 rounded-full object-cover shrink-0" />
                 ) : (
-                  <span class="text-primary shrink-0" set:html={icons.globe} />
+                  <span class={`size-6 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 ${site.bgColor} ${site.textColor}`}>
+                    {site.initials}
+                  </span>
                 )}
                 {site.label}
               </a>
