@@ -161,6 +161,8 @@ const profilePageJsonLd = {
           {homeLinks.map((link) => (
             <a
               href={link.href}
+              data-track-section="home"
+              data-track-label={link.label}
               class="flex items-center gap-3 w-full rounded-xl border border-border/60 bg-card/70 px-4 py-2.5 text-sm font-medium hover:bg-accent hover:border-border transition-colors"
             >
               <span class="text-primary" set:html={icons[link.icon]} />
@@ -177,6 +179,8 @@ const profilePageJsonLd = {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-track-section="social"
+                data-track-label={link.label}
                 class="flex items-center gap-3 w-full rounded-xl border border-border/60 bg-card/70 px-4 py-2.5 text-sm font-medium hover:bg-accent hover:border-border transition-colors"
               >
                 <span class="text-primary" set:html={icons[link.icon]} />
@@ -206,6 +210,8 @@ const profilePageJsonLd = {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${app.label} on the App Store`}
+                      data-track-section="app-apple"
+                      data-track-label={app.label}
                       class="inline-flex items-center justify-center size-7 rounded-full border border-border/60 hover:bg-accent transition-colors"
                     >
                       <Fragment set:html={appleIcon} />
@@ -217,6 +223,8 @@ const profilePageJsonLd = {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${app.label} on Google Play`}
+                      data-track-section="app-android"
+                      data-track-label={app.label}
                       class="inline-flex items-center justify-center size-7 rounded-full border border-border/60 hover:bg-accent transition-colors"
                     >
                       <Fragment set:html={androidIcon} />
@@ -236,6 +244,8 @@ const profilePageJsonLd = {
                 href={site.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                data-track-section="website"
+                data-track-label={site.label}
                 class="flex items-center gap-3 w-full rounded-xl border border-border/60 bg-card/70 px-4 py-2.5 text-sm font-medium hover:bg-accent hover:border-border transition-colors"
               >
                 {site.logo ? (
@@ -253,5 +263,20 @@ const profilePageJsonLd = {
       </div>
       </div>
     </div>
+    <script>
+      import { trackEvent } from '@/lib/events'
+
+      trackEvent('pageView', { page: 'tree' })
+
+      document.querySelectorAll<HTMLElement>('[data-track-label]').forEach((el) => {
+        el.addEventListener('click', () => {
+          trackEvent('ctaClick', {
+            source: 'tree',
+            section: el.dataset.trackSection ?? null,
+            label: el.dataset.trackLabel ?? null,
+          })
+        })
+      })
+    </script>
   </body>
 </html>
