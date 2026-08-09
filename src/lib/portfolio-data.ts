@@ -30,7 +30,10 @@ export const portfolioItems: PortfolioItem[] = [
     bgImage: "/assets/portfolio/party.jpg",
     logo: "/assets/logos/party.png",
     logoBg: "bg-[#FFF8E7]",
-    storeComingSoon: true,
+    storeLinks: {
+      apple: "https://testflight.apple.com/join/nvqXwGz7",
+      android: "https://play.google.com/store/apps/details?id=com.stanimeros.party"
+    }
   },
   {
     key: 'nourea',
