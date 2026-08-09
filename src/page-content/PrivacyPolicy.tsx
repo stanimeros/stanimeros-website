@@ -18,7 +18,9 @@ import {
   ClockIcon,
   UserGroupIcon,
   ArrowPathIcon,
-  TrashIcon
+  DevicePhoneMobileIcon,
+  CloudIcon,
+  TrashIcon,
 } from "@heroicons/react/24/outline"
 import { useTranslation } from "react-i18next"
 import { trackEvent } from "@/lib/events"
@@ -166,11 +168,75 @@ const PrivacyPolicy = ({ appSlug, lang }: PrivacyPolicyProps) => {
             </CardContent>
           </Card>
 
-          {/* Information We Collect */}
+          {/* On-Device Storage */}
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <DevicePhoneMobileIcon className="h-5 w-5 mr-2" />
+                {t('privacyPolicy.onDeviceStorage.title')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-muted-foreground">
+                {t('privacyPolicy.onDeviceStorage.description')}
+              </p>
+              <ul className="space-y-2 text-muted-foreground">
+                {(t('privacyPolicy.onDeviceStorage.items', { returnObjects: true }) as string[]).map((item, index) => (
+                  <li key={index}>• {item}</li>
+                ))}
+              </ul>
+              <p className="text-muted-foreground">
+                {t('privacyPolicy.onDeviceStorage.deletion')}
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Online Collection */}
           <Card className="mb-8">
             <CardHeader>
               <CardTitle className="flex items-center">
                 <Database className="h-5 w-5 mr-2" />
+                {t('privacyPolicy.onlineCollection.title')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-muted-foreground">
+                {t('privacyPolicy.onlineCollection.intro')}
+              </p>
+              <div className="overflow-x-auto rounded-md border">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b bg-muted/50">
+                      <th className="px-4 py-3 text-left font-semibold">{t('privacyPolicy.onlineCollection.columns.data')}</th>
+                      <th className="px-4 py-3 text-left font-semibold">{t('privacyPolicy.onlineCollection.columns.when')}</th>
+                      <th className="px-4 py-3 text-left font-semibold">{t('privacyPolicy.onlineCollection.columns.purpose')}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {(t('privacyPolicy.onlineCollection.rows', { returnObjects: true }) as Array<{ data: string; when: string; purpose: string }>).map((row, index) => (
+                      <tr key={index} className="border-b last:border-0">
+                        <td className="px-4 py-3 font-medium">{row.data}</td>
+                        <td className="px-4 py-3 text-muted-foreground">{row.when}</td>
+                        <td className="px-4 py-3 text-muted-foreground">{row.purpose}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <p className="text-muted-foreground">
+                {t('privacyPolicy.onlineCollection.noAccountRequired')}
+              </p>
+              <p className="text-muted-foreground">
+                {t('privacyPolicy.onlineCollection.personalInfoNote')}
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Personal, Usage & Device Information */}
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <UsersIcon className="h-5 w-5 mr-2" />
                 {t('privacyPolicy.informationWeCollect.title')}
               </CardTitle>
             </CardHeader>
@@ -180,26 +246,6 @@ const PrivacyPolicy = ({ appSlug, lang }: PrivacyPolicyProps) => {
                 <p className="text-muted-foreground">
                   {t('privacyPolicy.informationWeCollect.personalInformation.description')}
                 </p>
-              </div>
-              <div>
-                <p className="font-semibold mb-2">{t('privacyPolicy.informationWeCollect.locationData.title')}</p>
-                <p className="text-muted-foreground mb-3">
-                  {t('privacyPolicy.informationWeCollect.locationData.description')}
-                </p>
-                {(() => {
-                  const items = t('privacyPolicy.informationWeCollect.locationData.items', { returnObjects: true });
-                  if (!Array.isArray(items)) return null;
-                  return (
-                    <ul className="space-y-2 text-muted-foreground">
-                      {(items as Array<{ title: string; description: string }>).map((item, index) => (
-                        <li key={index}>
-                          <span className="font-medium text-foreground">{item.title}:</span>{' '}
-                          {item.description}
-                        </li>
-                      ))}
-                    </ul>
-                  );
-                })()}
               </div>
               <div>
                 <p className="font-semibold mb-2">{t('privacyPolicy.informationWeCollect.usageData.title')}</p>
@@ -213,6 +259,35 @@ const PrivacyPolicy = ({ appSlug, lang }: PrivacyPolicyProps) => {
                   {t('privacyPolicy.informationWeCollect.deviceInformation.description')}
                 </p>
               </div>
+            </CardContent>
+          </Card>
+
+          {/* Location Data */}
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <GlobeAltIcon className="h-5 w-5 mr-2" />
+                {t('privacyPolicy.informationWeCollect.locationData.title')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-muted-foreground">
+                {t('privacyPolicy.informationWeCollect.locationData.description')}
+              </p>
+              {(() => {
+                const items = t('privacyPolicy.informationWeCollect.locationData.items', { returnObjects: true });
+                if (!Array.isArray(items)) return null;
+                return (
+                  <ul className="space-y-2 text-muted-foreground">
+                    {(items as Array<{ title: string; description: string }>).map((item, index) => (
+                      <li key={index}>
+                        <span className="font-medium text-foreground">{item.title}:</span>{' '}
+                        {item.description}
+                      </li>
+                    ))}
+                  </ul>
+                );
+              })()}
             </CardContent>
           </Card>
 
@@ -230,6 +305,55 @@ const PrivacyPolicy = ({ appSlug, lang }: PrivacyPolicyProps) => {
                   <li key={index}>• {item}</li>
                 ))}
               </ul>
+            </CardContent>
+          </Card>
+
+          {/* Third-Party Services */}
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <CloudIcon className="h-5 w-5 mr-2" />
+                {t('privacyPolicy.thirdPartyServices.title')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-muted-foreground">
+                {preset
+                  ? t('privacyPolicy.thirdPartyServices.introApp', { appName: preset.appName })
+                  : t('privacyPolicy.thirdPartyServices.introGeneric')}
+              </p>
+              <ul className="space-y-2 text-muted-foreground">
+                {(t('privacyPolicy.thirdPartyServices.firebaseItems', { returnObjects: true }) as Array<{ name: string; description: string }>).map((item, index) => (
+                  <li key={index}>
+                    <span className="font-medium text-foreground">{item.name}</span>
+                    {' — '}
+                    {item.description}
+                  </li>
+                ))}
+              </ul>
+              <p className="text-muted-foreground">
+                {t('privacyPolicy.thirdPartyServices.googlePrivacy')}{' '}
+                <a
+                  href="https://policies.google.com/privacy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary hover:underline"
+                >
+                  {t('privacyPolicy.thirdPartyServices.googlePrivacyLinkText')}
+                </a>
+                .
+              </p>
+              <p className="text-muted-foreground">
+                {t('privacyPolicy.thirdPartyServices.otherIntro')}
+              </p>
+              <ul className="space-y-2 text-muted-foreground">
+                {(t('privacyPolicy.thirdPartyServices.otherItems', { returnObjects: true }) as string[]).map((item, index) => (
+                  <li key={index}>• {item}</li>
+                ))}
+              </ul>
+              <p className="text-muted-foreground font-medium">
+                {t('privacyPolicy.thirdPartyServices.noSell')}
+              </p>
             </CardContent>
           </Card>
 
@@ -314,9 +438,12 @@ const PrivacyPolicy = ({ appSlug, lang }: PrivacyPolicyProps) => {
                 {t('privacyPolicy.dataRetention.title')}
               </CardTitle>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-3">
               <p className="text-muted-foreground">
-                {t('privacyPolicy.dataRetention.description')}
+                {t('privacyPolicy.dataRetention.onDevice')}
+              </p>
+              <p className="text-muted-foreground">
+                {t('privacyPolicy.dataRetention.server')}
               </p>
             </CardContent>
           </Card>

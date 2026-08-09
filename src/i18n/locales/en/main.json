@@ -370,7 +370,7 @@
   "privacyPolicy": {
     "title": "Privacy Policy",
     "titleApp": "Privacy Policy of {{appName}}",
-    "lastUpdated": "Last updated: 14/06/2026",
+    "lastUpdated": "Last updated: 09/08/2026",
     "entity": {
       "appName": "Application",
       "developer": "Developer",
@@ -380,14 +380,71 @@
     "introduction": {
       "title": "Introduction",
       "paragraph1": "This Privacy Policy describes how Stanimeros (\"we,\" \"us,\" or \"our\") collects, uses, and shares your personal information when you use our mobile applications and services.",
-      "paragraph1App": "This Privacy Policy describes how {{developer}} (\"we,\" \"us,\" or \"our\") collects, uses, and shares your personal information when you use {{appName}} and related services.",
+      "paragraph1App": "This Privacy Policy describes how {{developer}} (\"we,\" \"us,\" or \"our\") collects, uses, and shares your personal information when you use {{appName}} and related services. Other apps by the same developer may collect different data; see each app's policy page for details.",
       "paragraph2": "By using the app, you agree to the collection and use of information in accordance with this policy."
+    },
+    "onDeviceStorage": {
+      "title": "Information Stored on Your Device",
+      "description": "Depending on how you use the app, the following may be stored only on your device and not transmitted to us:",
+      "items": [
+        "Preferences and settings (e.g. language, sound, display options)",
+        "Data you enter for app features (e.g. names, labels, saved items)",
+        "App state, progress, scores, or history",
+        "Content cached for offline use"
+      ],
+      "deletion": "You may be able to delete this data in the app (e.g. Settings → Clear data), by uninstalling the app, or through your device settings."
+    },
+    "onlineCollection": {
+      "title": "Information We Collect When You Use the App",
+      "intro": "When you use the app and an internet connection is available, we may collect:",
+      "columns": {
+        "data": "Data",
+        "when": "When",
+        "purpose": "Purpose"
+      },
+      "rows": [
+        {
+          "data": "Anonymous user identifier",
+          "when": "On first launch / when needed",
+          "purpose": "Operate app features without sign-in"
+        },
+        {
+          "data": "App interaction data",
+          "when": "During use",
+          "purpose": "Understand usage and improve the app"
+        },
+        {
+          "data": "Device / app identifiers",
+          "when": "During use",
+          "purpose": "Analytics and diagnostics"
+        },
+        {
+          "data": "User-provided content",
+          "when": "Only if you submit it",
+          "purpose": "Feedback, support, or in-app forms"
+        },
+        {
+          "data": "Personal information (e.g. name, address, phone, email)",
+          "when": "When required by app features or if you provide it",
+          "purpose": "Account setup, orders, deliveries, or other app functionality"
+        }
+      ],
+      "noAccountRequired": "We do not require you to create an account with your real name, email, or phone number unless the app explicitly asks for it.",
+      "personalInfoNote": "Some apps collect personal details such as your name, postal address, phone number, or email address when needed to provide their features (for example, account registration, bookings, or deliveries). We collect only what is necessary for the app you are using."
     },
     "informationWeCollect": {
       "title": "Information We Collect",
       "personalInformation": {
         "title": "Personal Information",
-        "description": "We may collect personal information such as your name, email address, and device information when you use the app."
+        "description": "Depending on the app, we may collect personal information such as your name, email address, phone number, postal address, or other details you provide when creating an account, placing an order, or using app features that require it."
+      },
+      "usageData": {
+        "title": "Usage Data",
+        "description": "We collect information about how you use the app, including features accessed, time spent, and performance data."
+      },
+      "deviceInformation": {
+        "title": "Device Information",
+        "description": "We may collect device-specific information such as device model, operating system version, and unique device identifiers."
       },
       "locationData": {
         "title": "Location Data",
@@ -414,15 +471,41 @@
             "description": "You can revoke background location access at any time through your device settings. Go to Settings → Apps, select the app, then Permissions → Location. Revoking access will disable location-dependent features."
           }
         ]
-      },
-      "usageData": {
-        "title": "Usage Data",
-        "description": "We collect information about how you use the app, including features accessed, time spent, and performance data."
-      },
-      "deviceInformation": {
-        "title": "Device Information",
-        "description": "We may collect device-specific information such as device model, operating system version, and unique device identifiers."
       }
+    },
+    "thirdPartyServices": {
+      "title": "Third-Party Services",
+      "introApp": "{{appName}} uses Google Firebase and related Google services, which may include:",
+      "introGeneric": "Our mobile applications use Google Firebase and related Google services, which may include:",
+      "firebaseItems": [
+        {
+          "name": "Firebase Analytics",
+          "description": "Usage and interaction data"
+        },
+        {
+          "name": "Firebase Authentication",
+          "description": "Anonymous or other sign-in methods"
+        },
+        {
+          "name": "Cloud Firestore / Realtime Database",
+          "description": "Stored submissions or app data"
+        },
+        {
+          "name": "Firebase Storage",
+          "description": "File and content delivery"
+        },
+        {
+          "name": "Firebase Crashlytics",
+          "description": "Crash reports and device state to fix bugs"
+        }
+      ],
+      "googlePrivacy": "Google processes this data on our behalf as a service provider. See",
+      "googlePrivacyLinkText": "Google's Privacy Policy",
+      "otherIntro": "Other third parties may be used where relevant, for example:",
+      "otherItems": [
+        "Google Play / Apple App Store — purchases, subscriptions, or in-app review prompts (payment handled by the store)"
+      ],
+      "noSell": "We do not sell your personal information."
     },
     "howWeUseInformation": {
       "title": "How We Use Your Information",
@@ -437,7 +520,7 @@
     },
     "informationSharing": {
       "title": "Information Sharing",
-      "description": "We do not sell your personal information. Your data is never sold to third parties. We do not share your personal information with any third parties under any circumstances."
+      "description": "Data described in this policy may be shared with service providers (such as Google Firebase) solely to operate and improve the app. We do not sell your personal information and do not share your data with third parties for their own advertising purposes."
     },
     "apiKeys": {
       "title": "API Keys and Service Account Keys",
@@ -468,7 +551,8 @@
     },
     "dataRetention": {
       "title": "Data Retention",
-      "description": "We retain your personal information only for as long as necessary to fulfill the purposes outlined in this Privacy Policy, unless a longer retention period is required or permitted by law."
+      "onDevice": "On-device data: Kept until you delete it in the app, clear app storage, or uninstall.",
+      "server": "Server data: Kept as long as needed to provide the service, improve the app, and meet legal obligations, unless you request deletion."
     },
     "childrensPrivacy": {
       "title": "Children's Privacy",
