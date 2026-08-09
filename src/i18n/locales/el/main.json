@@ -246,6 +246,10 @@
   "portfolio": {
     "title": "Έργα",
     "items": {
+      "party": {
+        "title": "Party",
+        "description": "Εφαρμογή για κινητά με τοπικά multiplayer party games σε ένα τηλέφωνο — περνάτε το γύρω, πλήρως offline, χωρίς λογαριασμούς."
+      },
       "nourea": {
         "title": "Nourea",
         "description": "Εφαρμογή για κινητά που δημιουργεί εξατομικευμένα 4-εβδομαδιαία διατροφικά πλάνα με βάση ερωτηματολόγιο υγείας και lifestyle."

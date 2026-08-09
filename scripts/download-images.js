@@ -35,6 +35,7 @@ const PEXELS_QUERIES = {
   'niki-margariti': 'student laptop AI chatbot',
   'chronal': 'travel planning trip suitcase map',
   'nourea': 'healthy meal planning fresh fruits vegetables nutrition',
+  'party': 'friends playing party games laughing smartphone',
 };
 
 async function downloadImage(url, filepath) {

@@ -17,9 +17,21 @@ export interface PortfolioItem {
   logoBg?: string
   url?: string
   storeLinks?: StoreLinks
+  /** Show on /{slug} download page with coming-soon store buttons (no live links yet) */
+  storeComingSoon?: boolean
 }
 
 export const portfolioItems: PortfolioItem[] = [
+  {
+    key: 'party',
+    technologies: ["iOS", "Android", "Party Games", "Offline", "Multiplayer", "Local"],
+    bgColor: "bg-fuchsia-900/30",
+    textColor: "text-fuchsia-200",
+    bgImage: "/assets/portfolio/party.jpg",
+    logo: "/assets/logos/party.png",
+    logoBg: "bg-[#FFF8E7]",
+    storeComingSoon: true,
+  },
   {
     key: 'nourea',
     technologies: ["iOS", "Android", "Nutrition", "AI", "Meal Planning", "Health"],
