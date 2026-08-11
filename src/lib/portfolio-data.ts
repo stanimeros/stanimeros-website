@@ -31,7 +31,7 @@ export const portfolioItems: PortfolioItem[] = [
     logo: "/assets/logos/party.png",
     logoBg: "bg-[#FFF8E7]",
     storeLinks: {
-      apple: "https://testflight.apple.com/join/nvqXwGz7",
+      apple: "https://apps.apple.com/us/app/party-παιχνίδια-παρέας/id6799648046",
       android: "https://play.google.com/store/apps/details?id=com.stanimeros.party"
     }
   },
