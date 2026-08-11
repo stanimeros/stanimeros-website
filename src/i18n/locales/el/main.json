@@ -670,6 +670,18 @@
     "accept": "Αποδοχή",
     "decline": "Απόρριψη"
   },
+  "appDownload": {
+    "downloadOnThe": "Κατέβασέ το από το",
+    "appStore": "App Store",
+    "joinBetaOn": "Μπες στο beta στο",
+    "testflight": "TestFlight",
+    "getItOn": "Βρες το στο",
+    "googlePlay": "Google Play",
+    "googlePlayBeta": "Google Play (Beta)",
+    "comingSoonOnThe": "Έρχεται σύντομα στο",
+    "comingSoonOn": "Έρχεται σύντομα στο",
+    "madeBy": "Από τον"
+  },
   "chat": {
     "title": "Συνομιλία με τον βοηθό",
     "subtitle": "Ρώτησε για τις υπηρεσίες ή κλείσε μια κλήση με τον Παντελή",

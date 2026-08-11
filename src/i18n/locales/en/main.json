@@ -675,6 +675,18 @@
     "accept": "Accept",
     "decline": "Decline"
   },
+  "appDownload": {
+    "downloadOnThe": "Download on the",
+    "appStore": "App Store",
+    "joinBetaOn": "Join the beta on",
+    "testflight": "TestFlight",
+    "getItOn": "Get it on",
+    "googlePlay": "Google Play",
+    "googlePlayBeta": "Google Play (Beta)",
+    "comingSoonOnThe": "Coming soon on the",
+    "comingSoonOn": "Coming soon on",
+    "madeBy": "Made by"
+  },
   "chat": {
     "title": "Chat with the assistant",
     "subtitle": "Ask about services, or book a call with Pantelis",

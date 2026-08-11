@@ -58,7 +58,7 @@ function getAllSourceFiles(dir, fileList = []) {
       if (!['node_modules', 'dist', 'build', '.git'].includes(file)) {
         getAllSourceFiles(filePath, fileList);
       }
-    } else if (/\.(tsx?|jsx?)$/.test(file)) {
+    } else if (/\.(tsx?|jsx?|astro)$/.test(file)) {
       fileList.push(filePath);
     }
   }
