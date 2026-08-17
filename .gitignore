@@ -33,3 +33,6 @@ src/lib/firebase.ts
 scripts/gsc-oauth-client.json
 scripts/gsc-token.json
 scripts/gsc-service-account.json
+
+# Private business offers (IBAN, pricing, contact info) - never public
+offers/
