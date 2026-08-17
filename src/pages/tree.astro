@@ -206,26 +206,17 @@ const profilePageJsonLd = {
                 <span class="text-sm font-medium flex-1">{app.label}</span>
                 <div class="flex items-center gap-2 shrink-0">
                   {app.apple && (
-                    <div class="relative">
-                      <a
-                        href={app.apple}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`${app.label} on the App Store`}
-                        data-track-section="app-apple"
-                        data-track-label={app.label}
-                        data-apple-link
-                        class="inline-flex items-center justify-center size-7 rounded-full border border-border/60 hover:bg-accent transition-colors"
-                      >
-                        <Fragment set:html={appleIcon} />
-                      </a>
-                      <div
-                        data-apple-hint
-                        class="hidden absolute z-20 top-full right-0 mt-1.5 w-56 rounded-md border border-border/60 bg-card p-2.5 text-xs leading-snug shadow-md text-foreground text-left"
-                      >
-                        Instagram blocks this link. Tap ⋯ (top right) and choose "Open in Browser" to open the App Store.
-                      </div>
-                    </div>
+                    <a
+                      href={app.apple}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${app.label} on the App Store`}
+                      data-track-section="app-apple"
+                      data-track-label={app.label}
+                      class="inline-flex items-center justify-center size-7 rounded-full border border-border/60 hover:bg-accent transition-colors"
+                    >
+                      <Fragment set:html={appleIcon} />
+                    </a>
                   )}
                   {app.android && (
                     <a
@@ -277,22 +268,6 @@ const profilePageJsonLd = {
       import { trackEvent } from '@/lib/events'
 
       trackEvent('pageView', { page: 'tree' })
-
-      function isIosInstagramInAppBrowser() {
-        const ua = navigator.userAgent
-        return /Instagram/i.test(ua) && /iPhone|iPad|iPod/i.test(ua)
-      }
-
-      document.querySelectorAll<HTMLAnchorElement>('[data-apple-link]').forEach((link) => {
-        link.addEventListener('click', (e) => {
-          if (!isIosInstagramInAppBrowser()) return
-          e.preventDefault()
-          const hint = link.parentElement?.querySelector<HTMLElement>('[data-apple-hint]')
-          if (!hint) return
-          hint.classList.remove('hidden')
-          window.setTimeout(() => hint.classList.add('hidden'), 6000)
-        })
-      })
 
       document.querySelectorAll<HTMLElement>('[data-track-label]').forEach((el) => {
         el.addEventListener('click', () => {
