@@ -112,6 +112,160 @@
     <priority>0.3</priority>
   </url>
 
+  <!-- English Party app -->
+  <url>
+    <loc>https://stanimeros.com/party</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/party"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/party"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/party"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Greek Party app -->
+  <url>
+    <loc>https://stanimeros.com/el/party</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/party"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/party"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/party"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- English Chronal app -->
+  <url>
+    <loc>https://stanimeros.com/chronal</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/chronal"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/chronal"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/chronal"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Greek Chronal app -->
+  <url>
+    <loc>https://stanimeros.com/el/chronal</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/chronal"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/chronal"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/chronal"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- English Ski Greece app -->
+  <url>
+    <loc>https://stanimeros.com/ski-greece</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/ski-greece"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/ski-greece"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/ski-greece"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Greek Ski Greece app -->
+  <url>
+    <loc>https://stanimeros.com/el/ski-greece</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/ski-greece"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/ski-greece"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/ski-greece"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- English Fire Message app -->
+  <url>
+    <loc>https://stanimeros.com/fire-message</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/fire-message"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/fire-message"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/fire-message"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Greek Fire Message app -->
+  <url>
+    <loc>https://stanimeros.com/el/fire-message</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/fire-message"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/fire-message"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/fire-message"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- English Tattoo Healer app -->
+  <url>
+    <loc>https://stanimeros.com/tattoo-healer</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/tattoo-healer"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/tattoo-healer"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/tattoo-healer"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Greek Tattoo Healer app -->
+  <url>
+    <loc>https://stanimeros.com/el/tattoo-healer</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/tattoo-healer"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/tattoo-healer"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/tattoo-healer"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- English ATPro Partner app -->
+  <url>
+    <loc>https://stanimeros.com/atpro-partner</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/atpro-partner"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/atpro-partner"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/atpro-partner"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Greek ATPro Partner app -->
+  <url>
+    <loc>https://stanimeros.com/el/atpro-partner</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/atpro-partner"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/atpro-partner"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/atpro-partner"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- English Hedeos app -->
+  <url>
+    <loc>https://stanimeros.com/hedeos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/hedeos"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/hedeos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/hedeos"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Greek Hedeos app -->
+  <url>
+    <loc>https://stanimeros.com/el/hedeos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/hedeos"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/hedeos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/hedeos"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
   <!-- Links / bio page -->
   <url>
     <loc>https://stanimeros.com/tree</loc>

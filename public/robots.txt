@@ -39,6 +39,22 @@ Allow: /privacy-policy
 Allow: /data-deletion
 Allow: /tree
 
+# App download pages
+Allow: /party
+Allow: /el/party
+Allow: /chronal
+Allow: /el/chronal
+Allow: /ski-greece
+Allow: /el/ski-greece
+Allow: /fire-message
+Allow: /el/fire-message
+Allow: /tattoo-healer
+Allow: /el/tattoo-healer
+Allow: /atpro-partner
+Allow: /el/atpro-partner
+Allow: /hedeos
+Allow: /el/hedeos
+
 # Note: Crawl-delay removed for better SEO indexing speed
 # Search engines will use their own crawl rate limits
 
