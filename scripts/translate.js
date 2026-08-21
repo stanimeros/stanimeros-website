@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { execSync } from 'child_process';
+import crypto from 'crypto';
 import { translate } from "i18n-ai-translate";
 import dotenv from 'dotenv';
 dotenv.config();
@@ -14,6 +14,11 @@ const LOCALES_PATH = path.join(__dirname, '../src/i18n/locales');
 const SOURCE_PATH = path.join(__dirname, '../src');
 const TARGET_LANGUAGES = ['el'];
 const BATCH_SIZE = 50;
+// Tracks the English text hash each key was last translated from, so re-translation
+// only fires when the English source actually changes - not merely because the
+// working tree has an uncommitted diff (git-diff-based detection used to re-translate,
+// and silently overwrite, keys on every run until the change was committed).
+const TRANSLATION_CACHE_PATH = path.join(LOCALES_PATH, '.translation-cache.json');
 
 // Custom translation prompts with domain context
 const TRANSLATION_PROMPTS = {
@@ -515,58 +520,79 @@ function findObsoleteKeys(sourceObj, targetObj, prefix = '') {
   return obsolete;
 }
 
-// Use git diff to find changed keys in English files
-function findChangedKeysUsingGitDiff(enFilePath) {
-  try {
-    const projectRoot = path.join(__dirname, '..');
-    const relativePath = path.relative(projectRoot, enFilePath);
-    
-    // Get the committed version from git
-    let committedJSON = null;
-    try {
-      const committedContent = execSync(`git show HEAD:${relativePath}`, {
-        cwd: projectRoot,
-        encoding: 'utf8',
-        stdio: ['pipe', 'pipe', 'pipe']
-      });
-      committedJSON = JSON.parse(committedContent);
-    } catch (e) {
-      // File might not exist in HEAD, that's okay
-      return [];
+function hashLeafValue(value) {
+  return crypto.createHash('sha1').update(JSON.stringify(value)).digest('hex');
+}
+
+function getAllLeafEntries(obj, prefix = '') {
+  const result = new Map();
+  for (const key in obj) {
+    const currentPath = prefix ? `${prefix}.${key}` : key;
+    if (typeof obj[key] === 'object' && obj[key] !== null && !Array.isArray(obj[key])) {
+      const nested = getAllLeafEntries(obj[key], currentPath);
+      nested.forEach((nestedValue, nestedKey) => result.set(nestedKey, nestedValue));
+    } else {
+      result.set(currentPath, obj[key]);
     }
-    
-    // Get current version
-    const currentJSON = JSON.parse(fs.readFileSync(enFilePath, 'utf8'));
-    
-    // Compare and find changed leaf values
-    const changedKeys = [];
-    
-    function compareObjects(source, target, prefix = '') {
-      for (const key in source) {
-        const currentPath = prefix ? `${prefix}.${key}` : key;
-        
-        if (typeof source[key] === 'object' && source[key] !== null && !Array.isArray(source[key])) {
-          // Nested object - recurse
-          if (target && target[key] && typeof target[key] === 'object' && !Array.isArray(target[key])) {
-            compareObjects(source[key], target[key], currentPath);
-          }
-        } else {
-          // Leaf value - check if changed
-          if (target && key in target) {
-            if (String(source[key]) !== String(target[key])) {
-              changedKeys.push(currentPath);
-            }
-          }
-        }
-      }
-    }
-    
-    compareObjects(committedJSON, currentJSON);
-    return changedKeys;
-  } catch (error) {
-    // If git command fails (e.g., not a git repo, file not in git), return empty array
-    return [];
   }
+  return result;
+}
+
+function loadTranslationCache() {
+  try {
+    return JSON.parse(fs.readFileSync(TRANSLATION_CACHE_PATH, 'utf8'));
+  } catch {
+    return {};
+  }
+}
+
+function saveTranslationCache(cache) {
+  fs.writeFileSync(TRANSLATION_CACHE_PATH, JSON.stringify(cache, null, 2) + '\n');
+}
+
+// Find English keys whose text differs from the hash recorded the last time
+// translation ran for them, using the persisted cache rather than git history.
+function findChangedKeysUsingCache(enFilePath, langCode, filename, cache) {
+  const cachedHashes = cache[langCode]?.[filename];
+
+  // No baseline recorded yet for this file (e.g. first run after introducing the
+  // cache) - treat as nothing changed rather than flagging every key, and let
+  // updateTranslationCache() establish the baseline at the end of this run.
+  if (!cachedHashes) return [];
+
+  const currentJSON = JSON.parse(fs.readFileSync(enFilePath, 'utf8'));
+  const leafEntries = getAllLeafEntries(currentJSON);
+
+  const changedKeys = [];
+  for (const [key, value] of leafEntries) {
+    // A key with no recorded hash is new, not changed - STEP 6 handles new keys.
+    if (key in cachedHashes && cachedHashes[key] !== hashLeafValue(value)) {
+      changedKeys.push(key);
+    }
+  }
+  return changedKeys;
+}
+
+// Record the current English text hash for every key, so the next run only
+// re-translates keys whose English source actually changed since this run.
+function updateTranslationCache() {
+  const cache = loadTranslationCache();
+  const enPath = path.join(LOCALES_PATH, 'en');
+  const enFiles = fs.readdirSync(enPath).filter(f => f.endsWith('.json'));
+
+  for (const langCode of TARGET_LANGUAGES) {
+    cache[langCode] = cache[langCode] ?? {};
+    for (const filename of enFiles) {
+      const enFilePath = path.join(enPath, filename);
+      const currentJSON = JSON.parse(fs.readFileSync(enFilePath, 'utf8'));
+      const hashes = {};
+      for (const [key, value] of getAllLeafEntries(currentJSON)) {
+        hashes[key] = hashLeafValue(value);
+      }
+      cache[langCode][filename] = hashes;
+    }
+  }
+  saveTranslationCache(cache);
 }
 
 function removeObsoleteKeysFromTarget(targetObj, obsoletePaths) {
@@ -578,34 +604,35 @@ function removeObsoleteKeysFromTarget(targetObj, obsoletePaths) {
 
 function syncEnglishChangesToOtherLanguages() {
   console.log('=== STEP 5: Syncing English changes to other languages ===');
-  
+
   const enPath = path.join(LOCALES_PATH, 'en');
   const enFiles = fs.readdirSync(enPath).filter(f => f.endsWith('.json'));
+  const cache = loadTranslationCache();
   let totalObsoleteRemoved = 0;
   let totalChangedRemoved = 0;
-  
+
   for (const langCode of TARGET_LANGUAGES) {
     console.log(`  Processing ${langCode}...`);
-    
+
     for (const filename of enFiles) {
       const enFilePath = path.join(enPath, filename);
       const targetFilePath = path.join(LOCALES_PATH, langCode, filename);
-      
+
       if (!fs.existsSync(targetFilePath)) {
         continue;
       }
-      
+
       const sourceJSON = JSON.parse(fs.readFileSync(enFilePath, 'utf8'));
       const targetJSON = JSON.parse(fs.readFileSync(targetFilePath, 'utf8'));
-      
+
       // Find obsolete keys (exist in target but not in source)
       const obsoleteKeys = findObsoleteKeys(sourceJSON, targetJSON);
-      
-      // Find changed keys using git diff (only keys that actually changed)
-      const changedKeys = findChangedKeysUsingGitDiff(enFilePath);
-      
+
+      // Find keys whose English text changed since the last successful translation run
+      const changedKeys = findChangedKeysUsingCache(enFilePath, langCode, filename, cache);
+
       let needsUpdate = false;
-      
+
       if (obsoleteKeys.length > 0) {
         console.log(`    ${filename} - removing ${obsoleteKeys.length} obsolete key(s): ${obsoleteKeys.slice(0, 5).join(', ')}${obsoleteKeys.length > 5 ? ` ... and ${obsoleteKeys.length - 5} more` : ''}`);
         removeObsoleteKeysFromTarget(targetJSON, obsoleteKeys);
@@ -840,7 +867,10 @@ async function main() {
   
   // Step 6: Translate missing keys
   await translateMissingKeys();
-  
+
+  // Record English hashes so unchanged keys are never re-translated on the next run
+  updateTranslationCache();
+
   console.log('=== All done! ===');
 }
 

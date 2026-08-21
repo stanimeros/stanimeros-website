@@ -687,7 +687,6 @@
     "sectionSocial": "Social",
     "sectionApps": "Εφαρμογές",
     "sectionWebsites": "Ιστότοποι",
-    "langSwitch": "English",
     "items": {
       "party": "Party games για φίλους, offline",
       "chronal": "Ταξίδια & ζωντανές ισοτιμίες",
@@ -704,7 +703,8 @@
       "transHellas": "Tracking δεμάτων Γερμανία–Ελλάδα",
       "etui": "Πολυτελείς συσκευασίες κοσμημάτων",
       "ekarotsi": "Online delivery σούπερ μάρκετ"
-    }
+    },
+    "langSwitch": "English"
   },
   "chat": {
     "title": "Συνομιλία με τον βοηθό",
