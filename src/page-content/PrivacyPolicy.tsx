@@ -63,7 +63,7 @@ const PRIVACY_POLICY_PRESETS: Record<string, { appName: string; developer: strin
     contactEmail: "hello@stanimeros.com",
   },
   "party": {
-    appName: "Party",
+    appName: "Party - Play with friends",
     developer: "STANIMEROS PANTELEIMON",
     company: "STANIMEROS PANTELEIMON",
     contactEmail: "hello@stanimeros.com",

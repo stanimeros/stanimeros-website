@@ -57,7 +57,7 @@ const DATA_DELETION_PRESETS: Record<string, { appName: string; developer: string
     contactEmail: "hello@stanimeros.com",
   },
   "party": {
-    appName: "Party",
+    appName: "Party - Play with friends",
     developer: "STANIMEROS PANTELEIMON",
     company: "STANIMEROS PANTELEIMON",
     contactEmail: "hello@stanimeros.com",
