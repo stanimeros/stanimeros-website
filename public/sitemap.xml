@@ -269,7 +269,20 @@
   <!-- Links / bio page -->
   <url>
     <loc>https://stanimeros.com/tree</loc>
-    <lastmod>2026-08-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/tree"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/tree"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/tree"/>
+    <lastmod>2026-08-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/tree</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/tree"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/tree"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/tree"/>
+    <lastmod>2026-08-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

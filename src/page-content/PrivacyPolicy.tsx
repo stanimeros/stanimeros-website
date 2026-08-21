@@ -326,7 +326,7 @@ const PrivacyPolicy = ({ appSlug, lang }: PrivacyPolicyProps) => {
                 {(t('privacyPolicy.thirdPartyServices.firebaseItems', { returnObjects: true }) as Array<{ name: string; description: string }>).map((item, index) => (
                   <li key={index}>
                     <span className="font-medium text-foreground">{item.name}</span>
-                    {' — '}
+                    {' - '}
                     {item.description}
                   </li>
                 ))}

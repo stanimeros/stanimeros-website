@@ -38,6 +38,7 @@ Allow: /el/contact
 Allow: /privacy-policy
 Allow: /data-deletion
 Allow: /tree
+Allow: /el/tree
 
 # App download pages
 Allow: /party

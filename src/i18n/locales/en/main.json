@@ -248,7 +248,7 @@
     "items": {
       "party": {
         "title": "Party - Play with friends",
-        "description": "Mobile app with local multiplayer party games on one phone — pass it around, fully offline, no accounts needed."
+        "description": "Mobile app with local multiplayer party games on one phone, pass it around, fully offline, no accounts needed."
       },
       "nourea": {
         "title": "Nourea",
@@ -503,7 +503,7 @@
       "googlePrivacyLinkText": "Google's Privacy Policy",
       "otherIntro": "Other third parties may be used where relevant, for example:",
       "otherItems": [
-        "Google Play / Apple App Store — purchases, subscriptions, or in-app review prompts (payment handled by the store)"
+        "Google Play / Apple App Store - purchases, subscriptions, or in-app review prompts (payment handled by the store)"
       ],
       "noSell": "We do not sell your personal information."
     },
@@ -572,7 +572,7 @@
       "title": "Legal Basis for Processing (GDPR Art. 6)",
       "description": "We process your personal data on the following legal bases:",
       "items": [
-        "Consent (Art. 6(1)(a)): analytics cookies and tracking — only after you accept via the cookie banner.",
+        "Consent (Art. 6(1)(a)): analytics cookies and tracking, only after you accept via the cookie banner.",
         "Legitimate interests (Art. 6(1)(f)): security, fraud prevention, and basic site functionality.",
         "Legal obligation (Art. 6(1)(c)): where required by applicable law."
       ]
@@ -687,10 +687,34 @@
     "comingSoonOn": "Coming soon on",
     "madeBy": "Made by"
   },
+  "tree": {
+    "tagline": "Freelance software engineer · AI agents & apps",
+    "sectionSocial": "Social",
+    "sectionApps": "Apps",
+    "sectionWebsites": "Websites",
+    "langSwitch": "Ελληνικά",
+    "items": {
+      "party": "Offline party games for friends",
+      "chronal": "Trip planning & currency rates",
+      "skiGreece": "Guide to Greek ski resorts",
+      "fireMessage": "Push notifications, made easy",
+      "tattooHealer": "Tattoo aftercare, made simple",
+      "atproPartner": "Bookings for hotels & transfers",
+      "hedeos": "Learn Greek through quizzes",
+      "irisdrop": "File uploads for print shops",
+      "athensMytransfer": "Book Athens airport transfers",
+      "veridictum": "AI for legal document analysis",
+      "process": "Live manufacturing monitoring",
+      "nikiMargariti": "AI chatbot for students",
+      "transHellas": "Parcel tracking Germany–Greece",
+      "etui": "Luxury jewelry packaging shop",
+      "ekarotsi": "Online supermarket delivery"
+    }
+  },
   "chat": {
     "title": "Chat with the assistant",
     "subtitle": "Ask about services, or book a call with Pantelis",
-    "greeting": "Hi! I'm here to help with questions about AI agents, apps, or automation — and I can help you book a call with Pantelis if it's a good fit. What's on your mind?",
+    "greeting": "Hi! I'm here to help with questions about AI agents, apps, or automation, and I can help you book a call with Pantelis if it's a good fit. What's on your mind?",
     "placeholder": "Type a message...",
     "send": "Send",
     "openLabel": "Open chat",

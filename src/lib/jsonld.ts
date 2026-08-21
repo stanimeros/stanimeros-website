@@ -1,7 +1,7 @@
 export const professionalServiceJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: "Pantelis Stanimeros — Software Engineer",
+  name: "Pantelis Stanimeros - Software Engineer",
   url: "https://stanimeros.com",
   image: "https://stanimeros.com/images/logo-glass-black.png",
   description: "Freelance software engineer based in Thessaloniki, Greece. Specializing in AI agents, automation, mobile apps, custom dashboards, and optimization systems for businesses.",
@@ -42,7 +42,7 @@ export const homeFaqJsonLd = {
       name: "How does an AI agent actually work for my business?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "An AI agent is a program that handles tasks automatically on your behalf — answering customer questions, processing requests, sending follow-ups, or running internal workflows. You define what it should do, and it runs 24/7 without needing someone to manage it manually. Think of it as a team member that never sleeps and never makes the same mistake twice.",
+        text: "An AI agent is a program that handles tasks automatically on your behalf, answering customer questions, processing requests, sending follow-ups, or running internal workflows. You define what it should do, and it runs 24/7 without needing someone to manage it manually. Think of it as a team member that never sleeps and never makes the same mistake twice.",
       },
     },
     {
@@ -50,7 +50,7 @@ export const homeFaqJsonLd = {
       name: "Do I need technical knowledge to use what you build?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Not at all. Everything is built with the end user in mind — whether that's you, your team, or your customers. You get a simple interface to manage things, and all the technical complexity is handled behind the scenes.",
+        text: "Not at all. Everything is built with the end user in mind, whether that's you, your team, or your customers. You get a simple interface to manage things, and all the technical complexity is handled behind the scenes.",
       },
     },
     {
@@ -58,7 +58,7 @@ export const homeFaqJsonLd = {
       name: "What kind of problems can you solve with optimization?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Any problem where you're trying to find the best arrangement, schedule, or allocation — and doing it manually takes too long or gives poor results. Common examples: employee scheduling with shift constraints, delivery route planning, matching resources to tasks, or deciding the optimal mix of products or services.",
+        text: "Any problem where you're trying to find the best arrangement, schedule, or allocation, and doing it manually takes too long or gives poor results. Common examples: employee scheduling with shift constraints, delivery route planning, matching resources to tasks, or deciding the optimal mix of products or services.",
       },
     },
     {
