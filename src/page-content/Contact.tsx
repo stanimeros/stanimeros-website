@@ -110,10 +110,10 @@ export default function Contact() {
       {/* Hero + trust features */}
       <motion.section
         ref={heroRef}
-        className="py-20 scroll-mt-10 overflow-hidden"
+        className="pt-20 pb-8 scroll-mt-10 overflow-hidden"
         {...(heroAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               <PhoneIcon className="inline h-8 w-8 text-primary mr-3 align-text-bottom" />
               {t('contact.title')}
@@ -130,6 +130,11 @@ export default function Contact() {
         className="pb-20 scroll-mt-10 overflow-hidden"
         {...(formAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <p className="text-sm text-muted-foreground mb-3">{t('contact.channels.title')}</p>
+            <ContactChannels className="flex flex-wrap justify-center gap-3" />
+          </div>
+
           {status === "success" ? (
             <div className="text-center space-y-4 max-w-lg mx-auto">
               <CheckCircleIcon className="h-16 w-16 text-green-400 mx-auto" />
@@ -217,11 +222,6 @@ export default function Contact() {
                 </div>
               </div>
             ))}
-          </div>
-
-          <div className="text-center mt-10">
-            <p className="text-sm text-muted-foreground mb-3">{t('contact.channels.title')}</p>
-            <ContactChannels className="flex flex-wrap justify-center gap-3" />
           </div>
         </div>
       </motion.section>
