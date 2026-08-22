@@ -25,7 +25,6 @@ import {
   PhoneIcon,
   CalendarDaysIcon,
   GlobeAltIcon,
-  Squares2X2Icon,
 } from "@heroicons/react/24/outline"
 const GitHubCalendarComponent = lazy(() => import("@/components/GitHubCalendar"))
 import WhySection from "@/components/WhySection"
@@ -474,14 +473,6 @@ const HomeSections = ({ lang }: HomeSectionsProps) => {
                 />
               </motion.div>
             ))}
-          </div>
-          <div className="text-center mt-12">
-            <Button variant="outline" size="lg" asChild>
-              <a href={`${workPrefix}/services`}>
-                <Squares2X2Icon className="size-5 mr-2 stroke-[1.5]" />
-                {t('portfolio.viewAll')}
-              </a>
-            </Button>
           </div>
         </div>
       </motion.section>
