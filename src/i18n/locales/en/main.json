@@ -277,7 +277,6 @@
   "portfolio": {
     "title": "Portfolio",
     "subtitle": "Some of the projects I've built. See the full portfolio for more.",
-    "viewAll": "View All Projects",
     "items": {
       "party": {
         "title": "Party - Play with friends",
