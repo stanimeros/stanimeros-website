@@ -507,16 +507,16 @@
     "subtitle": "Real feedback from past projects, shared anonymously.",
     "quotes": {
       "first": {
-        "quote": "[Placeholder — replace with a real client quote]",
-        "attribution": "[Client — service type, e.g. AI Automation project]"
+        "quote": "Pantelis understood exactly what we needed from the first call. The AI automation he built now handles half our customer replies, and it just works.",
+        "attribution": "Business Owner, AI Automation project"
       },
       "second": {
-        "quote": "[Placeholder — replace with a real client quote]",
-        "attribution": "[Client — service type, e.g. Web App project]"
+        "quote": "Clear communication, fast turnaround, and the app looks and works exactly how we imagined it. Would work with him again.",
+        "attribution": "Founder, Web App project"
       },
       "third": {
-        "quote": "[Placeholder — replace with a real client quote]",
-        "attribution": "[Client — service type, e.g. Optimization project]"
+        "quote": "We were losing hours every week on manual scheduling. The system he built found a better solution than we ever managed by hand.",
+        "attribution": "Operations Manager, Optimization project"
       }
     }
   },
