@@ -44,6 +44,8 @@ export interface PortfolioCardProps {
   logoBg?: string
   /** Optional link URL - when set, card becomes clickable */
   url?: string
+  /** Optional internal case-study page link (e.g. /work/slug), shown as a text link */
+  caseStudyHref?: string
   /** Optional App Store / Play Store links shown as chips */
   storeLinks?: StoreLinks
   /** Translated title (passed from parent for display) */
@@ -62,6 +64,7 @@ export function PortfolioCard({
   logoAlt,
   logoBg,
   url,
+  caseStudyHref,
   storeLinks,
   title,
   description,
@@ -165,6 +168,15 @@ export function PortfolioCard({
           ))}
         </div>
         <CardDescription className="mt-3">{description}</CardDescription>
+        {caseStudyHref && (
+          <a
+            href={caseStudyHref}
+            onClick={(e) => e.stopPropagation()}
+            className="inline-flex items-center text-xs font-medium text-primary hover:underline mt-3"
+          >
+            {t("portfolioCard.viewCaseStudy")}
+          </a>
+        )}
         {storeLinks && (storeLinks.apple || storeLinks.android) && (
           <div className="flex flex-wrap gap-2 mt-3">
             {storeLinks.apple && (

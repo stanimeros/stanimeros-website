@@ -2,12 +2,12 @@
 # This file provides guidance for AI agents and crawlers
 
 # Contact Information
-Contact: https://stanimeros.com/en/contact
+Contact: https://stanimeros.com/contact
 Owner: Pantelis Stanimeros
 
 # Site Information
 Site: https://stanimeros.com
-Description: Freelance software engineer in Thessaloniki, Greece. Builds AI agents, mobile apps, and custom automations for businesses.
+Description: Freelance software engineer in Thessaloniki, Greece. Builds websites, mobile apps, and AI automation for businesses.
 
 # Allowed AI Agents
 # Allow all AI agents to crawl and index content
@@ -43,15 +43,17 @@ Allow: /
 # Preferred content locations
 # Main pages
 Allow: /
-Allow: /en/contact
+Allow: /services
+Allow: /about
+Allow: /contact
+Allow: /el/services
+Allow: /el/about
 Allow: /el/contact
 Allow: /privacy-policy
 Allow: /data-deletion
 
-# Tools
-Allow: /tools/qr-code
-Allow: /tools/image-converter
-Allow: /tools/video-compressor
+# Case studies
+Allow: /work/
 
 # Static assets
 Allow: /images/
@@ -59,5 +61,4 @@ Allow: /images/
 # Crawl instructions
 # AI agents should respect rate limits and be considerate
 # Preferred crawl frequency: Moderate
-# Last updated: 2026
-
+# Last updated: 2026-08-22

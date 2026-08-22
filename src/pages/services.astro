@@ -1,18 +1,20 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
 import LocalizedServices from '@/page-content/Services.localized'
+import { servicesOfferJsonLd } from '@/lib/jsonld'
 ---
 
 <BaseLayout
   lang="en"
-  title="Services | AI Agents, Apps & Optimization | Pantelis Stanimeros"
-  description="AI agents & automation, mobile apps & dashboards, and smart optimization systems for scheduling, routing, and allocation. Based in Thessaloniki, Greece."
+  title="Services & Pricing | Websites From €350, Apps From €950"
+  description="Websites, apps & dashboards, and AI automation & optimization systems. Clear pricing from €350, custom quotes for AI work. Based in Thessaloniki, Greece."
   canonical="https://stanimeros.com/services"
   hreflangAlternates={[
     { hreflang: 'en', href: 'https://stanimeros.com/services' },
     { hreflang: 'el', href: 'https://stanimeros.com/el/services' },
     { hreflang: 'x-default', href: 'https://stanimeros.com/services' },
   ]}
+  jsonLd={[servicesOfferJsonLd]}
 >
   <LocalizedServices lang="en" client:load />
 </BaseLayout>

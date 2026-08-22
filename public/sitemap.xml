@@ -266,6 +266,387 @@
     <priority>0.6</priority>
   </url>
 
+  <!-- Case study / work pages -->
+  <url>
+    <loc>https://stanimeros.com/work/party</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/party"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/party"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/party"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/party</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/party"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/party"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/party"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/nourea</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/nourea"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/nourea"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/nourea"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/nourea</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/nourea"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/nourea"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/nourea"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/chronal</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/chronal"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/chronal"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/chronal"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/chronal</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/chronal"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/chronal"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/chronal"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/irisdrop</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/irisdrop"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/irisdrop"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/irisdrop"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/irisdrop</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/irisdrop"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/irisdrop"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/irisdrop"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/athens-mytransfer</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/athens-mytransfer"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/athens-mytransfer"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/athens-mytransfer"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/athens-mytransfer</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/athens-mytransfer"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/athens-mytransfer"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/athens-mytransfer"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/veridictum</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/veridictum"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/veridictum"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/veridictum"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/veridictum</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/veridictum"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/veridictum"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/veridictum"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/process</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/process"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/process"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/process"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/process</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/process"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/process"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/process"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/ski-greece</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/ski-greece"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/ski-greece"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/ski-greece"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/ski-greece</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/ski-greece"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/ski-greece"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/ski-greece"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/niki-margariti</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/niki-margariti"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/niki-margariti"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/niki-margariti"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/niki-margariti</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/niki-margariti"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/niki-margariti"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/niki-margariti"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/fire-message</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/fire-message"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/fire-message"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/fire-message"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/fire-message</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/fire-message"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/fire-message"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/fire-message"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/tattoo-healer</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/tattoo-healer"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/tattoo-healer"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/tattoo-healer"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/tattoo-healer</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/tattoo-healer"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/tattoo-healer"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/tattoo-healer"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/trans-hellas</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/trans-hellas"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/trans-hellas"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/trans-hellas"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/trans-hellas</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/trans-hellas"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/trans-hellas"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/trans-hellas"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/etui</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/etui"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/etui"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/etui"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/etui</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/etui"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/etui"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/etui"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/ridefast</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/ridefast"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/ridefast"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/ridefast"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/ridefast</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/ridefast"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/ridefast"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/ridefast"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/atpro-partner</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/atpro-partner"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/atpro-partner"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/atpro-partner"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/atpro-partner</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/atpro-partner"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/atpro-partner"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/atpro-partner"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/meal-ai</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/meal-ai"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/meal-ai"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/meal-ai"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/meal-ai</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/meal-ai"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/meal-ai"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/meal-ai"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/near</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/near"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/near"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/near"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/near</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/near"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/near"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/near"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/hedeos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/hedeos"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/hedeos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/hedeos"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/hedeos</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/hedeos"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/hedeos"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/hedeos"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/work/ekarotsi</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/ekarotsi"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/ekarotsi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/ekarotsi"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://stanimeros.com/el/work/ekarotsi</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://stanimeros.com/work/ekarotsi"/>
+    <xhtml:link rel="alternate" hreflang="el" href="https://stanimeros.com/el/work/ekarotsi"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://stanimeros.com/work/ekarotsi"/>
+    <lastmod>2026-08-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
   <!-- Links / bio page -->
   <url>
     <loc>https://stanimeros.com/tree</loc>

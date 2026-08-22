@@ -29,7 +29,7 @@
   },
   "hero": {
     "title": "Pantelis Stanimeros",
-    "subtitleBefore": "AI agents, smart apps, and ",
+    "subtitleBefore": "AI, smart apps, and ",
     "subtitleHighlight": "real solutions",
     "subtitleAfter": " for real business problems",
     "viewPackages": "View Packages",
@@ -38,7 +38,7 @@
   "about": {
     "title": "About Me",
     "name": "Pantelis Stanimeros",
-    "description1": "Based in Thessaloniki, I hold a Bachelor's in Computer Science and an MSc in AI & Data Analytics. I build AI agents, automations, mobile apps, and custom dashboards, tools that save time, cut costs, and help businesses make better decisions every day.",
+    "description1": "Based in Thessaloniki, I hold a Bachelor's in Computer Science and an MSc in AI & Data Analytics. I build AI-driven automation, mobile apps, and custom dashboards, tools that save time, cut costs, and help businesses make better decisions every day.",
     "description2": "I also tackle harder business problems: finding the best schedule when there are hundreds of constraints, training AI on your own data, or building a system that picks the optimal route, allocation, or plan automatically. If it's a problem that costs your business time or money, there's likely a smart solution for it.",
     "githubDescription": "Committed to consistent, high-quality updates."
   },
@@ -47,15 +47,15 @@
     "intro": "I'm Pantelis Stanimeros, a freelance developer based in Thessaloniki, Greece.",
     "background": {
       "title": "Background",
-      "paragraph": "I hold a Bachelor's degree in Computer Science and an MSc in AI & Data Analytics. That combination shapes how I work: I build software with solid engineering foundations, and I bring machine learning and data-driven thinking into it wherever it adds real value, not just as a buzzword."
+      "paragraph": "I hold a Bachelor's degree in Computer Science and an MSc in AI & Data Analytics. That shapes how I work: solid engineering foundations, with machine learning and data-driven thinking added wherever it adds real value, not just as a buzzword."
     },
     "problems": {
       "title": "The kind of problems I like solving",
-      "paragraph": "I build AI agents, automations, mobile apps, and custom dashboards, the kind of tools that save time, cut costs, and help a business make better decisions every day. I'm especially drawn to the harder problems behind the scenes: finding the best schedule when there are dozens of constraints to satisfy, training AI on a business's own data instead of a generic model, or building a system that automatically works out the optimal route, allocation, or plan. If a problem feels like a puzzle that costs time or money every time it's solved by hand, there's usually a smarter way to handle it."
+      "paragraph": "I build AI-driven automation, mobile apps, and custom dashboards, tools that save time, cut costs, and improve decisions. I'm especially drawn to harder problems: optimal scheduling under dozens of constraints, training AI on your own data, or systems that work out the best route or allocation automatically."
     },
     "whyWorkWithMe": {
       "title": "Why businesses work with me",
-      "paragraph": "Many of the businesses I work with come to me because their team is stuck doing the same repetitive tasks every day, making decisions on gut feeling instead of data, wrestling with scheduling and planning, or lacking a clear real-time picture of what's happening. I work end-to-end, from the first strategy call through building, launching, and supporting the result, so you get a working solution rather than a stack of undocumented code handed off and forgotten."
+      "paragraph": "Businesses come to me when their team is stuck on repetitive tasks, making decisions on gut feeling instead of data, or lacking real-time visibility into what's happening. I work end-to-end, from the first call through launch and support, so you get a working solution, not undocumented code handed off and forgotten."
     },
     "cta": {
       "title": "Have a problem in mind?",
@@ -69,22 +69,36 @@
   },
   "packages": {
     "title": "Packages",
-    "subtitle": "Three clear paths to solving real business problems with technology",
-    "getQuote": "Get a custom quote",
-    "onlinePresence": {
-      "title": "AI Agents & Automation",
-      "description": "Replace repetitive work with AI that runs 24/7",
+    "subtitle": "Clear pricing where the work is well-defined, custom quotes where it depends on your needs",
+    "website": {
+      "title": "Website & Online Presence",
+      "description": "Everything you need to get found online, set up right from day one",
+      "price": "From €350 + VAT",
       "features": [
-        "AI agent for customer support or internal workflows",
+        "Custom domain setup",
+        "Landing page design & build",
+        "Google Search Console setup",
+        "Google Analytics setup",
+        "Google Business Profile setup"
+      ]
+    },
+    "onlinePresence": {
+      "title": "AI, Automation & Optimization",
+      "description": "Custom AI and automation systems that handle repetitive work and solve complex problems automatically",
+      "price": "Custom Quote",
+      "features": [
+        "AI for customer support or internal workflows",
         "Automated task handling without human input",
         "Integration with your existing tools and platforms",
-        "Custom triggers, actions, and responses",
-        "Analytics and performance monitoring"
+        "Scheduling, routing, and resource optimization",
+        "AI trained on your data, with predictions & recommendations"
       ]
     },
     "eShop": {
       "title": "Apps & Dashboards",
       "description": "Custom apps and dashboards built around your business",
+      "price": "From €950 + VAT",
+      "priceNote": "Mobile app from €1950 + VAT",
       "features": [
         "Web app, iOS app, and Android app",
         "Real-time dashboard with your key metrics",
@@ -93,25 +107,25 @@
         "Publishing to App Store and Google Play"
       ]
     },
-    "customApp": {
-      "title": "Optimization & AI",
-      "description": "Smart systems that find the best solution automatically",
+    "getStarted": "Get Started",
+    "maintenance": {
+      "title": "Maintenance",
+      "description": "Keep everything running smoothly after launch, so you never have to think about it",
+      "price": "Basic from €50/month + VAT",
       "features": [
-        "Scheduling and workforce optimization",
-        "Routing, logistics, and resource allocation",
-        "AI trained on your own business data",
-        "Predictions, classifications, and recommendations",
-        "Custom algorithms tailored to your problem"
+        "24/7 support line",
+        "Ongoing updates & refinements",
+        "Domain renewal",
+        "Hosting & server management"
       ]
     },
-    "getStarted": "Get Started",
-    "footer": "You will get a quote within 24 hours. We'll guide you end-to-end.",
+    "footer": "We respond within 2 hours. Prototypes are ready in 3–7 days, finalized projects in a few weeks.",
     "faq": {
       "title": "Frequently Asked Questions",
       "items": {
         "hosting": {
-          "question": "How does an AI agent actually work for my business?",
-          "answer": "An AI agent is a program that handles tasks automatically on your behalf, answering customer questions, processing requests, sending follow-ups, or running internal workflows. You define what it should do, and it runs 24/7 without needing someone to manage it manually. Think of it as a team member that never sleeps and never makes the same mistake twice."
+          "question": "How does AI automation actually work for my business?",
+          "answer": "AI automation handles tasks automatically on your behalf, answering customer questions, processing requests, sending follow-ups, or running internal workflows. You define what it should do, and it runs 24/7 without needing someone to manage it manually. Think of it as a team member that never sleeps and never makes the same mistake twice."
         },
         "googleBusiness": {
           "question": "Do I need technical knowledge to use what you build?",
@@ -119,7 +133,7 @@
         },
         "eshopPlatforms": {
           "question": "What kind of data do I need to train an AI on my business?",
-          "answer": "It depends on what you want the AI to do. For a customer support agent, your existing documents, FAQs, or product descriptions are enough. For predictions or recommendations, historical records like past orders, schedules, or outcomes work well. You don't need a huge dataset, even a few hundred records can be a good starting point. We'll assess what you have and what's possible."
+          "answer": "It depends on what you want the AI to do. For customer support AI, your existing documents, FAQs, or product descriptions are enough. For predictions or recommendations, historical records like past orders, schedules, or outcomes work well. You don't need a huge dataset, even a few hundred records can be a good starting point. We'll assess what you have and what's possible."
         },
         "customization": {
           "question": "What kind of problems can you solve with optimization?",
@@ -131,7 +145,23 @@
         },
         "timeToLaunch": {
           "question": "How long does it take to build and deploy?",
-          "answer": "A focused AI agent or automation can be up and running in 1–2 weeks. Custom apps and dashboards typically take 3–6 weeks depending on complexity. Optimization systems vary based on the problem. After the free strategy call, you'll get a clear timeline before committing to anything."
+          "answer": "You'll see a working prototype in 3–7 days. From there, a finalized, launch-ready project typically takes a few weeks, depending on complexity. After the free strategy call, you'll get a clear timeline before committing to anything."
+        },
+        "ownership": {
+          "question": "Do I own the site and code once it's done?",
+          "answer": "Yes, 100%. Everything I build is yours: the code, the design, the hosting setup. There's no lock-in, and you're free to move it, extend it, or hand it to another developer whenever you want."
+        },
+        "seo": {
+          "question": "Will my site actually show up on Google?",
+          "answer": "Every site and landing page I build ships SEO-ready: proper meta tags, structured data, and fast load times from day one. That's the foundation Google needs to index and rank you; how fast you climb after that also depends on your content and competition."
+        },
+        "noContent": {
+          "question": "I don't have photos, a logo, or brand colors yet. Is that a problem?",
+          "answer": "Not at all. Tell me what you have in mind, or show me a site you like, and I'll put together a design direction for you, photos, logo, and colors included if you need them."
+        },
+        "payBeforeSeeing": {
+          "question": "How does payment work?",
+          "answer": "You get a free strategy call and a clear scope and price within 2 hours, so there are no surprises. Getting started requires a deposit to lock in the work, and from there you'll see a working prototype in 3–7 days, so you know it's on track early on."
         }
       }
     }
@@ -171,7 +201,7 @@
       },
       "quote": {
         "title": "Get a Quote",
-        "description": "You get a clear scope and price within 24 hours, so you know exactly what you're paying for before anything starts."
+        "description": "You get a clear scope and price within 2 hours, so you know exactly what you're paying for before anything starts."
       },
       "build": {
         "title": "Build & Develop",
@@ -186,8 +216,8 @@
   "services": {
     "title": "Services",
     "consulting": {
-      "title": "AI Agents & Automation",
-      "description": "AI agents that handle tasks automatically, answering customers, processing requests, or running workflows 24/7 without human input."
+      "title": "AI & Automation",
+      "description": "AI that handles tasks automatically, answering customers, processing requests, or running workflows 24/7 without human input."
     },
     "websites": {
       "title": "Mobile Apps & Dashboards",
@@ -208,20 +238,20 @@
     "intro": "Below is a fuller look at what I build. Every service can stand on its own or combine with the others into a single system tailored to your business.",
     "items": {
       "automation": {
-        "title": "AI Agents & Automation",
-        "description": "I build AI agents that handle work automatically, 24 hours a day. That can mean a customer support agent that answers questions and processes requests without a human in the loop, an internal workflow bot that moves data between the tools you already use, or a system with custom triggers and actions that reacts the moment something happens in your business. Every agent comes with analytics and performance monitoring, so you always know what it's doing and how well it's doing it."
+        "title": "AI & Automation",
+        "description": "AI that handles support, workflows, and repetitive tasks automatically, 24/7."
       },
       "apps": {
         "title": "Mobile Apps & Dashboards",
-        "description": "I design and build custom web apps, iOS apps, and Android apps around the way your business actually works, plus real-time dashboards that give you full visibility into the metrics that matter. This includes custom functionality and APIs, a properly set up database and cloud hosting, and publishing to the App Store and Google Play, so your app reaches customers or your team wherever they are."
+        "description": "Custom web, iOS, and Android apps with real-time dashboards, built around your business."
       },
       "optimization": {
         "title": "Smart Problem Solving",
-        "description": "Some problems are too complex to solve by hand: employee scheduling with dozens of constraints, delivery and logistics routing, matching resources to tasks, or deciding the best mix of products or services to offer. I build systems, and custom algorithms tailored to your exact constraints, that find the optimal schedule, route, or allocation automatically, saving hours of manual planning every week."
+        "description": "Custom algorithms for scheduling, routing, and resource problems too complex to solve by hand."
       },
       "aiData": {
         "title": "AI Trained on Your Data",
-        "description": "I train AI models on your own business data, whether that's documents and FAQs for a customer-facing agent, or historical records like past orders, schedules, and outcomes for predictions, classification, and recommendations. You don't need a huge dataset to start; even a few hundred records is often enough to build something useful and specific to your industry."
+        "description": "AI models trained on your own data, for support, predictions, and recommendations."
       }
     },
     "cta": {
@@ -241,86 +271,250 @@
     "betaGoogle": "Play Beta",
     "appStore": "App Store",
     "playStore": "Play Store",
-    "inAppBrowserHint": "Instagram blocks this link. Tap ⋯ (top right) and choose \"Open in Browser\" to open the App Store."
+    "inAppBrowserHint": "Instagram blocks this link. Tap ⋯ (top right) and choose \"Open in Browser\" to open the App Store.",
+    "viewCaseStudy": "View case study →"
   },
   "portfolio": {
     "title": "Portfolio",
     "items": {
       "party": {
         "title": "Party - Play with friends",
-        "description": "Mobile app with local multiplayer party games on one phone, pass it around, fully offline, no accounts needed."
+        "description": "Mobile app with local multiplayer party games on one phone, pass it around, fully offline, no accounts needed.",
+        "overview": "Party is a pass-the-phone game app for iOS and Android, built for one device and a room full of people. It bundles acting games, word games, quizzes, dares, and party classics into a single app, so groups always have something to play. There are no accounts to set up and no internet needed, just hand the phone around and go. It's made for game nights and anywhere the group has no signal, with English and Greek support.",
+        "highlights": [
+          "Multiple game types in one app",
+          "Pass-the-phone local multiplayer, no devices needed",
+          "Fully offline, no internet required",
+          "English and Greek language support"
+        ]
       },
       "nourea": {
         "title": "Nourea",
-        "description": "Mobile app that generates personalized 4-week nutrition plans from a health and lifestyle questionnaire."
+        "description": "Mobile app that generates personalized 4-week nutrition plans from a health and lifestyle questionnaire.",
+        "overview": "Nourea is a mobile app for iOS and Android that turns a short health and lifestyle questionnaire into a personalized 4-week nutrition plan. Users answer questions about their goals, dietary preferences, and daily routine, and an AI engine generates a structured meal plan tailored to that profile. It's built for people who want individualized guidance on what to eat without hiring a nutritionist. The 4-week structure gives users a clear, manageable planning horizon they can follow and revisit.",
+        "highlights": [
+          "AI-generated 4-week personalized nutrition plans",
+          "Onboarding questionnaire captures health and lifestyle data",
+          "Native apps for both iOS and Android",
+          "Structured meal planning tailored to individual goals"
+        ]
       },
       "chronal": {
         "title": "Chronal",
-        "description": "Mobile app for planning and managing trips, with synced itineraries and live currency exchange rates."
+        "description": "Mobile app for planning and managing trips, with synced itineraries and live currency exchange rates.",
+        "overview": "Chronal is a mobile app for planning and organizing trips on iOS and Android. It brings together itineraries, bookings, and countdowns for every upcoming trip in one place, tracks travel spending against a budget with live currency exchange rates, and pins favorite places, restaurants, and stays on a map. Trip data syncs across devices, so plans stay up to date whether you're preparing at home or checking details on the road.",
+        "highlights": [
+          "Itinerary and countdown for every trip",
+          "Expense tracking with live currency rates",
+          "Map pins for stays, food, and sights",
+          "Packing lists organized by category"
+        ]
       },
       "irisdrop": {
         "title": "irisdrop",
-        "description": "SaaS for print shops: customers upload files without USB or email; admins see a live queue feed."
+        "description": "SaaS for print shops: customers upload files without USB or email; admins see a live queue feed.",
+        "overview": "Irisdrop replaces email threads and USB sticks at print shop counters with a single QR code. Customers scan it, add their name, and drop a file from their phone, no account required. The shop's admin dashboard shows the upload the instant it lands in a live, private queue, so staff can download, print, and clear each job without leaving the counter.",
+        "highlights": [
+          "Unique QR code and link per shop",
+          "Mobile-first upload page, no customer account",
+          "Live admin queue updates instantly",
+          "Free and Premium tiers with EUR pricing"
+        ]
       },
       "fireMessage": {
         "title": "Fire Message",
-        "description": "Mobile app for iOS and Android to send push notifications with Firebase Cloud Messaging."
+        "description": "Mobile app for iOS and Android to send push notifications with Firebase Cloud Messaging.",
+        "overview": "Fire Message is a developer tool for iOS and Android that lets you send and test Firebase Cloud Messaging push notifications from your phone. You manage multiple Firebase projects, switch between dev, staging, and production, and compose messages with custom payloads targeted at device tokens, topics, or conditions. A send history logs every message and its response, and service account credentials stay encrypted on-device, never uploaded anywhere.",
+        "highlights": [
+          "Manage multiple Firebase projects and environments",
+          "Send to device tokens, topics, or conditions",
+          "Send history with duplicate and resend support",
+          "Credentials encrypted on-device, never uploaded"
+        ]
       },
       "ridefast": {
         "title": "RideFast",
-        "description": "Reservation system for transfers and taxis with real-time booking, payments, and mapping."
+        "description": "Reservation system for transfers and taxis with real-time booking, payments, and mapping.",
+        "overview": "RideFast is a reservation platform built for transfer and taxi operators who need to manage bookings from a single system. Customers can request rides, see live vehicle locations on a map, and pay online without phone calls or manual dispatch. Operators get a real-time view of active trips, drivers, and payments, cutting down on the back-and-forth that usually slows down taxi and transfer bookings.",
+        "highlights": [
+          "Real-time booking and trip tracking on a map",
+          "Integrated online payments at checkout",
+          "Built for taxi and transfer operators",
+          "Live vehicle location and dispatch view"
+        ]
       },
       "atproPartner": {
         "title": "ATPro Partner",
-        "description": "Appointment and transfer management for hotels and transport companies."
+        "description": "Appointment and transfer management for hotels and transport companies.",
+        "overview": "ATPro Partner is a route management tool for transfer agencies, shuttle companies, taxi drivers, and VIP transfer services. Available on iOS, Android, and as a Web App, it lets teams register, edit, and monitor daily transfers, then assign routes to drivers and vans with real-time sync. Each route's status is tracked from pending through in progress to completed, cutting down idle time and double-bookings.",
+        "highlights": [
+          "Assign routes to drivers and vans",
+          "Real-time sync across the fleet",
+          "Track route status end to end",
+          "Push notifications for booking updates"
+        ]
       },
       "athensMytransfer": {
         "title": "Athens MyTransfer",
-        "description": "Landing page for transfers in Athens with booking-focused user flow."
+        "description": "Landing page for transfers in Athens with booking-focused user flow.",
+        "overview": "Athens MyTransfer is a booking-focused landing page for a private transfer service in Athens, covering airport and port pickups plus day tours to destinations like Sounio, Delphi, and Meteora. It targets families, couples, business travelers, and cruise passengers who need reliable transport with English-speaking drivers. The page presents fixed, upfront pricing by route and lets visitors book directly through an online form, live chat, or WhatsApp.",
+        "highlights": [
+          "Fixed pricing shown per route, no hidden fees",
+          "Booking via web form, live chat, or WhatsApp",
+          "Airport, port, and city transfer coverage",
+          "Day tour options to Sounio, Delphi, Meteora"
+        ]
       },
       "mealAi": {
         "title": "Meal AI",
-        "description": "AI-powered app that scans food items for nutrition tracking."
+        "description": "AI-powered app that scans food items for nutrition tracking.",
+        "overview": "Meal AI is a mobile app for iOS and Android that uses computer vision to identify food from a photo and log it for nutrition tracking. Instead of manually searching a database or entering meals by hand, users point their camera at a plate and the app scans and recognizes the food items automatically. It's built for people who want to track what they eat without the friction of typical calorie-counting apps.",
+        "highlights": [
+          "Camera-based food recognition and scanning",
+          "Automatic nutrition data lookup per item",
+          "Native apps for both iOS and Android",
+          "Fast meal logging without manual search"
+        ]
       },
       "near": {
         "title": "Near",
-        "description": "Privacy-focused social app for location sharing with full data control."
+        "description": "Privacy-focused social app for location sharing with full data control.",
+        "overview": "Near is a privacy-focused location-sharing app for iOS and Android, built for people who want to stay in touch without losing control of their data. It uses maps to show trusted contacts where you are in real time, while giving you clear say over who sees your location and for how long. Unlike typical location-sharing apps, Near treats privacy as the default, not an afterthought.",
+        "highlights": [
+          "Real-time location sharing on a live map",
+          "Granular, per-contact privacy controls",
+          "Native iOS and Android apps",
+          "AI-assisted, data-minimizing location updates"
+        ]
       },
       "hedeos": {
         "title": "hedeos.gr",
-        "description": "Gamified app for learning Greek with quizzes and progress tracking."
+        "description": "Gamified app for learning Greek with quizzes and progress tracking.",
+        "overview": "Hedeos is a mobile app for iOS and Android that helps people build their Greek vocabulary one word at a time. Each day it surfaces a new word with a clear definition and example, then reinforces it with a short daily quiz. Users can save favorite words for quick review, share them with friends, and browse previously learned words offline, with daily reminders to keep the habit going.",
+        "highlights": [
+          "New Greek word introduced every day",
+          "Daily quizzes to test recall",
+          "Definitions with real usage examples",
+          "Offline access to saved words"
+        ]
       },
       "ekarotsi": {
         "title": "e-karotsi.gr",
-        "description": "E-commerce platform for a Greek supermarket with delivery and inventory management."
+        "description": "E-commerce platform for a Greek supermarket with delivery and inventory management.",
+        "overview": "e-karotsi.gr is an e-commerce platform built for a Greek supermarket, letting customers browse products and place online orders for home delivery. On the operations side, it includes inventory management tools so the store can track stock levels and keep the online catalog aligned with what's actually available. The platform covers the full order flow, from product selection through checkout to delivery.",
+        "highlights": [
+          "Online product catalog and ordering",
+          "Home delivery for supermarket orders",
+          "Inventory and stock management",
+          "Store-side order and catalog tools"
+        ]
       },
       "transHellas": {
         "title": "Trans Hellas",
-        "description": "Logistic app for parcels Germany to Greece."
+        "description": "Logistic app for parcels Germany to Greece.",
+        "overview": "Trans Hellas Reisen's platform manages parcel shipping between Germany and Greece, connecting stations in cities like Düsseldorf, Dortmund, Frankfurt, Köln, München and Stuttgart with weekly routes to Greece, including bus-station (KTEL) delivery. An admin panel lets staff create and track orders, manage stations and DPD courier shipments, and forward online purchases (eBay, Amazon) from Germany to recipients in Greece.",
+        "highlights": [
+          "Admin panel for orders and stations",
+          "DPD courier shipment tracking",
+          "Weekly Germany-Greece delivery routes",
+          "Online order forwarding from eBay, Amazon"
+        ]
       },
       "etui": {
         "title": "Etui Creations",
-        "description": "Luxury jewelry packaging e-commerce for rings, necklaces, and accessories with customization."
+        "description": "Luxury jewelry packaging e-commerce for rings, necklaces, and accessories with customization.",
+        "overview": "Etui Creations designs luxury jewelry packaging, cases and pouches for rings, necklaces, bracelets, earrings, and watches, made from suede, textured faux leather, velvet, and satin. Jewelers and handmade-jewelry makers can personalize each piece with their own logo via hot-foil stamping, screen printing, or digital printing, choosing from a wide range of colors. Orders start at small quantities, with bulk pricing from 200 pieces per year.",
+        "highlights": [
+          "Cases for rings, necklaces, bracelets, watches, earrings",
+          "Logo personalization via hot-foil, screen, or digital printing",
+          "Suede, faux leather, velvet, and satin materials",
+          "Flexible order quantities with volume pricing tiers"
+        ]
       },
       "tattooHealer": {
         "title": "Tattoo Healer",
-        "description": "Platform for personalized tattoo aftercare with educational content and artist connections."
+        "description": "Platform for personalized tattoo aftercare with educational content and artist connections.",
+        "overview": "Tattoo Healer is a digital aftercare platform for tattoo artists and studios, replacing paper sheets and repeated explanations with one place clients return to. Clients access their plan via a QR or text code, getting washing and cream reminders, a video library on proper care, and a personal healing tracker. Artists and studios build instructions once and share them with every client, keeping aftercare consistent.",
+        "highlights": [
+          "QR or text code plan sharing with clients",
+          "Push reminders for washing and cream application",
+          "Video library covering aftercare do's and don'ts",
+          "Studio admin panel for team-wide branded plans"
+        ]
       },
       "veridictum": {
         "title": "Veridictum AI",
-        "description": "AI-powered legal technology platform."
+        "description": "AI-powered legal technology platform.",
+        "overview": "Veridictum is an AI-powered workspace for legal professionals to manage cases, documents, and research in one platform. Users can chat with their uploaded case files, search a library of court opinions and precedents, and run comparative analysis against similar cases to gauge case strength and outcomes. A built-in stress-test feature argues the opposing side to surface weaknesses and counter-arguments before trial.",
+        "highlights": [
+          "AI chat over your uploaded case documents",
+          "Searchable library of court opinions and precedents",
+          "Comparative analysis against similar past cases",
+          "Stress-tests cases from opposing counsel's perspective"
+        ]
       },
       "process": {
         "title": "Process",
-        "description": "Production monitoring and tracking system for manufacturing."
+        "description": "Production monitoring and tracking system for manufacturing.",
+        "overview": "Process is an order and production tracking system for small manufacturing businesses like custom furniture workshops. It manages the full order lifecycle, from customer quotes through production tasks scheduled across phases such as assembly and finishing, letting staff start and stop each task in real time. A dashboard tracks scheduled versus actual work per day, order status, and orders per phase, alongside customer records and delivery dates.",
+        "highlights": [
+          "Real-time start/stop tracking for production tasks",
+          "Order lifecycle from quote to delivery",
+          "Dashboard charts scheduled vs actual production",
+          "Customer records with quotes and order history"
+        ]
       },
       "skiGreece": {
         "title": "Ski Greece",
-        "description": "Platform for Greek ski resorts and winter sports centers."
+        "description": "Platform for Greek ski resorts and winter sports centers.",
+        "overview": "Ski Greece is a directory platform for Greece's ski resorts and winter sports centers. Each resort page shows an interactive map, live weather and snow conditions, and its trails (pistes) with the lifts that serve them, plus lift pass pricing. Beyond winter, it also lists summer activities at these mountain destinations. Resort managers get their own dashboard to update content, photos, and pricing.",
+        "highlights": [
+          "Interactive map for every ski resort",
+          "Live weather and snow condition updates",
+          "Trail listings linked to their lifts",
+          "Manager dashboard for resort content and pricing"
+        ]
       },
       "nikiMargariti": {
         "title": "Niki Margariti Lab",
-        "description": "AI chatbot for students in Greece with educational support."
+        "description": "AI chatbot for students in Greece with educational support.",
+        "overview": "Niki Margariti Lab is an AI chatbot built for students in Greece, offering educational support directly through conversation. It helps students work through academic questions and topics in a familiar chat interface, accessible from any browser. The product focuses on making academic help approachable and available on demand, without requiring specialized software or setup.",
+        "highlights": [
+          "AI-powered chatbot for education",
+          "Built for Greek students",
+          "Browser-based chat interface",
+          "Academic support on demand"
+        ]
+      }
+    }
+  },
+  "stickyCta": {
+    "button": "Free Strategy Call"
+  },
+  "workDetail": {
+    "visitProject": "Visit Project",
+    "cta": "Discuss a Similar Project",
+    "relatedTitle": "More Projects",
+    "ctaSection": {
+      "title": "Have a similar project in mind?",
+      "description": "Let's talk about what you're building. The first call is free, no obligation."
+    }
+  },
+  "testimonials": {
+    "title": "What Clients Say",
+    "subtitle": "Real feedback from past projects, shared anonymously.",
+    "quotes": {
+      "first": {
+        "quote": "[Placeholder — replace with a real client quote]",
+        "attribution": "[Client — service type, e.g. AI Automation project]"
+      },
+      "second": {
+        "quote": "[Placeholder — replace with a real client quote]",
+        "attribution": "[Client — service type, e.g. Web App project]"
+      },
+      "third": {
+        "quote": "[Placeholder — replace with a real client quote]",
+        "attribution": "[Client — service type, e.g. Optimization project]"
       }
     }
   },
@@ -341,6 +535,12 @@
   "contact": {
     "title": "Get In Touch",
     "description": "Fill in your details below to get a free strategy call where we'll discuss your needs and find the best solution for you. No strings attached!",
+    "channels": {
+      "title": "Or reach out directly",
+      "email": "Email",
+      "whatsapp": "WhatsApp",
+      "viber": "Viber"
+    },
     "features": {
       "consultation": {
         "title": "Free Call",
@@ -356,14 +556,14 @@
       }
     },
     "form": {
-      "description": "Leave your details and I'll get back to you within 24 hours",
+      "description": "Leave your details and I'll get back to you within 2 hours",
       "name": "Name",
       "email": "Email",
       "namePlaceholder": "Your name",
       "emailPlaceholder": "email@example.com",
       "sending": "Sending...",
       "send": "Send Message",
-      "success": "Request sent! I'll contact you within 24 hours to schedule your free strategy call.",
+      "success": "Request sent! I'll contact you within 2 hours to schedule your free strategy call.",
       "error": "Failed to send request. Please try again."
     }
   },
@@ -688,7 +888,7 @@
     "madeBy": "Made by"
   },
   "tree": {
-    "tagline": "Freelance software engineer · AI agents & apps",
+    "tagline": "Freelance software engineer · AI & apps",
     "sectionSocial": "Social",
     "sectionApps": "Apps",
     "sectionWebsites": "Websites",
@@ -714,7 +914,7 @@
   "chat": {
     "title": "Chat with the assistant",
     "subtitle": "Ask about services, or book a call with Pantelis",
-    "greeting": "Hi! I'm here to help with questions about AI agents, apps, or automation, and I can help you book a call with Pantelis if it's a good fit. What's on your mind?",
+    "greeting": "Hi! I'm here to help with questions about AI, apps, or automation, and I can help you book a call with Pantelis if it's a good fit. What's on your mind?",
     "placeholder": "Type a message...",
     "send": "Send",
     "openLabel": "Open chat",

@@ -213,3 +213,12 @@ export const portfolioItems: PortfolioItem[] = [
     logo: "/assets/logos/e-karotsi.png",
   }
 ]
+
+/** Converts a camelCase portfolio key (e.g. 'athensMytransfer') to a URL slug ('athens-mytransfer') */
+export function keyToSlug(key: string): string {
+  return key.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase()
+}
+
+export function getPortfolioItemBySlug(slug: string): PortfolioItem | undefined {
+  return portfolioItems.find((item) => keyToSlug(item.key) === slug)
+}

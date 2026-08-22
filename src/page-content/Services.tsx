@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { PortfolioCard } from "@/components/PortfolioCard"
 import ProcessSection from "@/components/ProcessSection"
+import Testimonials from "@/components/Testimonials"
 import {
   WrenchScrewdriverIcon,
   SparklesIcon,
@@ -16,13 +18,15 @@ import {
   CheckIcon,
   CubeTransparentIcon,
   BriefcaseIcon,
-  BoltIcon,
   BuildingStorefrontIcon,
   PhoneIcon,
+  GlobeAltIcon,
+  ClockIcon,
+  QuestionMarkCircleIcon,
 } from "@heroicons/react/24/outline"
 import { trackEvent } from "@/lib/events"
 import { useScrollAnimation } from "@/lib/hooks"
-import { portfolioItems } from "@/lib/portfolio-data"
+import { portfolioItems, keyToSlug } from "@/lib/portfolio-data"
 
 const items = [
   { key: "automation", icon: SparklesIcon },
@@ -31,28 +35,47 @@ const items = [
   { key: "aiData", icon: CircleStackIcon },
 ] as const
 
+const faqItems = [
+  "hiddenFees",
+  "payBeforeSeeing",
+  "timeToLaunch",
+  "ownership",
+  "noContent",
+  "googleBusiness",
+  "seo",
+  "hosting",
+  "eshopPlatforms",
+  "customization",
+] as const
+
 const packages = [
   {
-    title: 'packages.onlinePresence.title',
-    description: 'packages.onlinePresence.description',
-    badge: 'common.badges.automation',
-    features: 'packages.onlinePresence.features',
+    title: 'packages.website.title',
+    description: 'packages.website.description',
+    price: 'packages.website.price',
+    priceNote: null,
+    badge: 'common.badges.website',
+    features: 'packages.website.features',
     className: 'border-border/60',
-    ctaIcon: <BoltIcon className="size-5 mr-2 stroke-[1.5]" />,
+    ctaIcon: <GlobeAltIcon className="size-5 mr-2 stroke-[1.5]" />,
   },
   {
     title: 'packages.eShop.title',
     description: 'packages.eShop.description',
+    price: 'packages.eShop.price',
+    priceNote: 'packages.eShop.priceNote',
     badge: 'common.badges.development',
     features: 'packages.eShop.features',
     className: 'border-primary/30 ring-1 ring-primary/30 bg-primary/5',
     ctaIcon: <BuildingStorefrontIcon className="size-5 mr-2 stroke-[1.5]" />,
   },
   {
-    title: 'packages.customApp.title',
-    description: 'packages.customApp.description',
+    title: 'packages.onlinePresence.title',
+    description: 'packages.onlinePresence.description',
+    price: 'packages.onlinePresence.price',
+    priceNote: null,
     badge: 'common.badges.ai',
-    features: 'packages.customApp.features',
+    features: 'packages.onlinePresence.features',
     className: 'border-border/60',
     ctaIcon: <SparklesIcon className="size-5 mr-2 stroke-[1.5]" />,
   },
@@ -72,12 +95,14 @@ export default function Services({ lang }: ServicesProps) {
   const heroRef = useRef<HTMLElement>(null)
   const itemsRef = useRef<HTMLElement>(null)
   const packagesRef = useRef<HTMLElement>(null)
+  const faqRef = useRef<HTMLElement>(null)
   const portfolioRef = useRef<HTMLElement>(null)
   const ctaRef = useRef<HTMLElement>(null)
 
   const heroAnimation = useScrollAnimation(heroRef)
   const itemsAnimation = useScrollAnimation(itemsRef)
   const packagesAnimation = useScrollAnimation(packagesRef)
+  const faqAnimation = useScrollAnimation(faqRef)
   const portfolioAnimation = useScrollAnimation(portfolioRef)
   const ctaAnimation = useScrollAnimation(ctaRef)
 
@@ -147,6 +172,10 @@ export default function Services({ lang }: ServicesProps) {
             </h2>
             <Separator className="w-24 mx-auto" />
             <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">{t('packages.subtitle')}</p>
+            <div className="inline-flex items-center gap-2 mt-5 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary font-medium text-sm">
+              <ClockIcon className="h-4 w-4" />
+              {t('packages.footer')}
+            </div>
           </div>
           <div className="grid md:grid-cols-3 gap-8 w-full">
             {packages.map((pkg) => (
@@ -162,7 +191,12 @@ export default function Services({ lang }: ServicesProps) {
                   <CardDescription>{t(pkg.description)}</CardDescription>
                 </CardHeader>
                 <CardContent className="flex-grow space-y-4">
-                  <div className="text-lg font-semibold">{t('packages.getQuote')}</div>
+                  <div>
+                    <div className="text-lg font-semibold text-primary">{t(pkg.price)}</div>
+                    {pkg.priceNote && (
+                      <div className="text-xs text-muted-foreground">{t(pkg.priceNote)}</div>
+                    )}
+                  </div>
                   <div className="space-y-2 text-sm text-muted-foreground">
                     {(t(pkg.features, { returnObjects: true }) as string[]).map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-start gap-2">
@@ -183,9 +217,56 @@ export default function Services({ lang }: ServicesProps) {
               </Card>
             ))}
           </div>
-          <p className="text-center text-sm text-muted-foreground mt-8">{t('packages.footer')}</p>
+          <Card className="mt-8 border-border/60 bg-card/70 w-full">
+            <CardContent className="p-6 flex flex-col md:flex-row md:items-center gap-6">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-2">
+                  <WrenchScrewdriverIcon className="h-6 w-6 text-primary shrink-0" />
+                  <CardTitle>{t('packages.maintenance.title')}</CardTitle>
+                </div>
+                <CardDescription>{t('packages.maintenance.description')}</CardDescription>
+                <div className="flex flex-wrap gap-x-5 gap-y-1.5 mt-3 text-sm text-muted-foreground">
+                  {(t('packages.maintenance.features', { returnObjects: true }) as string[]).map((feature, featureIndex) => (
+                    <span key={featureIndex} className="flex items-center gap-1.5">
+                      <CheckIcon className="h-4 w-4 text-primary" />
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-3 shrink-0">
+                <div className="text-lg font-semibold text-primary whitespace-nowrap">{t('packages.maintenance.price')}</div>
+                <Button variant="outline" asChild>
+                  <a href={`${prefix}/contact?source=services-maintenance`}>{t('packages.getStarted')}</a>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </motion.section>
+
+      {/* FAQ */}
+      <motion.section
+        ref={faqRef}
+        className="pb-20 scroll-mt-10 overflow-hidden"
+        {...(faqAnimation as HTMLMotionProps<"section">)}>
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl font-semibold text-center mb-8 flex items-center justify-center gap-2">
+            <QuestionMarkCircleIcon className="h-6 w-6 text-primary shrink-0" />
+            {t('packages.faq.title')}
+          </h2>
+          <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto">
+            {faqItems.map((key) => (
+              <AccordionItem key={key} value={key}>
+                <AccordionTrigger className="text-lg">{t(`packages.faq.items.${key}.question`)}</AccordionTrigger>
+                <AccordionContent>{t(`packages.faq.items.${key}.answer`)}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </motion.section>
+
+      <Testimonials />
 
       <ProcessSection />
 
@@ -215,14 +296,10 @@ export default function Services({ lang }: ServicesProps) {
                 logo={item.logo}
                 logoBg={item.logoBg}
                 url={item.url}
+                caseStudyHref={`${prefix}/work/${keyToSlug(item.key)}`}
               />
             ))}
           </div>
-          <p className="text-center mt-8">
-            <a href={`${prefix}/#portfolio`} className="text-primary hover:underline font-medium">
-              {t('servicesPage.links.portfolio')}
-            </a>
-          </p>
         </div>
       </motion.section>
 
@@ -234,7 +311,7 @@ export default function Services({ lang }: ServicesProps) {
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-3">{t("servicesPage.cta.title")}</h2>
-            <p className="text-muted-foreground mb-8">{t("servicesPage.cta.description")}</p>
+            <p className="text-foreground font-medium mb-8">{t("servicesPage.cta.description")}</p>
             <Button variant="green" size="lg" asChild className="mb-10">
               <a href={`${prefix}/contact`}>
                 <PhoneIcon className="size-5 mr-2 stroke-[1.5]" />

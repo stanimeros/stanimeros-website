@@ -18,7 +18,7 @@ import {
 import { trackEvent } from "@/lib/events"
 import { useScrollAnimation } from "@/lib/hooks"
 import GitHubCalendarComponent from "@/components/GitHubCalendar"
-import { portfolioItems } from "@/lib/portfolio-data"
+import { portfolioItems, keyToSlug } from "@/lib/portfolio-data"
 
 const sections = [
   { key: "background", icon: AcademicCapIcon },
@@ -176,14 +176,10 @@ export default function About({ lang }: AboutProps) {
                 logo={item.logo}
                 logoBg={item.logoBg}
                 url={item.url}
+                caseStudyHref={`${prefix}/work/${keyToSlug(item.key)}`}
               />
             ))}
           </div>
-          <p className="text-center mt-8">
-            <a href={`${prefix}/#portfolio`} className="text-primary hover:underline font-medium">
-              {t('servicesPage.links.portfolio')}
-            </a>
-          </p>
         </div>
       </motion.section>
 
@@ -195,7 +191,7 @@ export default function About({ lang }: AboutProps) {
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-3">{t("aboutPage.cta.title")}</h2>
-            <p className="text-muted-foreground mb-8">{t("aboutPage.cta.description")}</p>
+            <p className="text-foreground font-medium mb-8">{t("aboutPage.cta.description")}</p>
             <Button variant="green" size="lg" asChild className="mb-10">
               <a href={`${prefix}/contact`}>
                 <PhoneIcon className="size-5 mr-2 stroke-[1.5]" />

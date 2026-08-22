@@ -1,0 +1,31 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import LocalizedWorkDetail from '@/page-content/WorkDetail.localized'
+import { portfolioItems, keyToSlug } from '@/lib/portfolio-data'
+import enMain from '@/i18n/locales/en/main.json'
+
+export function getStaticPaths() {
+  return portfolioItems.map((item) => ({
+    params: { slug: keyToSlug(item.key) },
+    props: { item },
+  }))
+}
+
+const { item } = Astro.props
+const { slug } = Astro.params
+const copy = (enMain.portfolio.items as Record<string, { title: string; description: string }>)[item.key]
+---
+
+<BaseLayout
+  lang="en"
+  title={`${copy.title} | Pantelis Stanimeros`}
+  description={copy.description}
+  canonical={`https://stanimeros.com/work/${slug}`}
+  hreflangAlternates={[
+    { hreflang: 'en', href: `https://stanimeros.com/work/${slug}` },
+    { hreflang: 'el', href: `https://stanimeros.com/el/work/${slug}` },
+    { hreflang: 'x-default', href: `https://stanimeros.com/work/${slug}` },
+  ]}
+>
+  <LocalizedWorkDetail lang="en" slug={slug} client:load />
+</BaseLayout>

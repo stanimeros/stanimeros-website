@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { ContactChannels } from "@/components/ContactChannels"
 import {
   PhoneIcon,
   PaperAirplaneIcon,
@@ -25,7 +26,18 @@ const trustFeatures = [
   { key: "noObligations", icon: SparklesIcon },
 ] as const
 
-const faqItems = ["hiddenFees", "timeToLaunch", "hosting"] as const
+const faqItems = [
+  "hiddenFees",
+  "payBeforeSeeing",
+  "timeToLaunch",
+  "ownership",
+  "noContent",
+  "googleBusiness",
+  "seo",
+  "hosting",
+  "eshopPlatforms",
+  "customization",
+] as const
 
 export default function Contact() {
   const { t } = useTranslation()
@@ -107,7 +119,7 @@ export default function Contact() {
               {t('contact.title')}
             </h1>
             <Separator className="w-24 mx-auto mb-4" />
-            <p className="text-muted-foreground max-w-2xl mx-auto">{t('contact.form.description')}</p>
+            <p className="text-foreground font-medium max-w-2xl mx-auto">{t('contact.form.description')}</p>
           </div>
 
           <div className="grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
@@ -125,6 +137,11 @@ export default function Contact() {
                 </div>
               </div>
             ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <p className="text-sm text-muted-foreground mb-3">{t('contact.channels.title')}</p>
+            <ContactChannels className="flex flex-wrap justify-center gap-3" />
           </div>
         </div>
       </motion.section>

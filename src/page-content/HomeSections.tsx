@@ -23,19 +23,26 @@ import {
   CubeTransparentIcon,
   QuestionMarkCircleIcon,
   PhoneIcon,
-  BoltIcon,
   CalendarDaysIcon,
+  GlobeAltIcon,
 } from "@heroicons/react/24/outline"
 const GitHubCalendarComponent = lazy(() => import("@/components/GitHubCalendar"))
 import WhySection from "@/components/WhySection"
 import ProcessSection from "@/components/ProcessSection"
+import Testimonials from "@/components/Testimonials"
+import { ContactChannels } from "@/components/ContactChannels"
 import { trackEvent } from "@/lib/events"
 import { useScrollAnimation, useMobileCardAnimation } from "@/lib/hooks"
-import { portfolioItems } from "@/lib/portfolio-data"
+import { portfolioItems, keyToSlug } from "@/lib/portfolio-data"
 import { FacebookIcon, InstagramIcon, LinkedinIcon, GithubIcon, BriefcaseIcon } from "lucide-react"
 
-const HomeSections = () => {
+interface HomeSectionsProps {
+  lang: "en" | "el"
+}
+
+const HomeSections = ({ lang }: HomeSectionsProps) => {
   const { t } = useTranslation()
+  const workPrefix = lang === "el" ? "/el" : ""
   // react-github-calendar breaks Node SSR during Astro's static build, so it's
   // only ever rendered client-side, and only once the About section scrolls
   // into view (it pulls in a separate JS chunk + external API fetch).
@@ -234,34 +241,44 @@ const HomeSections = () => {
             <p className="text-muted-foreground mt-4 max-w-3xl mx-auto">
               {t('packages.subtitle')}
             </p>
+            <div className="inline-flex items-center gap-2 mt-5 px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary font-medium text-sm">
+              <ClockIcon className="h-4 w-4" />
+              {t('packages.footer')}
+            </div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 w-full">
             {[
               {
-                title: 'packages.onlinePresence.title',
-                description: 'packages.onlinePresence.description',
-                badge: 'common.badges.automation',
-                features: 'packages.onlinePresence.features',
+                title: 'packages.website.title',
+                description: 'packages.website.description',
+                price: 'packages.website.price',
+                priceNote: null,
+                badge: 'common.badges.website',
+                features: 'packages.website.features',
                 className: 'border-border/60',
-                ctaIcon: <BoltIcon className="size-5 mr-2 stroke-[1.5]" />,
+                ctaIcon: <GlobeAltIcon className="size-5 mr-2 stroke-[1.5]" />,
               },
               {
                 title: 'packages.eShop.title',
                 description: 'packages.eShop.description',
+                price: 'packages.eShop.price',
+                priceNote: 'packages.eShop.priceNote',
                 badge: 'common.badges.development',
                 features: 'packages.eShop.features',
                 className: 'border-primary/30 ring-1 ring-primary/30 bg-primary/5',
                 ctaIcon: <BuildingStorefrontIcon className="size-5 mr-2 stroke-[1.5]" />,
               },
               {
-                title: 'packages.customApp.title',
-                description: 'packages.customApp.description',
+                title: 'packages.onlinePresence.title',
+                description: 'packages.onlinePresence.description',
+                price: 'packages.onlinePresence.price',
+                priceNote: null,
                 badge: 'common.badges.ai',
-                features: 'packages.customApp.features',
+                features: 'packages.onlinePresence.features',
                 className: 'border-border/60',
                 ctaIcon: <SparklesIcon className="size-5 mr-2 stroke-[1.5]" />,
-              }
+              },
             ].map((pkg, index) => (
               <motion.div
                 key={index}
@@ -278,7 +295,12 @@ const HomeSections = () => {
                     <CardDescription>{t(pkg.description)}</CardDescription>
                   </CardHeader>
                   <CardContent className="flex-grow space-y-4">
-                    <div className="text-lg font-semibold"> {t('packages.getQuote')}</div>
+                    <div>
+                      <div className="text-lg font-semibold text-primary">{t(pkg.price)}</div>
+                      {pkg.priceNote && (
+                        <div className="text-xs text-muted-foreground">{t(pkg.priceNote)}</div>
+                      )}
+                    </div>
                     <div className="space-y-2 text-sm text-muted-foreground">
                       {(t(pkg.features, { returnObjects: true }) as string[]).map((feature, featureIndex) => (
                         <div key={featureIndex} className="flex items-start gap-2">
@@ -304,9 +326,31 @@ const HomeSections = () => {
             ))}
           </div>
 
-          <p className="text-center text-sm text-muted-foreground mt-8">
-            {t('packages.footer')}
-          </p>
+          <Card className="mt-8 border-border/60 bg-card/70 w-full">
+            <CardContent className="p-6 flex flex-col md:flex-row md:items-center gap-6">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-2">
+                  <WrenchScrewdriverIcon className="h-6 w-6 text-primary shrink-0" />
+                  <CardTitle>{t('packages.maintenance.title')}</CardTitle>
+                </div>
+                <CardDescription>{t('packages.maintenance.description')}</CardDescription>
+                <div className="flex flex-wrap gap-x-5 gap-y-1.5 mt-3 text-sm text-muted-foreground">
+                  {(t('packages.maintenance.features', { returnObjects: true }) as string[]).map((feature, featureIndex) => (
+                    <span key={featureIndex} className="flex items-center gap-1.5">
+                      <CheckIcon className="h-4 w-4 text-primary" />
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-3 shrink-0">
+                <div className="text-lg font-semibold text-primary whitespace-nowrap">{t('packages.maintenance.price')}</div>
+                <Button variant="outline" onClick={() => goToContact('maintenance-card')}>
+                  {t('packages.getStarted')}
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
 
           {/* FAQ Section */}
           <div className="mt-20">
@@ -315,10 +359,38 @@ const HomeSections = () => {
               {t('packages.faq.title')}
             </h3>
             <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto">
-              <AccordionItem value="hosting">
-                <AccordionTrigger className="text-lg">{t('packages.faq.items.hosting.question')}</AccordionTrigger>
+              <AccordionItem value="hiddenFees">
+                <AccordionTrigger className="text-lg">{t('packages.faq.items.hiddenFees.question')}</AccordionTrigger>
                 <AccordionContent>
-                  {t('packages.faq.items.hosting.answer')}
+                  {t('packages.faq.items.hiddenFees.answer')}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="payBeforeSeeing">
+                <AccordionTrigger className="text-lg">{t('packages.faq.items.payBeforeSeeing.question')}</AccordionTrigger>
+                <AccordionContent>
+                  {t('packages.faq.items.payBeforeSeeing.answer')}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="timeToLaunch">
+                <AccordionTrigger className="text-lg">{t('packages.faq.items.timeToLaunch.question')}</AccordionTrigger>
+                <AccordionContent>
+                  {t('packages.faq.items.timeToLaunch.answer')}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="ownership">
+                <AccordionTrigger className="text-lg">{t('packages.faq.items.ownership.question')}</AccordionTrigger>
+                <AccordionContent>
+                  {t('packages.faq.items.ownership.answer')}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="noContent">
+                <AccordionTrigger className="text-lg">{t('packages.faq.items.noContent.question')}</AccordionTrigger>
+                <AccordionContent>
+                  {t('packages.faq.items.noContent.answer')}
                 </AccordionContent>
               </AccordionItem>
 
@@ -326,6 +398,20 @@ const HomeSections = () => {
                 <AccordionTrigger className="text-lg">{t('packages.faq.items.googleBusiness.question')}</AccordionTrigger>
                 <AccordionContent>
                   {t('packages.faq.items.googleBusiness.answer')}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="seo">
+                <AccordionTrigger className="text-lg">{t('packages.faq.items.seo.question')}</AccordionTrigger>
+                <AccordionContent>
+                  {t('packages.faq.items.seo.answer')}
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="hosting">
+                <AccordionTrigger className="text-lg">{t('packages.faq.items.hosting.question')}</AccordionTrigger>
+                <AccordionContent>
+                  {t('packages.faq.items.hosting.answer')}
                 </AccordionContent>
               </AccordionItem>
 
@@ -342,29 +428,16 @@ const HomeSections = () => {
                   {t('packages.faq.items.customization.answer')}
                 </AccordionContent>
               </AccordionItem>
-
-              <AccordionItem value="hiddenFees">
-                <AccordionTrigger className="text-lg">{t('packages.faq.items.hiddenFees.question')}</AccordionTrigger>
-                <AccordionContent>
-                  {t('packages.faq.items.hiddenFees.answer')}
-                </AccordionContent>
-              </AccordionItem>
-
-              <AccordionItem value="timeToLaunch">
-                <AccordionTrigger className="text-lg">{t('packages.faq.items.timeToLaunch.question')}</AccordionTrigger>
-                <AccordionContent>
-                  {t('packages.faq.items.timeToLaunch.answer')}
-                </AccordionContent>
-              </AccordionItem>
             </Accordion>
           </div>
         </div>
       </motion.section>
 
+      <Testimonials />
+
       {/* Portfolio Section */}
-      <motion.section 
+      <motion.section
         ref={portfolioRef}
-        id="portfolio" 
         className="py-20 bg-card/70 scroll-mt-10 overflow-hidden"
         {...(portfolioAnimation as HTMLMotionProps<"section">)}>
         <div className="container mx-auto px-4">
@@ -393,6 +466,7 @@ const HomeSections = () => {
                   logo={item.logo}
                   logoBg={item.logoBg}
                   url={item.url}
+                  caseStudyHref={`${workPrefix}/work/${keyToSlug(item.key)}`}
                   storeLinks={item.storeLinks}
                 />
               </motion.div>
@@ -414,7 +488,7 @@ const HomeSections = () => {
               {t('contact.title')}
             </h2>
             <Separator className="w-24 mx-auto mb-4" />
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-foreground font-medium max-w-2xl mx-auto">
               {t('contact.description')}
             </p>
           </div>
@@ -472,6 +546,7 @@ const HomeSections = () => {
                   <span>{t('common.location')}</span>
                 </div>
               </div>
+              <ContactChannels hideEmail className="flex flex-wrap justify-center gap-3" />
               <div className="flex space-x-3">
                 <a href="https://linkedin.com/in/stanimeros" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                   <Button variant="outline" size="icon" aria-hidden="true" tabIndex={-1}>

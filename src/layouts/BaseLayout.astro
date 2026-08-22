@@ -4,6 +4,7 @@ import LocalizedHeader from '@/components/Header.localized'
 import LocalizedFooter from '@/components/Footer.localized'
 import LocalizedCookieBanner from '@/components/CookieBanner.localized'
 import LocalizedChatWidget from '@/components/ChatWidget.localized'
+import LocalizedStickyMobileCta from '@/components/StickyMobileCta.localized'
 import LocalizedLanguageBanner from '@/components/LanguageBanner.localized'
 import ParticlesBackground from '@/components/ParticlesBackground'
 import type { SupportedLang } from '@/i18n'
@@ -90,7 +91,7 @@ const {
       <div class="min-h-svh bg-background">
         <ParticlesBackground client:idle />
         <div class="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-secondary/10" />
-        <div class="relative z-10 min-h-svh flex flex-col">
+        <div class="relative z-10 min-h-svh flex flex-col pb-16 md:pb-0">
           <LocalizedHeader lang={lang} client:idle={{ timeout: 300 }} />
           <div class="pt-24 flex-1">
             <slot />
@@ -100,6 +101,7 @@ const {
         <LocalizedCookieBanner lang={lang} client:idle />
         <LocalizedChatWidget lang={lang} client:idle />
         <LocalizedLanguageBanner lang={lang} client:idle />
+        <LocalizedStickyMobileCta lang={lang} client:idle />
       </div>
     </div>
   </body>
