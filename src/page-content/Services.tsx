@@ -81,9 +81,6 @@ const packages = [
   },
 ] as const
 
-const exampleKeys = ['irisdrop', 'veridictum', 'skiGreece', 'ekarotsi']
-const examples = portfolioItems.filter((item) => exampleKeys.includes(item.key))
-
 interface ServicesProps {
   lang: "en" | "el"
 }
@@ -270,8 +267,9 @@ export default function Services({ lang }: ServicesProps) {
 
       <ProcessSection />
 
-      {/* Example projects */}
+      {/* All projects */}
       <motion.section
+        id="portfolio"
         ref={portfolioRef}
         className="py-20 bg-card/70 scroll-mt-10 overflow-hidden"
         {...(portfolioAnimation as HTMLMotionProps<"section">)}>
@@ -284,7 +282,7 @@ export default function Services({ lang }: ServicesProps) {
             <Separator className="w-24 mx-auto" />
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
-            {examples.map((item) => (
+            {portfolioItems.map((item) => (
               <PortfolioCard
                 key={item.key}
                 title={t(`portfolio.items.${item.key}.title`)}

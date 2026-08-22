@@ -25,6 +25,7 @@ import {
   PhoneIcon,
   CalendarDaysIcon,
   GlobeAltIcon,
+  Squares2X2Icon,
 } from "@heroicons/react/24/outline"
 const GitHubCalendarComponent = lazy(() => import("@/components/GitHubCalendar"))
 import WhySection from "@/components/WhySection"
@@ -58,7 +59,8 @@ const HomeSections = ({ lang }: HomeSectionsProps) => {
   // Refs for card animations
   const serviceCardRefs = Array(5).fill(null).map(() => useRef<HTMLDivElement>(null))
   const packageCardRefs = Array(3).fill(null).map(() => useRef<HTMLDivElement>(null))
-  const portfolioCardRefs = Array(portfolioItems.length).fill(null).map(() => useRef<HTMLDivElement>(null))
+  const featuredPortfolioItems = portfolioItems.slice(0, 8)
+  const portfolioCardRefs = Array(featuredPortfolioItems.length).fill(null).map(() => useRef<HTMLDivElement>(null))
   
   // Get animation props for each section
   const aboutAnimation = useScrollAnimation(aboutRef)
@@ -446,10 +448,11 @@ const HomeSections = ({ lang }: HomeSectionsProps) => {
               <BriefcaseIcon className="inline h-8 w-8 text-primary mr-3 align-text-bottom" />
               {t('portfolio.title')}
             </h2>
-            <Separator className="w-24 mx-auto" />
+            <Separator className="w-24 mx-auto mb-4" />
+            <p className="text-muted-foreground max-w-2xl mx-auto">{t('portfolio.subtitle')}</p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 w-full">
-            {portfolioItems.map((item, index) => (
+            {featuredPortfolioItems.map((item, index) => (
               <motion.div
                 key={item.key}
                 ref={portfolioCardRefs[index]}
@@ -471,6 +474,14 @@ const HomeSections = ({ lang }: HomeSectionsProps) => {
                 />
               </motion.div>
             ))}
+          </div>
+          <div className="text-center mt-12">
+            <Button variant="outline" size="lg" asChild>
+              <a href={`${workPrefix}/services#portfolio`}>
+                <Squares2X2Icon className="size-5 mr-2 stroke-[1.5]" />
+                {t('portfolio.viewAll')}
+              </a>
+            </Button>
           </div>
         </div>
       </motion.section>

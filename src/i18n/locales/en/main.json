@@ -119,7 +119,7 @@
         "Hosting & server management"
       ]
     },
-    "footer": "We respond within 2 hours. Prototypes are ready in 3–7 days, finalized projects in a few weeks.",
+    "footer": "I respond within 2 hours. Prototypes are ready in 3–7 days, finalized projects in a few weeks.",
     "faq": {
       "title": "Frequently Asked Questions",
       "items": {
@@ -276,6 +276,8 @@
   },
   "portfolio": {
     "title": "Portfolio",
+    "subtitle": "Some of the projects I've built. See the full portfolio for more.",
+    "viewAll": "View All Projects",
     "items": {
       "party": {
         "title": "Party - Play with friends",

@@ -10,11 +10,11 @@ import { PortfolioCard } from "@/components/PortfolioCard"
 import {
   ArrowLeftIcon,
   ArrowTopRightOnSquareIcon,
-  BriefcaseIcon,
   CheckIcon,
   PhoneIcon,
   Squares2X2Icon,
 } from "@heroicons/react/24/outline"
+import { cn } from "@/lib/utils"
 import { trackEvent } from "@/lib/events"
 import { useScrollAnimation } from "@/lib/hooks"
 import { getPortfolioItemBySlug, portfolioItems, keyToSlug } from "@/lib/portfolio-data"
@@ -40,6 +40,17 @@ export default function WorkDetail({ lang, slug }: WorkDetailProps) {
 
   if (!item) return null
 
+  const title = t(`portfolio.items.${item.key}.title`)
+  const fromWords = title
+    .split(/\s+/)
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase()
+  const initials =
+    fromWords.length >= 2
+      ? fromWords.slice(0, 2)
+      : (title.replace(/\s/g, "").slice(0, 2).toUpperCase() || "??").padEnd(2, "?")
+
   const currentIndex = portfolioItems.findIndex((p) => p.key === item.key)
   const related = Array.from({ length: 3 }, (_, i) => {
     const index = (currentIndex + 1 + i) % portfolioItems.length
@@ -59,10 +70,27 @@ export default function WorkDetail({ lang, slug }: WorkDetailProps) {
               {t("servicesPage.links.portfolio")}
             </a>
 
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              <BriefcaseIcon className="inline h-8 w-8 text-primary mr-3 align-text-bottom" />
-              {t(`portfolio.items.${item.key}.title`)}
-            </h1>
+            <div className="flex items-center gap-4 mb-4">
+              <div
+                className={cn(
+                  "w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold shrink-0",
+                  "border-2 border-border/60 shadow-lg",
+                  item.logoBg ? item.logoBg : "bg-white/95 dark:bg-white/10 backdrop-blur-sm",
+                  !item.logo && !item.logoBg && item.textColor
+                )}
+              >
+                {item.logo ? (
+                  <img
+                    src={item.logo}
+                    alt={title}
+                    className="w-full h-full rounded-full object-cover"
+                  />
+                ) : (
+                  <span>{initials}</span>
+                )}
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold">{title}</h1>
+            </div>
             <Separator className="w-24 mb-4" />
             <p className="text-xl text-muted-foreground mb-6">
               {t(`portfolio.items.${item.key}.description`)}
