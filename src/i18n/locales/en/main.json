@@ -174,9 +174,9 @@
         "title": "Your team is doing the same tasks every day",
         "description": "Answering the same customer questions, copying data between systems, chasing follow-ups manually. These tasks eat hours that could go somewhere useful."
       },
-      "decisions": {
-        "title": "Decisions are made on gut feeling, not data",
-        "description": "You have data sitting in spreadsheets, systems, or nowhere at all, and no easy way to turn it into something actionable. So decisions rely on instinct instead."
+      "presence": {
+        "title": "You don't have a professional online presence",
+        "description": "Customers search for you on Google and either can't find you, or land on a page that doesn't build trust. Without a proper site, you're losing customers before they ever talk to you."
       },
       "scheduling": {
         "title": "Scheduling and planning is a constant headache",
@@ -890,7 +890,7 @@
     "madeBy": "Made by"
   },
   "tree": {
-    "tagline": "Freelance software engineer · AI & apps",
+    "tagline": "Freelance software engineer · Websites & apps",
     "sectionSocial": "Social",
     "sectionApps": "Apps",
     "sectionWebsites": "Websites",
@@ -916,7 +916,7 @@
   "chat": {
     "title": "Chat with the assistant",
     "subtitle": "Ask about services, or book a call with Pantelis",
-    "greeting": "Hi! I'm here to help with questions about AI, apps, or automation, and I can help you book a call with Pantelis if it's a good fit. What's on your mind?",
+    "greeting": "Hi! I'm here to help with questions about websites, apps, or AI automation, and I can help you book a call with Pantelis if it's a good fit. What's on your mind?",
     "placeholder": "Type a message...",
     "send": "Send",
     "openLabel": "Open chat",

@@ -6,7 +6,7 @@ import { useScrollAnimation } from "@/lib/hooks"
 import UnderlineHighlight from "@/components/UnderlineHighlight"
 import {
   ArrowPathIcon,
-  CircleStackIcon,
+  GlobeAltIcon,
   CalendarDaysIcon,
   PresentationChartLineIcon,
   HandRaisedIcon,
@@ -14,8 +14,8 @@ import {
 } from "@heroicons/react/24/outline"
 
 const painPoints = [
+  { key: "presence",   icon: GlobeAltIcon },
   { key: "repetitive", icon: ArrowPathIcon },
-  { key: "decisions",  icon: CircleStackIcon },
   { key: "scheduling", icon: CalendarDaysIcon },
   { key: "visibility", icon: PresentationChartLineIcon },
 ] as const
