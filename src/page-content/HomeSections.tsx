@@ -477,7 +477,7 @@ const HomeSections = ({ lang }: HomeSectionsProps) => {
           </div>
           <div className="text-center mt-12">
             <Button variant="outline" size="lg" asChild>
-              <a href={`${workPrefix}/services#portfolio`}>
+              <a href={`${workPrefix}/services`}>
                 <Squares2X2Icon className="size-5 mr-2 stroke-[1.5]" />
                 {t('portfolio.viewAll')}
               </a>
