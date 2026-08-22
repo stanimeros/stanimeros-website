@@ -80,7 +80,7 @@ export default function WorkDetail({ lang, slug }: WorkDetailProps) {
               {item.url && (
                 <Button variant="outline" asChild>
                   <a href={item.url} target="_blank" rel="noopener noreferrer">
-                    <ArrowTopRightOnSquareIcon className="size-4 mr-2" />
+                    <ArrowTopRightOnSquareIcon className="size-5 mr-2 stroke-[1.5]" />
                     {t("workDetail.visitProject")}
                   </a>
                 </Button>

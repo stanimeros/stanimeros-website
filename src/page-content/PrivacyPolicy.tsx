@@ -561,7 +561,7 @@ const PrivacyPolicy = ({ appSlug, lang }: PrivacyPolicyProps) => {
             </p>
             <a href={appSlug ? `${prefix}/data-deletion/${appSlug}` : `${prefix}/data-deletion`}>
               <Button>
-                <TrashIcon className="size-4 mr-2 stroke-[1.5]" />
+                <TrashIcon className="size-5 mr-2 stroke-[1.5]" />
                 {t('privacyPolicy.dataDeletionLink.button')}
               </Button>
             </a>
