@@ -8,10 +8,15 @@ import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline"
 
 const quoteKeys = ["first", "second", "third"] as const
 
+// Hidden until real client quotes replace the generic placeholders.
+const TESTIMONIALS_ENABLED = false
+
 export default function Testimonials() {
   const { t } = useTranslation()
   const sectionRef = useRef<HTMLElement>(null)
   const animation = useScrollAnimation(sectionRef)
+
+  if (!TESTIMONIALS_ENABLED) return null
 
   return (
     <motion.section
