@@ -177,19 +177,19 @@ const HomeSections = ({ lang }: HomeSectionsProps) => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 w-full">
             {[
               {
-                icon: <LightBulbIcon className="h-8 w-8" />,
-                title: 'services.consulting.title',
-                description: 'services.consulting.description'
-              },
-              {
-                icon: <BuildingStorefrontIcon className="h-8 w-8" />,
-                title: 'services.websites.title',
-                description: 'services.websites.description'
+                icon: <GlobeAltIcon className="h-8 w-8" />,
+                title: 'services.website.title',
+                description: 'services.website.description'
               },
               {
                 icon: <DevicePhoneMobileIcon className="h-8 w-8" />,
-                title: 'services.mobile.title',
-                description: 'services.mobile.description'
+                title: 'services.apps.title',
+                description: 'services.apps.description'
+              },
+              {
+                icon: <LightBulbIcon className="h-8 w-8" />,
+                title: 'services.optimization.title',
+                description: 'services.optimization.description'
               },
               {
                 icon: <ChatBubbleLeftRightIcon className="h-8 w-8" />,

@@ -29,7 +29,7 @@ import { useScrollAnimation } from "@/lib/hooks"
 import { portfolioItems, keyToSlug } from "@/lib/portfolio-data"
 
 const items = [
-  { key: "automation", icon: SparklesIcon },
+  { key: "website", icon: GlobeAltIcon },
   { key: "apps", icon: DevicePhoneMobileIcon },
   { key: "optimization", icon: PuzzlePieceIcon },
   { key: "aiData", icon: CircleStackIcon },

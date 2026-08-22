@@ -29,7 +29,7 @@
   },
   "hero": {
     "title": "Pantelis Stanimeros",
-    "subtitleBefore": "AI, smart apps, and ",
+    "subtitleBefore": "Websites, apps, and ",
     "subtitleHighlight": "real solutions",
     "subtitleAfter": " for real business problems",
     "viewPackages": "View Packages",
@@ -38,7 +38,7 @@
   "about": {
     "title": "About Me",
     "name": "Pantelis Stanimeros",
-    "description1": "Based in Thessaloniki, I hold a Bachelor's in Computer Science and an MSc in AI & Data Analytics. I build AI-driven automation, mobile apps, and custom dashboards, tools that save time, cut costs, and help businesses make better decisions every day.",
+    "description1": "Based in Thessaloniki, I hold a Bachelor's in Computer Science and an MSc in AI & Data Analytics. I build websites, mobile apps, and custom dashboards, tools that save time, cut costs, and help businesses make better decisions every day.",
     "description2": "I also tackle harder business problems: finding the best schedule when there are hundreds of constraints, training AI on your own data, or building a system that picks the optimal route, allocation, or plan automatically. If it's a problem that costs your business time or money, there's likely a smart solution for it.",
     "githubDescription": "Committed to consistent, high-quality updates."
   },
@@ -51,7 +51,7 @@
     },
     "problems": {
       "title": "The kind of problems I like solving",
-      "paragraph": "I build AI-driven automation, mobile apps, and custom dashboards, tools that save time, cut costs, and improve decisions. I'm especially drawn to harder problems: optimal scheduling under dozens of constraints, training AI on your own data, or systems that work out the best route or allocation automatically."
+      "paragraph": "I build websites, mobile apps, and custom dashboards, tools that save time, cut costs, and improve decisions. I'm also drawn to harder problems: optimal scheduling under dozens of constraints, training AI on your own data, or systems that work out the best route or allocation automatically."
     },
     "whyWorkWithMe": {
       "title": "Why businesses work with me",
@@ -215,15 +215,15 @@
   },
   "services": {
     "title": "Services",
-    "consulting": {
-      "title": "AI & Automation",
-      "description": "AI that handles tasks automatically, answering customers, processing requests, or running workflows 24/7 without human input."
+    "website": {
+      "title": "Websites & Landing Pages",
+      "description": "A professional website or landing page that presents your business clearly and turns visitors into customers, live in days, not months."
     },
-    "websites": {
-      "title": "Mobile Apps & Dashboards",
+    "apps": {
+      "title": "Web & Mobile Apps",
       "description": "Custom iOS, Android, and web apps with dashboards that give you full visibility and control over your business in real time."
     },
-    "mobile": {
+    "optimization": {
       "title": "Smart Problem Solving",
       "description": "Got a scheduling nightmare, a routing problem, or a decision that's too complex to do manually? I build systems that find the optimal solution fast."
     },
@@ -237,12 +237,12 @@
     "subtitle": "Practical technology built around your business, not the other way around.",
     "intro": "Below is a fuller look at what I build. Every service can stand on its own or combine with the others into a single system tailored to your business.",
     "items": {
-      "automation": {
-        "title": "AI & Automation",
-        "description": "AI that handles support, workflows, and repetitive tasks automatically, 24/7."
+      "website": {
+        "title": "Websites & Landing Pages",
+        "description": "A professional site that presents your business clearly, built to convert visitors into customers and ready for search from day one."
       },
       "apps": {
-        "title": "Mobile Apps & Dashboards",
+        "title": "Web & Mobile Apps",
         "description": "Custom web, iOS, and Android apps with real-time dashboards, built around your business."
       },
       "optimization": {
