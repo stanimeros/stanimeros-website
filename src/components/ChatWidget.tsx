@@ -140,7 +140,7 @@ export default function ChatWidget() {
           <div className="flex items-center justify-between px-4 py-3 border-b border-border/60 shrink-0">
             <div>
               <h2 className="font-semibold">{t("chat.title")}</h2>
-              <p className="text-xs text-muted-foreground">{t("chat.subtitle")}</p>
+              <p className="text-sm text-muted-foreground">{t("chat.subtitle")}</p>
             </div>
             <Button variant="ghost" size="icon" onClick={() => setOpen(false)} aria-label={t("chat.closeLabel")}>
               <XMarkIcon className="h-5 w-5" />

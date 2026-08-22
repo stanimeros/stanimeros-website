@@ -121,28 +121,6 @@ export default function Contact() {
             <Separator className="w-24 mx-auto mb-4" />
             <p className="text-foreground font-medium max-w-2xl mx-auto">{t('contact.form.description')}</p>
           </div>
-
-          <div className="grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto">
-            {trustFeatures.map(({ key, icon: Icon }) => (
-              <div
-                key={key}
-                className="flex items-start space-x-3 p-4 rounded-lg bg-card/70 border border-border/60"
-              >
-                <div className="mt-1 shrink-0">
-                  <Icon className="h-5 w-5 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-medium">{t(`contact.features.${key}.title`)}</h3>
-                  <p className="text-sm text-muted-foreground">{t(`contact.features.${key}.description`)}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="text-center mt-10">
-            <p className="text-sm text-muted-foreground mb-3">{t('contact.channels.title')}</p>
-            <ContactChannels className="flex flex-wrap justify-center gap-3" />
-          </div>
         </div>
       </motion.section>
 
@@ -223,6 +201,28 @@ export default function Contact() {
               </form>
             </div>
           )}
+
+          <div className="grid sm:grid-cols-3 gap-4 max-w-4xl mx-auto mt-16">
+            {trustFeatures.map(({ key, icon: Icon }) => (
+              <div
+                key={key}
+                className="flex items-start space-x-3 p-4 rounded-lg bg-card/70 border border-border/60"
+              >
+                <div className="mt-1 shrink-0">
+                  <Icon className="h-5 w-5 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-medium">{t(`contact.features.${key}.title`)}</h3>
+                  <p className="text-sm text-muted-foreground">{t(`contact.features.${key}.description`)}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-10">
+            <p className="text-sm text-muted-foreground mb-3">{t('contact.channels.title')}</p>
+            <ContactChannels className="flex flex-wrap justify-center gap-3" />
+          </div>
         </div>
       </motion.section>
 

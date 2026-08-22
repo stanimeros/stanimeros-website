@@ -35,7 +35,7 @@ const Hero = () => {
   return (
     <section id="home" className="min-h-svh flex items-center justify-center relative overflow-hidden">
       <div className="container mx-auto px-4 text-center relative z-10">
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent relative z-20">
+        <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent relative z-20">
           {t('hero.title')}
         </h1>
         <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto relative z-20">

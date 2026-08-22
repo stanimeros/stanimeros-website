@@ -194,7 +194,7 @@ export function PortfolioCard({
                 {showAppleHint && (
                   <div
                     role="tooltip"
-                    className="absolute z-20 top-full mt-1.5 left-0 w-56 rounded-md border bg-popover p-2.5 text-xs leading-snug text-popover-foreground shadow-md"
+                    className="absolute z-20 top-full mt-1.5 left-0 w-56 rounded-md border bg-popover p-2.5 text-sm leading-snug text-popover-foreground shadow-md"
                     onClick={(e) => e.stopPropagation()}
                   >
                     {t("portfolioCard.inAppBrowserHint")}
